@@ -5,15 +5,11 @@ class Entity {
 
 public:
 
-	int		getX( void );
-	int		getY( void );
-	int		move( int	direction );
-
-	void	setPoints( int points );
-
-protected:
-
-private:
+	//virtual ~Entity( void);
+	virtual int		getX( void ) = 0;
+	virtual int		getY( void ) = 0;
+	virtual void	move( int	direction ) = 0;
+	virtual void	setPoints( int points ) = 0;
 	int		posX;
 	int		posY;
 	//int		direction?
