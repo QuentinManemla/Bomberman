@@ -17,7 +17,7 @@ int		Player::getY( void ){
 	return this->posY;
 }
 
-void	Player::move( int	direction ){
+void	Player::move( int	key ){
 
 }
 

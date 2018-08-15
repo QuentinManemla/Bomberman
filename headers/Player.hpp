@@ -9,7 +9,7 @@ public:
 	~Player( void );
 	int		getX( void );
 	int		getY( void );
-	void	move( int	direction );
+	void	move( int key );
 	void	setPoints( int points );
 
 protected:
