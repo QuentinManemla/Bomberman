@@ -14,7 +14,7 @@ public:
 	Game( void );
 	~Game( void );
 	void	gameloop( void );
-	void	getKey( void );
+	int		getKey( void );
 	void	draw( void );
 
 protected:
