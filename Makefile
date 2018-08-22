@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake
+CMAKE_COMMAND = /goinfre/qmanamel/.brew/Cellar/cmake/3.12.1/bin/cmake
 
 # The command to remove a file.
-RM = /goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -E remove -f
+RM = /goinfre/qmanamel/.brew/Cellar/cmake/3.12.1/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/Bomberma
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.1/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.1/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -231,6 +231,33 @@ sources/States/Menu/sources/Menu.cpp.s:
 	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/States/Menu/sources/Menu.cpp.s
 .PHONY : sources/States/Menu/sources/Menu.cpp.s
 
+sources/main.o: sources/main.cpp.o
+
+.PHONY : sources/main.o
+
+# target to build an object file
+sources/main.cpp.o:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/main.cpp.o
+.PHONY : sources/main.cpp.o
+
+sources/main.i: sources/main.cpp.i
+
+.PHONY : sources/main.i
+
+# target to preprocess a source file
+sources/main.cpp.i:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/main.cpp.i
+.PHONY : sources/main.cpp.i
+
+sources/main.s: sources/main.cpp.s
+
+.PHONY : sources/main.s
+
+# target to generate assembly for a file
+sources/main.cpp.s:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/main.cpp.s
+.PHONY : sources/main.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -252,6 +279,9 @@ help:
 	@echo "... sources/States/Menu/sources/Menu.o"
 	@echo "... sources/States/Menu/sources/Menu.i"
 	@echo "... sources/States/Menu/sources/Menu.s"
+	@echo "... sources/main.o"
+	@echo "... sources/main.i"
+	@echo "... sources/main.s"
 .PHONY : help
 
 

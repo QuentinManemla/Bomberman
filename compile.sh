@@ -1,1 +1,0 @@
-clang++ main.cpp sources/Game.cpp sources/Player.cpp sources/EntityManager.cpp -I headers/ -I ~/.brew/Cellar/sfml/2.4.2_1/include/ -rpath ~/.brew/lib -L ~/.brew/lib -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
