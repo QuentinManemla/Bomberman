@@ -4,6 +4,14 @@
 # include <iostream>
 # include <unistd.h>
 
+# include "enumState.hpp" // hopefully cmake sorts this out
+# include "IState.hpp"
+# include "InstroState.hpp"
+# include "MenuState.hpp"
+# include "PlayState.hpp"
+# include "CreditsState.hpp"
+# include "QuitState.hpp"
+
 class Game {
 public:
 	Game( void );
