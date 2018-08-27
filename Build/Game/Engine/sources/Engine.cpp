@@ -14,6 +14,7 @@ void	Engine::engineInit( void ) {
 
 	if (!glfwInit())
 		throw (GLFWInitializationError());
+	std::cout << "GLFW Initialized Successfully" << std::endl;
 	this->_Window = glfwCreateWindow(1024, 768, "Bomberman", NULL, NULL);
 	if( this->_Window == NULL ){
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
@@ -22,6 +23,7 @@ void	Engine::engineInit( void ) {
 	glfwMakeContextCurrent(this->_Window);
 	if (glewInit() != GLEW_OK)
 		throw (GLEWInitializationError());
+	std::cout << "GLEW Initialized Successfully" << std::endl;
 }
 
 /* Exceptions */
