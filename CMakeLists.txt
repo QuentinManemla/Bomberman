@@ -23,19 +23,23 @@ if(NOT WIN32)
   set(BoldWhite   "${Esc}[1;37m")
 endif()
 
+set(GLEW_INCLUDE_DIR "$ENV{HOME}/.brew/Cellar/glew/2.1.0/include")
+set(GLEW_LIBRARY "$ENV{HOME}/.brew/Cellar/glew/2.1.0/lib")
+
+set(GLFW_LIBRARY "$ENV{HOME}/.brew/Cellar/glfw/3.2.1/lib")
+set(GLFW_INCLUDE_DIRS "$ENV{HOME}/.brew/Cellar/glfw/3.2.1/include")
+
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(GLM REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_search_module(GLFW REQUIRED glfw3)
 
-set(LIB_DIR, "/goinfre/qmanamel/.brew/Cellar")
-
-file(GLOB_RECURSE BomberMan_SOURCES "sources/*.cpp")
+file(GLOB_RECURSE BomberMan_SOURCES "*.cpp")
 file(GLOB_RECURSE BomberMan_HEADERS "includes/*.hpp")
 
-# Recersivley itterate through the "Sources" directory for all the sources and includes. 
-set (BomberMan_INCLUDE_DIRS "Sources")
+# Recersivley itterate through the "Build" directory for all the sources and includes. 
+set (BomberMan_INCLUDE_DIRS "Build")
 foreach(_headerFile ${BomberMan_HEADERS})
 	get_filename_component(_dir $(_headerFile) PATH)
 	list(APPEND BomberMan_INCLUDE_DIRS ${_dir})
@@ -50,18 +54,21 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
 
 # GLEW
 if(GLEW_FOUND)
-	message("${Green}Glew Package Found${ColourReset}")
-	include_directories("/goinfre/qmanamel/.brew/Cellar/glew/2.1.0/include")
-	link_libraries(${PROJECT_NAME} glew ${GLEW_LIBRARIES})
+	message("${Green}Glew Package Found -")
+	message("${Green}   Libraries = ${GLEW_LIBRARIES}${ColourReset}")
+	message("${Green}   Headers = ${GLEW_INCLUDE_DIR}${ColourReset}")
+  link_libraries(${PROJECT_NAME} glew ${GLEW_LIBRARIES})
+  target_include_directories(${PROJECT_NAME} PRIVATE ${GLEW_INCLUDE_DIR})
+  target_compile_definitions(${PROJECT_NAME} PRIVATE ${GLEW_INCLUDE_NONE})
 else()
 	message("${Red}Glew Package Not Found${ColourReset}")
 endif()
 
 # GLFW
 if(GLFW_FOUND)
-	message("${Green}Glfw Package Found${ColourReset}")
-	include_directories("/goinfre/qmanamel/.brew/Cellar/glfw/3.2.1/include")
-	link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES})
+  message("${Green}Glfw Package Found - ${ColourReset}")
+  include_directories(${GLFW_INCLUDE_DIRS})
+  target_link_libraries(Bomberman glfw)
 else()
 	message("${Red}Glfw Package Not Found${ColourReset}")
 endif()

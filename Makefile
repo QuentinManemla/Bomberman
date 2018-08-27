@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /goinfre/qmanamel/.brew/Cellar/cmake/3.12.1/bin/cmake
+CMAKE_COMMAND = /goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake
 
 # The command to remove a file.
-RM = /goinfre/qmanamel/.brew/Cellar/cmake/3.12.1/bin/cmake -E remove -f
+RM = /goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/Bomberma
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.1/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.1/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -123,140 +123,167 @@ Bomberman/fast:
 	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/build
 .PHONY : Bomberman/fast
 
-sources/Game/Game/sources/Game.o: sources/Game/Game/sources/Game.cpp.o
+Build/Game/Engine/sources/Engine.o: Build/Game/Engine/sources/Engine.cpp.o
 
-.PHONY : sources/Game/Game/sources/Game.o
-
-# target to build an object file
-sources/Game/Game/sources/Game.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/Game/Game/sources/Game.cpp.o
-.PHONY : sources/Game/Game/sources/Game.cpp.o
-
-sources/Game/Game/sources/Game.i: sources/Game/Game/sources/Game.cpp.i
-
-.PHONY : sources/Game/Game/sources/Game.i
-
-# target to preprocess a source file
-sources/Game/Game/sources/Game.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/Game/Game/sources/Game.cpp.i
-.PHONY : sources/Game/Game/sources/Game.cpp.i
-
-sources/Game/Game/sources/Game.s: sources/Game/Game/sources/Game.cpp.s
-
-.PHONY : sources/Game/Game/sources/Game.s
-
-# target to generate assembly for a file
-sources/Game/Game/sources/Game.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/Game/Game/sources/Game.cpp.s
-.PHONY : sources/Game/Game/sources/Game.cpp.s
-
-sources/Game/GameEngine/sources/GameEngine.o: sources/Game/GameEngine/sources/GameEngine.cpp.o
-
-.PHONY : sources/Game/GameEngine/sources/GameEngine.o
+.PHONY : Build/Game/Engine/sources/Engine.o
 
 # target to build an object file
-sources/Game/GameEngine/sources/GameEngine.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/Game/GameEngine/sources/GameEngine.cpp.o
-.PHONY : sources/Game/GameEngine/sources/GameEngine.cpp.o
+Build/Game/Engine/sources/Engine.cpp.o:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Game/Engine/sources/Engine.cpp.o
+.PHONY : Build/Game/Engine/sources/Engine.cpp.o
 
-sources/Game/GameEngine/sources/GameEngine.i: sources/Game/GameEngine/sources/GameEngine.cpp.i
+Build/Game/Engine/sources/Engine.i: Build/Game/Engine/sources/Engine.cpp.i
 
-.PHONY : sources/Game/GameEngine/sources/GameEngine.i
+.PHONY : Build/Game/Engine/sources/Engine.i
 
 # target to preprocess a source file
-sources/Game/GameEngine/sources/GameEngine.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/Game/GameEngine/sources/GameEngine.cpp.i
-.PHONY : sources/Game/GameEngine/sources/GameEngine.cpp.i
+Build/Game/Engine/sources/Engine.cpp.i:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Game/Engine/sources/Engine.cpp.i
+.PHONY : Build/Game/Engine/sources/Engine.cpp.i
 
-sources/Game/GameEngine/sources/GameEngine.s: sources/Game/GameEngine/sources/GameEngine.cpp.s
+Build/Game/Engine/sources/Engine.s: Build/Game/Engine/sources/Engine.cpp.s
 
-.PHONY : sources/Game/GameEngine/sources/GameEngine.s
+.PHONY : Build/Game/Engine/sources/Engine.s
 
 # target to generate assembly for a file
-sources/Game/GameEngine/sources/GameEngine.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/Game/GameEngine/sources/GameEngine.cpp.s
-.PHONY : sources/Game/GameEngine/sources/GameEngine.cpp.s
+Build/Game/Engine/sources/Engine.cpp.s:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Game/Engine/sources/Engine.cpp.s
+.PHONY : Build/Game/Engine/sources/Engine.cpp.s
 
-sources/Game/Player/sources/Player.o: sources/Game/Player/sources/Player.cpp.o
+Build/Game/Game/sources/Game.o: Build/Game/Game/sources/Game.cpp.o
 
-.PHONY : sources/Game/Player/sources/Player.o
+.PHONY : Build/Game/Game/sources/Game.o
 
 # target to build an object file
-sources/Game/Player/sources/Player.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/Game/Player/sources/Player.cpp.o
-.PHONY : sources/Game/Player/sources/Player.cpp.o
+Build/Game/Game/sources/Game.cpp.o:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Game/Game/sources/Game.cpp.o
+.PHONY : Build/Game/Game/sources/Game.cpp.o
 
-sources/Game/Player/sources/Player.i: sources/Game/Player/sources/Player.cpp.i
+Build/Game/Game/sources/Game.i: Build/Game/Game/sources/Game.cpp.i
 
-.PHONY : sources/Game/Player/sources/Player.i
+.PHONY : Build/Game/Game/sources/Game.i
 
 # target to preprocess a source file
-sources/Game/Player/sources/Player.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/Game/Player/sources/Player.cpp.i
-.PHONY : sources/Game/Player/sources/Player.cpp.i
+Build/Game/Game/sources/Game.cpp.i:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Game/Game/sources/Game.cpp.i
+.PHONY : Build/Game/Game/sources/Game.cpp.i
 
-sources/Game/Player/sources/Player.s: sources/Game/Player/sources/Player.cpp.s
+Build/Game/Game/sources/Game.s: Build/Game/Game/sources/Game.cpp.s
 
-.PHONY : sources/Game/Player/sources/Player.s
+.PHONY : Build/Game/Game/sources/Game.s
 
 # target to generate assembly for a file
-sources/Game/Player/sources/Player.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/Game/Player/sources/Player.cpp.s
-.PHONY : sources/Game/Player/sources/Player.cpp.s
+Build/Game/Game/sources/Game.cpp.s:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Game/Game/sources/Game.cpp.s
+.PHONY : Build/Game/Game/sources/Game.cpp.s
 
-sources/States/Menu/sources/Menu.o: sources/States/Menu/sources/Menu.cpp.o
+Build/Game/Player/sources/Player.o: Build/Game/Player/sources/Player.cpp.o
 
-.PHONY : sources/States/Menu/sources/Menu.o
+.PHONY : Build/Game/Player/sources/Player.o
 
 # target to build an object file
-sources/States/Menu/sources/Menu.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/States/Menu/sources/Menu.cpp.o
-.PHONY : sources/States/Menu/sources/Menu.cpp.o
+Build/Game/Player/sources/Player.cpp.o:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Game/Player/sources/Player.cpp.o
+.PHONY : Build/Game/Player/sources/Player.cpp.o
 
-sources/States/Menu/sources/Menu.i: sources/States/Menu/sources/Menu.cpp.i
+Build/Game/Player/sources/Player.i: Build/Game/Player/sources/Player.cpp.i
 
-.PHONY : sources/States/Menu/sources/Menu.i
+.PHONY : Build/Game/Player/sources/Player.i
 
 # target to preprocess a source file
-sources/States/Menu/sources/Menu.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/States/Menu/sources/Menu.cpp.i
-.PHONY : sources/States/Menu/sources/Menu.cpp.i
+Build/Game/Player/sources/Player.cpp.i:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Game/Player/sources/Player.cpp.i
+.PHONY : Build/Game/Player/sources/Player.cpp.i
 
-sources/States/Menu/sources/Menu.s: sources/States/Menu/sources/Menu.cpp.s
+Build/Game/Player/sources/Player.s: Build/Game/Player/sources/Player.cpp.s
 
-.PHONY : sources/States/Menu/sources/Menu.s
+.PHONY : Build/Game/Player/sources/Player.s
 
 # target to generate assembly for a file
-sources/States/Menu/sources/Menu.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/States/Menu/sources/Menu.cpp.s
-.PHONY : sources/States/Menu/sources/Menu.cpp.s
+Build/Game/Player/sources/Player.cpp.s:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Game/Player/sources/Player.cpp.s
+.PHONY : Build/Game/Player/sources/Player.cpp.s
 
-sources/main.o: sources/main.cpp.o
+Build/States/Menu/sources/Menu.o: Build/States/Menu/sources/Menu.cpp.o
 
-.PHONY : sources/main.o
+.PHONY : Build/States/Menu/sources/Menu.o
 
 # target to build an object file
-sources/main.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/main.cpp.o
-.PHONY : sources/main.cpp.o
+Build/States/Menu/sources/Menu.cpp.o:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/Menu/sources/Menu.cpp.o
+.PHONY : Build/States/Menu/sources/Menu.cpp.o
 
-sources/main.i: sources/main.cpp.i
+Build/States/Menu/sources/Menu.i: Build/States/Menu/sources/Menu.cpp.i
 
-.PHONY : sources/main.i
+.PHONY : Build/States/Menu/sources/Menu.i
 
 # target to preprocess a source file
-sources/main.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/main.cpp.i
-.PHONY : sources/main.cpp.i
+Build/States/Menu/sources/Menu.cpp.i:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/Menu/sources/Menu.cpp.i
+.PHONY : Build/States/Menu/sources/Menu.cpp.i
 
-sources/main.s: sources/main.cpp.s
+Build/States/Menu/sources/Menu.s: Build/States/Menu/sources/Menu.cpp.s
 
-.PHONY : sources/main.s
+.PHONY : Build/States/Menu/sources/Menu.s
 
 # target to generate assembly for a file
-sources/main.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/sources/main.cpp.s
-.PHONY : sources/main.cpp.s
+Build/States/Menu/sources/Menu.cpp.s:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/Menu/sources/Menu.cpp.s
+.PHONY : Build/States/Menu/sources/Menu.cpp.s
+
+Build/main.o: Build/main.cpp.o
+
+.PHONY : Build/main.o
+
+# target to build an object file
+Build/main.cpp.o:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/main.cpp.o
+.PHONY : Build/main.cpp.o
+
+Build/main.i: Build/main.cpp.i
+
+.PHONY : Build/main.i
+
+# target to preprocess a source file
+Build/main.cpp.i:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/main.cpp.i
+.PHONY : Build/main.cpp.i
+
+Build/main.s: Build/main.cpp.s
+
+.PHONY : Build/main.s
+
+# target to generate assembly for a file
+Build/main.cpp.s:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/main.cpp.s
+.PHONY : Build/main.cpp.s
+
+CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.o: CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.o
+
+.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.o
+
+# target to build an object file
+CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.o:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.o
+.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.o
+
+CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.i: CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.i
+
+.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.i
+
+# target to preprocess a source file
+CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.i:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.i
+.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.i
+
+CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.s: CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.s
+
+.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.s
+
+# target to generate assembly for a file
+CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.s:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.s
+.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.s
 
 # Help Target
 help:
@@ -267,21 +294,24 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Bomberman"
-	@echo "... sources/Game/Game/sources/Game.o"
-	@echo "... sources/Game/Game/sources/Game.i"
-	@echo "... sources/Game/Game/sources/Game.s"
-	@echo "... sources/Game/GameEngine/sources/GameEngine.o"
-	@echo "... sources/Game/GameEngine/sources/GameEngine.i"
-	@echo "... sources/Game/GameEngine/sources/GameEngine.s"
-	@echo "... sources/Game/Player/sources/Player.o"
-	@echo "... sources/Game/Player/sources/Player.i"
-	@echo "... sources/Game/Player/sources/Player.s"
-	@echo "... sources/States/Menu/sources/Menu.o"
-	@echo "... sources/States/Menu/sources/Menu.i"
-	@echo "... sources/States/Menu/sources/Menu.s"
-	@echo "... sources/main.o"
-	@echo "... sources/main.i"
-	@echo "... sources/main.s"
+	@echo "... Build/Game/Engine/sources/Engine.o"
+	@echo "... Build/Game/Engine/sources/Engine.i"
+	@echo "... Build/Game/Engine/sources/Engine.s"
+	@echo "... Build/Game/Game/sources/Game.o"
+	@echo "... Build/Game/Game/sources/Game.i"
+	@echo "... Build/Game/Game/sources/Game.s"
+	@echo "... Build/Game/Player/sources/Player.o"
+	@echo "... Build/Game/Player/sources/Player.i"
+	@echo "... Build/Game/Player/sources/Player.s"
+	@echo "... Build/States/Menu/sources/Menu.o"
+	@echo "... Build/States/Menu/sources/Menu.i"
+	@echo "... Build/States/Menu/sources/Menu.s"
+	@echo "... Build/main.o"
+	@echo "... Build/main.i"
+	@echo "... Build/main.s"
+	@echo "... CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.o"
+	@echo "... CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.i"
+	@echo "... CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.s"
 .PHONY : help
 
 
