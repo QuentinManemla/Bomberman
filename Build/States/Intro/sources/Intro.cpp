@@ -12,7 +12,7 @@ void IntroState::update( void ) {
 	std::cout << "Intro update" << std::endl;
 }
 
-void IntroState::render( Engine	&engine ) {
+void IntroState::render( Engine	& engine ) {
 	engine.render();
 	std::cout << "Intro render" << std::endl;
 }

@@ -19,7 +19,6 @@ void Game::run( void ) {
 }
 
 void Game::_switchState( void ){
-	//delete this->_currentState;
 	switch (this->_state){
 		case INTRO:
 			this->_currentState = new IntroState;

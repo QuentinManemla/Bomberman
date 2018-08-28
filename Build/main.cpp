@@ -1,9 +1,9 @@
 # include "Game/Game/includes/Game.hpp"
 
 int main() {
-    Game game;
+	Game game;
 
-    game.init();
-    game.run();
-    return (0);
+	game.init();
+	game.run();
+	return (0);
 }
