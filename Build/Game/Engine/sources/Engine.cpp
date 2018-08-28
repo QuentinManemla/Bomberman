@@ -4,6 +4,12 @@ Engine::Engine() {return ;}
 
 Engine::~Engine() {return ;}
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_E && action == GLFW_PRESS)
+		glfwTerminate();
+}
+
 void	Engine::engineInit( void ) {
 	// GLFW Hint Setup
 	glfwWindowHint(GLFW_SAMPLES, 4);
@@ -25,6 +31,7 @@ void	Engine::engineInit( void ) {
 		throw (GLEWInitializationError());
 	std::cout << "GLEW Initialized Successfully" << std::endl;
 	glfwSetInputMode(this->_Window, GLFW_STICKY_KEYS, GL_TRUE);
+	glfwSetKeyCallback(this->_Window, key_callback);
 }
 
 void	Engine::render( void ) {

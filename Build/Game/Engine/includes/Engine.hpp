@@ -19,7 +19,7 @@ class	Engine {
 
 		void			engineInit( void );
 		void			render( void );
-
+		
 		/* Exception */
 		class GLFWInitializationError: public std::exception {
 			virtual const char* what() const throw();
