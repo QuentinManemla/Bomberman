@@ -1,7 +1,9 @@
-#include "Game/Engine/includes/Engine.hpp"
+# include "Game/Game/includes/Game.hpp"
 
 int main() {
-    Engine  _mainEngine;
-    _mainEngine.engineInit();
+    Game game;
+
+    game.init();
+    game.run();
     return (0);
 }

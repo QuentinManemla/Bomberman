@@ -1,4 +1,4 @@
-#include "../includes/Game.hpp"
+# include "../includes/Game.hpp"
 
 Game::Game( void ){
 	std::cout << "Game constructed" << std::endl; // debug
@@ -8,37 +8,34 @@ Game::~Game( void ){
 	std::cout << "Game destructed" << std::endl; // debug
 }
 
-void Game::init( void ){
-	
+void Game::init( void ) {
+	this->_engine.engineInit();
+	this->_state = INTRO;
+	_switchState();
+}
+
+void Game::run( void ) {
+	_mainLoop();
 }
 
 void Game::_switchState( void ){
-	delete this->_currentState;
-	switch (sys->state){ // need to pass Game engine pointer to state
+	//delete this->_currentState;
+	switch (this->_state){
 		case INTRO:
-			this->_currentState = new InstroState intro;
-			break;
-		case MENU:
-			this->_currentState = new MenuState;
-			break;
-		case PLAY:
-			this->_currentState = new PlayState;
-			break;
-		case CREDITS:
-			this->_currentState = new CreditsState;
-			break;
-		case QUIT:
-			this->_currentState = new QuitState;
+			this->_currentState = new IntroState;
+		default:
 			break;
 	};
 }
 
 void Game::_mainLoop( void ){
-	// current state can get a reference to quit as well as system struct (like env)
+	int 	quit;
+
+	quit = 0;
 	while (!(quit)){
 		// get input
+		this->_currentState->render(this->_engine);
 		this->_currentState->update();
-		this->_currentState->render();
 		usleep(1000000);
 	}
 }
