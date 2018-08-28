@@ -10,12 +10,15 @@
 # include <iostream>
 # include <string.h>
 
+# include "../../Sound/includes/Sound.hpp"
+
 class	Engine {
 	public:
 		Engine();
 		~Engine();
 
 		void			engineInit( void );
+		void			render( void );
 
 		/* Exception */
 		class GLFWInitializationError: public std::exception {
@@ -30,6 +33,9 @@ class	Engine {
 		GLFWwindow		*_Window;
 		int				_WindowHeight;
 		int				_WindowWidth;
+
+		Sound			_SoundEngine;
+
 };
 
 #endif // !ENGINE_HPP

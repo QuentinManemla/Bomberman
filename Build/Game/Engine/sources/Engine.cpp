@@ -24,6 +24,12 @@ void	Engine::engineInit( void ) {
 	if (glewInit() != GLEW_OK)
 		throw (GLEWInitializationError());
 	std::cout << "GLEW Initialized Successfully" << std::endl;
+	glfwSetInputMode(this->_Window, GLFW_STICKY_KEYS, GL_TRUE);
+}
+
+void	Engine::render( void ) {
+	glfwSwapBuffers(this->_Window);
+	glfwPollEvents();
 }
 
 /* Exceptions */
