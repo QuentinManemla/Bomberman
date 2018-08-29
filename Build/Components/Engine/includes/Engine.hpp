@@ -11,6 +11,7 @@
 # include <string.h>
 
 # include "../../Sound/includes/Sound.hpp"
+# include "../../Game/includes/enumCONTROLS.hpp"
 
 class	Engine {
 	public:
@@ -19,6 +20,14 @@ class	Engine {
 
 		void			engineInit( void );
 		void			render( void );
+
+		/********************************************************************************************/
+		/*	Keyboard Input Functions 																*/
+		/*	getkey( void ) gets the "_Active" private memeber of the Engine which containts the 	*/
+		/*	current actively pressed key that is set using the key_callback function				*/
+		/********************************************************************************************/
+		eControls		getkey( void );
+		static void 	key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 		/* Exception */
 		class GLFWInitializationError: public std::exception {
@@ -33,7 +42,7 @@ class	Engine {
 		GLFWwindow		*_Window;
 		int				_WindowHeight;
 		int				_WindowWidth;
-
+		eControls		_ActiveKey;
 		Sound			_SoundEngine;
 
 };

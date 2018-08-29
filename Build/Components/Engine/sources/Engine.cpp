@@ -1,8 +1,29 @@
-#include "../includes/Engine.hpp"
+# include "../includes/Engine.hpp"
 
 Engine::Engine() {return ;}
 
 Engine::~Engine() {return ;}
+
+void  Engine::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	Engine	*_engine =  static_cast<Engine *>(glfwGetWindowUserPointer(window));
+	if (action == GLFW_PRESS) {
+		switch(key) {
+			case ( GLFW_KEY_ESCAPE ):
+				_engine->_ActiveKey = ESCAPE;
+			case ( GLFW_KEY_LEFT ):
+				_engine->_ActiveKey = LEFT;
+			case ( GLFW_KEY_RIGHT ):
+				_engine->_ActiveKey = RIGHT;
+			case ( GLFW_KEY_UP ):
+				_engine->_ActiveKey = UP;
+			case ( GLFW_KEY_DOWN ):
+				_engine->_ActiveKey = DOWN;
+			default:
+				break;
+		}
+	}
+}
 
 void	Engine::engineInit( void ) {
 	// GLFW Hint Setup
@@ -25,11 +46,16 @@ void	Engine::engineInit( void ) {
 		throw (GLEWInitializationError());
 	std::cout << "GLEW Initialized Successfully" << std::endl;
 	glfwSetInputMode(this->_Window, GLFW_STICKY_KEYS, GL_TRUE);
+	glfwSetKeyCallback(this->_Window, Engine::key_callback);
 }
 
 void	Engine::render( void ) {
 	glfwSwapBuffers(this->_Window);
 	glfwPollEvents();
+}
+
+eControls		Engine::getkey( void ) {
+	return (this->_ActiveKey);
 }
 
 /* Exceptions */
