@@ -66,8 +66,8 @@ void Game::_mainLoop( void ){
 	quit = 0;
 	while (!(quit)){
 		//std::cout << this->_engine.getKey() << std::endl;
-		this->_currentState->render(this->_engine);
 		this->_currentState->update(); // update gets the key that is pressed
+		this->_currentState->render(this->_engine);
 		if (tick % 5 == 0)
 			this->_state = static_cast<eState>(statetest++ % 5);
 		this->_switchState();
