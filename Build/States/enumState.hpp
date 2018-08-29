@@ -2,6 +2,7 @@
 # define ENUMSTATE_HPP
 
 enum eState {
+	IDLE,
 	INTRO,
 	MENU,
 	PLAY,
