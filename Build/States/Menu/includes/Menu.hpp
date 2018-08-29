@@ -2,7 +2,7 @@
 # define MENU_HPP
 
 # include <iostream>
-# include <list>
+# include <array>
 # include "../../IState/IState.hpp"
 
 class MenuState : public IState {
@@ -16,7 +16,13 @@ public:
 protected:
 
 private:
-	std::list<std::string>_MainMenuOptions;
+	void	_changeSelection( eControls key );
+	void	_makeSelection( int _menuIndex );
+
+	int						_menuIndex;
+	int						_menuSize;
+	std::array<std::string, 5>	_MainMenuOptions;
+	//std::list<std::string>_MainMenuOptions;
 };
 
 #endif
