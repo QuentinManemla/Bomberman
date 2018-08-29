@@ -15,7 +15,6 @@ public:
 protected:
 
 private:
-	// ptr to GameEngine
 
 };
 
