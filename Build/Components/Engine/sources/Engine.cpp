@@ -2,33 +2,8 @@
 
 Engine::Engine() {return ;}
 
-Engine::~Engine() {return ;}
 
-void  Engine::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	Engine	*_engine =  static_cast<Engine *>(glfwGetWindowUserPointer(window));
-	if (action == GLFW_PRESS) {
-		switch(key) {
-			case ( GLFW_KEY_ESCAPE ):
-				_engine->_ActiveKey = ESCAPE;
-				break;
-			case ( GLFW_KEY_LEFT ):
-				_engine->_ActiveKey = LEFT;
-				break;
-			case ( GLFW_KEY_RIGHT ):
-				_engine->_ActiveKey = RIGHT;
-				break;
-			case ( GLFW_KEY_UP ):
-				_engine->_ActiveKey = UP;
-				break;
-			case ( GLFW_KEY_DOWN ):
-				_engine->_ActiveKey = DOWN;
-				break;
-			default:
-				break;
-		}
-	}
-}
+Engine::~Engine() {}
 
 void	Engine::engineInit( void ) {
 	// GLFW Hint Setup
@@ -51,17 +26,31 @@ void	Engine::engineInit( void ) {
 		throw (GLEWInitializationError());
 	std::cout << "GLEW Initialized Successfully" << std::endl;
 	glfwSetInputMode(this->_Window, GLFW_STICKY_KEYS, GL_TRUE);
-	glfwSetKeyCallback(this->_Window, Engine::key_callback);
+	//glfwSetKeyCallback(this->_Window, Engine::key_callback);
 }
 
 void	Engine::render( void ) {
 	glfwSwapBuffers(this->_Window);
 	glfwPollEvents();
+	
 }
 
-eControls		Engine::getKey( void ) {
-	return (this->_ActiveKey);
+
+/********************************************************************************************/
+/*	Keyboard Input Functions BEGIN															*/
+/********************************************************************************************/
+
+bool		Engine::getkey( int key ) {
+	int state = glfwGetKey(this->_Window, key);
+	if (state == GLFW_PRESS)
+		return (true);
+	return (false);
 }
+
+/********************************************************************************************/
+/*	Keyboard Input Functions END															*/
+/********************************************************************************************/
+
 
 /* Exceptions */
 
