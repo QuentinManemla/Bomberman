@@ -35,12 +35,11 @@ void	Engine::render( void ) {
 	
 }
 
-
 /********************************************************************************************/
 /*	Keyboard Input Functions BEGIN															*/
 /********************************************************************************************/
 
-bool		Engine::getkey( int key ) {
+bool		Engine::getKey( int key ) {
 	int state = glfwGetKey(this->_Window, key);
 	if (state == GLFW_PRESS)
 		return (true);

@@ -27,7 +27,7 @@ class	Engine {
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
 
-		bool			getkey( int key );
+		bool			getKey( int key );
 
 		static void processKeys(unsigned char key, int x, int y);
 		/* Exception */
