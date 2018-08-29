@@ -6,10 +6,10 @@
 
 
 class Sound {
-    public:
-        Sound( void );
-        ~Sound( void );
-    private:
-        //irrklang::ISoundEngine  *_soundEngine = irrklang::createIrrKlangDevice();
+	public:
+		Sound( void );
+		~Sound( void );
+	private:
+		//irrklang::ISoundEngine  *_soundEngine = irrklang::createIrrKlangDevice();
 };
 #endif //!SOUND_HPP

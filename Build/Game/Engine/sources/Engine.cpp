@@ -1,4 +1,4 @@
-#include "../includes/Engine.hpp"
+# include "../includes/Engine.hpp"
 
 Engine::Engine() {return ;}
 
@@ -6,8 +6,23 @@ Engine::~Engine() {return ;}
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if (key == GLFW_KEY_E && action == GLFW_PRESS)
-		glfwTerminate();
+	if (action == GLFW_PRESS) {
+		switch(key) {
+			case ( GLFW_KEY_ESCAPE ):
+				std::cout << "ESCAPE" << std::endl;
+				this->_ActiveKey = ESCAPE;
+			// case ( GLFW_KEY_LEFT ):
+			// 	return (LEFT);
+			// case ( GLFW_KEY_RIGHT ):
+			// 	return (RIGHT);
+			// case ( GLFW_KEY_UP ):
+			// 	return (UP);
+			// case ( GLFW_KEY_DOWN ):
+			// 	return (DOWN);
+			default:
+				break;
+		}
+	}
 }
 
 void	Engine::engineInit( void ) {
@@ -37,6 +52,13 @@ void	Engine::engineInit( void ) {
 void	Engine::render( void ) {
 	glfwSwapBuffers(this->_Window);
 	glfwPollEvents();
+	if (this->_ActiveKey == ESCAPE) {
+		glfwTerminate();
+	}
+}
+
+void	Engine::setkey(eControls key) {
+	this->_ActiveKey = key;
 }
 
 /* Exceptions */

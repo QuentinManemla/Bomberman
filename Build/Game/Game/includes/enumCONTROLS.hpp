@@ -1,12 +1,12 @@
 #ifndef CONTROLS_HPP
 # define CONTROLS_HPP
 
-enum Controls {
+enum eControls {
 	LEFT,
 	UP,
 	RIGHT,
 	DOWN,
-	QUIT,
+	ESCAPE,
 };
 
 #endif

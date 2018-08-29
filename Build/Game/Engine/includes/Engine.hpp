@@ -11,6 +11,7 @@
 # include <string.h>
 
 # include "../../Sound/includes/Sound.hpp"
+# include "../../Game/includes/enumCONTROLS.hpp"
 
 class	Engine {
 	public:
@@ -19,7 +20,9 @@ class	Engine {
 
 		void			engineInit( void );
 		void			render( void );
-		
+
+		void			setkey(eControls key);
+
 		/* Exception */
 		class GLFWInitializationError: public std::exception {
 			virtual const char* what() const throw();
@@ -33,7 +36,7 @@ class	Engine {
 		GLFWwindow		*_Window;
 		int				_WindowHeight;
 		int				_WindowWidth;
-
+		eControls		_ActiveKey;
 		Sound			_SoundEngine;
 
 };
