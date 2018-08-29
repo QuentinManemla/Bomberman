@@ -3,6 +3,7 @@
 # define GLEW_STATIC
 
 # include <GL/glew.h>
+# include <GL/glut.h>
 # include <GLFW/glfw3.h>
 # include <glm/glm.hpp>
 
@@ -20,15 +21,14 @@ class	Engine {
 
 		void			engineInit( void );
 		void			render( void );
-
 		/********************************************************************************************/
 		/*	Keyboard Input Functions 																*/
 		/*	getkey( void ) gets the "_Active" private memeber of the Engine which containts the 	*/
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
-		eControls		getkey( void );
-		static void 	key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+		bool			getkey( int key );
 
+		static void processKeys(unsigned char key, int x, int y);
 		/* Exception */
 		class GLFWInitializationError: public std::exception {
 			virtual const char* what() const throw();
@@ -40,6 +40,7 @@ class	Engine {
 
 	private:
 		GLFWwindow		*_Window;
+		Engine			*_MYWindow;
 		int				_WindowHeight;
 		int				_WindowWidth;
 		eControls		_ActiveKey;
