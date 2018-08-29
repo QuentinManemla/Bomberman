@@ -1,4 +1,4 @@
-# include "Game/Game/includes/Game.hpp"
+# include "Components/Game/includes/Game.hpp"
 
 int main() {
     Game game;

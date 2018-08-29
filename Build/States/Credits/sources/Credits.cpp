@@ -12,6 +12,7 @@ void CreditsState::update( void ){
 	std::cout << "Credits update" << std::endl;
 }
 
-void CreditsState::render( void ){
+void CreditsState::render( Engine & engine ){
+	engine.render();
 	std::cout << "Credits render" << std::endl;
 }
