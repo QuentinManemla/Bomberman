@@ -26,7 +26,7 @@ class	Engine {
 		/*	getkey( void ) gets the "_Active" private memeber of the Engine which containts the 	*/
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
-		eControls		getkey( void );
+		eControls		getKey( void );
 		static void 	key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 		/* Exception */

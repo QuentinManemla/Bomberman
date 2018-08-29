@@ -11,14 +11,19 @@ void  Engine::key_callback(GLFWwindow* window, int key, int scancode, int action
 		switch(key) {
 			case ( GLFW_KEY_ESCAPE ):
 				_engine->_ActiveKey = ESCAPE;
+				break;
 			case ( GLFW_KEY_LEFT ):
 				_engine->_ActiveKey = LEFT;
+				break;
 			case ( GLFW_KEY_RIGHT ):
 				_engine->_ActiveKey = RIGHT;
+				break;
 			case ( GLFW_KEY_UP ):
 				_engine->_ActiveKey = UP;
+				break;
 			case ( GLFW_KEY_DOWN ):
 				_engine->_ActiveKey = DOWN;
+				break;
 			default:
 				break;
 		}
@@ -54,7 +59,7 @@ void	Engine::render( void ) {
 	glfwPollEvents();
 }
 
-eControls		Engine::getkey( void ) {
+eControls		Engine::getKey( void ) {
 	return (this->_ActiveKey);
 }
 

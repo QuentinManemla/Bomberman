@@ -7,6 +7,7 @@ enum eControls {
 	RIGHT,
 	DOWN,
 	ESCAPE,
+	IDLEKEY,
 };
 
 #endif
