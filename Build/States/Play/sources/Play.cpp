@@ -12,6 +12,7 @@ void PlayState::update( void ){
 	std::cout << "Play update" << std::endl;
 }
 
-void PlayState::render( void ){
+void PlayState::render( Engine & engine ){
+	engine.render();
 	std::cout << "Play render" << std::endl;
 }

@@ -11,7 +11,7 @@ public:
 	~PlayState( void );
 
 	void update( void );
-	void render( void );
+	void render( Engine & engine );
 protected:
 
 private:

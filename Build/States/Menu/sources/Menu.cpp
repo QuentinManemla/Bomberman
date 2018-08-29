@@ -12,6 +12,8 @@ void MenuState::update( void ){
 	std::cout << "Menu update" << std::endl;
 }
 
-void MenuState::render( Engine	&engine ){
+void MenuState::render( Engine & engine ){
 	engine.render();
+	std::cout << "Menu render" << std::endl;
+
 }

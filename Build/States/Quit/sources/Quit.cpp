@@ -12,6 +12,7 @@ void QuitState::update( void ){
 	std::cout << "Quit update" << std::endl;
 }
 
-void QuitState::render( void ){
+void QuitState::render( Engine & engine ){
+	engine.render();
 	std::cout << "Quit render" << std::endl;
 }
