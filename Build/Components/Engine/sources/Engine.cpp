@@ -1,6 +1,18 @@
 # include "../includes/Engine.hpp"
 
-Engine::Engine() {return ;}
+Engine::Engine() {
+	std::cout << "Engine constructed" << std::endl;
+	// initialising controls struct
+	this->_sControls.LEFT_KEY = 263;
+	this->_sControls.UP_KEY = 265;
+	this->_sControls.RIGHT_KEY = 262;
+	this->_sControls.DOWN_KEY = 264;
+	this->_sControls.ENTER_KEY = 257;
+	this->_sControls.ESCAPE_KEY = 256;
+	this->_sControls.FIRE_KEY = 90;
+	this->_sControls.ACTION_KEY = 88;
+	return ;
+}
 
 
 Engine::~Engine() {}
@@ -31,15 +43,36 @@ void	Engine::engineInit( void ) {
 
 void	Engine::render( void ) {
 	glfwSwapBuffers(this->_Window);
+	std::cout << "engine render" << std::endl; // debug
 	glfwPollEvents();
-	
 }
 
 /********************************************************************************************/
 /*	Keyboard Input Functions BEGIN															*/
 /********************************************************************************************/
 
-bool		Engine::getKey( int key ) {
+eControls	Engine::getInput(){
+	// run through array or struct of values. struct most likely
+	if (this->_getKey( this->_sControls.LEFT_KEY ))
+		return (LEFT);
+	if (this->_getKey( this->_sControls.UP_KEY ))
+		return (UP);
+	if (this->_getKey( this->_sControls.RIGHT_KEY ))
+		return (RIGHT);
+	if (this->_getKey( this->_sControls.DOWN_KEY ))
+		return (DOWN);
+	if (this->_getKey( this->_sControls.ENTER_KEY ))
+		return (ENTER);
+	if (this->_getKey( this->_sControls.ESCAPE_KEY ))
+		return (ESCAPE);
+	if (this->_getKey( this->_sControls.ACTION_KEY ))
+		return (LEFT);
+	if (this->_getKey( this->_sControls.FIRE_KEY ))
+		return (LEFT);
+	return (IDLEKEY);
+}
+
+bool		Engine::_getKey( int key ) {
 	int state = glfwGetKey(this->_Window, key);
 	if (state == GLFW_PRESS)
 		return (true);

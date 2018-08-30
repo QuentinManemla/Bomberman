@@ -5,8 +5,8 @@
 
 class IState {
 public:
-	virtual void update( void ) = 0;
-	virtual void render( Engine	& engine ) = 0;
+	virtual void update( eControls key ) = 0;
+	virtual void render( void ) = 0;
 	virtual ~IState( ) {};
 
 protected:

@@ -1,5 +1,5 @@
-#ifndef CONTROLS_HPP
-# define CONTROLS_HPP
+#ifndef ECONTROLS_HPP
+# define ECONTROLS_HPP
 
 enum eControls {
 	LEFT,
@@ -8,6 +8,8 @@ enum eControls {
 	DOWN,
 	ESCAPE,
 	ENTER,
+	ACTION,
+	FIRE,
 	IDLEKEY,
 };
 

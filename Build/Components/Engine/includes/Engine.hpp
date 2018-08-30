@@ -13,6 +13,8 @@
 
 # include "../../Sound/includes/Sound.hpp"
 # include "../../Game/includes/enumCONTROLS.hpp"
+# include "structControls.hpp"
+# include "../../../States/enumState.hpp"
 
 class	Engine {
 	public:
@@ -27,7 +29,7 @@ class	Engine {
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
 
-		bool			getKey( int key );
+		eControls		getInput( void );
 
 		static void processKeys(unsigned char key, int x, int y);
 		/* Exception */
@@ -39,6 +41,8 @@ class	Engine {
 			virtual const char* what() const throw();
 		};
 
+		eState			state;
+
 	private:
 		GLFWwindow		*_Window;
 		Engine			*_MYWindow;
@@ -46,6 +50,8 @@ class	Engine {
 		int				_WindowWidth;
 		eControls		_ActiveKey;
 		Sound			_SoundEngine;
+		sControls		_sControls;
+		bool			_getKey( int key );
 
 };
 

@@ -8,14 +8,15 @@ class CreditsState : public IState {
 public:
 	// constructor that takes ptr to GameEngine
 	CreditsState( void );
+	CreditsState( Engine & engine );
 	~CreditsState( void );
 
-	void update( void );
-	void render( Engine & engine );
+	void update( eControls key );
+	void render( void );
 protected:
 
 private:
-	// ptr to GameEngine
+	Engine	*_engine;
 };
 
 #endif
