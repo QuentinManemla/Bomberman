@@ -34,10 +34,10 @@ void MenuState::render( void ){
 void	MenuState::_changeSelection( eControls key){
 	switch (key){
 		case UP:
-			this->_menuIndex--;
+			this->_menuIndex == 0 ? this->_menuIndex = 0 : this->_menuIndex--;
 			break;
 		case DOWN:
-			this->_menuIndex++;
+			this->_menuIndex == 4 ? this->_menuIndex = 4 : this->_menuIndex++;
 			break;
 		case ENTER:
 			this->_makeSelection(this->_menuIndex);
@@ -45,15 +45,15 @@ void	MenuState::_changeSelection( eControls key){
 		default:
 			break;
 	};
-	this->_menuIndex = std::abs(this->_menuIndex % 5);
-	std::cout << "Menu index: " << this->_menuIndex << std::endl; // debug
+	//this->_menuIndex = std::abs(this->_menuIndex % 5); // circular menu selection
+	std::cout << "Menu option: " << this->_MainMenuOptions[this->_menuIndex] << std::endl; // debug
 }
 
 void	MenuState::_makeSelection( int _menuIndex ){
-	std::cout << "Selected " << this->_menuIndex << "! (" << this->_menuIndex << ")" << std::endl;
+	std::cout << "Selected " << this->_MainMenuOptions[this->_menuIndex] << "! (" << this->_menuIndex << ")" << std::endl;
 	
-	// reset _menuIndex;
+	// reset _menuIndex; (only when not switching state)
 	// update state depending on selection
 	if (this->_menuIndex == 2) // test
-		this->_engine->state = PLAY;
+		this->_engine->state = PLAY; // test
 }
