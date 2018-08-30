@@ -26,10 +26,8 @@ void MenuState::update( eControls key ){
 }
 
 void MenuState::render( void ){
-	// engine.renderMenu() // specialized menu rendering engine
-	//std::cout << this->_menuIndex << std::endl; / /debug
-	// END FAKE renderMenu()
 	this->_engine->render();
+	// this->_engine->renderMenu( array of options, current index, background/layout );
 	std::cout << "Menu render" << std::endl; // debug
 }
 
@@ -47,11 +45,13 @@ void	MenuState::_changeSelection( eControls key){
 		default:
 			break;
 	};
+	this->_menuIndex = std::abs(this->_menuIndex % 5);
 	std::cout << "Menu index: " << this->_menuIndex << std::endl; // debug
 }
 
 void	MenuState::_makeSelection( int _menuIndex ){
-	std::cout << "Selected " << std::abs(this->_menuIndex % 5) << "! (" << this->_menuIndex << ")" << std::endl;
+	std::cout << "Selected " << this->_menuIndex << "! (" << this->_menuIndex << ")" << std::endl;
+	
 	// reset _menuIndex;
 	// update state depending on selection
 	if (this->_menuIndex == 2) // test
