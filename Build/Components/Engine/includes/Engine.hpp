@@ -10,6 +10,7 @@
 # include <vector>
 # include <iostream>
 # include <string.h>
+# include <array>
 
 # include "../../Sound/includes/Sound.hpp"
 # include "../../Game/includes/enumCONTROLS.hpp"
@@ -23,15 +24,18 @@ class	Engine {
 
 		void			engineInit( void );
 		void			render( void );
+
 		/********************************************************************************************/
 		/*	Keyboard Input Functions 																*/
 		/*	getkey( void ) gets the "_Active" private memeber of the Engine which containts the 	*/
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
-
 		eControls		getInput( void );
-
 		static void processKeys(unsigned char key, int x, int y);
+
+		/* Timer functions */
+		void			FPSManager();
+
 		/* Exception */
 		class GLFWInitializationError: public std::exception {
 			virtual const char* what() const throw();

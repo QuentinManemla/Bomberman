@@ -42,7 +42,7 @@ void	Engine::engineInit( void ) {
 	//glfwSetKeyCallback(this->_Window, Engine::key_callback);
 }
 
-void	Engine::render( void ) {
+void	Engine::render( void ) { // investigate optimisation
 	glfwSwapBuffers(this->_Window);
 	std::cout << "engine render" << std::endl; // debug
 	glfwPollEvents();
@@ -84,6 +84,37 @@ bool		Engine::_getKey( int key ) {
 /*	FPS management BEGIN																	*/
 /********************************************************************************************/
 
+void		Engine::FPSManager( void ){
+	static int				index = 0;
+	double					deltaTime = 0;
+	static double			frames[100]; // set samples
+	double					averageTime = 0;
+	static int				samplesFull = 0;
+	static double			prevTime = 0;
+	double					currentTime = 0;
+
+	currentTime = glfwGetTime();
+	deltaTime = currentTime - prevTime;
+	frames[index++] = deltaTime;
+
+	if (index == 100){
+		samplesFull = 1;
+		index = 0;
+	}
+
+	for (int i = 0; i < 100; i++){
+		averageTime += frames[i];
+	}
+	//if (index % 10 == 0)
+		if (samplesFull)
+			std::cout << "Average time: " << (averageTime /= 100) << std::endl; // debug
+		else
+			std::cout << "Average time: " << (averageTime /= index) << std::endl; // debug
+	
+	std::cout << "Average FPS: " << 1000.0f / averageTime << std::endl;
+	
+	prevTime = currentTime;
+}
 
 /********************************************************************************************/
 /*	Exceptions BEGIN																		*/

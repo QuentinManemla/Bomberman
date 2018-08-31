@@ -8,7 +8,7 @@ MenuState::MenuState( Engine & engine ){
 	this->_MainMenuOptions[2] = "Options";
 	this->_MainMenuOptions[3] = "Credits";
 	this->_MainMenuOptions[4] = "Quit";
-	this->_menuSize = this->_MainMenuOptions.size();
+	// this->_menuSize = this->_MainMenuOptions.size(); // doesn't seem to be needed
 	this->_menuIndex = 0;
 }
 
@@ -27,7 +27,7 @@ void MenuState::update( eControls key ){
 
 void MenuState::render( void ){
 	this->_engine->render();
-	// this->_engine->renderMenu( array of options, current index, background/layout );
+	// this->_engine->renderMenu( array of options, current index, background/layout ); // proposed usage for menu draw function
 	std::cout << "Menu render" << std::endl; // debug
 }
 
@@ -55,15 +55,16 @@ void	MenuState::_changeSelection( eControls key){
 		default:
 			break;
 	};
-	//this->_menuIndex = std::abs(this->_menuIndex % 5); // circular menu selection
+	//this->_menuIndex = std::abs(this->_menuIndex % 5); // circular menu selection feature. Requires additional logic. I vote nah
 	std::cout << "Menu option: " << this->_MainMenuOptions[this->_menuIndex] << std::endl; // debug
 }
 
 void	MenuState::_makeSelection( int _menuIndex ){
-	std::cout << "Selected " << this->_MainMenuOptions[this->_menuIndex] << "! (" << this->_menuIndex << ")" << std::endl;
+	std::cout << "Selected " << this->_MainMenuOptions[this->_menuIndex] << "! (" << this->_menuIndex << ")" << std::endl; // debug
 	
-	// reset _menuIndex; (only when not switching state)
-	// update state depending on selection
+	// reset _menuIndex; // (maybe? Only when not switching state I guess?)
+	
+	// update state depending on selection:
 	if (this->_menuIndex == 0) // test
 		this->_engine->state = PLAY; // test
 	if (this->_menuIndex == 4) // test
