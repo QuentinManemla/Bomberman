@@ -3,14 +3,14 @@
 Engine::Engine() {
 	std::cout << "Engine constructed" << std::endl;
 	// initialising controls struct
-	this->_sControls.LEFT_KEY = 263;
-	this->_sControls.UP_KEY = 265;
-	this->_sControls.RIGHT_KEY = 262;
-	this->_sControls.DOWN_KEY = 264;
-	this->_sControls.ENTER_KEY = 257;
-	this->_sControls.ESCAPE_KEY = 256;
-	this->_sControls.FIRE_KEY = 90;
-	this->_sControls.ACTION_KEY = 88;
+	this->_sControls.LEFT_KEY = GLFW_KEY_LEFT;//263;
+	this->_sControls.UP_KEY = GLFW_KEY_UP;//265;
+	this->_sControls.RIGHT_KEY = GLFW_KEY_RIGHT;//262;
+	this->_sControls.DOWN_KEY = GLFW_KEY_DOWN;//264;
+	this->_sControls.ENTER_KEY = GLFW_KEY_ENTER;//257;
+	this->_sControls.ESCAPE_KEY = GLFW_KEY_ESCAPE;//256;
+	this->_sControls.FIRE_KEY = GLFW_KEY_Z;//90; defaults to z
+	this->_sControls.ACTION_KEY = GLFW_KEY_X;//88; defaults to x
 	return ;
 }
 

@@ -55,6 +55,7 @@ void Game::_mainLoop( void ){
 
 	quit = 0;
 	while (!(quit)){
+		std::cout << "debug key: " << this->_engine.getInput() << std::endl; // debug
 		this->_currentState->update(this->_engine.getInput()); // update gets the key that is pressed
 		this->_currentState->render();
 		this->_switchState();

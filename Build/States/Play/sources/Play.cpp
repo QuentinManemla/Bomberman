@@ -18,6 +18,7 @@ void PlayState::update( eControls key ){
 	if (key == ESCAPE){
 		this->_engine->state = MENU;
 	}
+
 }
 
 void PlayState::render( void ){
