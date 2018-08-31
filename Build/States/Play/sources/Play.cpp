@@ -15,6 +15,9 @@ PlayState::~PlayState( void ){
 
 void PlayState::update( eControls key ){
 	std::cout << "Play update" << std::endl;
+	if (key == ESCAPE){
+		this->_engine->state = MENU;
+	}
 }
 
 void PlayState::render( void ){

@@ -66,4 +66,6 @@ void	MenuState::_makeSelection( int _menuIndex ){
 	// update state depending on selection
 	if (this->_menuIndex == 0) // test
 		this->_engine->state = PLAY; // test
+	if (this->_menuIndex == 4) // test
+		exit(0); // test
 }

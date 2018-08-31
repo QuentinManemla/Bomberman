@@ -10,7 +10,7 @@ Game::~Game( void ){
 
 void Game::init( void ) {
 	this->_engine.engineInit();
-	this->_engine.state = MENU; // set initial state
+	this->_engine.state = INTRO; // set initial state
 	this->_currentState = 0;
 	_switchState();
 }
