@@ -32,7 +32,7 @@ void MenuState::render( void ){
 }
 
 void	MenuState::_changeSelection( eControls key){
-	static	int held = 0;
+	static	int held = 1; // set to 1 initially to avoid accidental selection on state switch
 
 	switch (key){
 		case UP:
