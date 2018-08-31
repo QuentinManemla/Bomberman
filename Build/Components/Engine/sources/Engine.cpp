@@ -105,15 +105,16 @@ void		Engine::FPSManager( void ){
 	for (int i = 0; i < 100; i++){
 		averageTime += frames[i];
 	}
-	//if (index % 10 == 0)
-		if (samplesFull)
-			std::cout << "Average time: " << (averageTime /= 100) << std::endl; // debug
-		else
-			std::cout << "Average time: " << (averageTime /= index) << std::endl; // debug
-	
-	std::cout << "Average FPS: " << 1000.0f / averageTime << std::endl;
-	
+
+	if (samplesFull)
+		averageTime /= 100;
+	else
+		averageTime /= index;
+
+	std::cout << "Average FPS: " << 1.0f / averageTime << std::endl;
 	prevTime = currentTime;
+
+	// delay here
 }
 
 /********************************************************************************************/

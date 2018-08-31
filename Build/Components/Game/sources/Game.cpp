@@ -55,15 +55,11 @@ void Game::_mainLoop( void ){
 
 	quit = 0;
 	while (!(quit)){
-		//std::cout << "elapsed time: " << glfwGetTime() - startTime << std::endl; // debug
-		//std::cout << "ticks elapsed: " << tick++ << std::endl; // debug
 		this->_currentState->update(this->_engine.getInput()); // update gets the key that is pressed
 		this->_currentState->render();
 		this->_switchState();
 
 		std::cout << std::endl; // debug
-
-		//usleep(16666); // simulate 60 fps
 
 		//Frame rate manager
 		this->_engine.FPSManager(/*startTime*/);
