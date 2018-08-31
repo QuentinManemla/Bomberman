@@ -32,16 +32,26 @@ void MenuState::render( void ){
 }
 
 void	MenuState::_changeSelection( eControls key){
+	static	int held = 0;
+
 	switch (key){
 		case UP:
-			this->_menuIndex == 0 ? this->_menuIndex = 0 : this->_menuIndex--;
+			if (!(held))
+				this->_menuIndex == 0 ? this->_menuIndex = 0 : this->_menuIndex--;
+			held = 1;
 			break;
 		case DOWN:
-			this->_menuIndex == 4 ? this->_menuIndex = 4 : this->_menuIndex++;
+			if (!(held))
+				this->_menuIndex == 4 ? this->_menuIndex = 4 : this->_menuIndex++;
+			held = 1;
 			break;
 		case ENTER:
-			this->_makeSelection(this->_menuIndex);
+			if (!(held))
+				this->_makeSelection(this->_menuIndex);
+			held = 1;
 			break;
+		case IDLEKEY:
+			held = 0;
 		default:
 			break;
 	};
@@ -54,6 +64,6 @@ void	MenuState::_makeSelection( int _menuIndex ){
 	
 	// reset _menuIndex; (only when not switching state)
 	// update state depending on selection
-	if (this->_menuIndex == 2) // test
+	if (this->_menuIndex == 0) // test
 		this->_engine->state = PLAY; // test
 }

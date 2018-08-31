@@ -61,10 +61,11 @@ void Game::_mainLoop( void ){
 
 	quit = 0;
 	while (!(quit)){
-		//std::cout << this->_engine.getInput() << std::endl; // test debug
+		std::cout << "gameloop debug: " << std::endl << this->_engine.getInput() << std::endl; // test debug
 		this->_currentState->update(this->_engine.getInput()); // update gets the key that is pressed
 		this->_currentState->render();
 		this->_switchState();
+		//this->_engine.frameManager();
 
 		/* switch testing
 		if (tick % 5 == 0)
@@ -72,6 +73,6 @@ void Game::_mainLoop( void ){
 		tick++;
 		*/
 		std::cout << std::endl; // debug
-		usleep(100000);
+		usleep(16666); // simulate 60 fps
 	}
 }

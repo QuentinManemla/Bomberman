@@ -14,8 +14,9 @@ Engine::Engine() {
 	return ;
 }
 
-
-Engine::~Engine() {}
+Engine::~Engine() {
+	std::cout << "Engine destructed" << std::endl;
+}
 
 void	Engine::engineInit( void ) {
 	// GLFW Hint Setup
@@ -80,11 +81,14 @@ bool		Engine::_getKey( int key ) {
 }
 
 /********************************************************************************************/
-/*	Keyboard Input Functions END															*/
+/*	FPS management BEGIN																	*/
 /********************************************************************************************/
 
 
-/* Exceptions */
+/********************************************************************************************/
+/*	Exceptions BEGIN																		*/
+/********************************************************************************************/
+
 
 const char* Engine::GLFWInitializationError::what() const throw() {
 	return ("[Error (Code: 00)] Failed to initialize GLFW");
