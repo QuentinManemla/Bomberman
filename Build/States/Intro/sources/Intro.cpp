@@ -1,6 +1,11 @@
 #include "../includes/Intro.hpp"
 
-IntroState::IntroState( void ): _Textiteration(0) {
+IntroState::IntroState( Engine & engine ){
+	this->_engine = &engine;
+	std::cout << "Intro constructed" << std::endl;
+}
+
+IntroState::IntroState( void ){
 	std::cout << "Intro constructed" << std::endl;
 }
 
@@ -8,19 +13,22 @@ IntroState::~IntroState( void ){
 	std::cout << "Intro destructed" << std::endl;
 }
 
-void IntroState::update( Engine & engine ) {
-	engine.clear();
-	std::string		welcome = "Welcome to Bomberman";
-	if (this->_Textiteration < welcome.length()) {
-		engine.print2DText(welcome.substr(0 ,this->_Textiteration), 20, 20);
-		this->_Textiteration++;
-	} else if (this->_Textiteration == welcome.length()) {
-		engine.print2DText(welcome, 20, 20);
-		//engine.print2DText("Press any key to continue.", 20, 25);
+void IntroState::update( eControls key ) {
+	std::cout << "Intro update" << std::endl;
+	static int time = 0; // test // debug
+	time++; // test
+	std::cout << "time: " << time << std::endl; // test
+	if (time >= 500){ // test // to be replaced by "end of intro/animation" flag
+		std::cout << "Intro over!" << std::endl;
+		this->_engine->state = MENU;
+	}
+	if (key == ENTER){
+		std::cout << "Skipping intro!" << std::endl;
+		this->_engine->state = MENU;
 	}
 }
 
-void IntroState::render( Engine	& engine ) {
-	engine.render();
+void IntroState::render( void ) {
+	this->_engine->render();
 	std::cout << "Intro render" << std::endl;
 }

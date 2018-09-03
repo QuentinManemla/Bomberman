@@ -32,6 +32,13 @@
 # include "../../Game/includes/enumCONTROLS.hpp"
 # include "TextRenderer.hpp"
 # include "Shader.hpp"
+# include <string.h>
+# include <array>
+
+# include "../../Sound/includes/Sound.hpp"
+# include "../../Game/includes/enumCONTROLS.hpp"
+# include "structControls.hpp"
+# include "../../../States/enumState.hpp"
 
 class	Engine {
 	public:
@@ -43,14 +50,18 @@ class	Engine {
 		void			clear( void );
 
 		void			print2DText(std::string text, int pos_x, int pos_y);
+
 		/********************************************************************************************/
 		/*	Keyboard Input Functions 																*/
 		/*	getkey( void ) gets the "_Active" private memeber of the Engine which containts the 	*/
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
-		bool			getkey( int key );
-
+		eControls		getInput( void );
 		static void processKeys(unsigned char key, int x, int y);
+
+		/* Timer functions */
+		void			FPSManager();
+
 		/* Exception */
 		class GLFWInitializationError: public std::exception {
 			virtual const char* what() const throw();
@@ -59,6 +70,8 @@ class	Engine {
 		class GLEWInitializationError: public std::exception {
 			virtual const char* what() const throw();
 		};
+
+		eState			state;
 
 	private:
 		GLFWwindow				*_Window;
@@ -69,6 +82,8 @@ class	Engine {
 		Sound					_SoundEngine;
 		Shader					_Shader;
 		glfreetype::font_data	_Font;
+		sControls		_sControls;
+		bool			_getKey( int key );
 };
 
 #endif // !ENGINE_HPP

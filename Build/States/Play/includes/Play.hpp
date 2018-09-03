@@ -8,15 +8,15 @@ class PlayState : public IState {
 public:
 	// constructor that takes ptr to GameEngine
 	PlayState( void );
+	PlayState( Engine & engine );
 	~PlayState( void );
 
-	void update( void );
+	void update( eControls key );
 	void render( void );
 protected:
 
 private:
-	// ptr to GameEngine
-
+	Engine *_engine;
 };
 
 #endif

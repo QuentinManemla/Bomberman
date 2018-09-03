@@ -8,15 +8,15 @@ class QuitState : public IState {
 public:
 	// constructor that takes ptr to GameEngine
 	QuitState( void );
+	QuitState( Engine & engine );
 	~QuitState( void );
 
-	void update( void );
+	void update( eControls key );
 	void render( void );
 protected:
 
 private:
-	// ptr to GameEngine
-
+	Engine	*_engine;
 };
 
 #endif
