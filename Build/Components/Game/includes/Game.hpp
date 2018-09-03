@@ -25,7 +25,7 @@ private:
 	void	_mainLoop();
 	void	_switchState();
 	
-	eState	_state;
+	// eState	_state; moved to engine
 	Engine	_engine;
 
 	IState	*_currentState; // type interface IState // set default on construction // possibly initialize everything on construction

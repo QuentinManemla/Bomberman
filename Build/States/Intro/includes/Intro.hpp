@@ -8,15 +8,15 @@ class IntroState : public IState {
 public:
 	// constructor that takes ptr to GameEngine
 	IntroState( void );
+	IntroState( Engine & engine );
 	~IntroState( void );
 
-	void update( void );
-	void render( Engine	&engine );
+	void update( eControls key );
+	void render( void );
 protected:
 
 private:
-	// ptr to GameEngine
-
+	Engine *_engine;
 };
 
 #endif
