@@ -25,7 +25,9 @@ void MenuState::update( eControls key ){
 	this->_changeSelection( key );
 }
 
-void MenuState::render( void ){
+void MenuState::render( void ) {
+	this->_engine->clear();
+	this->_engine->printMenu(this->_MainMenuOptions, this->_menuIndex, "Assets/Images/main_menu_backgrond.png");
 	this->_engine->render();
 	// this->_engine->renderMenu( array of options, current index, background/layout ); // proposed usage for menu draw function
 	std::cout << "Menu render" << std::endl; // debug

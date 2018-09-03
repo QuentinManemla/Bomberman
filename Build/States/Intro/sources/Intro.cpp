@@ -18,14 +18,15 @@ void IntroState::update( eControls key ) {
 	static int time = 0; // test // debug
 	time++; // test
 	std::cout << "time: " << time << std::endl; // test
+	this->_engine->clear();
 	if (time >= 500){ // test // to be replaced by "end of intro/animation" flag
 		std::cout << "Intro over!" << std::endl;
 		this->_engine->state = MENU;
-	}
-	if (key == ENTER){
+	} else if (key == ENTER){
 		std::cout << "Skipping intro!" << std::endl;
 		this->_engine->state = MENU;
-	}
+	} else
+		this->_engine->print2DText("Intro", 20, 20, 0, 0, 0xff);
 }
 
 void IntroState::render( void ) {

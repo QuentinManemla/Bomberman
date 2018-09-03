@@ -20,8 +20,8 @@ private:
 	void	_changeSelection( eControls key );
 	void	_makeSelection( int _menuIndex );
 
-	int						_menuIndex;
-	int						_menuSize;
+	int							_menuIndex;
+	int							_menuSize;
 	std::array<std::string, 5>	_MainMenuOptions;
 	Engine *_engine;
 	//std::list<std::string>_MainMenuOptions;

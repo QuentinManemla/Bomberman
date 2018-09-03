@@ -18,10 +18,11 @@ void PlayState::update( eControls key ){
 	if (key == ESCAPE){
 		this->_engine->state = MENU;
 	}
-
 }
 
 void PlayState::render( void ){
+	this->_engine->clear();
+	this->_engine->print2DText("Play", 20, 20, 0, 0, 0xff);
 	this->_engine->render();
 	std::cout << "Play render" << std::endl;
 }
