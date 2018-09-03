@@ -33,8 +33,8 @@ void Game::_mainLoop( void ){
 	quit = 0;
 	while (!(quit)){
 		// get input
+		this->_currentState->update(this->_engine);
 		this->_currentState->render(this->_engine);
-		this->_currentState->update();
-		usleep(1000000);
+		usleep(300000);
 	}
 }

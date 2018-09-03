@@ -10,12 +10,12 @@ public:
 	IntroState( void );
 	~IntroState( void );
 
-	void update( void );
+	void update( Engine &engine );
 	void render( Engine	&engine );
 protected:
 
 private:
-
+	unsigned int _Textiteration;
 };
 
 #endif

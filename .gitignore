@@ -5,3 +5,4 @@ Makefile
 .vscode
 Bomberman
 a.out
+.DS_STORE

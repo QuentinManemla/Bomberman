@@ -5,7 +5,7 @@
 
 class IState {
 public:
-	virtual void update( void ) = 0;
+	virtual void update( Engine &engine ) = 0;
 	virtual void render( Engine	&engine ) = 0;
 	virtual ~IState( ) {};
 

@@ -1,8 +1,12 @@
 #ifndef SHADER_HPP
-# define SHADER_HPP
 
 # include <GL/glew.h>
 # include <GL/glut.h>
+# include <GLFW/glfw3.h>
+# include <glm/glm.hpp>
+# include <glm/gtc/matrix_transform.hpp>
+# include <glm/gtc/type_ptr.hpp>
+
 # include <GLFW/glfw3.h>
 # include <glm/glm.hpp>
 
@@ -13,19 +17,29 @@
 # include <sstream>
 # include <iostream>
 
-class Shader {
-    public:
+# include <ft2build.h>
+# include <freetype/freetype.h>
+# include <freetype/ftglyph.h>
+# include <freetype/ftoutln.h>
+# include <freetype/fttrigon.h>
+# include FT_FREETYPE_H
 
-        Shader();
-        Shader(const GLchar* vertexPath, const GLchar* fragmentPath);
-        ~Shader();
+# include <map>
 
-        void use();
-        void setBool(const std::string &name, bool value) const;  
-        void setInt(const std::string &name, int value) const;   
-        void setFloat(const std::string &name, float value) const;
+class Shader
+{
+public:
+	GLuint ID;
 
-    private:
-        unsigned int ID:
+	Shader();
+	Shader(const GLchar* vertexPath, const GLchar* fragmentPath);
+	Shader	&operator=(Shader const & _rhs);
+	~Shader();
+
+	void use();
+	void setBool(const std::string &name, bool value) const;
+	void setInt(const std::string &name, int value) const;
+	void setFloat(const std::string &name, float value) const;
 };
+
 #endif // !SHADER_HPP
