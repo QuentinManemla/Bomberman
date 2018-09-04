@@ -59,6 +59,7 @@ void Game::_mainLoop( void ){
 		this->_currentState->update(this->_engine.getInput()); // update gets the key that is pressed
 		this->_currentState->render();
 		this->_switchState();
+		//this->_subState();
 
 		std::cout << std::endl; // debug
 
