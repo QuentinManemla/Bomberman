@@ -7,7 +7,8 @@ enum eState {
 	MENU,
 	PLAY,
 	CREDITS,
-	QUIT
+	QUIT,
+	BACK
 };
 
 #endif

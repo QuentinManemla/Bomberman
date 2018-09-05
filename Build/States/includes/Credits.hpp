@@ -2,7 +2,7 @@
 # define CREDITS_HPP
 
 # include <iostream>
-# include "../../IState/IState.hpp"
+# include "IState.hpp"
 
 class CreditsState : public IState {
 public:
@@ -11,8 +11,13 @@ public:
 	CreditsState( Engine & engine );
 	~CreditsState( void );
 
+	std::string getType( void ); // debug
+
+
 	void update( eControls key );
 	void render( void );
+
+	std::string type; // debug
 protected:
 
 private:

@@ -2,6 +2,8 @@
 
 Game::Game( void ){
 	std::cout << "Game constructed" << std::endl; // debug
+	this->_stateStack.push(new QuitState(this->_engine));
+	this->_stateStack.push(new MenuState(this->_engine));
 }
 
 Game::~Game( void ){
@@ -22,24 +24,28 @@ void Game::run( void ) {
 void Game::_switchState( void ){
 	switch (this->_engine.state){
 		case INTRO:
-			delete this->_currentState;
-			this->_currentState = new IntroState(this->_engine);
+			this->_stateStack.push(new IntroState(this->_engine));
 			break;
 		case MENU:
-			delete this->_currentState;
-			this->_currentState = new MenuState(this->_engine);
+			this->_stateStack.push(new MenuState(this->_engine));
 			break;
 		case PLAY:
-			delete this->_currentState;
-			this->_currentState = new PlayState(this->_engine);
+			this->_stateStack.push(new PlayState(this->_engine));
 			break;
 		case CREDITS:
-			delete this->_currentState;
-			this->_currentState = new CreditsState(this->_engine);
+			this->_stateStack.push(new CreditsState(this->_engine));
 			break;
 		case QUIT:
-			delete this->_currentState;
-			this->_currentState = new QuitState(this->_engine);
+			this->_stateStack.push(new QuitState(this->_engine));
+			break;
+/*		case PAUSE:
+			this->_stateStack.push(new QuitState(this->_engine));
+			break;
+		case OPTIONS:
+			this->_stateStack.push(new QuitState(this->_engine));
+			break;*/
+		case BACK:
+			this->_stateStack.pop();
 			break;
 		case IDLE:
 			break;
@@ -56,13 +62,19 @@ void Game::_mainLoop( void ){
 	quit = 0;
 	while (!(quit)){
 		std::cout << "debug key: " << this->_engine.getInput() << std::endl; // debug
-		this->_currentState->update(this->_engine.getInput()); // update gets the key that is pressed
-		this->_currentState->render();
+		this->_stateStack.top()->update(this->_engine.getInput());
+		this->_stateStack.top()->render();
 		this->_switchState();
+		this->debugprintstack();// debug
 
 		std::cout << std::endl; // debug
-
 		//Frame rate manager
 		this->_engine.FPSManager(/*startTime*/);
 	}
+}
+
+void	Game::debugprintstack(){ // debug
+    for (std::stack<IState*> dump = this->_stateStack; !dump.empty(); dump.pop())
+        std::cout << dump.top()->getType() << '-';
+	std::cout << std::endl;
 }

@@ -3,7 +3,7 @@
 
 # include <iostream>
 # include <array>
-# include "../../IState/IState.hpp"
+# include "IState.hpp"
 
 class MenuState : public IState {
 public:
@@ -12,8 +12,13 @@ public:
 	MenuState( Engine & engine );
 	~MenuState( void );
 
+	std::string getType( void ); // debug
+
+
 	void update( eControls key );
 	void render( void );
+
+	std::string type; // debug
 protected:
 
 private:

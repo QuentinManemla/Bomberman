@@ -2,7 +2,7 @@
 # define PLAY_HPP
 
 # include <iostream>
-# include "../../IState/IState.hpp"
+# include "IState.hpp"
 
 class PlayState : public IState {
 public:
@@ -11,8 +11,13 @@ public:
 	PlayState( Engine & engine );
 	~PlayState( void );
 
+		std::string getType( void ); // debug
+
+
 	void update( eControls key );
 	void render( void );
+
+	std::string type; // debug
 protected:
 
 private:

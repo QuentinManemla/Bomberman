@@ -2,6 +2,7 @@
 
 CreditsState::CreditsState( Engine & engine ){
 	this->_engine = &engine;
+	this->type = "Credits";
 	std::cout << "Credits constructed" << std::endl;
 }
 
@@ -20,4 +21,8 @@ void CreditsState::update( eControls key ){
 void CreditsState::render( void ){
 	this->_engine->render();
 	std::cout << "Credits render" << std::endl;
+}
+
+std::string CreditsState::getType( void ){ //debug
+	return this->type;
 }

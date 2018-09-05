@@ -2,7 +2,7 @@
 # define QUIT_HPP
 
 # include <iostream>
-# include "../../IState/IState.hpp"
+# include "IState.hpp"
 
 class QuitState : public IState {
 public:
@@ -11,8 +11,11 @@ public:
 	QuitState( Engine & engine );
 	~QuitState( void );
 
+	std::string getType( void ); // debug
 	void update( eControls key );
 	void render( void );
+
+	std::string type; // debug
 protected:
 
 private:

@@ -2,6 +2,7 @@
 
 MenuState::MenuState( Engine & engine ){
 	std::cout << "Menu constructed" << std::endl; // debug
+	this->type = "Menu";
 	this->_engine = &engine;
 	this->_MainMenuOptions[0] = "New game";
 	this->_MainMenuOptions[1] = "Load game";
@@ -54,11 +55,15 @@ void	MenuState::_changeSelection( eControls key){
 			break;
 		case IDLEKEY:
 			held = 0;
+			break;
+		case ESCAPE:
+			this->_engine->state = BACK;
+			break;
 		default:
 			break;
 	};
 	//this->_menuIndex = std::abs(this->_menuIndex % 5); // circular menu selection feature. Requires additional logic. I vote nah
-	std::cout << "Menu option: " << this->_MainMenuOptions[this->_menuIndex] << std::endl; // debug
+	//std::cout << "Menu option: " << this->_MainMenuOptions[this->_menuIndex] << std::endl; // debug
 }
 
 void	MenuState::_makeSelection( int _menuIndex ){
@@ -70,5 +75,9 @@ void	MenuState::_makeSelection( int _menuIndex ){
 	if (this->_menuIndex == 0) // test
 		this->_engine->state = PLAY; // test
 	if (this->_menuIndex == 4) // test
-		exit(0); // test
+		this->_engine->state = BACK; // test
+}
+
+std::string MenuState::getType( void ){ //debug
+	return this->type;
 }

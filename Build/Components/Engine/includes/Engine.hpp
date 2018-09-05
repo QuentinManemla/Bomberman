@@ -29,16 +29,16 @@
 # include <map>
 
 # include "../../Sound/includes/Sound.hpp"
-# include "../../Game/includes/enumCONTROLS.hpp"
+# include "../../Game/includes/enumControls.hpp"
 # include "TextRenderer.hpp"
 # include "Shader.hpp"
 # include <string.h>
 # include <array>
 
 # include "../../Sound/includes/Sound.hpp"
-# include "../../Game/includes/enumCONTROLS.hpp"
+# include "../../Game/includes/enumControls.hpp"
 # include "structControls.hpp"
-# include "../../../States/enumState.hpp"
+# include "../../../States/includes/enumState.hpp"
 
 class	Engine {
 	public:

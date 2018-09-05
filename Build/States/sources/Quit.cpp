@@ -2,6 +2,7 @@
 
 QuitState::QuitState( Engine & engine ){
 	std::cout << "Quit constructed" << std::endl;
+	this->type = "Quit";
 	this->_engine = &engine;
 }
 
@@ -20,4 +21,8 @@ void QuitState::update( eControls key ){
 void QuitState::render( void ){
 	this->_engine->render();
 	std::cout << "Quit render" << std::endl;
+}
+
+std::string QuitState::getType( void ){ //debug
+	return this->type;
 }

@@ -2,6 +2,7 @@
 
 IntroState::IntroState( Engine & engine ){
 	this->_engine = &engine;
+	this->type = "Intro";
 	std::cout << "Intro constructed" << std::endl;
 }
 
@@ -21,10 +22,10 @@ void IntroState::update( eControls key ) {
 	this->_engine->clear();
 	if (time >= 500){ // test // to be replaced by "end of intro/animation" flag
 		std::cout << "Intro over!" << std::endl;
-		this->_engine->state = MENU;
+		this->_engine->state = BACK;
 	} else if (key == ENTER){
 		std::cout << "Skipping intro!" << std::endl;
-		this->_engine->state = MENU;
+		this->_engine->state = BACK;
 	} else
 		this->_engine->print2DText("Intro", 20, 20, 0, 0, 0xff);
 }
@@ -32,4 +33,8 @@ void IntroState::update( eControls key ) {
 void IntroState::render( void ) {
 	this->_engine->render();
 	std::cout << "Intro render" << std::endl;
+}
+
+std::string IntroState::getType( void ){ //debug
+	return this->type;
 }
