@@ -57,7 +57,9 @@ void	MenuState::_changeSelection( eControls key){
 			held = 0;
 			break;
 		case ESCAPE:
-			this->_engine->state = BACK;
+			if (!(held))
+				this->_engine->state = BACK;
+			held = 1;
 			break;
 		default:
 			break;

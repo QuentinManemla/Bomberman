@@ -45,6 +45,7 @@ void Game::_switchState( void ){
 			this->_stateStack.push(new QuitState(this->_engine));
 			break;*/
 		case BACK:
+			delete this->_stateStack.top();
 			this->_stateStack.pop();
 			break;
 		case IDLE:

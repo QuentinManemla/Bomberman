@@ -65,7 +65,7 @@ void	Engine::render( void ) {
 /********************************************************************************************/
 void		Engine::print2DText(std::string text, int pos_x, int pos_y, GLubyte red, GLubyte green, GLubyte blue) {
 	glColor3ub(red,green,blue);
-	std::cout << (this->_WindowWidth / 2) << std::endl;
+	//std::cout << (this->_WindowWidth / 2) << std::endl; // debug
 	glfreetype::print(this->_Font, pos_x, pos_y,text);
 }
 
@@ -74,7 +74,7 @@ int menuIndex, std::string backgroundPath) {
 	int		x = 20;
 	int 	y = 20;
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
-		std::cout << menuItems[i] << std::endl;
+		//std::cout << menuItems[i] << std::endl; // debug
 		this->print2DText(menuItems[i], x, y, 0, 0, 0xff);
 		y += 50;
 	}
@@ -84,7 +84,7 @@ void		Engine::printMenu(std::array<std::string, 5> menuItems, int menuIndex, std
 	int		x = 20;
 	int 	y = (this->_WindowHeight / 2) - (menuItems.size() * 32);
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
-		std::cout << menuItems[i] << std::endl;
+		//std::cout << menuItems[i] << std::endl; // debug
 		int length = menuItems[i].length();
 		if (i == menuIndex)
 			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 32), y, 0, 0, 0);

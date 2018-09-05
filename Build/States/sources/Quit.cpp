@@ -16,6 +16,7 @@ QuitState::~QuitState( void ){
 
 void QuitState::update( eControls key ){
 	std::cout << "Quit update" << std::endl;
+	exit(0); // test
 }
 
 void QuitState::render( void ){
