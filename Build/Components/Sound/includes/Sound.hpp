@@ -1,15 +1,25 @@
 #ifndef SOUND_HPP
 #define SOUND_HPP
 
-// # include <irrKlang.h>
-// #pragma comment(lib, "irrKlang.lib")
+# include <irrKlang.h>
+# include <iostream>
+# include <atomic>
+# include <thread>
+# include <chrono>
+# include <pthread.h>
+
+#pragma comment(lib, "irrKlang.lib")
 
 
 class Sound {
 	public:
 		Sound( void );
 		~Sound( void );
+
+		void		init( void );
+		void		play2DSound( std::string soundPath, bool loop );
+		void		stopSound( void );
 	private:
-		//irrklang::ISoundEngine  *_soundEngine = irrklang::createIrrKlangDevice();
+		irrklang::ISoundEngine  *_soundEngine;
 };
 #endif //!SOUND_HPP

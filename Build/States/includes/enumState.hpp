@@ -1,0 +1,17 @@
+#ifndef ENUMSTATE_HPP
+# define ENUMSTATE_HPP
+
+enum eState {
+	IDLE,
+	INTRO,
+	MENU,
+	PLAY,
+	CREDITS,
+	QUIT,
+	OPTIONS,
+	PAUSE,
+//	BACK_TO_MAIN,
+	BACK
+};
+
+#endif

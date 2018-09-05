@@ -29,16 +29,16 @@
 # include <map>
 
 # include "../../Sound/includes/Sound.hpp"
-# include "../../Game/includes/enumCONTROLS.hpp"
+# include "../../Game/includes/enumControls.hpp"
 # include "TextRenderer.hpp"
 # include "Shader.hpp"
 # include <string.h>
-# include <array>
+# include <vector>
 
 # include "../../Sound/includes/Sound.hpp"
-# include "../../Game/includes/enumCONTROLS.hpp"
+# include "../../Game/includes/enumControls.hpp"
 # include "structControls.hpp"
-# include "../../../States/enumState.hpp"
+# include "../../../States/includes/enumState.hpp"
 
 class	Engine {
 	public:
@@ -49,24 +49,28 @@ class	Engine {
 		void			render( void );
 		void			clear( void );
 
+		void			playSound( std::string soundPath, bool loop);
+		void			stopSound( void );
+		void			muteSound( void );
 		/********************************************************************************************/
 		/*	Text Rendering Functions 																*/
 		/*	print2DText() Takes in the text and X & Y position to print out on the Window			*/
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
 
-		void			print2DText(std::string text, int pos_x, int pos_y, GLubyte red, GLubyte green, GLubyte blue);
-		void			printMenu(std::array<std::string, 5> menuItems, int pos_x, int pos_y, int menuIndex, std::string backgroundPath);
-		
-		void			printMenu(std::array<std::string, 5> menuItems, int menuIndex, std::string backgroundPath);
+		void			print2DText(std::string text, float pos_x, float pos_y, GLubyte red, GLubyte green, GLubyte blue);
+		void			printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y, int menuIndex, std::string backgroundPath);		
+		void			printMenu(std::vector<std::string> menuItems, int menuIndex, std::string backgroundPath);
+		int				menuHandler( eControls key, int & menuIndex, int lastIndex, int & held );
 
 		/********************************************************************************************/
 		/*	Keyboard Input Functions 																*/
 		/*	getkey( void ) gets the "_Active" private memeber of the Engine which containts the 	*/
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
+
 		eControls		getInput( void );
-		static void processKeys(unsigned char key, int x, int y);
+		static void		processKeys(unsigned char key, int x, int y);
 
 		/* Timer functions */
 		void			FPSManager();
@@ -80,19 +84,19 @@ class	Engine {
 			virtual const char* what() const throw();
 		};
 
-		eState			state;
+		eState					state;
+		int						_WindowHeight;
+		int						_WindowWidth;
 
 	private:
 		GLFWwindow				*_Window;
-		Engine					*_MYWindow;
-		int						_WindowHeight;
-		int						_WindowWidth;
 		eControls				_ActiveKey;
 		Sound					_SoundEngine;
-		Shader					_Shader;
+		// Shader					_Shader;
 		glfreetype::font_data	_Font;
 		sControls				_sControls;
 		bool					_getKey( int key );
+		bool					_Mute;
 };
 
 #endif // !ENGINE_HPP
