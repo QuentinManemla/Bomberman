@@ -11,17 +11,17 @@ public:
 	CreditsState( Engine & engine );
 	~CreditsState( void );
 
-	std::string getType( void ); // debug
+	std::string		getType( void ); // debug
 
+	void			update( eControls key );
+	void			render( void );
 
-	void update( eControls key );
-	void render( void );
-
-	std::string type; // debug
 protected:
 
 private:
-	Engine	*_engine;
+	Engine			*_engine;
+	std::string		_type; // debug
+	
 };
 
 #endif

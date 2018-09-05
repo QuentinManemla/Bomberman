@@ -8,6 +8,9 @@ enum eState {
 	PLAY,
 	CREDITS,
 	QUIT,
+	OPTIONS,
+	PAUSE,
+//	BACK_TO_MAIN,
 	BACK
 };
 

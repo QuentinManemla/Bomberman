@@ -2,7 +2,7 @@
 
 PlayState::PlayState( Engine & engine ){
 	this->_engine = &engine;
-	this->type = "Play";
+	this->_type = "Play";
 	std::cout << "Play constructed" << std::endl;
 }
 
@@ -15,9 +15,15 @@ PlayState::~PlayState( void ){
 }
 
 void PlayState::update( eControls key ){
+	static	int held = 1; // set to 1 initially to avoid accidental selection on state switch // debug // test
 	std::cout << "Play update" << std::endl;
 	if (key == ESCAPE){
-		this->_engine->state = BACK;
+		if (!(held))
+			this->_engine->state = PAUSE;
+		held = 1;
+	}
+	else if (key == IDLEKEY){
+		held = 0;
 	}
 }
 
@@ -29,5 +35,5 @@ void PlayState::render( void ){
 }
 
 std::string PlayState::getType( void ){ //debug
-	return this->type;
+	return this->_type;
 }

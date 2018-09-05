@@ -2,7 +2,7 @@
 
 IntroState::IntroState( Engine & engine ){
 	this->_engine = &engine;
-	this->type = "Intro";
+	this->_type = "Intro";
 	std::cout << "Intro constructed" << std::endl;
 }
 
@@ -36,5 +36,5 @@ void IntroState::render( void ) {
 }
 
 std::string IntroState::getType( void ){ //debug
-	return this->type;
+	return this->_type;
 }

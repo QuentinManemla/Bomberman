@@ -11,15 +11,17 @@ public:
 	QuitState( Engine & engine );
 	~QuitState( void );
 
-	std::string getType( void ); // debug
-	void update( eControls key );
-	void render( void );
+	std::string		getType( void ); // debug
 
-	std::string type; // debug
+	void			update( eControls key );
+	void			render( void );
+
 protected:
 
 private:
-	Engine	*_engine;
+	Engine			*_engine;
+	std::string		_type; // debug
+
 };
 
 #endif

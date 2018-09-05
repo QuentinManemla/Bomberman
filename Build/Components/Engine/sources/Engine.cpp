@@ -1,5 +1,9 @@
 # include "../includes/Engine.hpp"
 
+/********************************************************************************/
+/*	Required functions															*/
+/********************************************************************************/
+
 Engine::Engine(): _WindowWidth(1024),_WindowHeight(768) {
 	std::cout << "Engine constructed" << std::endl;
 	// initialising controls struct
@@ -18,6 +22,10 @@ Engine::~Engine() {
 	std::cout << "Engine destructed" << std::endl;
 	this->_Font.clean();
 }
+
+/********************************************************************************/
+/*	Engine specific functions													*/
+/********************************************************************************/
 
 void	Engine::engineInit( void ) {
 	glfwWindowHint(GLFW_SAMPLES, 4);
@@ -60,16 +68,17 @@ void	Engine::render( void ) {
 	glfwPollEvents();
 }
 
-/********************************************************************************************/
-/*	Text Rendering Fucntion BEGIN															*/
-/********************************************************************************************/
+/********************************************************************************/
+/*	Text and Menu Rendering Function														*/
+/********************************************************************************/
+
 void		Engine::print2DText(std::string text, int pos_x, int pos_y, GLubyte red, GLubyte green, GLubyte blue) {
 	glColor3ub(red,green,blue);
 	//std::cout << (this->_WindowWidth / 2) << std::endl; // debug
 	glfreetype::print(this->_Font, pos_x, pos_y,text);
 }
 
-void		Engine::printMenu(std::array<std::string, 5> menuItems, int pos_x, int pos_y,
+void		Engine::printMenu(std::vector<std::string> menuItems, int pos_x, int pos_y,
 int menuIndex, std::string backgroundPath) {
 	int		x = 20;
 	int 	y = 20;
@@ -80,7 +89,7 @@ int menuIndex, std::string backgroundPath) {
 	}
 }
 
-void		Engine::printMenu(std::array<std::string, 5> menuItems, int menuIndex, std::string backgroundPath) {
+void		Engine::printMenu(std::vector<std::string> menuItems, int menuIndex, std::string backgroundPath) {
 	int		x = 20;
 	int 	y = (this->_WindowHeight / 2) - (menuItems.size() * 32);
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
@@ -94,9 +103,40 @@ void		Engine::printMenu(std::array<std::string, 5> menuItems, int menuIndex, std
 	}
 }
 
-/********************************************************************************************/
-/*	Keyboard Input Functions BEGIN															*/
-/********************************************************************************************/
+int			Engine::menuHandler( eControls key, int & menuIndex, int lastIndex, int & held ){
+	switch (key){
+			case UP:
+			if (!(held))
+				menuIndex == 0 ? menuIndex = 0 : menuIndex--;
+			held = 1;
+			break;
+		case DOWN:
+			if (!(held))
+				menuIndex == lastIndex ? menuIndex = lastIndex : menuIndex++;
+			held = 1;
+			break;
+		case ENTER:
+			if (!(held))
+				return (1);
+			held = 1;
+			break;
+		case IDLEKEY:
+			held = 0;
+			break;
+		case ESCAPE:
+			if (!(held))
+				this->state = BACK;
+			held = 1;
+			break;
+		default:
+			break;
+	};
+	return (0);
+}
+
+/********************************************************************************/
+/*	Keyboard input functions													*/
+/********************************************************************************/
 
 eControls	Engine::getInput(){
 	// run through array or struct of values. struct most likely
@@ -126,9 +166,9 @@ bool		Engine::_getKey( int key ) {
 	return (false);
 }
 
-/********************************************************************************************/
-/*	FPS management BEGIN																	*/
-/********************************************************************************************/
+/********************************************************************************/
+/*	FPS management functions													*/
+/********************************************************************************/
 
 void		Engine::FPSManager( void ){
 	static int				index = 0;
@@ -163,10 +203,9 @@ void		Engine::FPSManager( void ){
 	// delay here
 }
 
-/********************************************************************************************/
-/*	Exceptions BEGIN																		*/
-/********************************************************************************************/
-
+/********************************************************************************/
+/*	Exception handling															*/
+/********************************************************************************/
 
 const char* Engine::GLFWInitializationError::what() const throw() {
 	return ("[Error (Code: 00)] Failed to initialize GLFW");

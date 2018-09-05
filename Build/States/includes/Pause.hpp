@@ -1,16 +1,16 @@
-#ifndef MENU_HPP
-# define MENU_HPP
+#ifndef PAUSE_HPP
+# define PAUSE_HPP
 
 # include <iostream>
 # include <vector>
 # include "IState.hpp"
 
-class MenuState : public IState {
+class PauseState : public IState {
 public:
 	// constructor that takes ptr to GameEngine
-	MenuState( void );
-	MenuState( Engine & engine );
-	~MenuState( void );
+	PauseState( void );
+	PauseState( Engine & engine );
+	~PauseState( void );
 
 	std::string					getType( void ); // debug
 
@@ -25,7 +25,7 @@ private:
 
 	int							_menuIndex;
 	int							_menuSize;
-	std::vector<std::string>	_mainMenu;
+	std::vector<std::string>	_pauseMenu;
 	Engine						*_engine;
 	std::string					_type; // debug
 };
