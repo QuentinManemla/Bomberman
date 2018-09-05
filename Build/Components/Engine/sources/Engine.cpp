@@ -85,16 +85,16 @@ void		Engine::muteSound( void ) {
 /*	Text and Menu Rendering Function														*/
 /********************************************************************************/
 
-void		Engine::print2DText(std::string text, int pos_x, int pos_y, GLubyte red, GLubyte green, GLubyte blue) {
+void		Engine::print2DText(std::string text, float pos_x, float pos_y, GLubyte red, GLubyte green, GLubyte blue) {
 	glColor3ub(red,green,blue);
 	//std::cout << (this->_WindowWidth / 2) << std::endl; // debug
 	glfreetype::print(this->_Font, pos_x, pos_y,text);
 }
 
-void		Engine::printMenu(std::vector<std::string> menuItems, int pos_x, int pos_y,
+void		Engine::printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y,
 int menuIndex, std::string backgroundPath) {
-	int		x = 20;
-	int 	y = 20;
+	float		x = 20;
+	float 	y = 20;
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
 		//std::cout << menuItems[i] << std::endl; // debug
 		this->print2DText(menuItems[i], x, y, 0, 0, 0xff);
@@ -104,11 +104,11 @@ int menuIndex, std::string backgroundPath) {
 
 
 void		Engine::printMenu(std::vector<std::string> menuItems, int menuIndex, std::string backgroundPath) {
-	int		x = 20;
-	int 	y = (this->_WindowHeight / 2) - (menuItems.size() * 32);
+	float		x = 20;
+	float 	y = (this->_WindowHeight / 2) - (menuItems.size() * 32);
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
 		//std::cout << menuItems[i] << std::endl; // debug
-		int length = menuItems[i].length();
+		float length = menuItems[i].length();
 		if (i == menuIndex)
 			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 32), y, 0, 0, 0);
 		else
