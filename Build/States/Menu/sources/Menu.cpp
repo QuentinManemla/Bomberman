@@ -10,6 +10,7 @@ MenuState::MenuState( Engine & engine ){
 	this->_MainMenuOptions[4] = "Quit";
 	// this->_menuSize = this->_MainMenuOptions.size(); // doesn't seem to be needed
 	this->_menuIndex = 0;
+	this->_engine->playSound("Assets/Audio/Introduction_Music.wav", false);
 }
 
 MenuState::MenuState( void ){
@@ -18,6 +19,7 @@ MenuState::MenuState( void ){
 
 MenuState::~MenuState( void ){
 	std::cout << "Menu destructed" << std::endl; // debug
+	this->_engine->stopSound();
 }
 
 void MenuState::update( eControls key ){
@@ -29,27 +31,31 @@ void MenuState::render( void ) {
 	this->_engine->clear();
 	this->_engine->printMenu(this->_MainMenuOptions, this->_menuIndex, "Assets/Images/main_menu_backgrond.png");
 	this->_engine->render();
-	// this->_engine->renderMenu( array of options, current index, background/layout ); // proposed usage for menu draw function
 	std::cout << "Menu render" << std::endl; // debug
 }
 
 void	MenuState::_changeSelection( eControls key){
-	static	int held = 1; // set to 1 initially to avoid accidental selection on state switch
-
+	static	int held = 1;
 	switch (key){
 		case UP:
-			if (!(held))
+			if (!(held)) {
 				this->_menuIndex == 0 ? this->_menuIndex = 0 : this->_menuIndex--;
+				this->_engine->playSound("Assets/Audio/Selection.wav", false);
+			}
 			held = 1;
 			break;
 		case DOWN:
-			if (!(held))
+			if (!(held)) {
 				this->_menuIndex == 4 ? this->_menuIndex = 4 : this->_menuIndex++;
+				this->_engine->playSound("Assets/Audio/Selection.wav", false);
+			}
 			held = 1;
 			break;
 		case ENTER:
-			if (!(held))
+			if (!(held)) {
+				this->_engine->playSound("Assets/Audio/Enter_Key.wav", false);
 				this->_makeSelection(this->_menuIndex);
+			}
 			held = 1;
 			break;
 		case IDLEKEY:
