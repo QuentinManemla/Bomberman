@@ -17,6 +17,7 @@
 # include "../../../States/includes/Quit.hpp"
 # include "../../../States/includes/Options.hpp"
 # include "../../../States/includes/Pause.hpp"
+# include "../../../States/includes/OptionsResolution.hpp"
 
 class Game {
 public:

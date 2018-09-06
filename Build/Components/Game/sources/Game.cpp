@@ -47,6 +47,9 @@ void Game::_switchState( void ){
 			case OPTIONS:
 				this->_stateStack.push(new OptionsState(this->_engine));
 				break;
+			case RESOLUTION:
+				this->_stateStack.push(new OptionsResolutionState(this->_engine));
+				break;
 			case BACK:
 				if (this->_stateStack.top()->getType() != "Quit"){ // special case when esc is pressed in quit state
 					delete this->_stateStack.top();

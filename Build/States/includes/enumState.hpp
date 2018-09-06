@@ -9,6 +9,7 @@ enum eState {
 	CREDITS,
 	QUIT,
 	OPTIONS,
+	RESOLUTION,
 	PAUSE,
 	BACK_TO_MAIN,
 	EXIT,
