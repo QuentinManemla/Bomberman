@@ -4,7 +4,7 @@ QuitState::QuitState( Engine & engine ){
 	std::cout << "Quit constructed" << std::endl;
 	this->_type = "Quit";
 	this->_engine = &engine;
-	std::string arrQuitMenu[4] = {"NO", "YES"};
+	std::string arrQuitMenu[2] = {"NO", "YES"};
 	this->_quitMenu.insert(this->_quitMenu.end(), std::begin(arrQuitMenu), std::end(arrQuitMenu));
 	this->_engine = &engine;
 	this->_menuIndex = 0;

@@ -48,8 +48,10 @@ void Game::_switchState( void ){
 				this->_stateStack.push(new OptionsState(this->_engine));
 				break;
 			case BACK:
-				delete this->_stateStack.top();
-				this->_stateStack.pop();
+				if (this->_stateStack.top()->getType() != "Quit"){ // special case when esc is pressed in quit state
+					delete this->_stateStack.top();
+					this->_stateStack.pop();
+				}
 				break;
 			case BACK_TO_MAIN:
 				while (this->_stateStack.top()->getType() != "Menu"){
