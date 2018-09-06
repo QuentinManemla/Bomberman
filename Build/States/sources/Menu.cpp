@@ -29,5 +29,4 @@ void	MenuState::_makeSelection( void ){
 		this->_engine->state = OPTIONS; // test
 	if (this->_menuIndex == 4) // test
 		this->_engine->state = BACK; // test
-	std::cout << "no if" << std::endl;
 }
