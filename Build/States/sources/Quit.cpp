@@ -23,7 +23,6 @@ void QuitState::update( eControls key ){
 	if (this->_engine->menuHandler( key, this->_menuIndex, this->_quitMenu.size() - 1 )){
 		this->_makeSelection();
 	}
-	//exit(0); // test
 }
 
 void	QuitState::_makeSelection( void){
