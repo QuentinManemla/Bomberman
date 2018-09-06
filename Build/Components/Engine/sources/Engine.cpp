@@ -3,7 +3,7 @@
 /*	Required functions															*/
 /********************************************************************************/
 
-int		Engine::_held = 1;
+int		Engine::held = 1;
 
 
 Engine::Engine(): _WindowWidth(1024),_WindowHeight(768) {
@@ -124,27 +124,27 @@ void		Engine::printMenu(std::vector<std::string> menuItems, int menuIndex, std::
 int			Engine::menuHandler( eControls key, int & menuIndex, int lastIndex ){
 	switch (key){
 			case UP:
-			if (!(this->_held))
+			if (!(this->held))
 				menuIndex == 0 ? menuIndex = 0 : menuIndex--;
-			this->_held = 1;
+			this->held = 1;
 			break;
 		case DOWN:
-			if (!(this->_held))
+			if (!(this->held))
 				menuIndex == lastIndex ? menuIndex = lastIndex : menuIndex++;
-			this->_held = 1;
+			this->held = 1;
 			break;
 		case ENTER:
-			if (!(this->_held))
+			if (!(this->held))
 				return (1);
-			this->_held = 1;
+			this->held = 1;
 			break;
 		case IDLEKEY:
-			this->_held = 0;
+			this->held = 0;
 			break;
 		case ESCAPE:
-			if (!(this->_held))
+			if (!(this->held))
 				this->state = BACK;
-			this->_held = 1;
+			this->held = 1;
 			break;
 		default:
 			break;

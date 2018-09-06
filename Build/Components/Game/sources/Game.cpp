@@ -22,6 +22,7 @@ void Game::run( void ) {
 
 void Game::_switchState( void ){
 	if (this->_engine.state != IDLE){
+		this->_engine.held = 1; // test
 		switch (this->_engine.state){
 			case IDLE:
 				break;
@@ -49,12 +50,14 @@ void Game::_switchState( void ){
 			case BACK:
 				delete this->_stateStack.top();
 				this->_stateStack.pop();
-/*			case BACK_TO_MAIN:
+				break;
+			case BACK_TO_MAIN:
 				while (this->_stateStack.top()->getType() != "Menu"){
+					std::cout << "TPYE: " << this->_stateStack.top()->getType() << std::endl;
 					delete this->_stateStack.top();
 					this->_stateStack.pop();
 				}
-				break;*/
+				break;
 		};
 		this->_engine.state = IDLE;
 	}

@@ -87,6 +87,7 @@ class	Engine {
 		eState					state;
 		int						_WindowHeight;
 		int						_WindowWidth;
+		static int				held; // test
 
 	private:
 		GLFWwindow				*_Window;
@@ -97,7 +98,6 @@ class	Engine {
 		sControls				_sControls;
 		bool					_getKey( int key );
 		bool					_Mute;
-		static int				_held; // test
 };
 
 #endif // !ENGINE_HPP

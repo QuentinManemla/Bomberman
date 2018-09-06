@@ -10,7 +10,7 @@ enum eState {
 	QUIT,
 	OPTIONS,
 	PAUSE,
-//	BACK_TO_MAIN,
+	BACK_TO_MAIN,
 	BACK
 };
 

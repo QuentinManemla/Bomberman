@@ -15,12 +15,15 @@ public:
 
 	void			update( eControls key );
 	void			render( void );
+	void			_makeSelection( void );
 
 protected:
 
 private:
-	Engine			*_engine;
-	std::string		_type; // debug
+	Engine						*_engine;
+	std::string					_type; // debug
+	int							_menuIndex;
+	std::vector<std::string>	_quitMenu;
 
 };
 
