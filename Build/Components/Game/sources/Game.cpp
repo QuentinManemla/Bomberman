@@ -54,7 +54,7 @@ void Game::_switchState( void ){
 				}
 				break;
 			case BACK_TO_MAIN:
-				while (this->_stateStack.top()->getType() != "Menu"){
+				while (this->_stateStack.top()->getType() != "Menu"){ // traverse all the way back to main menu
 					std::cout << "TPYE: " << this->_stateStack.top()->getType() << std::endl;
 					delete this->_stateStack.top();
 					this->_stateStack.pop();
