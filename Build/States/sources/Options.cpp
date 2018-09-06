@@ -30,8 +30,8 @@ void OptionsState::render( void ) {
 }
 
 void	OptionsState::_changeSelection( eControls key){
-	static	int held = 1; // set to 1 initially to avoid accidental selection on state switch
-	if (this->_engine->menuHandler( key, this->_menuIndex, this->_optionsMenu.size() - 1, held )){
+	//static	int held = 1; // set to 1 initially to avoid accidental selection on state switch
+	if (this->_engine->menuHandler( key, this->_menuIndex, this->_optionsMenu.size() - 1 )){
 		this->_makeSelection();
 	}
 }

@@ -30,8 +30,8 @@ void PauseState::render( void ) {
 }
 
 void	PauseState::_changeSelection( eControls key){
-	static	int held = 1; // set to 1 initially to avoid accidental selection on state switch
-	if (this->_engine->menuHandler( key, this->_menuIndex, this->_pauseMenu.size() - 1, held )){
+	//static	int held = 1; // set to 1 initially to avoid accidental selection on state switch
+	if (this->_engine->menuHandler( key, this->_menuIndex, this->_pauseMenu.size() - 1 )){
 		this->_makeSelection();
 	}
 }

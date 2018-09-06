@@ -61,7 +61,7 @@ class	Engine {
 		void			print2DText(std::string text, float pos_x, float pos_y, GLubyte red, GLubyte green, GLubyte blue);
 		void			printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y, int menuIndex, std::string backgroundPath);		
 		void			printMenu(std::vector<std::string> menuItems, int menuIndex, std::string backgroundPath);
-		int				menuHandler( eControls key, int & menuIndex, int lastIndex, int & held );
+		int				menuHandler( eControls key, int & menuIndex, int lastIndex );
 
 		/********************************************************************************************/
 		/*	Keyboard Input Functions 																*/
@@ -97,6 +97,7 @@ class	Engine {
 		sControls				_sControls;
 		bool					_getKey( int key );
 		bool					_Mute;
+		static int				_held; // test
 };
 
 #endif // !ENGINE_HPP

@@ -3,6 +3,9 @@
 /*	Required functions															*/
 /********************************************************************************/
 
+int		Engine::_held = 1;
+
+
 Engine::Engine(): _WindowWidth(1024),_WindowHeight(768) {
 	std::cout << "Engine constructed" << std::endl;
 	// initialising controls struct
@@ -14,6 +17,7 @@ Engine::Engine(): _WindowWidth(1024),_WindowHeight(768) {
 	this->_sControls.ESCAPE_KEY = GLFW_KEY_ESCAPE;//256;
 	this->_sControls.FIRE_KEY = GLFW_KEY_Z;//90; defaults to z
 	this->_sControls.ACTION_KEY = GLFW_KEY_X;//88; defaults to x
+
 	return ;
 }
 
@@ -117,30 +121,30 @@ void		Engine::printMenu(std::vector<std::string> menuItems, int menuIndex, std::
 	}
 }
 
-int			Engine::menuHandler( eControls key, int & menuIndex, int lastIndex, int & held ){
+int			Engine::menuHandler( eControls key, int & menuIndex, int lastIndex ){
 	switch (key){
 			case UP:
-			if (!(held))
+			if (!(this->_held))
 				menuIndex == 0 ? menuIndex = 0 : menuIndex--;
-			held = 1;
+			this->_held = 1;
 			break;
 		case DOWN:
-			if (!(held))
+			if (!(this->_held))
 				menuIndex == lastIndex ? menuIndex = lastIndex : menuIndex++;
-			held = 1;
+			this->_held = 1;
 			break;
 		case ENTER:
-			if (!(held))
+			if (!(this->_held))
 				return (1);
-			held = 1;
+			this->_held = 1;
 			break;
 		case IDLEKEY:
-			held = 0;
+			this->_held = 0;
 			break;
 		case ESCAPE:
-			if (!(held))
+			if (!(this->_held))
 				this->state = BACK;
-			held = 1;
+			this->_held = 1;
 			break;
 		default:
 			break;
