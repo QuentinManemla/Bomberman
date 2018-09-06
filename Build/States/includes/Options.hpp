@@ -3,31 +3,16 @@
 
 # include <iostream>
 # include <vector>
-# include "IState.hpp"
+# include "MenuParentState.hpp"
 
-class OptionsState : public IState {
+class OptionsState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
-	OptionsState( void );
 	OptionsState( Engine & engine );
 	~OptionsState( void );
 
-	std::string					getType( void ); // debug
-
-	void						update( eControls key );
-	void						render( void );
-
-protected:
-
 private:
-	void						_changeSelection( eControls key );
-	void						_makeSelection( void );
-
-	int							_menuIndex;
-	int							_menuSize;
-	std::vector<std::string>	_optionsMenu;
-	Engine						*_engine;
-	std::string					_type; // debug
+	void	_makeSelection( void );
 };
 
 #endif

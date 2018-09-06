@@ -2,28 +2,17 @@
 # define QUIT_HPP
 
 # include <iostream>
-# include "IState.hpp"
+# include <vector>
+# include "MenuParentState.hpp"
 
-class QuitState : public IState {
+class QuitState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
-	QuitState( void );
 	QuitState( Engine & engine );
 	~QuitState( void );
 
-	std::string		getType( void ); // debug
-
-	void			update( eControls key );
-	void			render( void );
-	void			_makeSelection( void );
-
-protected:
-
 private:
-	Engine						*_engine;
-	std::string					_type; // debug
-	int							_menuIndex;
-	std::vector<std::string>	_quitMenu;
+	void	_makeSelection( void );
 
 };
 

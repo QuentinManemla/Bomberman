@@ -1,8 +1,8 @@
 #include "../includes/Menu.hpp"
 
 MenuState::MenuState( Engine & engine ) {
-	std::cout << this->getType() << " constructed" << std::endl; // debug
 	this->_type = "Menu";
+	std::cout << this->getType() << " constructed" << std::endl; // debug
 	this->_engine = &engine;
 	this->_menuIndex = 0;
 
@@ -10,14 +10,9 @@ MenuState::MenuState( Engine & engine ) {
 	this->_menu.insert(this->_menu.end(), std::begin(arrMainMenu), std::end(arrMainMenu));
 }
 
-MenuState::MenuState( void ){
-	std::cout << this->getType() << " constructed" << std::endl; // debug
-}
-
 MenuState::~MenuState( void ){
 	std::cout << this->getType() << " destructed" << std::endl; // debug
 }
-
 
 void	MenuState::_makeSelection( void ){
 	std::cout << "Selected " << this->_menu[this->_menuIndex] << "! (" << this->_menuIndex << ")" << std::endl; // debug

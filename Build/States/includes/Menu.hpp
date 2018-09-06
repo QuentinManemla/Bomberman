@@ -9,11 +9,12 @@
 class MenuState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
-	MenuState( void );
 	MenuState( Engine & engine );
 	~MenuState( void );
 
+private:
 	void	_makeSelection( void ) override;
+
 };
 
 #endif
