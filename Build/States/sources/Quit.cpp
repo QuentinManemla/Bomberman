@@ -17,7 +17,7 @@ QuitState::~QuitState( void ){
 void	QuitState::_makeSelection( void){
 	std::cout << "Selected " << this->_menu[this->_menuIndex] << "! (" << this->_menuIndex << ")" << std::endl; // debug
 	if (this->_menuIndex == 1)
-		exit(0);
+		this->_engine->state = EXIT;
 	else if (this->_menuIndex == 0)
 		this->_engine->state = MENU;
 }

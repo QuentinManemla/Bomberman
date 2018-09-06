@@ -13,6 +13,7 @@ public:
 
 private:
 	void	_makeSelection( void );
+	
 };
 
 #endif

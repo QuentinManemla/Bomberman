@@ -11,6 +11,7 @@ enum eState {
 	OPTIONS,
 	PAUSE,
 	BACK_TO_MAIN,
+	EXIT,
 	BACK
 };
 

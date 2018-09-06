@@ -60,6 +60,11 @@ void Game::_switchState( void ){
 					this->_stateStack.pop();
 				}
 				break;
+			case EXIT:
+				delete this->_stateStack.top();
+				this->_stateStack.pop();
+				exit(0);
+				break;
 		};
 		this->_engine.state = IDLE;
 	}

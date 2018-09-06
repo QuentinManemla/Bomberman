@@ -3,7 +3,6 @@
 
 # include <iostream>
 # include <vector>
-# include "IState.hpp"
 # include "MenuParentState.hpp"
 
 class MenuState : public MenuParentState {
@@ -13,7 +12,7 @@ public:
 	~MenuState( void );
 
 private:
-	void	_makeSelection( void ) override;
+	void	_makeSelection( void );
 
 };
 
