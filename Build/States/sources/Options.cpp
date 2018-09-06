@@ -30,7 +30,6 @@ void OptionsState::render( void ) {
 }
 
 void	OptionsState::_changeSelection( eControls key){
-	//static	int held = 1; // set to 1 initially to avoid accidental selection on state switch
 	if (this->_engine->menuHandler( key, this->_menuIndex, this->_optionsMenu.size() - 1 )){
 		this->_makeSelection();
 	}
@@ -38,9 +37,6 @@ void	OptionsState::_changeSelection( eControls key){
 
 void	OptionsState::_makeSelection( void){
 	std::cout << "Selected " << this->_optionsMenu[this->_menuIndex] << "! (" << this->_menuIndex << ")" << std::endl; // debug
-	
-	// reset _menuIndex; // (maybe? Only when not switching state I guess?)
-	
 	// update state depending on selection:
 	/*if (this->_menuIndex == 0) // test
 		this->_engine->state = PLAY; // test
