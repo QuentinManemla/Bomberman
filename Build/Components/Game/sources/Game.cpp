@@ -2,19 +2,20 @@
 
 Game::Game( void ){
 	std::cout << "Game constructed" << std::endl; // debug
+	
+	this->_engine.engineInit();
+
 	this->_stateStack.push(new QuitState(this->_engine));
 	this->_stateStack.push(new MenuState(this->_engine));
+
+	this->_engine.state = INTRO; // set initial state
+	_switchState();
 }
 
 Game::~Game( void ){
 	std::cout << "Game destructed" << std::endl; // debug
 }
 
-void Game::init( void ) {
-	this->_engine.engineInit();
-	this->_engine.state = INTRO; // set initial state
-	_switchState();
-}
 
 void Game::run( void ) {
 	_mainLoop();

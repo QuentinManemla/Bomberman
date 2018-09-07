@@ -28,6 +28,7 @@ private:
 	std::vector<std::string>	_mainMenu;
 	Engine						*_engine;
 	std::string					_type; // debug
+	bool						_playing;
 };
 
 #endif

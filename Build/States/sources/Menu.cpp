@@ -19,6 +19,10 @@ MenuState::~MenuState( void ){
 
 void MenuState::update( eControls key ){
 	std::cout << "Menu update" << std::endl; // debug
+	if (!this->_playing) {
+		this->_engine->playSound("Assets/Audio/Introduction_Music.wav", false);
+		this->_playing = true;
+	}
 	this->_changeSelection( key );
 }
 

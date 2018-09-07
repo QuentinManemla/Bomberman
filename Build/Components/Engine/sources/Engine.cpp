@@ -2,9 +2,42 @@
 /********************************************************************************/
 /*	Required functions															*/
 /********************************************************************************/
+unsigned int VBO, VAO;
 
 Engine::Engine(): _WindowWidth(1024),_WindowHeight(768) {
 	std::cout << "Engine constructed" << std::endl;
+	//GLFW
+	if (!glfwInit())
+		throw (GLFWInitializationError());
+
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
+	std::cout << "GLFW Initialized Successfully" << std::endl;
+	this->_Window = glfwCreateWindow(this->_WindowWidth, this->_WindowHeight, "Bomberman", NULL, NULL);
+	if( this->_Window == NULL ){ // Exception
+		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
+		glfwTerminate();
+	}
+	glfwMakeContextCurrent(this->_Window);
+
+	glewExperimental = GL_TRUE;
+	glewInit();
+
+	glfwSetInputMode(this->_Window, GLFW_STICKY_KEYS, GL_TRUE);
+	// Set OpenGL options
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	this->_TextEngine.init("Assets/Fonts/neon_pixel.ttf", 30, this->_WindowWidth, this->_WindowHeight);
+
+	std::cout << "GL Version: " <<  (char *)glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+	this->_SoundEngine.init();
+	this->muteSound();
+
 	// initialising controls struct
 	this->_sControls.LEFT_KEY = GLFW_KEY_LEFT;//263;
 	this->_sControls.UP_KEY = GLFW_KEY_UP;//265;
@@ -19,41 +52,45 @@ Engine::Engine(): _WindowWidth(1024),_WindowHeight(768) {
 
 Engine::~Engine() {
 	std::cout << "Engine destructed" << std::endl;
-	this->_Font.clean();
+	//this->_Font.clean();
+	glfwTerminate();
 }
 
+void	Engine::triangle( void ) {
+	float vertices[] = {
+		// positions         // colors
+		 0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom right
+		-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom left
+		 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // top 
+	};
+
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+	glBindVertexArray(VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+}
+
+void	Engine::draw( void ) {
+	this->_Shader.use();
+	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+}
 /********************************************************************************/
 /*	Engine specific functions													*/
 /********************************************************************************/
 
 void	Engine::engineInit( void ) {
-	glfwWindowHint(GLFW_SAMPLES, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	if (!glfwInit())
-		throw (GLFWInitializationError());
-	std::cout << "GLFW Initialized Successfully" << std::endl;
-	this->_Window = glfwCreateWindow(this->_WindowWidth, this->_WindowHeight, "Bomberman", NULL, NULL);
-	if( this->_Window == NULL ){ // Exception
-		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
-		glfwTerminate();
-	}
-	glfwMakeContextCurrent(this->_Window);
-
-	glewExperimental = GL_TRUE;
-	if (glewInit() != GLEW_OK)
-		throw (GLEWInitializationError());
-	std::cout << "GLEW Initialized Successfully" << std::endl;
-
-	glfwSetInputMode(this->_Window, GLFW_STICKY_KEYS, GL_TRUE);
-	this->_Font.init("Assets/Fonts/neon_pixel.ttf", 30 /* size */);
-
-	std::cout << "GL Version: " <<  (char *)glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
-	this->_SoundEngine.init();
-	//this->muteSound();
+	this->_Shader.init("Assets/Shaders/Default/shader.vs", "Assets/Shaders/Default/shader.fs");
 }
 
 void	Engine::clear( void ) {
@@ -63,11 +100,12 @@ void	Engine::clear( void ) {
 	glLoadIdentity();
 }
 
-void	Engine::render( void ) {
-	glPopMatrix();
+void	Engine::render( void ) {	
+	//glPopMatrix();
 	glfwSwapBuffers(this->_Window);
 	glfwPollEvents();
 }
+
 
 void		Engine::playSound( std::string soundPath, bool loop) {
 	if (!this->_Mute)
@@ -86,9 +124,7 @@ void		Engine::muteSound( void ) {
 /********************************************************************************/
 
 void		Engine::print2DText(std::string text, float pos_x, float pos_y, GLubyte red, GLubyte green, GLubyte blue) {
-	glColor3ub(red,green,blue);
-	//std::cout << (this->_WindowWidth / 2) << std::endl; // debug
-	glfreetype::print(this->_Font, pos_x, pos_y,text);
+	this->_TextEngine.RenderText(text, pos_x, pos_y, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
 }
 
 void		Engine::printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y,
@@ -96,7 +132,6 @@ int menuIndex, std::string backgroundPath) {
 	float		x = 20;
 	float 	y = 20;
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
-		//std::cout << menuItems[i] << std::endl; // debug
 		this->print2DText(menuItems[i], x, y, 0, 0, 0xff);
 		y += 50;
 	}
@@ -105,7 +140,7 @@ int menuIndex, std::string backgroundPath) {
 
 void		Engine::printMenu(std::vector<std::string> menuItems, int menuIndex, std::string backgroundPath) {
 	float		x = 20;
-	float 	y = (this->_WindowHeight / 2) - (menuItems.size() * 32);
+	float		y = (this->_WindowHeight / 2) - (menuItems.size() * 32);
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
 		//std::cout << menuItems[i] << std::endl; // debug
 		float length = menuItems[i].length();
@@ -120,13 +155,17 @@ void		Engine::printMenu(std::vector<std::string> menuItems, int menuIndex, std::
 int			Engine::menuHandler( eControls key, int & menuIndex, int lastIndex, int & held ){
 	switch (key){
 			case UP:
-			if (!(held))
+			if (!(held)) {
 				menuIndex == 0 ? menuIndex = 0 : menuIndex--;
+				this->playSound("Assets/Audio/Selection.wav", false);
+			}
 			held = 1;
 			break;
 		case DOWN:
-			if (!(held))
+			if (!(held)) {
 				menuIndex == lastIndex ? menuIndex = lastIndex : menuIndex++;
+				this->playSound("Assets/Audio/Selection.wav", false);
+			}
 			held = 1;
 			break;
 		case ENTER:
@@ -215,6 +254,86 @@ void		Engine::FPSManager( void ){
 	prevTime = currentTime;
 
 	// delay here
+}
+
+GLuint	Engine::createShader(const char* vertexPath, const char* fragmentPath) {
+	// 1. retrieve the vertex/fragment source code from filePath
+	std::string vertexCode;
+	std::string fragmentCode;
+	std::ifstream vShaderFile;
+	std::ifstream fShaderFile;
+	// ensure ifstream objects can throw exceptions:
+	vShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+	fShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+	try 
+	{
+		// open files
+		vShaderFile.open("Assets/Shaders/Default/shader.vs");
+		fShaderFile.open("Assets/Shaders/Default/shader.fs");
+		std::stringstream vShaderStream, fShaderStream;
+		// read file's buffer contents into streams
+		vShaderStream << vShaderFile.rdbuf();
+		fShaderStream << fShaderFile.rdbuf();
+		// close file handlers
+		vShaderFile.close();
+		fShaderFile.close();
+		// convert stream into string
+		vertexCode   = vShaderStream.str();
+		fragmentCode = fShaderStream.str();
+	}
+	catch (std::ifstream::failure e) {
+		std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+	}
+	const char* vShaderCode = vertexCode.c_str();
+	const char * fShaderCode = fragmentCode.c_str();
+	// 2. compile shaders
+	unsigned int vertex, fragment;
+	int success;
+	char infoLog[512];
+	// vertex shader
+	vertex = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vertex, 1, &vShaderCode, NULL);
+	glCompileShader(vertex);
+	this->checkCompileErrors(vertex, "VERTEX");
+	// fragment Shader
+	fragment = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fragment, 1, &fShaderCode, NULL);
+	glCompileShader(fragment);
+	this->checkCompileErrors(fragment, "FRAGMENT");
+	// shader Program
+	int ProgramID = glCreateProgram();
+	glAttachShader(ProgramID, vertex);
+	glAttachShader(ProgramID, fragment);
+	glLinkProgram(ProgramID);
+	this->checkCompileErrors(ProgramID, "PROGRAM");
+	glDeleteShader(vertex);
+	glDeleteShader(fragment);
+
+	return (ProgramID);
+}
+
+void Engine::checkCompileErrors(unsigned int shader, std::string type)
+{
+	int success;
+	char infoLog[1024];
+	if (type != "PROGRAM")
+	{
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
+			std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+		}
+	}
+	else
+	{
+		glGetProgramiv(shader, GL_LINK_STATUS, &success);
+		if (!success)
+		{
+			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
+			std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+		}
+	}
 }
 
 /********************************************************************************/

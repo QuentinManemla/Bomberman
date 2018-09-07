@@ -22,7 +22,6 @@ class Game {
 public:
 	Game( void );
 	~Game( void );
-	void	init();
 	void	run();
 
 protected:

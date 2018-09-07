@@ -2,6 +2,7 @@
 # define ENGINE_HPP
 # define GLEW_STATIC
 
+//# include <glad/glad.h>
 # include <GL/glew.h>
 # include <GL/glut.h>
 # include <GLFW/glfw3.h>
@@ -30,11 +31,10 @@
 
 # include "../../Sound/includes/Sound.hpp"
 # include "../../Game/includes/enumControls.hpp"
-# include "TextRenderer.hpp"
+# include "Text.hpp"
 # include "Shader.hpp"
 # include <string.h>
 # include <vector>
-
 # include "../../Sound/includes/Sound.hpp"
 # include "../../Game/includes/enumControls.hpp"
 # include "structControls.hpp"
@@ -48,6 +48,12 @@ class	Engine {
 		void			engineInit( void );
 		void			render( void );
 		void			clear( void );
+
+		void			triangle( void );
+		void			draw( void );
+		
+		GLuint			createShader(const char* vertexPath, const char* fragmentPath);
+		void 			checkCompileErrors(unsigned int shader, std::string type);
 
 		void			playSound( std::string soundPath, bool loop);
 		void			stopSound( void );
@@ -92,11 +98,12 @@ class	Engine {
 		GLFWwindow				*_Window;
 		eControls				_ActiveKey;
 		Sound					_SoundEngine;
-		// Shader					_Shader;
-		glfreetype::font_data	_Font;
+		Text					_TextEngine;
 		sControls				_sControls;
 		bool					_getKey( int key );
 		bool					_Mute;
+		Shader					_Shader;
+		Shader					_ShaderText;
 };
 
 #endif // !ENGINE_HPP
