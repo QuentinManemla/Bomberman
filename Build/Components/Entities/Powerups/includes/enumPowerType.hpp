@@ -1,0 +1,12 @@
+#ifndef ENUMPOWERTYPE_HPP
+# define ENUMPOWERTYPE_HPP
+
+enum ePowerType {
+	POWER1,
+	POWER2,
+	POWER3,
+	POWER4,
+	POWER5 // PLACEHOLDER NAMES
+};
+
+#endif
