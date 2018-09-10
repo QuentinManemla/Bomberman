@@ -64,7 +64,7 @@ class	Engine {
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
 
-		void			print2DText(std::string text, float pos_x, float pos_y, GLubyte red, GLubyte green, GLubyte blue);
+		void			print2DText(std::string text, float pos_x, float pos_y, float red, float green, float blue);
 		void			printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y, int menuIndex, std::string backgroundPath);		
 		void			printMenu(std::vector<std::string> menuItems, int menuIndex, std::string backgroundPath);
 		int				menuHandler( eControls key, int & menuIndex, int lastIndex );

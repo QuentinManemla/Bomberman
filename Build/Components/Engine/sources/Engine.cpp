@@ -127,8 +127,8 @@ void		Engine::muteSound( void ) {
 /*	Text and Menu Rendering Function														*/
 /********************************************************************************/
 
-void		Engine::print2DText(std::string text, float pos_x, float pos_y, GLubyte red, GLubyte green, GLubyte blue) {
-	this->_TextEngine.RenderText(text, pos_x, pos_y, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
+void		Engine::print2DText(std::string text, float pos_x, float pos_y, float red, float green, float blue) {
+	this->_TextEngine.RenderText(text, pos_x, pos_y, 1.0f, glm::vec3(red, green, blue));
 }
 
 void		Engine::printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y,
@@ -136,7 +136,7 @@ int menuIndex, std::string backgroundPath) {
 	float		x = 20;
 	float 	y = 20;
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
-		this->print2DText(menuItems[i], x, y, 0, 0, 0xff);
+		this->print2DText(menuItems[i], x, y, 0.3, 0.7f, 0.9f);
 		y += 50;
 	}
 }
@@ -149,9 +149,9 @@ void		Engine::printMenu(std::vector<std::string> menuItems, int menuIndex, std::
 		//std::cout << menuItems[i] << std::endl; // debug
 		float length = menuItems[i].length();
 		if (i == menuIndex)
-			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 32), y, 0, 0, 0);
+			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 25), y, 0.5, 0.8f, 0.2f);
 		else
-			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 32), y, 0, 0, 0xff);
+			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 25), y, 0.3, 0.7f, 0.9f);
 		y += 50;
 	}
 }
