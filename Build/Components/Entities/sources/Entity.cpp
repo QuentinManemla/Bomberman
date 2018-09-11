@@ -9,13 +9,13 @@ Entity::Entity( void ){
 }
 
 Entity::~Entity( void ){
-
+	std::cout << this->strType << " destructed" << std::endl;
 }
 
 void		Entity::move(){
-
+	std::cout << this->strType << " move" << std::endl;
 }
 
 void		Entity::die(){
-
+	std::cout << this->strType << " die" << std::endl;
 }

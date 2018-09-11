@@ -1,4 +1,4 @@
-#ifndef POWERUP_HPP
+  #ifndef POWERUP_HPP
 # define POWERUP_HPP
 
 class Powerup {

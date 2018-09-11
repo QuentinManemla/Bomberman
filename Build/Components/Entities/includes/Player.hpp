@@ -1,9 +1,12 @@
 #ifndef PLAYER_HPP
 # define PLAYER_HPP
 
-class Player{
+# include "Entity.hpp"
+//# include "enumEntityType.hpp"
+
+class Player : public Entity {
 public:
-	Player( void );
+	Player( float posX, float posY, eType type);
 	~Player( void );
 
 protected:
