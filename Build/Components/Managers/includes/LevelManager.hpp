@@ -18,7 +18,7 @@ public:
 	void	placePowerups( void ); // might use array as well
 	void	placeDoor( void ); 
 
-	std::vector<std::vector<int> > map;
+	int		mapMax;
 	int		level;
 
 protected:

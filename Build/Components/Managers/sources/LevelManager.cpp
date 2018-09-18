@@ -2,7 +2,7 @@
 
 LevelManager::LevelManager( void ){
 	std::cout << "LM constructed" << std::endl;
-	this->map[0] = {0};
+	this->mapMax = 11;
 	// NOTE:
 	/*Don't need map object. Just render objects on the same plane based on
 	  their positions. Random generation will work with special cases and
