@@ -15,6 +15,7 @@ LevelManager::LevelManager( int level ){
 	assert(this->mapWidth >= 7 && this->mapWidth <= 31 && this->mapHeight % 2 != 0);
 	assert(this->mapHeight >= 7 && this->mapWidth <= 31 && this->mapWidth % 2 != 0);
 	enemies = this->mapWidth * this->mapHeight / 50 + (level * 2);
+	std::cout << "LevelManager constructed" << std::endl; // debug
 }
 
 LevelManager::LevelManager( void ){
@@ -22,6 +23,7 @@ LevelManager::LevelManager( void ){
 }
 
 LevelManager::~LevelManager( void ){
+	std::cout << "LevelManager destructed" << std::endl; // debug
 
 }
 
@@ -78,6 +80,8 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 	}
 	this->testMap.pop_back();
 	std::cout << "solid = " << solidCountDebug << "\nopen = " << openCountDebug << "\nbreakable = " << breakableCountDebug << std::endl;
+	std::cout << "LevelManager end generateMap()" << std::endl; // debug
+	return (this->testMap);
 }
 
 void	LevelManager::pushObject( int type, int x, int y ){ // may take level int in future;

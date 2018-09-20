@@ -5,6 +5,8 @@ PlayState::PlayState( Engine & engine ) : _firstInit(true){ // first init?
 	this->_type = "Play";
 	std::cout << "Play constructed" << std::endl;
 
+	this->_OM = new ObjectManager();
+
 	y = 0.0f;
 	x = 0.0f;
 	_positionTime = 0.0f;
