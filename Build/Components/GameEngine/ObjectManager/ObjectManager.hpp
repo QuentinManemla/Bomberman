@@ -1,9 +1,12 @@
 #ifndef OBJECTMANAGER_HPP
 # define OBJECTMANAGER_HPP
 
+# include <vector>
+
 # include "ObjectManager.hpp"
-# include "GameObject.hpp"
-# include "enumControls.hpp"
+# include "../GameObjects/includes/GameObject.hpp"
+# include "../GameObjects/includes/Bomb.hpp"
+# include "../../Game/includes/enumControls.hpp"
 # include "LevelManager.hpp"
 
 class ObjectManager {
@@ -16,7 +19,7 @@ public:
 	void	canMove(GameObject *GameObject, eControls key); // returns direction // or void and calls move directly
 	void	checkCollision( void );
 
-	vector<GameObject *>	map;
+	std::vector<GameObject *>	map;
 	GameObject				*player;
 	Bomb					*bomb;
 

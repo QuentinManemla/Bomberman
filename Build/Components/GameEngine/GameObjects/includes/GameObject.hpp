@@ -6,7 +6,7 @@
 
 # include "enumGameObjectState.hpp"
 # include "enumGameObjectType.hpp"
-# include "Vector3d.hpp"
+# include "../../Vector3d/Vector3d.hpp"
 //# include "Door.hpp"
 //# include "Enemy.hpp"
 //# include "Player.hpp"

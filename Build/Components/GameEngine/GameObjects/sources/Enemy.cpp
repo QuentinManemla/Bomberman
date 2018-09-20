@@ -1,4 +1,4 @@
-# include "Enemy.hpp"
+# include "../includes/Enemy.hpp"
 
 Enemy::Enemy( eGameObjectType type, Vector3d *position ){
 	this->position = position;

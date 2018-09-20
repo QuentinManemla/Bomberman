@@ -6,12 +6,12 @@
 # include <cassert>
 
 # include "LevelManager.hpp"
-# include "GameObject.hpp"
-# include "Door.hpp"
-# include "Enemy.hpp"
-# include "Player.hpp"
-# include "Wall.hpp"
-# include "SolidWall.hpp"
+# include "../GameObjects/includes/GameObject.hpp"
+# include "../GameObjects/includes/Door.hpp"
+# include "../GameObjects/includes/Enemy.hpp"
+# include "../GameObjects/includes/Player.hpp"
+# include "../GameObjects/includes/Wall.hpp"
+# include "../GameObjects/includes/SolidWall.hpp"
 
 class LevelManager {
 public:

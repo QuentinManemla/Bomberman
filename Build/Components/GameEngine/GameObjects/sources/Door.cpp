@@ -1,4 +1,4 @@
-# include "Door.hpp"
+# include "../includes/Door.hpp"
 
 Door::Door( eGameObjectType type, Vector3d *position ){
 	this->position = position;
