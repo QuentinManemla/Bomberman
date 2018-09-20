@@ -2,23 +2,26 @@
 # define ENGINE_HPP
 # define GLEW_STATIC
 
-//# include <glad/glad.h>
-# include <GL/glew.h>
+# include <glad/glad.h>
+//# include <GL/glew.h>
 # include <GL/glut.h>
-# include <GLFW/glfw3.h>
 # include <glm/glm.hpp>
 # include <glm/gtc/matrix_transform.hpp>
 # include <glm/gtc/type_ptr.hpp>
 
 # include <GLFW/glfw3.h>
 # include <glm/glm.hpp>
-
+# include <stb_image.h>
 # include <vector>
 # include <iostream>
 # include <string>
 # include <fstream>
 # include <sstream>
 # include <iostream>
+
+# include <assimp/Importer.hpp>
+# include <assimp/scene.h>
+# include <assimp/postprocess.h>
 
 # include <ft2build.h>
 # include <freetype/freetype.h>
@@ -32,7 +35,8 @@
 # include "../../Sound/includes/Sound.hpp"
 # include "../../Game/includes/enumControls.hpp"
 # include "Text.hpp"
-# include "Shader.hpp"
+# include "Camera.hpp"
+# include "Model.hpp"
 # include <string.h>
 # include <vector>
 # include "../../Sound/includes/Sound.hpp"
@@ -51,7 +55,7 @@ class	Engine {
 
 		void			triangle( void );
 		void			draw( void );
-		
+		void 			drawModel( float transX, float transY, float transZ );
 		GLuint			createShader(const char* vertexPath, const char* fragmentPath);
 		void 			checkCompileErrors(unsigned int shader, std::string type);
 
@@ -78,6 +82,16 @@ class	Engine {
 		eControls		getInput( void );
 		static void		processKeys(unsigned char key, int x, int y);
 
+		/********************************************************************************************/
+		/*	Display Monitor Functions 																*/
+		/* */
+		/********************************************************************************************/
+
+		void			setFullScreen( void );
+		void			setWindowed( void );
+		void			setResolution( int width, int height);
+
+
 		/* Timer functions */
 		void			FPSManager();
 
@@ -94,9 +108,12 @@ class	Engine {
 		int						_WindowHeight;
 		int						_WindowWidth;
 		static int				held; // test
+		Camera 					_Camera;
 
 	private:
 		GLFWwindow				*_Window;
+		const GLFWvidmode		*_Mode;
+		GLFWmonitor				*_Monitor;
 		eControls				_ActiveKey;
 		Sound					_SoundEngine;
 		Text					_TextEngine;
@@ -104,6 +121,8 @@ class	Engine {
 		bool					_getKey( int key );
 		bool					_Mute;
 		Shader					_Shader;
+		Shader					_ModelShader;
+		Model					_TestModel;
 		Shader					_ShaderText;
 };
 

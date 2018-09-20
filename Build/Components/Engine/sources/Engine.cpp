@@ -1,45 +1,84 @@
+# define STB_IMAGE_IMPLEMENTATION
 # include "../includes/Engine.hpp"
+
 /********************************************************************************/
 /*	Required functions															*/
 /********************************************************************************/
-unsigned int VBO, VAO;
+unsigned int VBO, VAO, EBO;
+unsigned int texture1, texture2;
+
+glm::vec3 cubePositions[] = {
+  glm::vec3( 0.0f,  0.0f,  0.0f), 
+  glm::vec3( 2.0f,  5.0f, -15.0f), 
+  glm::vec3(-1.5f, -2.2f, -2.5f),  
+  glm::vec3(-3.8f, -2.0f, -12.3f),  
+  glm::vec3( 2.4f, -0.4f, -3.5f),  
+  glm::vec3(-1.7f,  3.0f, -7.5f),  
+  glm::vec3( 1.3f, -2.0f, -2.5f),  
+  glm::vec3( 1.5f,  2.0f, -2.5f), 
+  glm::vec3( 1.5f,  0.2f, -1.5f), 
+  glm::vec3(-1.3f,  1.0f, -1.5f)  
+};
 
 int		Engine::held = 1;
 
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	// make sure the viewport matches the new window dimensions; note that width and 
+	// height will be significantly larger than specified on retina displays.
+	glViewport(0, 0, 800, 600);
+}
 
-Engine::Engine(): _WindowWidth(1024),_WindowHeight(768) {
+Engine::Engine(): _WindowWidth(800),_WindowHeight(600) {
 	std::cout << "Engine constructed" << std::endl;
 	//GLFW
 	if (!glfwInit())
 		throw (GLFWInitializationError());
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	#ifdef __APPLE__
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	#endif
 
 	std::cout << "GLFW Initialized Successfully" << std::endl;
+	this->_Monitor = glfwGetPrimaryMonitor();
+
+	this->_Mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 	this->_Window = glfwCreateWindow(this->_WindowWidth, this->_WindowHeight, "Bomberman", NULL, NULL);
+
 	if( this->_Window == NULL ){ // Exception
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		glfwTerminate();
 	}
 	glfwMakeContextCurrent(this->_Window);
+	glfwSetFramebufferSizeCallback(this->_Window, framebuffer_size_callback);
+	// glewExperimental = GL_TRUE;
+	// glewInit();
 
-	glewExperimental = GL_TRUE;
-	glewInit();
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		std::cout << "Failed to initialize GLAD" << std::endl;
+	}
 
 	glfwSetInputMode(this->_Window, GLFW_STICKY_KEYS, GL_TRUE);
+
 	// Set OpenGL options
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
+	std::cout << glGetError() << std::endl; // returns 0 (no error)
+
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	std::cout << glGetError() << std::endl; // returns 0 (no error)
 
 	this->_TextEngine.init("Assets/Fonts/neon_pixel.ttf", 30, this->_WindowWidth, this->_WindowHeight);
 
 	std::cout << "GL Version: " <<  (char *)glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 	this->_SoundEngine.init();
 	this->muteSound();
+	this->engineInit();
+	this->_Camera.init(glm::vec3(0.0f, 0.0f, 3.0f));
 
 	// initialising controls struct
 	this->_sControls.LEFT_KEY = GLFW_KEY_LEFT;//263;
@@ -50,62 +89,198 @@ Engine::Engine(): _WindowWidth(1024),_WindowHeight(768) {
 	this->_sControls.ESCAPE_KEY = GLFW_KEY_ESCAPE;//256;
 	this->_sControls.FIRE_KEY = GLFW_KEY_Z;//90; defaults to z
 	this->_sControls.ACTION_KEY = GLFW_KEY_X;//88; defaults to x
-
 	return ;
 }
 
 Engine::~Engine() {
 	std::cout << "Engine destructed" << std::endl;
-	//this->_Font.clean();
 	glfwTerminate();
 }
 
 void	Engine::triangle( void ) {
 	float vertices[] = {
-		// positions         // colors
-		 0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // bottom right
-		-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom left
-		 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // top 
-	};
+        // positions          // texture coords
+         0.5f,  0.5f, 0.0f,   1.0f, 1.0f, // top right
+         0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, // bottom left
+        -0.5f,  0.5f, 0.0f,   0.0f, 1.0f  // top left 
+    };
+    unsigned int indices[] = {
+        0, 1, 3, // first triangle
+        1, 2, 3  // second triangle
+    };
 
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	glBindVertexArray(VAO);
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBindVertexArray(VAO);
 
-	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	// color attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    // position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    // texture coord attribute
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+	// load and create a texture 
+	// -------------------------
+	// texture 1
+	// ---------
+	glGenTextures(1, &texture1);
+	glBindTexture(GL_TEXTURE_2D, texture1);
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// load image, create texture and generate mipmaps
+	int width, height, nrChannels;
+	stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+	unsigned char *data = stbi_load("Assets/Textures/container.jpg", &width, &height, &nrChannels, 0);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else {
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+	// texture 2
+	// ---------
+	glGenTextures(1, &texture2);
+	glBindTexture(GL_TEXTURE_2D, texture2);
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// load image, create texture and generate mipmaps
+	data = stbi_load("Assets/Textures/face.png", &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		// note that the awesomeface.png has transparency and thus an alpha channel, so make sure to tell OpenGL the data type is of GL_RGBA
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+
+	this->_Shader.use(); 
+	this->_Shader.setInt("texture1", 0);
+	this->_Shader.setInt("texture2", 1);
 }
 
 void	Engine::draw( void ) {
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture1);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, texture2);
+	
+	//create transformations
+	// glm::mat4 transform  = glm::mat4(1.0f);
+	// transform = glm::rotate(transform, glm::radians(90.0f), glm::vec3(0.0, 0.0f, 1.0f));
+	// transform = glm::scale(transform, glm::vec3(0.5, 0.5, 0.5)); 
+
+	// glm::mat4 transform = glm::mat4(1.0f);
+	// transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+	// transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
+	// transform = glm::scale(transform, glm::vec3(0.5, 0.5, 0.5)); 
+	
+	// glm::vec4 result = transform * glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	// printf("%f, %f, %f\n", result.x, result.y, result.z);
+	
 	this->_Shader.use();
-	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	// create transformations
+	glm::mat4 model = glm::mat4(1.0f);
+	glm::mat4 view = glm::mat4(1.0f);
+	glm::mat4 projection = glm::mat4(1.0f);
+
+	model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+	//view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+	projection = glm::perspective(glm::radians(45.0f), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
+	
+	float radius = 10.0f;
+	float camX = sin(glfwGetTime()) * radius;
+	float camZ = cos(glfwGetTime()) * radius;
+	view = this->_Camera.GetViewMatrix();
+	// retrieve the matrix uniform locations
+	unsigned int modelLoc = glGetUniformLocation(this->_Shader.ID, "model");
+	unsigned int viewLoc  = glGetUniformLocation(this->_Shader.ID, "view");
+	
+	// pass them to the shaders (3 different ways)
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+	
+	// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+	this->_Shader.setMat4("projection", projection);
+
+	// unsigned int transformLoc = glGetUniformLocation(this->_Shader.ID, "transform");
+	// glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+
+	glBindVertexArray(VAO);
+	for(unsigned int i = 0; i < 10; i++) {
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, cubePositions[i]);
+		//model = glm::rotate(model, (float)glfwGetTime(), cubePositions[i]);
+		float angle = 20.0f * i; 
+		//model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+		this->_Shader.setMat4("model", model);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	}
 }
+
 /********************************************************************************/
 /*	Engine specific functions													*/
 /********************************************************************************/
 
 void	Engine::engineInit( void ) {
-	this->_Shader.init("Assets/Shaders/Default/shader.vs", "Assets/Shaders/Default/shader.fs");
+	this->_Shader.init("Assets/Shaders/Textures/shader.vs", "Assets/Shaders/Textures/shader.fs");
+	this->_ModelShader.init("Assets/Shaders/Model/shader.vs", "Assets/Shaders/Model/shader.fs");
+	this->_TestModel.init("Assets/Models/Crate/89e64c1cd44944659f70b75891693405.blend.obj");
+	//this->_TestModel.init("Assets/Models/simple-bomb-bomb/source/Bomb.obj");
 }
 
 void	Engine::clear( void ) {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(255.0, 255.0, 255.0, 0.0);
-	glPushMatrix();
-	glLoadIdentity();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void	Engine::render( void ) {	
-	//glPopMatrix();
+void 	Engine::drawModel( float transX, float transY, float transZ ) {
+	this->_ModelShader.use();
+	// float	transX = 0.0f;
+	// float	transY = -1.0f;
+	// float	transZ = 0.0f;
+	std::cout << "Drawing Model Now" << std::endl;
+	// view/projection transformations
+	glm::mat4 projection = glm::perspective(glm::radians(this->_Camera.Zoom), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
+	glm::mat4 view = this->_Camera.GetViewMatrix();
+	this->_ModelShader.setMat4("projection", projection);
+	this->_ModelShader.setMat4("view", view);
+
+	// render the loaded model
+	glm::mat4 model = glm::mat4(1.0f);
+	//										x		y		z
+	model = glm::translate(model, glm::vec3(transX, transY, transZ)); // translate it down so it's at the center of the scene
+	model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));	// it's a bit too big for our scene, so scale it down
+	//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5f, 1.0f, 0.0f));
+	this->_ModelShader.setMat4("model", model);
+	this->_TestModel.Draw(_ModelShader);
+}
+
+void	Engine::render( void ) {
 	glfwSwapBuffers(this->_Window);
 	glfwPollEvents();
 }
@@ -124,7 +299,7 @@ void		Engine::muteSound( void ) {
 	this->_Mute = !_Mute;
 }
 /********************************************************************************/
-/*	Text and Menu Rendering Function														*/
+/*	Text and Menu Rendering Function											*/
 /********************************************************************************/
 
 void		Engine::print2DText(std::string text, float pos_x, float pos_y, float red, float green, float blue) {
@@ -133,7 +308,7 @@ void		Engine::print2DText(std::string text, float pos_x, float pos_y, float red,
 
 void		Engine::printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y,
 int menuIndex, std::string backgroundPath) {
-	float		x = 20;
+	float	x = 20;
 	float 	y = 20;
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
 		this->print2DText(menuItems[i], x, y, 0.3, 0.7f, 0.9f);
@@ -146,7 +321,6 @@ void		Engine::printMenu(std::vector<std::string> menuItems, int menuIndex, std::
 	float		x = 20;
 	float		y = (this->_WindowHeight / 2) - (menuItems.size() * 32);
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
-		//std::cout << menuItems[i] << std::endl; // debug
 		float length = menuItems[i].length();
 		if (i == menuIndex)
 			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 25), y, 0.5, 0.8f, 0.2f);
@@ -210,9 +384,9 @@ eControls	Engine::getInput(){
 	if (this->_getKey( this->_sControls.ESCAPE_KEY ))
 		return (ESCAPE);
 	if (this->_getKey( this->_sControls.ACTION_KEY ))
-		return (LEFT);
+		return (ACTION);
 	if (this->_getKey( this->_sControls.FIRE_KEY ))
-		return (LEFT);
+		return (FIRE);
 	return (IDLEKEY);
 }
 
@@ -223,6 +397,24 @@ bool		Engine::_getKey( int key ) {
 	return (false);
 }
 
+/********************************************************************************************/
+/*	Display Monitor Functions 																*/
+/* */
+/********************************************************************************************/
+
+void		Engine::setFullScreen( void ) {
+	glfwSetWindowMonitor( this->_Window, this->_Monitor, 0, 0, this->_Mode->width, this->_Mode->height, 0 );
+}
+
+void		Engine::setWindowed( void ) {
+	glfwSetWindowMonitor( this->_Window, NULL , 0, 0, this->_Mode->width, this->_Mode->height, 0 );
+}
+
+void		Engine::setResolution( int width, int height) {
+	this->_WindowHeight = height;
+	this->_WindowWidth = width;
+	glfwSetWindowMonitor( this->_Window, this->_Monitor, 0, 0, this->_WindowWidth, this->_WindowHeight, 0 );
+}
 /********************************************************************************/
 /*	FPS management functions													*/
 /********************************************************************************/
@@ -240,12 +432,12 @@ void		Engine::FPSManager( void ){
 	deltaTime = currentTime - prevTime;
 	frames[index++] = deltaTime;
 
-	if (index == 100){
+	if (index == 100) {
 		samplesFull = 1;
 		index = 0;
 	}
 
-	for (int i = 0; i < 100; i++){
+	for (int i = 0; i < 100; i++) {
 		averageTime += frames[i];
 	}
 
@@ -258,86 +450,6 @@ void		Engine::FPSManager( void ){
 	prevTime = currentTime;
 
 	// delay here
-}
-
-GLuint	Engine::createShader(const char* vertexPath, const char* fragmentPath) {
-	// 1. retrieve the vertex/fragment source code from filePath
-	std::string vertexCode;
-	std::string fragmentCode;
-	std::ifstream vShaderFile;
-	std::ifstream fShaderFile;
-	// ensure ifstream objects can throw exceptions:
-	vShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
-	fShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
-	try 
-	{
-		// open files
-		vShaderFile.open("Assets/Shaders/Default/shader.vs");
-		fShaderFile.open("Assets/Shaders/Default/shader.fs");
-		std::stringstream vShaderStream, fShaderStream;
-		// read file's buffer contents into streams
-		vShaderStream << vShaderFile.rdbuf();
-		fShaderStream << fShaderFile.rdbuf();
-		// close file handlers
-		vShaderFile.close();
-		fShaderFile.close();
-		// convert stream into string
-		vertexCode   = vShaderStream.str();
-		fragmentCode = fShaderStream.str();
-	}
-	catch (std::ifstream::failure e) {
-		std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
-	}
-	const char* vShaderCode = vertexCode.c_str();
-	const char * fShaderCode = fragmentCode.c_str();
-	// 2. compile shaders
-	unsigned int vertex, fragment;
-	int success;
-	char infoLog[512];
-	// vertex shader
-	vertex = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertex, 1, &vShaderCode, NULL);
-	glCompileShader(vertex);
-	this->checkCompileErrors(vertex, "VERTEX");
-	// fragment Shader
-	fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragment, 1, &fShaderCode, NULL);
-	glCompileShader(fragment);
-	this->checkCompileErrors(fragment, "FRAGMENT");
-	// shader Program
-	int ProgramID = glCreateProgram();
-	glAttachShader(ProgramID, vertex);
-	glAttachShader(ProgramID, fragment);
-	glLinkProgram(ProgramID);
-	this->checkCompileErrors(ProgramID, "PROGRAM");
-	glDeleteShader(vertex);
-	glDeleteShader(fragment);
-
-	return (ProgramID);
-}
-
-void Engine::checkCompileErrors(unsigned int shader, std::string type)
-{
-	int success;
-	char infoLog[1024];
-	if (type != "PROGRAM")
-	{
-		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-		if (!success)
-		{
-			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-		}
-	}
-	else
-	{
-		glGetProgramiv(shader, GL_LINK_STATUS, &success);
-		if (!success)
-		{
-			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-		}
-	}
 }
 
 /********************************************************************************/

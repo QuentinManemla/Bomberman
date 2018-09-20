@@ -18,6 +18,7 @@
 # include "../../../States/includes/Options.hpp"
 # include "../../../States/includes/Pause.hpp"
 # include "../../../States/includes/OptionsResolution.hpp"
+# include "../../../States/includes/OptionsFullScreen.hpp"
 
 class Game {
 public:

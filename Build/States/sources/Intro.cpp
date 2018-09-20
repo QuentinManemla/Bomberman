@@ -20,6 +20,7 @@ void IntroState::update( eControls key ) {
 	static int time = 0; // test // debug
 	time++; // test
 	std::cout << "time: " << time << std::endl; // test
+	this->_engine->triangle();
 	this->_engine->clear();
 	if (time == 1)
 		this->_engine->playSound("Assets/Audio/Intro_State.wav", true);
@@ -36,6 +37,7 @@ void IntroState::update( eControls key ) {
 }
 
 void IntroState::render( void ) {
+	this->_engine->draw();
 	this->_engine->render();
 	std::cout << "Intro render" << std::endl;
 }
