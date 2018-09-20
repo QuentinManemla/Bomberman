@@ -1,4 +1,4 @@
-# include "Player.hpp"
+# include "../includes/Player.hpp"
 
 Player::Player( eGameObjectType type, Vector3d *position ){
 	this->position = position;

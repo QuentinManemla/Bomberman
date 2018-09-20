@@ -1,4 +1,4 @@
-# include "Wall.hpp"
+# include "../includes/Wall.hpp"
 
 Wall::Wall( eGameObjectType type, Vector3d *position ){
 	this->strType = "Wall";

@@ -1,4 +1,4 @@
-# include "SolidWall.hpp"
+# include "../includes/SolidWall.hpp"
 
 SolidWall::SolidWall( eGameObjectType type, Vector3d *position ){
 	this->strType = "SolidWall";

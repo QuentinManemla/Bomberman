@@ -1,4 +1,4 @@
-#include "GameObject.hpp"
+#include "../includes/GameObject.hpp"
 
 GameObject::GameObject( eGameObjectType type, Vector3d *position ){
 	this->position = position;
