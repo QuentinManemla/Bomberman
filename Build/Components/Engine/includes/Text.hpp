@@ -1,6 +1,6 @@
 #ifndef TEXT_HPP
-//# include <glad/glad.h>
-# include <GL/glew.h>
+# include <glad/glad.h>
+//# include <GL/glew.h>
 # include <GL/glut.h>
 # include <GL/glut.h>
 # include <GLFW/glfw3.h>

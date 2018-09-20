@@ -1,0 +1,24 @@
+# Blender MTL File: 'LM.blend'
+# Material Count: 2
+
+newmtl BOmb
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.045536 0.049762 0.050277
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\feed\Desktop\Diffuse.png
+
+newmtl Rope
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.292234 0.279692 0.312126
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\feed\Desktop\Diffuse.png

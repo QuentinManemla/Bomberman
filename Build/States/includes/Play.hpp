@@ -21,6 +21,12 @@ protected:
 private:
 	Engine			*_engine;
 	std::string		_type; // debug
+	bool			_firstInit;
+	float			_positionTime;
+	float			_positionPitch;
+	float			y;
+	float			x;
+	float 			z;
 
 };
 
