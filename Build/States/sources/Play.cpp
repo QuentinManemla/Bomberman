@@ -5,11 +5,14 @@ PlayState::PlayState( Engine & engine ) : _firstInit(true){ // first init?
 	this->_type = "Play";
 	std::cout << "Play constructed" << std::endl;
 
-	y = 0.0f;
-	x = 0.0f;
+	start_y = 0.44f;
+	y = 0.44f;
+	x = -0.44f;
+	start_x = -0.44f;
 	_positionTime = 0.0f;
 	_positionPitch = 0.0f;
 	this->_engine->triangle();
+	this->_OM = new ObjectManager();
 }
 
 PlayState::PlayState( void ){
@@ -38,9 +41,22 @@ void PlayState::render( void ) {
 		this->_engine->_Camera.ProcessKeyboard(CAMERA_FORWARD, this->_positionTime);
 		this->_positionTime += 0.01f;
 	}
-	// if ( this->_positionTime > 0.14f && this->_positionPitch < 80.0f) {
-	// 	this->_engine->_Camera.ProcessMouseMovement(0, this->_positionPitch);
-	// 	this->_positionPitch += 5.0f;
+	std::cout << "==========" << std::endl;
+	std::cout << "Vector X: " << this->_OM->map[0]->position->vX << std::endl;
+	std::cout << "Vector Y: " << this->_OM->map[0]->position->vY << std::endl;
+	std::cout << "Vector Y: " << this->_OM->map[0]->position->vZ << std::endl;
+	std::cout << "==========" << std::endl;
+	std::cout << "==========" << std::endl;
+	std::cout << "ACTUAL Vector X: " << this->_OM->map[0]->position->vX << std::endl;
+	std::cout << "ACTUAL Vector Y: " << this->_OM->map[0]->position->vY << std::endl;
+	std::cout << "ACTUAL Vector Y: " << this->_OM->map[0]->position->vZ << std::endl;
+	std::cout << "==========" << std::endl;
+	// for (int i = 0; i < this->_OM->map.size(); i++) {
+	// 	std::cout << "==========" << std::endl;
+	// 	std::cout << "Vector X: " << this->_OM->map[i]->position->vX << std::endl;
+	// 	std::cout << "Vector Y: " << this->_OM->map[i]->position->vY << std::endl;
+	// 	std::cout << "Vector Y: " << this->_OM->map[i]->position->vZ << std::endl;
+	// 	std::cout << "==========" << std::endl;
 	// }
 	std::cout << " Position: " << this->_positionTime << std::endl;
 	this->_engine->clear();
@@ -59,6 +75,7 @@ void PlayState::render( void ) {
 	}
 
 	this->_engine->draw();
+	std::cout << "X: " << x << "Y: " << y << std::endl;
 	this->_engine->drawModel(x, y, 0.1f);
 	this->_engine->print2DText("Play", 20, 20, 0, 0, 0xff);
 	this->_engine->render();

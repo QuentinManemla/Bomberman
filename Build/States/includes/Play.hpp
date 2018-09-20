@@ -26,6 +26,9 @@ private:
 	bool			_firstInit;
 	float			_positionTime;
 	float			_positionPitch;
+	float 			start_x;
+	float 			start_y;
+	float 			start_z;
 	float			y;
 	float			x;
 	float 			z;
