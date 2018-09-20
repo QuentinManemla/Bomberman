@@ -250,7 +250,7 @@ void	Engine::engineInit( void ) {
 	this->_Shader.init("Assets/Shaders/Textures/shader.vs", "Assets/Shaders/Textures/shader.fs");
 	this->_ModelShader.init("Assets/Shaders/Model/shader.vs", "Assets/Shaders/Model/shader.fs");
 	this->_TestModel.init("Assets/Models/Crate/89e64c1cd44944659f70b75891693405.blend.obj");
-	//this->_TestModel.init("Assets/Models/simple-bomb-bomb/source/Bomb.obj");
+	//this->_TestModel.init("Assets/Models/Classic-Crate/model/obj/crate.obj");
 }
 
 void	Engine::clear( void ) {
