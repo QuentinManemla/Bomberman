@@ -1,9 +1,10 @@
 #include "../includes/Play.hpp"
 
-PlayState::PlayState( Engine & engine ) : _firstInit(true){
+PlayState::PlayState( Engine & engine ) : _firstInit(true){ // first init?
 	this->_engine = &engine;
 	this->_type = "Play";
 	std::cout << "Play constructed" << std::endl;
+
 	y = 0.0f;
 	x = 0.0f;
 	_positionTime = 0.0f;

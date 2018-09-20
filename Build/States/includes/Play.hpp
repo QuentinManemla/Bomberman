@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include "IState.hpp"
+# include "ObjectManager.hpp"
 
 class PlayState : public IState {
 public:
@@ -19,6 +20,7 @@ public:
 protected:
 
 private:
+	ObjectManager	*_OM;
 	Engine			*_engine;
 	std::string		_type; // debug
 	bool			_firstInit;
