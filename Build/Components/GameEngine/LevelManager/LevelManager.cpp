@@ -39,28 +39,27 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 	int type;
 	int innerLine = 1;
 	int	y = 1;
-	int x;
+	int x = 1;
 	int	solidCountDebug = 0;
 	int	breakableCountDebug = 0;
 	int	openCountDebug = 0;
 
-	for (int i = 0; i <= h * w; i++){
+	for (int i = 0; i < (h * w); i++){ // i will increment from 0 to (TOTAL_BLOCKS - 1)
 		type = 0;
-		if (((i % w == 1) || (i % w == 0)) || ((i <= w) || (i >= (h * w) - w))){
+		if (x == 1 || x == w || y == 1 || y == h){// If boarders: type = 1 (SolidWall)
 			type = 1;
 			block = 0;
 		}
-		else{
-			// insert random objects here
-			if ((i > w + 4) && (i != w * 2 + 2) && (i != w * 3 + 2)){ // keeps player start area clear
-				if (rand() % 3 == 1)
-					type = 2;
+		else { // if not boarder
+			// insert random objects here avoiding player spawn zone in top left corner
+			if ((x == 2 && y <= 4) || (y == 2 && x <= 4)){// keeps player start area clear
+				type = 5; // type 5 indicates safe zone where no blocks will spawn
 			}
 			else
-				type = 5;
+				if (rand() % 3 == 1) // chance of spawning Wall on this coord
+					type = 2;
 			// end insert random object
-			if ((i >= (w * 2 - 1)) &&
-			(i < (w * h - (w * 2) - 1))){
+			if (y != 1 && y != h){// generate SolidWall grid, leaving second and second last row open
 				innerLine++;
 				block++;
 				if (block % 2 == 0 && innerLine % 2 == 0)
@@ -73,18 +72,22 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 			breakableCountDebug++;
 		else if (type == 0)
 			openCountDebug++;
-		y = ((i+1)/w) + 1;
-		x = ((i+1)%w);
+		std::cout << i << " type =" << type << "; totalline (x;y) = " << x << ";" << y << std::endl; // debug
 		pushObject(type, x, y);
-		std::cout << i << " type =" << type << "; totalline (x;y) = " << x << ";" << y << std::endl;
+		x++;
+		if (x == w + 1){
+			x = 1;
+			y++;
+		}
 	}
-	this->testMap.pop_back();
 	std::cout << "solid = " << solidCountDebug << "\nopen = " << openCountDebug << "\nbreakable = " << breakableCountDebug << std::endl;
+	//this->debugPrintMap(); //debug
+	//exit(-1); // debug
 	return (this->testMap);
 }
 
 void	LevelManager::pushObject( int type, int x, int y ){ // may take level int in future;
-	std::cout << "pushObject" << " type =" << type << "; totalline (x;y) = " << x << ";" << y << std::endl;
+	//std::cout << "pushObject" << " type =" << type << "; totalline (x;y) = " << x << ";" << y << std::endl;
 	GameObject *object;
 	switch (type){
 		case 1:
@@ -98,13 +101,16 @@ void	LevelManager::pushObject( int type, int x, int y ){ // may take level int i
 		case 5:
 			return;
 	};
-	std::cout << "object debug pre push" << object->strType << " " << object->position->vX << ";" << object->position->vY << std::endl; // debug
+	//std::cout << "object debug pre push" << object->strType << " " << object->position->vX << ";" << object->position->vY << std::endl; // debug
 	this->testMap.push_back(object);
 }
 
 void	LevelManager::debugPrintMap( void ){ // debug // test
 	std::cout << "total = " <<testMap.size() << std::endl;
 	for (int i = 0; i < testMap.size(); i++){
-		std::cout << testMap[i]->strType << " = " << testMap[i]->position->vX << ";" << testMap[i]->position->vY << std::endl;
+		//std::cout << testMap[i]->strType << " = " << testMap[i]->position->vX << ";" << testMap[i]->position->vY << std::endl;
+		std::cout << testMap[i]->eType;
+		if (i & this->mapWidth == 0)
+			std::cout << std::endl;
 	}
 }
