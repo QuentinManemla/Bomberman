@@ -264,7 +264,7 @@ void 	Engine::drawModel( float transX, float transY, float transZ ) {
 	// float	transX = 0.0f;
 	// float	transY = -1.0f;
 	// float	transZ = 0.0f;
-	std::cout << "Drawing Model Now" << std::endl;
+	//std::cout << "Drawing Model Now" << std::endl;
 	// view/projection transformations
 	glm::mat4 projection = glm::perspective(glm::radians(this->_Camera.Zoom), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
 	glm::mat4 view = this->_Camera.GetViewMatrix();

@@ -11,8 +11,9 @@ PlayState::PlayState( Engine & engine ) : _firstInit(true){ // first init?
 	start_x = -0.44f;
 	_positionTime = 0.0f;
 	_positionPitch = 0.0f;
+
 	this->_engine->triangle();
-	this->_OM = new ObjectManager();
+	this->_OM = new ObjectManager( engine);
 }
 
 PlayState::PlayState( void ){
@@ -34,6 +35,7 @@ void PlayState::update( eControls key ){
 	else if (key == IDLEKEY){
 		held = 0;
 	}
+	this->_OM->update(key, 0.1); // testing phase
 }
 
 void PlayState::render( void ) {
@@ -51,9 +53,9 @@ void PlayState::render( void ) {
 	// std::cout << "ACTUAL Vector Y: " << this->_OM->map[2]->position->vY << std::endl;
 	// std::cout << "ACTUAL Vector Z: " << this->_OM->map[0]->position->vZ << std::endl;
 	// std::cout << "==========" << std::endl;
-	std::cout << " Position: " << this->_positionTime << std::endl;
+	//std::cout << " Position: " << this->_positionTime << std::endl; // debug
 	this->_engine->clear();
-	if (this->_engine->getInput() == UP) {
+	/*if (this->_engine->getInput() == UP) {
 		y += 0.01f;
 	} else if (this->_engine->getInput() == DOWN) {
 		y -= 0.01f;
@@ -66,21 +68,22 @@ void PlayState::render( void ) {
 	} else if ( this->_engine->getInput() == FIRE ) {
 		this->_engine->_Camera.ProcessMouseMovement(0, -0.05f);
 	}
-
+*/
 	for (int i = 0; i < this->_OM->map.size(); i++) {
 		if (this->_OM->map[i]->strType == "SolidWall")
 			this->_engine->drawModel((this->_OM->map[i]->position->vX - 1) * 0.08f + start_x, (this->_OM->map[i]->position->vY - 1) * 0.08f - start_y, 0.1f);
 		if (this->_OM->map[i]->strType == "Wall")
 			this->_engine->drawModel2((this->_OM->map[i]->position->vX - 1) * 0.08f + start_x, (this->_OM->map[i]->position->vY - 1) * 0.08f - start_y, 0.1f);
-		std::cout << "==========" << std::endl;
-		std::cout << "Vector X: " << this->_OM->map[i]->position->vX << std::endl;
-		std::cout << "Vector Y: " << this->_OM->map[i]->position->vY << std::endl;
-		std::cout << "Vector Y: " << this->_OM->map[i]->position->vZ << std::endl;
-		std::cout << "==========" << std::endl;
+		//std::cout << "==========" << std::endl;
+		//std::cout << "Vector X: " << this->_OM->map[i]->position->vX << std::endl;
+		//std::cout << "Vector Y: " << this->_OM->map[i]->position->vY << std::endl;
+		//std::cout << "Vector Y: " << this->_OM->map[i]->position->vZ << std::endl;
+		//std::cout << "==========" << std::endl;
 	}
 	this->_engine->draw();
-	std::cout << "X: " << x << "Y: " << y << std::endl;
+	//std::cout << "X: " << x << "Y: " << y << std::endl; // debug
 	//this->_engine->drawModel(x, y, 0.1f);
+	this->_OM->render(); // testing phase // testing position as well
 	this->_engine->print2DText("Play", 20, 20, 0, 0, 0xff);
 	this->_engine->render();
 	std::cout << "Play render" << std::endl;
