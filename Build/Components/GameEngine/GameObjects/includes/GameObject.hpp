@@ -6,6 +6,7 @@
 
 # include "enumGameObjectState.hpp"
 # include "enumGameObjectType.hpp"
+# include "enumDirection.hpp"
 # include "../../Vector3d/Vector3d.hpp"
 //# include "Door.hpp"
 //# include "Enemy.hpp"
@@ -29,7 +30,7 @@ public:
 	eGameObjectState		state;
 	eGameObjectType			eType;
 	std::string				strType;
-	float					currentDirection;
+	eDirection				currentDirection;
 	int						hitPoints;
 	bool					mortal;
 	//Powerup					*powerup; // think about how bombs are ordered when powerup is active

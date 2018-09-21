@@ -19,7 +19,7 @@ public:
 	void	update(eControls key, double deltaTime); // may get dT from engine
 	void	render(void);
 	void	canMove(GameObject *actor, eControls key); // returns direction // or void and calls move directly
-	void	move( eControls key, GameObject *actor );
+	void	move( GameObject *actor, eControls key );
 	void	checkCollision( void );
 
 	Engine & engine;

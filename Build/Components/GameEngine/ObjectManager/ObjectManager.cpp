@@ -12,9 +12,11 @@ ObjectManager::~ObjectManager( void ){
 }
 
 void	ObjectManager::update( eControls key, double deltaTime){
-	move(key, this->player);
-	// call canMove() to see if legal move based on key
-	// if successfull call move()
+	canMove(this->player, key);
+	//for (int i = 0; i < this->enemies.size(); i++){
+	//	canMove(this->enemies[i], key);
+	//}
+
 	std::cout << "PLAYER POS: " << this->player->position->vX << ";" << this->player->position->vY << std::endl;
 }
 
@@ -24,13 +26,17 @@ void	ObjectManager::render(void){
 }
 
 
-void	ObjectManager::canMove(GameObject *GameObject, eControls key){
+void	ObjectManager::canMove(GameObject *actor, eControls key){
+	int truncX = <static_cast>actor->position->vX;
+	int truncY = <static_cast>actor->position->vY;
+
+
+	move(actor, key);
 	// switch (key)
 	// if dir and block in that dir is occupied then no, just set dir
-
 }
 
-void	ObjectManager::move( eControls key , GameObject *actor){
+void	ObjectManager::move( GameObject *actor, eControls key ){
 	switch (key){
 		case UP:
 			actor->position->vY += 0.01;
