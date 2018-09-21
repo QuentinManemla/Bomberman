@@ -100,7 +100,7 @@ Engine::~Engine() {
 void	Engine::triangle( void ) {
 	float vertices[] = {
         // positions          // texture coords
-         0.5f,  0.5f, 0.0f,   1.0f, 1.0f, // top right
+         0.5f,  0.5f, 0.0f,   0.5f, 1.0f, // top right
          0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // bottom right
         -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, // bottom left
         -0.5f,  0.5f, 0.0f,   0.0f, 1.0f  // top left 
@@ -144,7 +144,7 @@ void	Engine::triangle( void ) {
 	// load image, create texture and generate mipmaps
 	int width, height, nrChannels;
 	stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-	unsigned char *data = stbi_load("Assets/Textures/container.jpg", &width, &height, &nrChannels, 0);
+	unsigned char *data = stbi_load("Assets/Textures/stone-wall.jpg", &width, &height, &nrChannels, 0);
 	if (data) {
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
@@ -153,29 +153,29 @@ void	Engine::triangle( void ) {
 		std::cout << "Failed to load texture" << std::endl;
 	}
 	stbi_image_free(data);
-	// texture 2
-	// ---------
-	glGenTextures(1, &texture2);
-	glBindTexture(GL_TEXTURE_2D, texture2);
-	// set the texture wrapping parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	// set texture filtering parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// load image, create texture and generate mipmaps
-	data = stbi_load("Assets/Textures/face.png", &width, &height, &nrChannels, 0);
-	if (data)
-	{
-		// note that the awesomeface.png has transparency and thus an alpha channel, so make sure to tell OpenGL the data type is of GL_RGBA
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
-	{
-		std::cout << "Failed to load texture" << std::endl;
-	}
-	stbi_image_free(data);
+	// // texture 2
+	// // ---------
+	// glGenTextures(1, &texture2);
+	// glBindTexture(GL_TEXTURE_2D, texture2);
+	// // set the texture wrapping parameters
+	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// // set texture filtering parameters
+	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// // load image, create texture and generate mipmaps
+	// data = stbi_load("Assets/Textures/face.png", &width, &height, &nrChannels, 0);
+	// if (data)
+	// {
+	// 	// note that the awesomeface.png has transparency and thus an alpha channel, so make sure to tell OpenGL the data type is of GL_RGBA
+	// 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	// 	glGenerateMipmap(GL_TEXTURE_2D);
+	// }
+	// else
+	// {
+	// 	std::cout << "Failed to load texture" << std::endl;
+	// }
+	// stbi_image_free(data);
 
 	this->_Shader.use(); 
 	this->_Shader.setInt("texture1", 0);
@@ -250,6 +250,7 @@ void	Engine::engineInit( void ) {
 	this->_Shader.init("Assets/Shaders/Textures/shader.vs", "Assets/Shaders/Textures/shader.fs");
 	this->_ModelShader.init("Assets/Shaders/Model/shader.vs", "Assets/Shaders/Model/shader.fs");
 	this->_TestModel.init("Assets/Models/Crate/89e64c1cd44944659f70b75891693405.blend.obj");
+	this->_TestModel2.init("Assets/Models/Crate-Break/89e64c1cd44944659f70b75891693405.blend.obj");
 	//this->_TestModel.init("Assets/Models/Classic-Crate/model/obj/crate.obj");
 }
 
@@ -278,6 +279,28 @@ void 	Engine::drawModel( float transX, float transY, float transZ ) {
 	//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5f, 1.0f, 0.0f));
 	this->_ModelShader.setMat4("model", model);
 	this->_TestModel.Draw(_ModelShader);
+}
+
+void 	Engine::drawModel2( float transX, float transY, float transZ ) {
+	this->_ModelShader.use();
+	// float	transX = 0.0f;
+	// float	transY = -1.0f;
+	// float	transZ = 0.0f;
+	std::cout << "Drawing Model Now" << std::endl;
+	// view/projection transformations
+	glm::mat4 projection = glm::perspective(glm::radians(this->_Camera.Zoom), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
+	glm::mat4 view = this->_Camera.GetViewMatrix();
+	this->_ModelShader.setMat4("projection", projection);
+	this->_ModelShader.setMat4("view", view);
+
+	// render the loaded model
+	glm::mat4 model = glm::mat4(1.0f);
+	//										x		y		z
+	model = glm::translate(model, glm::vec3(transX, transY, transZ)); // translate it down so it's at the center of the scene
+	model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));	// it's a bit too big for our scene, so scale it down
+	//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5f, 1.0f, 0.0f));
+	this->_ModelShader.setMat4("model", model);
+	this->_TestModel2.Draw(_ModelShader);
 }
 
 void	Engine::render( void ) {

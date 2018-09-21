@@ -56,6 +56,7 @@ class	Engine {
 		void			triangle( void );
 		void			draw( void );
 		void 			drawModel( float transX, float transY, float transZ );
+		void 			drawModel2( float transX, float transY, float transZ );
 		GLuint			createShader(const char* vertexPath, const char* fragmentPath);
 		void 			checkCompileErrors(unsigned int shader, std::string type);
 
@@ -123,6 +124,7 @@ class	Engine {
 		Shader					_Shader;
 		Shader					_ModelShader;
 		Model					_TestModel;
+		Model					_TestModel2;
 		Shader					_ShaderText;
 };
 

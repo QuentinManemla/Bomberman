@@ -37,27 +37,20 @@ void PlayState::update( eControls key ){
 }
 
 void PlayState::render( void ) {
-	if ( this->_positionTime < 0.11f ) {
+	if ( this->_positionTime < 0.09f ) {
 		this->_engine->_Camera.ProcessKeyboard(CAMERA_FORWARD, this->_positionTime);
 		this->_positionTime += 0.01f;
 	}
-	std::cout << "==========" << std::endl;
-	std::cout << "Vector X: " << this->_OM->map[0]->position->vX << std::endl;
-	std::cout << "Vector Y: " << this->_OM->map[0]->position->vY << std::endl;
-	std::cout << "Vector Y: " << this->_OM->map[0]->position->vZ << std::endl;
-	std::cout << "==========" << std::endl;
-	std::cout << "==========" << std::endl;
-	std::cout << "ACTUAL Vector X: " << this->_OM->map[0]->position->vX << std::endl;
-	std::cout << "ACTUAL Vector Y: " << this->_OM->map[0]->position->vY << std::endl;
-	std::cout << "ACTUAL Vector Y: " << this->_OM->map[0]->position->vZ << std::endl;
-	std::cout << "==========" << std::endl;
-	// for (int i = 0; i < this->_OM->map.size(); i++) {
-	// 	std::cout << "==========" << std::endl;
-	// 	std::cout << "Vector X: " << this->_OM->map[i]->position->vX << std::endl;
-	// 	std::cout << "Vector Y: " << this->_OM->map[i]->position->vY << std::endl;
-	// 	std::cout << "Vector Y: " << this->_OM->map[i]->position->vZ << std::endl;
-	// 	std::cout << "==========" << std::endl;
-	// }
+	// std::cout << "==========" << std::endl;
+	// std::cout << "Vector X: " << this->_OM->map[2]->position->vX << std::endl;
+	// std::cout << "Vector Y: " << this->_OM->map[2]->position->vY << std::endl;
+	// std::cout << "Vector Z: " << this->_OM->map[1]->position->vZ << std::endl;
+	// std::cout << "==========" << std::endl;
+	// std::cout << "==========" << std::endl;
+	// std::cout << "ACTUAL Vector X: " << (this->_OM->map[2]->position->vX - 1) * start_x + 0.09f << std::endl;
+	// std::cout << "ACTUAL Vector Y: " << this->_OM->map[2]->position->vY << std::endl;
+	// std::cout << "ACTUAL Vector Z: " << this->_OM->map[0]->position->vZ << std::endl;
+	// std::cout << "==========" << std::endl;
 	std::cout << " Position: " << this->_positionTime << std::endl;
 	this->_engine->clear();
 	if (this->_engine->getInput() == UP) {
@@ -74,9 +67,20 @@ void PlayState::render( void ) {
 		this->_engine->_Camera.ProcessMouseMovement(0, -0.05f);
 	}
 
+	for (int i = 0; i < this->_OM->map.size(); i++) {
+		if (this->_OM->map[i]->strType == "SolidWall")
+			this->_engine->drawModel((this->_OM->map[i]->position->vX - 1) * 0.08f + start_x, (this->_OM->map[i]->position->vY - 1) * 0.08f - start_y, 0.1f);
+		if (this->_OM->map[i]->strType == "Wall")
+			this->_engine->drawModel2((this->_OM->map[i]->position->vX - 1) * 0.08f + start_x, (this->_OM->map[i]->position->vY - 1) * 0.08f - start_y, 0.1f);
+		std::cout << "==========" << std::endl;
+		std::cout << "Vector X: " << this->_OM->map[i]->position->vX << std::endl;
+		std::cout << "Vector Y: " << this->_OM->map[i]->position->vY << std::endl;
+		std::cout << "Vector Y: " << this->_OM->map[i]->position->vZ << std::endl;
+		std::cout << "==========" << std::endl;
+	}
 	this->_engine->draw();
 	std::cout << "X: " << x << "Y: " << y << std::endl;
-	this->_engine->drawModel(x, y, 0.1f);
+	//this->_engine->drawModel(x, y, 0.1f);
 	this->_engine->print2DText("Play", 20, 20, 0, 0, 0xff);
 	this->_engine->render();
 	std::cout << "Play render" << std::endl;
