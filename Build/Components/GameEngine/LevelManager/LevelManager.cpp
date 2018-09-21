@@ -80,7 +80,6 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 	}
 	this->testMap.pop_back();
 	std::cout << "solid = " << solidCountDebug << "\nopen = " << openCountDebug << "\nbreakable = " << breakableCountDebug << std::endl;
-	std::cout << "LevelManager end generateMap()" << std::endl; // debug
 	return (this->testMap);
 }
 
