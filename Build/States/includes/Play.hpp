@@ -17,6 +17,8 @@ public:
 	void			update( eControls key );
 	void			render( void );
 
+	void			drawMap( void );
+
 protected:
 
 private:

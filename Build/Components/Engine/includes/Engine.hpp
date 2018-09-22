@@ -43,6 +43,7 @@
 # include "../../Game/includes/enumControls.hpp"
 # include "structControls.hpp"
 # include "../../../States/includes/enumState.hpp"
+# include "../../GameEngine/enums/enumGameObjectType.hpp"
 
 class	Engine {
 	public:
@@ -55,8 +56,7 @@ class	Engine {
 
 		void			triangle( void );
 		void			draw( void );
-		void 			drawModel( float transX, float transY, float transZ );
-		void 			drawModel2( float transX, float transY, float transZ );
+		void 			drawModel( eGameObjectType type, float transX, float transY, float transZ );
 		GLuint			createShader(const char* vertexPath, const char* fragmentPath);
 		void 			checkCompileErrors(unsigned int shader, std::string type);
 
@@ -71,7 +71,7 @@ class	Engine {
 
 		void			print2DText(std::string text, float pos_x, float pos_y, float red, float green, float blue);
 		void			printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y, int menuIndex, std::string backgroundPath);		
-		void			printMenu(std::vector<std::string> menuItems, int menuIndex, std::string backgroundPath);
+		void			printMenu(std::vector<std::string> menuItems, std::string menuHeading, int menuIndex, std::string backgroundPath);
 		int				menuHandler( eControls key, int & menuIndex, int lastIndex );
 
 		/********************************************************************************************/
@@ -121,11 +121,16 @@ class	Engine {
 		sControls				_sControls;
 		bool					_getKey( int key );
 		bool					_Mute;
+
+		/** Shaders **/
 		Shader					_Shader;
 		Shader					_ModelShader;
-		Model					_TestModel;
-		Model					_TestModel2;
 		Shader					_ShaderText;
+
+		/** Models **/
+		Model					_SolidWall;
+		Model					_BreakableWall;
+		Model					_Player;
 };
 
 #endif // !ENGINE_HPP

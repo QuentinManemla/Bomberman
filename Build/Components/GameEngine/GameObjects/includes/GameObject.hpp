@@ -4,9 +4,11 @@
 # include <string>
 # include <vector>
 
-# include "enumGameObjectState.hpp"
-# include "enumGameObjectType.hpp"
+# include "../../enums/enumGameObjectState.hpp"
+# include "../../enums/enumGameObjectType.hpp"
 # include "../../Vector3d/Vector3d.hpp"
+# include "../../../Engine/includes/Engine.hpp"
+
 //# include "Door.hpp"
 //# include "Enemy.hpp"
 //# include "Player.hpp"
@@ -32,6 +34,7 @@ public:
 	float					currentDirection;
 	int						hitPoints;
 	bool					mortal;
+	Model					_model;
 	//Powerup					*powerup; // think about how bombs are ordered when powerup is active
 
 protected:

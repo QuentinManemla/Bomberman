@@ -7,7 +7,7 @@
 # include "../GameObjects/includes/GameObject.hpp"
 # include "../GameObjects/includes/Bomb.hpp"
 # include "../../Game/includes/enumControls.hpp"
-# include "LevelManager.hpp"
+# include "../LevelManager/LevelManager.hpp"
 
 class ObjectManager {
 public:

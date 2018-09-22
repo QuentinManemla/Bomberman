@@ -249,9 +249,11 @@ void	Engine::draw( void ) {
 void	Engine::engineInit( void ) {
 	this->_Shader.init("Assets/Shaders/Textures/shader.vs", "Assets/Shaders/Textures/shader.fs");
 	this->_ModelShader.init("Assets/Shaders/Model/shader.vs", "Assets/Shaders/Model/shader.fs");
-	this->_TestModel.init("Assets/Models/Crate/89e64c1cd44944659f70b75891693405.blend.obj");
-	this->_TestModel2.init("Assets/Models/Crate-Break/89e64c1cd44944659f70b75891693405.blend.obj");
-	//this->_TestModel.init("Assets/Models/Classic-Crate/model/obj/crate.obj");
+	
+	/* Model Initialization */
+	this->_SolidWall.init("Assets/Models/Crate/89e64c1cd44944659f70b75891693405.blend.obj");
+	this->_BreakableWall.init("Assets/Models/Crate-Break/89e64c1cd44944659f70b75891693405.blend.obj");
+	this->_Player.init("Assets/Models/Slime/MC Slime.obj");
 }
 
 void	Engine::clear( void ) {
@@ -259,12 +261,8 @@ void	Engine::clear( void ) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void 	Engine::drawModel( float transX, float transY, float transZ ) {
+void	Engine::drawModel( eGameObjectType type, float transX, float transY, float transZ ) {
 	this->_ModelShader.use();
-	// float	transX = 0.0f;
-	// float	transY = -1.0f;
-	// float	transZ = 0.0f;
-	std::cout << "Drawing Model Now" << std::endl;
 	// view/projection transformations
 	glm::mat4 projection = glm::perspective(glm::radians(this->_Camera.Zoom), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
 	glm::mat4 view = this->_Camera.GetViewMatrix();
@@ -275,33 +273,66 @@ void 	Engine::drawModel( float transX, float transY, float transZ ) {
 	glm::mat4 model = glm::mat4(1.0f);
 	//										x		y		z
 	model = glm::translate(model, glm::vec3(transX, transY, transZ)); // translate it down so it's at the center of the scene
-	model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));	// it's a bit too big for our scene, so scale it down
+	if (type == PLAYER) {
+		model = glm::scale(model, glm::vec3(0.0008f, 0.0008f, 0.0008f));
+	} else {
+		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));	// it's a bit too big for our scene, so scale it down
+	}
 	//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5f, 1.0f, 0.0f));
 	this->_ModelShader.setMat4("model", model);
-	this->_TestModel.Draw(_ModelShader);
+
+	switch (type) {
+		case( SOLIDWALL ):
+			this->_SolidWall.Draw(_ModelShader);
+			break;
+		case( WALL ):
+			this->_BreakableWall.Draw(_ModelShader);
+			break;
+		case( PLAYER ):
+			this->_Player.Draw(_ModelShader);
+			break;
+	}
 }
 
-void 	Engine::drawModel2( float transX, float transY, float transZ ) {
-	this->_ModelShader.use();
-	// float	transX = 0.0f;
-	// float	transY = -1.0f;
-	// float	transZ = 0.0f;
-	std::cout << "Drawing Model Now" << std::endl;
-	// view/projection transformations
-	glm::mat4 projection = glm::perspective(glm::radians(this->_Camera.Zoom), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
-	glm::mat4 view = this->_Camera.GetViewMatrix();
-	this->_ModelShader.setMat4("projection", projection);
-	this->_ModelShader.setMat4("view", view);
+// void 	Engine::drawModel( float transX, float transY, float transZ ) {
+// 	this->_ModelShader.use();
+// 	// view/projection transformations
+// 	glm::mat4 projection = glm::perspective(glm::radians(this->_Camera.Zoom), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
+// 	glm::mat4 view = this->_Camera.GetViewMatrix();
+// 	this->_ModelShader.setMat4("projection", projection);
+// 	this->_ModelShader.setMat4("view", view);
 
-	// render the loaded model
-	glm::mat4 model = glm::mat4(1.0f);
-	//										x		y		z
-	model = glm::translate(model, glm::vec3(transX, transY, transZ)); // translate it down so it's at the center of the scene
-	model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));	// it's a bit too big for our scene, so scale it down
-	//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5f, 1.0f, 0.0f));
-	this->_ModelShader.setMat4("model", model);
-	this->_TestModel2.Draw(_ModelShader);
-}
+// 	// render the loaded model
+// 	glm::mat4 model = glm::mat4(1.0f);
+// 	//										x		y		z
+// 	model = glm::translate(model, glm::vec3(transX, transY, transZ)); // translate it down so it's at the center of the scene
+// 	model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));	// it's a bit too big for our scene, so scale it down
+// 	//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5f, 1.0f, 0.0f));
+// 	this->_ModelShader.setMat4("model", model);
+// 	this->_TestModel.Draw(_ModelShader);
+// }
+
+// void 	Engine::drawModel2( float transX, float transY, float transZ ) {
+// 	this->_ModelShader.use();
+// 	// float	transX = 0.0f;
+// 	// float	transY = -1.0f;
+// 	// float	transZ = 0.0f;
+// 	std::cout << "Drawing Model Now" << std::endl;
+// 	// view/projection transformations
+// 	glm::mat4 projection = glm::perspective(glm::radians(this->_Camera.Zoom), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
+// 	glm::mat4 view = this->_Camera.GetViewMatrix();
+// 	this->_ModelShader.setMat4("projection", projection);
+// 	this->_ModelShader.setMat4("view", view);
+
+// 	// render the loaded model
+// 	glm::mat4 model = glm::mat4(1.0f);
+// 	//										x		y		z
+// 	model = glm::translate(model, glm::vec3(transX, transY, transZ)); // translate it down so it's at the center of the scene
+// 	model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));	// it's a bit too big for our scene, so scale it down
+// 	//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5f, 1.0f, 0.0f));
+// 	this->_ModelShader.setMat4("model", model);
+// 	this->_TestModel2.Draw(_ModelShader);
+// }
 
 void	Engine::render( void ) {
 	glfwSwapBuffers(this->_Window);
@@ -340,9 +371,12 @@ int menuIndex, std::string backgroundPath) {
 }
 
 
-void		Engine::printMenu(std::vector<std::string> menuItems, int menuIndex, std::string backgroundPath) {
+void		Engine::printMenu(std::vector<std::string> menuItems, std::string menuHeading, int menuIndex, std::string backgroundPath) {
 	float		x = 20;
 	float		y = (this->_WindowHeight / 2) - (menuItems.size() * 32);
+
+	float headingLength = menuHeading.length();
+	this->print2DText(menuHeading, (this->_WindowWidth / 2) - ((headingLength / 2) * 25), y + (50 * menuItems.size() + 20), 0.5, 0.8f, 0.2f);
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
 		float length = menuItems[i].length();
 		if (i == menuIndex)

@@ -21,7 +21,7 @@ void MenuParentState::update( eControls key ){
 
 void MenuParentState::render( void ) {
 	this->_engine->clear();
-	this->_engine->printMenu(this->_menu, this->_menuIndex, "Assets/Images/main_menu_backgrond.png");
+	this->_engine->printMenu(this->_menu, this->_type, this->_menuIndex, "Assets/Images/main_menu_backgrond.png");
 	this->_engine->render();
 	std::cout << this->getType() << " render" << std::endl; // debug
 }
