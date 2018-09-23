@@ -8,7 +8,7 @@ unsigned int VBO, VAO, EBO;
 unsigned int texture1, texture2;
 
 glm::vec3 cubePositions[] = {
-  glm::vec3( 0.0f,  0.0f,  0.0f), 
+  glm::vec3( 0.48f, -0.48f,  0.0f), // same as camera offset
   glm::vec3( 2.0f,  5.0f, -15.0f), 
   glm::vec3(-1.5f, -2.2f, -2.5f),  
   glm::vec3(-3.8f, -2.0f, -12.3f),  
@@ -78,7 +78,7 @@ Engine::Engine(): _WindowWidth(800),_WindowHeight(600) {
 	this->_SoundEngine.init();
 	this->muteSound();
 	this->engineInit();
-	this->_Camera.init(glm::vec3(0.0f, 0.0f, 3.0f));
+	this->_Camera.init(glm::vec3(0.48f, -0.48f, 3.0f)); // use position of player in future
 
 	// initialising controls struct
 	this->_sControls.LEFT_KEY = GLFW_KEY_LEFT;//263;
@@ -262,6 +262,9 @@ void	Engine::clear( void ) {
 }
 
 void	Engine::drawModel( eGameObjectType type, float transX, float transY, float transZ ) {
+	transX = (transX -1) * 0.08f; //scaling
+	transY = (transY -1) * 0.08f; //scaling
+	transY = -transY; // flip about y axis
 	this->_ModelShader.use();
 	// view/projection transformations
 	glm::mat4 projection = glm::perspective(glm::radians(this->_Camera.Zoom), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
@@ -274,7 +277,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	//										x		y		z
 	model = glm::translate(model, glm::vec3(transX, transY, transZ)); // translate it down so it's at the center of the scene
 	if (type == PLAYER) {
-		model = glm::scale(model, glm::vec3(0.0008f, 0.0008f, 0.0008f));
+		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
 	} else {
 		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));	// it's a bit too big for our scene, so scale it down
 	}
@@ -289,7 +292,9 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 			this->_BreakableWall.Draw(_ModelShader);
 			break;
 		case( PLAYER ):
-			this->_Player.Draw(_ModelShader);
+			//this->_Player.Draw(_ModelShader);
+			this->_SolidWall.Draw(_ModelShader);
+			std::cout << "draw player" << std::endl;
 			break;
 	}
 }

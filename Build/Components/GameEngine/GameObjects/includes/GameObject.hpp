@@ -27,6 +27,7 @@ public:
 	std::string				modelPath;
 	std::string				spritePath;
 	Vector3d				*position;
+	Vector3d				*destination;
 	float					velocity;
 	eGameObjectState		state;
 	eGameObjectType			eType;

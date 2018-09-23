@@ -33,8 +33,7 @@ private:
 	float 			start_z;
 	float			y;
 	float			x;
-	float 			z;
-
+	float			z;
 };
 
 #endif
