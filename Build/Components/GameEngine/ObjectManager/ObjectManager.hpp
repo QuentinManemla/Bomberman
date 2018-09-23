@@ -22,12 +22,16 @@ public:
 	void	requestMove(GameObject *actor, eControls key); // returns direction // or void and calls move directly
 	int		canMove(int x, int y);
 	void	move( GameObject *actor, int vectorDifference );
-	void	checkCollision( void );
+	void	AI( GameObject *actor );
 	int		getVectorDifference(GameObject *actor);
+	float	getZStep( GameObject *actor );
+	void	placeEnemies( int level );
 
+	LevelManager				*LM;
 	Engine						*engine;
 	std::vector<GameObject *>	map;
 	GameObject					*player;
+	std::vector<GameObject *>	enemies;
 	Bomb						*bomb;
 
 protected:

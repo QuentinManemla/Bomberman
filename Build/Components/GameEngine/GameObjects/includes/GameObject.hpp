@@ -28,6 +28,7 @@ public:
 	std::string				spritePath;
 	Vector3d				*position;
 	Vector3d				*destination;
+	int						step;
 	float					velocity;
 	eGameObjectState		state;
 	eGameObjectType			eType;
