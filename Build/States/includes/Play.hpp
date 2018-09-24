@@ -25,7 +25,6 @@ private:
 	ObjectManager	*_OM;
 	Engine			*_engine;
 	std::string		_type; // debug
-	bool			_firstInit;
 	float			_positionTime;
 	float			_positionPitch;
 	float 			start_x;

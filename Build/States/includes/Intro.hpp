@@ -21,7 +21,7 @@ protected:
 private:
 	Engine			*_engine;
 	std::string		_type; // debug
-
+	
 };
 
 #endif

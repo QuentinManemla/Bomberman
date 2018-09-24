@@ -11,7 +11,7 @@ public:
 	virtual ~IState( ) {};
 
 protected:
-
+	bool		_isPlaying;
 private:
 
 };
