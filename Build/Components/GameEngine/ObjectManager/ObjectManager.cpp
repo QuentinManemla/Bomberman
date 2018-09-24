@@ -5,6 +5,8 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->LM = new LevelManager(1); // may move this codeblock to a level init function to be available on call rather than this constructor
 	this->map = this->LM->generateMap();
 	this->player = new GameObject( PLAYER, new Vector3d(2, 2, 0.1f) );
+	this->enemies.push_back(new GameObject( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
+	this->enemies.push_back(new GameObject( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
 	//this->placeEnemies( 1 ); // arbitrary int for now
 }
 
@@ -17,6 +19,8 @@ void	ObjectManager::update( eControls key, double deltaTime){
 	requestMove(this->player, key);
 
 	// ENEMY MOVE
+	AI(this->enemies[0]); // test // debug
+	AI(this->enemies[1]); // test // debug
 //	for (int i = 0; i < this->enemies.size(); i++){
 //		if (this->enemies[i]->state == ALIVE)
 //			this->engine->drawModel(PLAYER, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);
@@ -28,6 +32,8 @@ void	ObjectManager::render(void){
 	std::cout << "PLAYER POS: " << this->player->position->vX << ";" << this->player->position->vY << std::endl; // debug
 	// std::cout << "PLR TRUNC : " << trunc(this->player->position->vX) << ";" << trunc(this->player->position->vY) << std::endl; // debug
 	this->engine->drawModel(PLAYER, (this->player->position->vX), (this->player->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+	this->engine->drawModel(PLAYER, (this->enemies[0]->position->vX), (this->enemies[0]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+	this->engine->drawModel(PLAYER, (this->enemies[1]->position->vX), (this->enemies[1]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	// std::cout << "OM render()" << std::endl; // debug
 }
 
@@ -132,7 +138,13 @@ int		ObjectManager::canMove(int x, int y){
 }
 
 void	ObjectManager::AI( GameObject *actor ){
-
+	int dir = 0;
+	if (rand() % 4 == 1)
+		if ((actor->position->vX == actor->destination->vX) &&
+			(actor->position->vX == actor->destination->vX)){
+			dir = rand() % 4;
+		}
+	this->requestMove(actor, static_cast<eControls>(dir));
 	// requestMove( actor, key );
 }
 
