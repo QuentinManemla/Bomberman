@@ -69,7 +69,7 @@ class	Engine {
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
 
-		void			print2DText(std::string text, float pos_x, float pos_y, float red, float green, float blue);
+		void			print2DText(std::string text, float pos_x, float pos_y, float red, float green, float blue, float scale);
 		void			printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y, int menuIndex, std::string backgroundPath);		
 		void			printMenu(std::vector<std::string> menuItems, std::string menuHeading, int menuIndex, std::string backgroundPath);
 		int				menuHandler( eControls key, int & menuIndex, int lastIndex );
@@ -96,15 +96,6 @@ class	Engine {
 		/* Timer functions */
 		void			FPSManager();
 
-		/* Exception */
-		class GLFWInitializationError: public std::exception {
-			virtual const char* what() const throw();
-		};
-
-		class GLEWInitializationError: public std::exception {
-			virtual const char* what() const throw();
-		};
-
 		eState					state;
 		int						_WindowHeight;
 		int						_WindowWidth;
@@ -120,17 +111,45 @@ class	Engine {
 		Text					_TextEngine;
 		sControls				_sControls;
 		bool					_getKey( int key );
+
+		/*	Booleans */
 		bool					_Mute;
+		bool					_Fullscreen;
 
 		/** Shaders **/
 		Shader					_Shader;
 		Shader					_ModelShader;
 		Shader					_ShaderText;
+		Shader					_Lighting;
 
 		/** Models **/
 		Model					_SolidWall;
 		Model					_BreakableWall;
 		Model					_Player;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		/** Exception **/
+		class EngineErr : public std::exception {
+		public:
+			EngineErr( std::string line );
+			~EngineErr() _NOEXCEPT;
+		private:
+			virtual const char *what() const throw();
+			std::string _errMsg;
+	};
 };
 
 #endif // !ENGINE_HPP
