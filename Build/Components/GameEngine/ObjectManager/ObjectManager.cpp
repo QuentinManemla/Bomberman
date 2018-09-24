@@ -5,7 +5,7 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->LM = new LevelManager(1); // may move this codeblock to a level init function to be available on call rather than this constructor
 	this->map = this->LM->generateMap();
 	this->player = new GameObject( PLAYER, new Vector3d(2, 2, 0.1f) );
-	this->placeEnemies( 1 ); // arbitrary int for now
+	//this->placeEnemies( 1 ); // arbitrary int for now
 }
 
 ObjectManager::~ObjectManager( void ){
@@ -17,15 +17,15 @@ void	ObjectManager::update( eControls key, double deltaTime){
 	requestMove(this->player, key);
 
 	// ENEMY MOVE
-	for (int i = 0; i < this->enemies.size(); i++){
-		if (this->enemies[i]->state == ALIVE)
-			this->engine->drawModel(PLAYER, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);
-			//AI(this->enemies[i]);
-	}
+//	for (int i = 0; i < this->enemies.size(); i++){
+//		if (this->enemies[i]->state == ALIVE)
+//			this->engine->drawModel(PLAYER, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);
+//			//AI(this->enemies[i]);
+//	}
 }
 
 void	ObjectManager::render(void){
-	// std::cout << "PLAYER POS: " << this->player->position->vX << ";" << this->player->position->vY << std::endl; // debug
+	std::cout << "PLAYER POS: " << this->player->position->vX << ";" << this->player->position->vY << std::endl; // debug
 	// std::cout << "PLR TRUNC : " << trunc(this->player->position->vX) << ";" << trunc(this->player->position->vY) << std::endl; // debug
 	this->engine->drawModel(PLAYER, (this->player->position->vX), (this->player->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	// std::cout << "OM render()" << std::endl; // debug
@@ -88,9 +88,10 @@ void	ObjectManager::move( GameObject *actor, int vectorDifference ){
 	float move = 0;
 	switch (vectorDifference){
 		case 1:
-			move = (actor->position->vX > actor->destination->vX ? -0.1 : 0.1);
-			actor->position->vX += move;
-			actor->position->vZ = getZStep(actor);
+			move = ((trunc(actor->position->vX * 10) / 10) > trunc(actor->destination->vX * 10) / 10 ? -0.1 : 0.1);
+			//if (abs(actor->position->vX - actor->destination->vX) > 0.09)// test // debug // WORK BUT MOVE TO PRIMARY CONDITION
+				actor->position->vX += move;
+			//actor->position->vZ = getZStep(actor);
 			break;
 		case 2:
 			move = (actor->position->vY > actor->destination->vY ? -0.1 : 0.1);
