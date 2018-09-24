@@ -1,10 +1,10 @@
 #include "../includes/Play.hpp"
 
-PlayState::PlayState( Engine & engine ) : _firstInit(true){ // first init?
+PlayState::PlayState( Engine & engine ){ // first init?
 	this->_engine = &engine;
 	this->_type = "Play";
 	std::cout << "Play constructed" << std::endl;
-
+	this->_isPlaying = false;
 	start_y = 0.48f;
 	y = 0.48f;
 	x = -0.48f;
@@ -20,11 +20,8 @@ PlayState::PlayState( void ){
 }
 
 PlayState::~PlayState( void ){
-	if ( this->_positionTime ) {
-		this->_engine->_Camera.ProcessKeyboard(CAMERA_FORWARD, this->_positionTime);
-		this->_positionTime -= 0.01f;
-	}
-	std::cout << "Play destructed" << std::endl;
+	this->_engine->_Camera.init(glm::vec3(0.0f, 0.0f, 3.0f));
+	this->_engine->stopSound();
 }
 
 void PlayState::update( eControls key ){
@@ -49,6 +46,10 @@ void PlayState::drawMap( void ) {
 }
 
 void PlayState::render( void ) {
+	if (!_isPlaying) {
+		this->_engine->playSound("Assets/Audio/Bomberman-Music.wav", true);
+		this->_isPlaying = true;
+	}
 	if ( this->_positionTime < 0.11f ) {
 		this->_engine->_Camera.ProcessKeyboard(CAMERA_FORWARD, this->_positionTime);
 		this->_positionTime += 0.01f;

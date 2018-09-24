@@ -33,7 +33,7 @@ void IntroState::update( eControls key ) {
 		std::cout << "Skipping intro!" << std::endl;
 		this->_engine->state = BACK;
 	} else
-		this->_engine->print2DText("Intro", 20, 20, 0, 0, 0xff);
+		this->_engine->print2DText("Intro", 20, 20, 0, 0, 0xff, 1.0f);
 }
 
 void IntroState::render( void ) {

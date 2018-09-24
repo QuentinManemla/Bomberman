@@ -5,6 +5,7 @@
 /*	Required functions															*/
 /********************************************************************************/
 unsigned int VBO, VAO, EBO;
+unsigned int lightVAO;
 unsigned int texture1, texture2;
 
 glm::vec3 cubePositions[] = {
@@ -21,20 +22,18 @@ glm::vec3 cubePositions[] = {
 };
 
 int		Engine::held = 1;
+int		_anim = 0;
+float	_move = 0.0008f;
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	// make sure the viewport matches the new window dimensions; note that width and 
-	// height will be significantly larger than specified on retina displays.
-	glViewport(0, 0, 800, 600);
-}
-
-Engine::Engine(): _WindowWidth(800),_WindowHeight(600) {
+Engine::Engine(): _WindowWidth(1920),_WindowHeight(1080), _Fullscreen(true) {
 	std::cout << "Engine constructed" << std::endl;
-	//GLFW
-	if (!glfwInit())
-		throw (GLFWInitializationError());
+	/* GLFW Initialization */
+	if (!glfwInit()) {
+		std::string errMsg = "[Error: Code 00 - (Render Engine)] : GLFW Failed to Initialize, Please Check your Includes";
+		throw Engine::EngineErr(errMsg);
+	}
 
+	// GLFW Window Hints
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -42,41 +41,30 @@ Engine::Engine(): _WindowWidth(800),_WindowHeight(600) {
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	#endif
 
-	std::cout << "GLFW Initialized Successfully" << std::endl;
 	this->_Monitor = glfwGetPrimaryMonitor();
-
 	this->_Mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 	this->_Window = glfwCreateWindow(this->_WindowWidth, this->_WindowHeight, "Bomberman", NULL, NULL);
-
-	if( this->_Window == NULL ){ // Exception
-		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
-		glfwTerminate();
+	if( this->_Window == NULL ){
+		std::string errMsg = "[Error: Code 01 - (Render Engine)] : Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version";
+		throw Engine::EngineErr(errMsg);
 	}
 	glfwMakeContextCurrent(this->_Window);
-	glfwSetFramebufferSizeCallback(this->_Window, framebuffer_size_callback);
-	// glewExperimental = GL_TRUE;
-	// glewInit();
-
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		std::cout << "Failed to initialize GLAD" << std::endl;
+		std::string errMsg = "[Error: Code 01 - (Render Engine)] : GLFW Failed to Initialize, Please Check your Includes";
+		throw Engine::EngineErr(errMsg);
 	}
 
+	/** Set OpenGL & GLFW options **/
 	glfwSetInputMode(this->_Window, GLFW_STICKY_KEYS, GL_TRUE);
-
-	// Set OpenGL options
-	//glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
-	std::cout << glGetError() << std::endl; // returns 0 (no error)
-
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	std::cout << glGetError() << std::endl; // returns 0 (no error)
 
+	/* Initialize Sound, Text & Camera Engine */
 	this->_TextEngine.init("Assets/Fonts/neon_pixel.ttf", 30, this->_WindowWidth, this->_WindowHeight);
-
-	std::cout << "GL Version: " <<  (char *)glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 	this->_SoundEngine.init();
 	this->muteSound();
+	this->setFullScreen();
 	this->engineInit();
 	this->_Camera.init(glm::vec3(0.0f, 0.0f, 3.0f));
 
@@ -99,35 +87,35 @@ Engine::~Engine() {
 
 void	Engine::triangle( void ) {
 	float vertices[] = {
-        // positions          // texture coords
-         0.5f,  0.5f, 0.0f,   0.5f, 1.0f, // top right
-         0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // bottom right
-        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, // bottom left
-        -0.5f,  0.5f, 0.0f,   0.0f, 1.0f  // top left 
-    };
-    unsigned int indices[] = {
-        0, 1, 3, // first triangle
-        1, 2, 3  // second triangle
-    };
+		// positions          // texture coords
+		 0.5f,  0.5f, 0.0f,   0.5f, 1.0f, // top right
+		 0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // bottom right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, // bottom left
+		-0.5f,  0.5f, 0.0f,   0.0f, 1.0f  // top left 
+	};
+	unsigned int indices[] = {
+		0, 1, 3, // first triangle
+		1, 2, 3  // second triangle
+	};
 
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
 
-    glBindVertexArray(VAO);
+	glBindVertexArray(VAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    // texture coord attribute
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// texture coord attribute
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
 
 	// load and create a texture 
 	// -------------------------
@@ -153,29 +141,6 @@ void	Engine::triangle( void ) {
 		std::cout << "Failed to load texture" << std::endl;
 	}
 	stbi_image_free(data);
-	// // texture 2
-	// // ---------
-	// glGenTextures(1, &texture2);
-	// glBindTexture(GL_TEXTURE_2D, texture2);
-	// // set the texture wrapping parameters
-	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
-	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	// // set texture filtering parameters
-	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// // load image, create texture and generate mipmaps
-	// data = stbi_load("Assets/Textures/face.png", &width, &height, &nrChannels, 0);
-	// if (data)
-	// {
-	// 	// note that the awesomeface.png has transparency and thus an alpha channel, so make sure to tell OpenGL the data type is of GL_RGBA
-	// 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	// 	glGenerateMipmap(GL_TEXTURE_2D);
-	// }
-	// else
-	// {
-	// 	std::cout << "Failed to load texture" << std::endl;
-	// }
-	// stbi_image_free(data);
 
 	this->_Shader.use(); 
 	this->_Shader.setInt("texture1", 0);
@@ -187,20 +152,6 @@ void	Engine::draw( void ) {
 	glBindTexture(GL_TEXTURE_2D, texture1);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, texture2);
-	
-	//create transformations
-	// glm::mat4 transform  = glm::mat4(1.0f);
-	// transform = glm::rotate(transform, glm::radians(90.0f), glm::vec3(0.0, 0.0f, 1.0f));
-	// transform = glm::scale(transform, glm::vec3(0.5, 0.5, 0.5)); 
-
-	// glm::mat4 transform = glm::mat4(1.0f);
-	// transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-	// transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
-	// transform = glm::scale(transform, glm::vec3(0.5, 0.5, 0.5)); 
-	
-	// glm::vec4 result = transform * glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-	// printf("%f, %f, %f\n", result.x, result.y, result.z);
-	
 	this->_Shader.use();
 
 	// create transformations
@@ -209,14 +160,12 @@ void	Engine::draw( void ) {
 	glm::mat4 projection = glm::mat4(1.0f);
 
 	model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
-	//view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 	projection = glm::perspective(glm::radians(45.0f), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
 	
 	float radius = 10.0f;
 	float camX = sin(glfwGetTime()) * radius;
 	float camZ = cos(glfwGetTime()) * radius;
 	view = this->_Camera.GetViewMatrix();
-	// retrieve the matrix uniform locations
 	unsigned int modelLoc = glGetUniformLocation(this->_Shader.ID, "model");
 	unsigned int viewLoc  = glGetUniformLocation(this->_Shader.ID, "view");
 	
@@ -227,8 +176,6 @@ void	Engine::draw( void ) {
 	// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
 	this->_Shader.setMat4("projection", projection);
 
-	// unsigned int transformLoc = glGetUniformLocation(this->_Shader.ID, "transform");
-	// glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 
 	glBindVertexArray(VAO);
 	for(unsigned int i = 0; i < 10; i++) {
@@ -247,9 +194,11 @@ void	Engine::draw( void ) {
 /********************************************************************************/
 
 void	Engine::engineInit( void ) {
+	/* Shader Initialization */
 	this->_Shader.init("Assets/Shaders/Textures/shader.vs", "Assets/Shaders/Textures/shader.fs");
 	this->_ModelShader.init("Assets/Shaders/Model/shader.vs", "Assets/Shaders/Model/shader.fs");
-	
+	this->_Lighting.init("Assets/Shaders/Lighting/shader.vs", "Assets/Shaders/Lighting/shader.fs");
+
 	/* Model Initialization */
 	this->_SolidWall.init("Assets/Models/Crate/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_BreakableWall.init("Assets/Models/Crate-Break/89e64c1cd44944659f70b75891693405.blend.obj");
@@ -272,11 +221,12 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	// render the loaded model
 	glm::mat4 model = glm::mat4(1.0f);
 	//										x		y		z
-	model = glm::translate(model, glm::vec3(transX, transY, transZ)); // translate it down so it's at the center of the scene
 	if (type == PLAYER) {
+		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.0008f, 0.0008f, 0.0008f));
 	} else {
-		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));	// it's a bit too big for our scene, so scale it down
+		model = glm::translate(model, glm::vec3(transX, transY, transZ));
+		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
 	}
 	//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5f, 1.0f, 0.0f));
 	this->_ModelShader.setMat4("model", model);
@@ -294,45 +244,6 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	}
 }
 
-// void 	Engine::drawModel( float transX, float transY, float transZ ) {
-// 	this->_ModelShader.use();
-// 	// view/projection transformations
-// 	glm::mat4 projection = glm::perspective(glm::radians(this->_Camera.Zoom), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
-// 	glm::mat4 view = this->_Camera.GetViewMatrix();
-// 	this->_ModelShader.setMat4("projection", projection);
-// 	this->_ModelShader.setMat4("view", view);
-
-// 	// render the loaded model
-// 	glm::mat4 model = glm::mat4(1.0f);
-// 	//										x		y		z
-// 	model = glm::translate(model, glm::vec3(transX, transY, transZ)); // translate it down so it's at the center of the scene
-// 	model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));	// it's a bit too big for our scene, so scale it down
-// 	//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5f, 1.0f, 0.0f));
-// 	this->_ModelShader.setMat4("model", model);
-// 	this->_TestModel.Draw(_ModelShader);
-// }
-
-// void 	Engine::drawModel2( float transX, float transY, float transZ ) {
-// 	this->_ModelShader.use();
-// 	// float	transX = 0.0f;
-// 	// float	transY = -1.0f;
-// 	// float	transZ = 0.0f;
-// 	std::cout << "Drawing Model Now" << std::endl;
-// 	// view/projection transformations
-// 	glm::mat4 projection = glm::perspective(glm::radians(this->_Camera.Zoom), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
-// 	glm::mat4 view = this->_Camera.GetViewMatrix();
-// 	this->_ModelShader.setMat4("projection", projection);
-// 	this->_ModelShader.setMat4("view", view);
-
-// 	// render the loaded model
-// 	glm::mat4 model = glm::mat4(1.0f);
-// 	//										x		y		z
-// 	model = glm::translate(model, glm::vec3(transX, transY, transZ)); // translate it down so it's at the center of the scene
-// 	model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));	// it's a bit too big for our scene, so scale it down
-// 	//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5f, 1.0f, 0.0f));
-// 	this->_ModelShader.setMat4("model", model);
-// 	this->_TestModel2.Draw(_ModelShader);
-// }
 
 void	Engine::render( void ) {
 	glfwSwapBuffers(this->_Window);
@@ -356,8 +267,8 @@ void		Engine::muteSound( void ) {
 /*	Text and Menu Rendering Function											*/
 /********************************************************************************/
 
-void		Engine::print2DText(std::string text, float pos_x, float pos_y, float red, float green, float blue) {
-	this->_TextEngine.RenderText(text, pos_x, pos_y, 1.0f, glm::vec3(red, green, blue));
+void		Engine::print2DText(std::string text, float pos_x, float pos_y, float red, float green, float blue, float scale) {
+	this->_TextEngine.RenderText(text, pos_x, pos_y, scale , glm::vec3(red, green, blue));
 }
 
 void		Engine::printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y,
@@ -365,7 +276,7 @@ int menuIndex, std::string backgroundPath) {
 	float	x = 20;
 	float 	y = 20;
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
-		this->print2DText(menuItems[i], x, y, 0.3, 0.7f, 0.9f);
+		this->print2DText(menuItems[i], x, y, 0.3, 0.7f, 0.9f, 1.0f);
 		y += 50;
 	}
 }
@@ -375,14 +286,16 @@ void		Engine::printMenu(std::vector<std::string> menuItems, std::string menuHead
 	float		x = 20;
 	float		y = (this->_WindowHeight / 2) - (menuItems.size() * 32);
 
-	float headingLength = menuHeading.length();
-	this->print2DText(menuHeading, (this->_WindowWidth / 2) - ((headingLength / 2) * 25), y + (50 * menuItems.size() + 20), 0.5, 0.8f, 0.2f);
+	/* Render Menu Header Text */
+	float headingLength = menuHeading.length() * 1.5;
+	this->print2DText(menuHeading, (this->_WindowWidth / 2) - ((headingLength / 2) * 25), y + (50 * menuItems.size() + 20), 0.5, 0.8f, 0.2f, 1.5f);
+
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
 		float length = menuItems[i].length();
 		if (i == menuIndex)
-			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 25), y, 0.5, 0.8f, 0.2f);
+			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 25), y, 0.5, 0.8f, 0.2f, 1.0f);
 		else
-			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 25), y, 0.3, 0.7f, 0.9f);
+			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 25), y, 0.3, 0.7f, 0.9f, 1.0f);
 		y += 50;
 	}
 }
@@ -404,6 +317,7 @@ int			Engine::menuHandler( eControls key, int & menuIndex, int lastIndex ){
 			this->held = 1;
 			break;
 		case ENTER:
+			this->playSound("Assets/Audio/Enter_Key.wav", false);
 			if (!(this->held))
 				return (1);
 			this->held = 1;
@@ -460,17 +374,23 @@ bool		Engine::_getKey( int key ) {
 /********************************************************************************************/
 
 void		Engine::setFullScreen( void ) {
-	glfwSetWindowMonitor( this->_Window, this->_Monitor, 0, 0, this->_Mode->width, this->_Mode->height, 0 );
+	glfwSetWindowMonitor( this->_Window, this->_Monitor, 0, 0, this->_WindowWidth, this->_WindowHeight, 0 );
+	this->_Fullscreen = true;
 }
 
 void		Engine::setWindowed( void ) {
-	glfwSetWindowMonitor( this->_Window, NULL , 0, 0, this->_Mode->width, this->_Mode->height, 0 );
+	glfwSetWindowMonitor( this->_Window, NULL , 0, 0, this->_WindowWidth, this->_WindowHeight, 0 );
+	this->_Fullscreen = false;
 }
 
 void		Engine::setResolution( int width, int height) {
 	this->_WindowHeight = height;
 	this->_WindowWidth = width;
-	glfwSetWindowMonitor( this->_Window, this->_Monitor, 0, 0, this->_WindowWidth, this->_WindowHeight, 0 );
+	if (!this->_Fullscreen)
+		glfwSetWindowMonitor( this->_Window, NULL, 0, 0, this->_WindowWidth, this->_WindowHeight, 0 );
+	else
+		glfwSetWindowMonitor( this->_Window, this->_Monitor, 0, 0, this->_WindowWidth, this->_WindowHeight, 0 );
+	this->_TextEngine.init("Assets/Fonts/neon_pixel.ttf", 30, this->_WindowWidth, this->_WindowHeight);
 }
 /********************************************************************************/
 /*	FPS management functions													*/
@@ -513,10 +433,12 @@ void		Engine::FPSManager( void ){
 /*	Exception handling															*/
 /********************************************************************************/
 
-const char* Engine::GLFWInitializationError::what() const throw() {
-	return ("[Error (Code: 00)] Failed to initialize GLFW");
+Engine::EngineErr::EngineErr( std::string errMsg ) {
+	_errMsg = errMsg;
 }
 
-const char* Engine::GLEWInitializationError::what() const throw() {
-	return ("[Error (Code: 00)] Failed to initialize GLEW");
+Engine::EngineErr::~EngineErr() throw() { return ;}
+
+const char*Engine::EngineErr::what() const throw() { 
+	return _errMsg.c_str();
 }
