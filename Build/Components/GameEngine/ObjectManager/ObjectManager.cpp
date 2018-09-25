@@ -307,6 +307,13 @@ void	ObjectManager::explode( void ){
 	}
 	std::cout << "pre exit" << std::endl;
 
+	// RENDER EXPLOSION // NEEDS TO BE MOVED AND PROLONGED
+	for (int i = 0; i < this->bomb->blast.size(); i++){
+		std::cout << "splode" << std::endl;
+		this->engine->drawModel(WALL, (this->bomb->blast[i].first), (this->bomb->blast[i].second), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+	}
+	//exit(-1); // debug
+
 	delete this->bomb; // test
 	this->bomb = NULL;
 	std::cout << "boom" << std::endl;
