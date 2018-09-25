@@ -65,26 +65,6 @@ void	ObjectManager::requestMove(GameObject *actor, eControls key){
 	actor->position->vY = static_cast<float>(truncY); // recentre object and mitigate precision issues
 
 	this->getForward(key, &truncX, &truncY);
-/*
-	switch (key){
-		case LEFT:
-			truncX -= 1;
-			std::cout << "LEFT" << std::endl;
-			break;
-		case UP:
-			truncY -= 1;
-			std::cout << "UP" << std::endl;
-			break;
-		case RIGHT:
-			truncX += 1;
-			std::cout << "RIGHT" << std::endl;
-			break;
-		case DOWN:
-			truncY += 1;
-			std::cout << "DOWN" << std::endl;
-			break;
-	}
-*/
 
 	// IF MOVE ALLOWED, SET NEW DESTINATION
 	if (this->isOpen(truncX, truncY)){
@@ -140,12 +120,6 @@ int		ObjectManager::isOpen(int x, int y){
 }
 
 void	ObjectManager::requestEnemyMove( GameObject *actor ){
-	//	if pos = dest
-	//		if current dirForward == open
-	//			keep current dir
-	//		else
-	//			change dir until dirForward == open && dir != oldDir
-	//		if none found, return;
 	int x = actor->position->vX;
 	int y = actor->position->vY;
 
@@ -156,29 +130,8 @@ void	ObjectManager::requestEnemyMove( GameObject *actor ){
 	if (isOpen(forwardX, forwardY) == 0)
 		getOpenDirection(actor);
 	else if (actor->stuck != 1){
-		//if (this->isAtDestination(actor)){
-			//this->getForward(actor->currentDirection, &x, &y);
-			//if (this->isOpen(x, y)){
-				this->requestMove(actor, actor->currentDirection);
-		//	}
-		//	else {
-		//		actor->currentDirection = static_cast<eControls>(static_cast<int>(actor->currentDirection) + 2 % 4);
-	//			this->requestMove(actor, actor->currentDirection);
-//			}
-//		}
+		this->requestMove(actor, actor->currentDirection);
 	}
-
-
-/*
-	int dir = 0;
-	if (rand() % 4 == 1)
-		if ((actor->position->vX == actor->destination->vX) &&
-			(actor->position->vX == actor->destination->vX)){
-			dir = rand() % 4;
-		}
-	this->requestMove(actor, static_cast<eControls>(dir));
-	// requestMove( actor, key );
-	*/
 }
 
 int		ObjectManager::getVectorDifference(GameObject *actor){
@@ -200,7 +153,6 @@ void	ObjectManager::placeEnemies( int level ){
 			if ((this->isOpen(x, y) == 0)){
 				this->enemies.push_back(new GameObject( ENEMY, new Vector3d(x, y, 0.1f) ));
 				std::cout << "placed at " << x << ";" << y << std::endl; // debug
-				// exit(-1); // debug
 				return; // test // debug// only returning here to limit enemies to 1 for now
 			}
 		}
