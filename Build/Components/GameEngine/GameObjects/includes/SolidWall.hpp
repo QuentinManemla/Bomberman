@@ -2,6 +2,7 @@
 # define SOLIDWALL_HPP
 
 # include "GameObject.hpp"
+# include "../../Vector3d/Vector3d.hpp"
 
 class SolidWall : public GameObject{
 public:

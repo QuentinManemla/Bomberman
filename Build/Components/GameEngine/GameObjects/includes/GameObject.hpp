@@ -6,6 +6,12 @@
 
 # include "../../enums/enumGameObjectState.hpp"
 # include "../../enums/enumGameObjectType.hpp"
+//# include "Enemy.hpp"
+//# include "Door.hpp"
+//# include "Bomb.hpp"
+//# include "Player.hpp"
+//# include "SolidWall.hpp"
+//# include "Wall.hpp"
 # include "../../Vector3d/Vector3d.hpp"
 # include "../../../Engine/includes/Engine.hpp"
 
@@ -33,10 +39,11 @@ public:
 	eGameObjectState		state;
 	eGameObjectType			eType;
 	std::string				strType;
-	float					currentDirection;
+	eControls				currentDirection;
 	int						hitPoints;
 	bool					mortal;
 	Model					_model;
+	int						stuck;
 	//Powerup					*powerup; // think about how bombs are ordered when powerup is active
 
 protected:

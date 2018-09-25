@@ -4,6 +4,7 @@
 # include <string>
 
 # include "Bomb.hpp"
+# include "../../Vector3d/Vector3d.hpp"
 
 class Bomb {
 public:
