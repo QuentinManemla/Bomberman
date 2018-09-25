@@ -15,7 +15,7 @@ PlayState::PlayState( void ){
 }
 
 PlayState::~PlayState( void ){
-	this->_engine->_Camera.init(glm::vec3(0.0f, 0.0f, 3.0f));
+	this->_engine->_Camera.init(glm::vec3(0.48f, -0.48f, 3.0f));
 	this->_engine->stopSound();
 }
 

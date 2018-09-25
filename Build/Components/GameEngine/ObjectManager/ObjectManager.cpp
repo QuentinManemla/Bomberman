@@ -6,7 +6,7 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->map = this->LM->generateMap();
 	this->player = new Player( PLAYER, new Vector3d(2, 2, 0.1f) );
 	this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
-	//this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
+	this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
 	//this->placeEnemies( 1 ); // arbitrary int for now
 }
 
@@ -21,15 +21,12 @@ void	ObjectManager::update( eControls key, double deltaTime){
 	// ENEMY MOVE
 	for (int i = 0; i < this->enemies.size(); i++){
 		if (this->enemies[i]->state == ALIVE)
-			requestEnemyMove(this->enemies[i]); // test // debug
+			requestEnemyMove(this->enemies[i]);
 	}
 }
 
 void	ObjectManager::render(void){
 	std::cout << "PLAYER POS: " << this->player->position->vX << ";" << this->player->position->vY << std::endl; // debug
-	std::cout << "ENEMY POS: " << this->enemies[0]->position->vX << ";" << this->player->position->vY << std::endl; // debug
-	std::cout << "ENEMY DES: " << this->enemies[0]->destination->vX << ";" << this->player->destination->vY << std::endl; // debug
-	std::cout << "ENEMY DIR: " << this->enemies[0]->currentDirection << std::endl; // debug
 	// std::cout << "PLR TRUNC : " << trunc(this->player->position->vX) << ";" << trunc(this->player->position->vY) << std::endl; // debug
 	this->engine->drawModel(PLAYER, (this->player->position->vX), (this->player->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	for (int i = 0; i < this->enemies.size(); i++){
@@ -38,7 +35,6 @@ void	ObjectManager::render(void){
 	}
 	// std::cout << "OM render()" << std::endl; // debug
 }
-
 
 void	ObjectManager::requestMove(GameObject *actor, eControls key){
 	// OTHER WAYS TO CAST
