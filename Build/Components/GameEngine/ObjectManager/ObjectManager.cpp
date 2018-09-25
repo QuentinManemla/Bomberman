@@ -7,7 +7,12 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->player = new Player( PLAYER, new Vector3d(2, 2, 0.1f) );
 	this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
 	this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
+	this->bomb = NULL;
 	//this->placeEnemies( 1 ); // arbitrary int for now
+
+	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
+	this->fuseTime = 3.0f;
+	this->bombRadius = 1;
 }
 
 ObjectManager::~ObjectManager( void ){
@@ -23,6 +28,15 @@ void	ObjectManager::update( eControls key, double deltaTime){
 		if (this->enemies[i]->state == ALIVE)
 			requestEnemyMove(this->enemies[i]);
 	}
+
+	// INCREMENT BOMB FUSE
+	if (this->bomb != NULL){
+		if (this->bomb->state == ALIVE){
+			this->bomb->fuseTime -= 0.016f; // to be replaced with deltaTime
+			if (this->bomb->fuseTime < 0)
+				this->explode();
+		}
+	}
 }
 
 void	ObjectManager::render(void){
@@ -33,7 +47,8 @@ void	ObjectManager::render(void){
 		if (this->enemies[i]->state == ALIVE)
 		this->engine->drawModel(PLAYER, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	}
-	// std::cout << "OM render()" << std::endl; // debug
+	if (this->bomb != NULL)
+		this->engine->drawModel(PLAYER, (this->bomb->position->vX), (this->bomb->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 }
 
 void	ObjectManager::requestMove(GameObject *actor, eControls key){
@@ -115,6 +130,19 @@ int		ObjectManager::isOpen(int x, int y){
 				return (1);
 	}
 	return (1);
+}
+
+int		ObjectManager::isMortal(int x, int y){
+	//if (x == this->player->destination->vX && y == this->player->destination->vY) // debug
+	//	return (0);
+	for (int i = 0; i < this->map.size(); i++){
+		if (this->map[i]->position->vX == x && this->map[i]->position->vY == y)
+			if (this->map[i]->mortal == 1)
+				return (1);
+			else
+				return (0);
+	}
+	return (0);
 }
 
 void	ObjectManager::requestEnemyMove( GameObject *actor ){
@@ -219,4 +247,76 @@ void	ObjectManager::getOpenDirection( GameObject *actor ){
 		start = start++ % 4;
 	}
 	actor->stuck = 1;
+}
+
+void	ObjectManager::placeBomb( void ){
+	// check for bomb related powerup and then change bomb params accordingly
+	if (this->bomb == NULL)
+		this->bomb = new Bomb(BOMB, new Vector3d(this->player->destination->vX, this->player->destination->vY, this->player->destination->vZ), this->fuseTime); // params subject to powerup
+}
+
+void	ObjectManager::explode( void ){
+	// check if bomb related powerup - adjust values as necessary
+	// push values to bomb positional array
+	// check open dirs for bomb
+	// extend in open dirs as far as radius including bomb pos
+	// check if collision with any mortal object
+	// clean up the carnage
+	int	dir = -1;
+	int	index = -1;
+	int	x = static_cast<int>(this->bomb->position->vX);
+	int	y = static_cast<int>(this->bomb->position->vY);
+
+	int forwardX = x;
+	int forwardY = y;
+
+	this->bomb->state == DYING;
+
+	// EXTEND BLAST
+	this->bomb->blast.push_back( std::pair<int, int>(x, y));
+	while (++dir < 4){
+		//std::cout << "dir: " << dir << std::endl; // debug dir
+		while (++index < this->bombRadius){
+			//std::cout << "index: " << index << std::endl; // debug index
+			this->getForward(static_cast<eControls>(dir), &forwardX, &forwardY);
+			if (!(this->isOpen(forwardX, forwardY)))
+				if (this->isMortal(forwardX, forwardY) == 0) // issue with mortal
+					break;
+			this->bomb->blast.push_back( std::pair<int, int>(forwardX, forwardY));
+		}
+		index = -1;
+		forwardX = x;
+		forwardY = y;
+	}
+
+	// debug print bomb blast
+	for (int i = 0; i < this->bomb->blast.size(); i++){
+		std::cout << "blast coord: " << this->bomb->blast[i].first << ";" << this->bomb->blast[i].second << std::endl;
+	}
+	//exit(-1); // debug
+
+	// CHECK BLAST COLLISION
+	// for loop through blast pairs
+	// compare against boxes
+	int i = 0;
+	int j = 0;
+	std::cout << "test 1" << std::endl;
+	for (j = 0; j < this->map.size(); j++){
+		std::cout << "test 2 for blast blast" << std::endl;
+		for (i = 0; i < this->bomb->blast.size(); i++){
+			std::cout << "test 3 for" << std::endl;
+			if (this->map[j]->position->vX == this->bomb->blast[i].first && this->map[j]->position->vY == this->bomb->blast[i].second && this->map[j]->state == ALIVE && this->map[j]->mortal == 1){
+				std::cout << "dead coord: " << this->map[j]->position->vX << ";" << this->map[j]->position->vY << std::endl; // debug
+				this->map[j]->state = DEAD;
+			}
+		}
+		//i = 0; not needed?
+	}
+	std::cout << "pre exit" << std::endl;
+	//exit(-1); // debug
+
+
+	delete this->bomb; // test
+	this->bomb = NULL;
+	std::cout << "boom" << std::endl;
 }
