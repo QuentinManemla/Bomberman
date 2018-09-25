@@ -45,7 +45,7 @@ void	ObjectManager::render(void){
 	this->engine->drawModel(PLAYER, (this->player->position->vX), (this->player->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	for (int i = 0; i < this->enemies.size(); i++){
 		if (this->enemies[i]->state == ALIVE)
-		this->engine->drawModel(PLAYER, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+			this->engine->drawModel(PLAYER, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	}
 	if (this->bomb != NULL)
 		this->engine->drawModel(PLAYER, (this->bomb->position->vX), (this->bomb->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
@@ -120,8 +120,9 @@ float	ObjectManager::getZStep( GameObject *actor){
 }
 
 int		ObjectManager::isOpen(int x, int y){
-	//if (x == this->player->destination->vX && y == this->player->destination->vY) // debug
-	//	return (0);
+	if (this->bomb != NULL)
+		if (x == this->bomb->position->vX && y == this->bomb->position->vY) // debug
+			return (0);
 	for (int i = 0; i < this->map.size(); i++){
 		if (this->map[i]->position->vX == x && this->map[i]->position->vY == y)
 			if (this->map[i]->state == ALIVE)
@@ -298,19 +299,23 @@ void	ObjectManager::explode( void ){
 	// CHECK BLAST COLLISION
 	// for loop through blast pairs
 	// compare against boxes
-	int i = 0;
-	int j = 0;
-	std::cout << "test 1" << std::endl;
-	for (j = 0; j < this->map.size(); j++){
-		std::cout << "test 2 for blast blast" << std::endl;
-		for (i = 0; i < this->bomb->blast.size(); i++){
-			std::cout << "test 3 for" << std::endl;
+	//int i = 0;
+	//int j = 0;
+	for (int j = 0; j < this->map.size(); j++){
+		for (int i = 0; i < this->bomb->blast.size(); i++){
 			if (this->map[j]->position->vX == this->bomb->blast[i].first && this->map[j]->position->vY == this->bomb->blast[i].second && this->map[j]->state == ALIVE && this->map[j]->mortal == 1){
-				std::cout << "dead coord: " << this->map[j]->position->vX << ";" << this->map[j]->position->vY << std::endl; // debug
+				//std::cout << "dead coord: " << this->map[j]->position->vX << ";" << this->map[j]->position->vY << std::endl; // debug
 				this->map[j]->state = DEAD;
 			}
 		}
 		//i = 0; not needed?
+	}
+	for (int j = 0; j < this->enemies.size(); j++){
+		for (int i = 0; i < this->bomb->blast.size(); i++){
+			if (this->enemies[j]->destination->vX == this->bomb->blast[i].first && this->enemies[j]->destination->vY == this->bomb->blast[i].second && this->enemies[j]->state == ALIVE){
+				this->enemies[j]->state = DEAD;
+			}
+		}
 	}
 	std::cout << "pre exit" << std::endl;
 	//exit(-1); // debug
