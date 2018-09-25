@@ -105,6 +105,8 @@ float	ObjectManager::getZStep( GameObject *actor){
 }
 
 int		ObjectManager::isOpen(int x, int y){
+	if (x == this->player->destination->vX && y == this->player->destination->vY) // debug
+		return (0);
 	for (int i = 0; i < this->map.size(); i++){
 		if (this->map[i]->position->vX == x && this->map[i]->position->vY == y)
 			if (this->map[i]->state == ALIVE)
