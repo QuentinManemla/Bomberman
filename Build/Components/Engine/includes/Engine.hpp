@@ -93,8 +93,9 @@ class	Engine {
 		void			setResolution( int width, int height);
 
 
-		/* Timer functions */
-		void			FPSManager();
+		/** Timing **/
+		void					FPSManager();
+		float					_deltaTime;
 
 		eState					state;
 		int						_WindowHeight;
@@ -126,13 +127,6 @@ class	Engine {
 		Model					_SolidWall;
 		Model					_BreakableWall;
 		Model					_Player;
-
-
-
-
-
-
-
 
 
 
