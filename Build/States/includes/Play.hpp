@@ -2,8 +2,13 @@
 # define PLAY_HPP
 
 # include <iostream>
+# include <ctime>
+# include <vector>
+# include <numeric>
+# include <chrono>
 # include "IState.hpp"
 # include "../../Components/GameEngine/ObjectManager/ObjectManager.hpp"
+# include "../../Components/GameEngine/GUIManager/GUIManager.hpp"
 
 class PlayState : public IState {
 public:
@@ -23,8 +28,14 @@ protected:
 
 private:
 	ObjectManager	*_OM;
+	GUIManager		*_GM;
 	Engine			*_engine;
 	std::string		_type; // debug
+
+	std::chrono::steady_clock::time_point begin;
+	int				_elapsedSec;
+	int 			_remainingTime;
+
 	float			_positionTime;
 	float			_positionPitch;
 	float 			start_x;

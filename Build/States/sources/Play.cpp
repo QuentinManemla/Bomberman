@@ -4,10 +4,14 @@ PlayState::PlayState( Engine & engine ){ // first init?
 	this->_engine = &engine;
 	this->_type = "Play";
 	std::cout << "Play constructed" << std::endl;
+
 	_positionTime = 0.0f;
 	_positionPitch = 0.0f;
+
+	this->begin = std::chrono::steady_clock::now();
 	this->_engine->triangle();
 	this->_OM = new ObjectManager( engine );
+	this->_GM = new GUIManager( engine );
 }
 
 PlayState::PlayState( void ){
@@ -15,11 +19,17 @@ PlayState::PlayState( void ){
 }
 
 PlayState::~PlayState( void ){
-	this->_engine->_Camera.init(glm::vec3(0.0f, 0.0f, 3.0f));
+	this->_engine->_Camera.init(glm::vec3(0.0f, 0.0f, 4.0f));
 	this->_engine->stopSound();
 }
 
 void PlayState::update( eControls key ){
+	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+	this->_elapsedSec = std::chrono::duration_cast<std::chrono::seconds>(end - this->begin).count();
+	this->_remainingTime = this->_OM->LM->duration - this->_elapsedSec;
+
+	std::cout << "TIME ELAPSED: " << this->_elapsedSec << std::endl;
 	static	int held = 1; // set to 1 initially to avoid accidental selection on state switch // debug // test
 	std::cout << "Play update" << std::endl;
 	if (key == ESCAPE){
@@ -31,6 +41,7 @@ void PlayState::update( eControls key ){
 		held = 0;
 	}
 	this->_OM->update(key, 0.1f);
+	this->_GM->update(this->_OM->player, this->_remainingTime);
 }
 
 void PlayState::drawMap( void ) { // needs to move to render engine
@@ -57,6 +68,7 @@ void PlayState::render( void ) {
 	this->drawMap(); // move to engine
 	this->_engine->draw(); //rename
 	this->_OM->render();
+	this->_GM->render();
 	this->_engine->render();
 	std::cout << "Play render" << std::endl;
 }

@@ -25,6 +25,7 @@ public:
 	void						debugPrintMap( void ); // debug // test
 
 	static int					level;
+	int							duration;
 	static int					enemies;
 	static int					walls;
 	int							mapWidth;

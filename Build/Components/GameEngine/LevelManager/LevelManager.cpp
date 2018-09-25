@@ -10,6 +10,19 @@ int LevelManager::enemies = 0;
 LevelManager::LevelManager( int level ){
 	srand(time(NULL));
 	level = level;
+
+	switch(level) {
+		case(1):
+			this->duration = 200;
+			break;
+		case(2):
+			this->duration = 400;
+			break;
+		case(3):
+			this->duration = 600;
+			break;
+	}
+
 	this->mapWidth = 13; // must be odd between 7 and 31
 	this->mapHeight = 13; // must be odd between 7 and 31
 	assert(this->mapWidth >= 7 && this->mapWidth <= 31 && this->mapHeight % 2 != 0);

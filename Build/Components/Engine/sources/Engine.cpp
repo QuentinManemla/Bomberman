@@ -25,7 +25,7 @@ int		Engine::held = 1;
 int		_anim = 0;
 float	_move = 0.0008f;
 
-Engine::Engine(): _WindowWidth(1920),_WindowHeight(1080), _Fullscreen(true) {
+Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _deltaTime(0.0f) {
 	std::cout << "Engine constructed" << std::endl;
 	/* GLFW Initialization */
 	if (!glfwInit()) {
@@ -64,9 +64,9 @@ Engine::Engine(): _WindowWidth(1920),_WindowHeight(1080), _Fullscreen(true) {
 	this->_TextEngine.init("Assets/Fonts/neon_pixel.ttf", 30, this->_WindowWidth, this->_WindowHeight);
 	this->_SoundEngine.init();
 	this->muteSound();
-	this->setFullScreen();
+	//this->setFullScreen();
 	this->engineInit();
-	this->_Camera.init(glm::vec3(0.48f, -0.48f, 3.0f)); // use position of player in future
+	this->_Camera.init(glm::vec3(0.48f, -0.48f, 3.5f)); // use position of player in future
 
 	// initialising controls struct
 	this->_sControls.LEFT_KEY = GLFW_KEY_LEFT;//263;
@@ -403,7 +403,6 @@ void		Engine::setResolution( int width, int height) {
 
 void		Engine::FPSManager( void ){
 	static int				index = 0;
-	double					deltaTime = 0;
 	static double			frames[100]; // set samples
 	double					averageTime = 0;
 	static int				samplesFull = 0;
@@ -411,8 +410,8 @@ void		Engine::FPSManager( void ){
 	double					currentTime = 0;
 
 	currentTime = glfwGetTime();
-	deltaTime = currentTime - prevTime;
-	frames[index++] = deltaTime;
+	this->_deltaTime = currentTime - prevTime;
+	frames[index++] = this->_deltaTime;
 
 	if (index == 100) {
 		samplesFull = 1;

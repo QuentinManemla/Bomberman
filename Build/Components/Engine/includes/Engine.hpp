@@ -95,6 +95,7 @@ class	Engine {
 
 		/* Timer functions */
 		void			FPSManager();
+		float			_deltaTime;
 
 		eState					state;
 		int						_WindowHeight;
