@@ -134,8 +134,6 @@ int		ObjectManager::isOpen(int x, int y){
 }
 
 int		ObjectManager::isMortal(int x, int y){
-	//if (x == this->player->destination->vX && y == this->player->destination->vY) // debug
-	//	return (0);
 	for (int i = 0; i < this->map.size(); i++){
 		if (this->map[i]->position->vX == x && this->map[i]->position->vY == y)
 			if (this->map[i]->mortal == 1)
@@ -273,12 +271,9 @@ void	ObjectManager::explode( void ){
 
 	this->bomb->state == DYING;
 
-	// EXTEND BLAST
 	this->bomb->blast.push_back( std::pair<int, int>(x, y));
 	while (++dir < 4){
-		//std::cout << "dir: " << dir << std::endl; // debug dir
 		while (++index < this->bombRadius){
-			//std::cout << "index: " << index << std::endl; // debug index
 			this->getForward(static_cast<eControls>(dir), &forwardX, &forwardY);
 			if (!(this->isOpen(forwardX, forwardY)))
 				if (this->isMortal(forwardX, forwardY) == 0) // issue with mortal
@@ -294,13 +289,7 @@ void	ObjectManager::explode( void ){
 	for (int i = 0; i < this->bomb->blast.size(); i++){
 		std::cout << "blast coord: " << this->bomb->blast[i].first << ";" << this->bomb->blast[i].second << std::endl;
 	}
-	//exit(-1); // debug
 
-	// CHECK BLAST COLLISION
-	// for loop through blast pairs
-	// compare against boxes
-	//int i = 0;
-	//int j = 0;
 	for (int j = 0; j < this->map.size(); j++){
 		for (int i = 0; i < this->bomb->blast.size(); i++){
 			if (this->map[j]->position->vX == this->bomb->blast[i].first && this->map[j]->position->vY == this->bomb->blast[i].second && this->map[j]->state == ALIVE && this->map[j]->mortal == 1){
@@ -308,7 +297,6 @@ void	ObjectManager::explode( void ){
 				this->map[j]->state = DEAD;
 			}
 		}
-		//i = 0; not needed?
 	}
 	for (int j = 0; j < this->enemies.size(); j++){
 		for (int i = 0; i < this->bomb->blast.size(); i++){
@@ -318,8 +306,6 @@ void	ObjectManager::explode( void ){
 		}
 	}
 	std::cout << "pre exit" << std::endl;
-	//exit(-1); // debug
-
 
 	delete this->bomb; // test
 	this->bomb = NULL;
