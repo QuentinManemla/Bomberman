@@ -37,12 +37,15 @@ void	ObjectManager::update( eControls key, double deltaTime){
 				this->explode();
 		}
 	}
+
+	// IF PLAYER = MORTAL IF PLAYER COLLISION WITH ENEMY, PLAYER--
 }
 
 void	ObjectManager::render(void){
 	std::cout << "PLAYER POS: " << this->player->position->vX << ";" << this->player->position->vY << std::endl; // debug
 	// std::cout << "PLR TRUNC : " << trunc(this->player->position->vX) << ";" << trunc(this->player->position->vY) << std::endl; // debug
-	this->engine->drawModel(PLAYER, (this->player->position->vX), (this->player->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+	if (this->player->state == ALIVE)
+		this->engine->drawModel(PLAYER, (this->player->position->vX), (this->player->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	for (int i = 0; i < this->enemies.size(); i++){
 		if (this->enemies[i]->state == ALIVE)
 			this->engine->drawModel(PLAYER, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
@@ -290,6 +293,7 @@ void	ObjectManager::explode( void ){
 		std::cout << "blast coord: " << this->bomb->blast[i].first << ";" << this->bomb->blast[i].second << std::endl;
 	}
 
+	// DESTROY BREAKABLE BLOCKS IN BLAST
 	for (int j = 0; j < this->map.size(); j++){
 		for (int i = 0; i < this->bomb->blast.size(); i++){
 			if (this->map[j]->position->vX == this->bomb->blast[i].first && this->map[j]->position->vY == this->bomb->blast[i].second && this->map[j]->state == ALIVE && this->map[j]->mortal == 1){
@@ -298,6 +302,7 @@ void	ObjectManager::explode( void ){
 			}
 		}
 	}
+	// KILL ENEMIES IN BLAST
 	for (int j = 0; j < this->enemies.size(); j++){
 		for (int i = 0; i < this->bomb->blast.size(); i++){
 			if (this->enemies[j]->destination->vX == this->bomb->blast[i].first && this->enemies[j]->destination->vY == this->bomb->blast[i].second && this->enemies[j]->state == ALIVE){
@@ -305,6 +310,13 @@ void	ObjectManager::explode( void ){
 			}
 		}
 	}
+	// KILL PLAYER IN BLAST
+	for (int i = 0; i < this->bomb->blast.size(); i++){
+		if (this->player->destination->vX == this->bomb->blast[i].first && this->player->destination->vY == this->bomb->blast[i].second){
+			this->player->state = DEAD;
+		}
+	}
+
 	std::cout << "pre exit" << std::endl;
 
 	// RENDER EXPLOSION // NEEDS TO BE MOVED AND PROLONGED

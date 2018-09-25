@@ -32,6 +32,7 @@ public:
 	void		getOpenDirection( GameObject *actor );
 	void		placeBomb( void );
 	void		explode( void );
+	void		checkEnemyCollision( void );
 
 	Engine						*engine;
 	LevelManager				*LM;
