@@ -6,3 +6,4 @@ Makefile
 Bomberman
 a.out
 .DS_STORE
+tmp/
