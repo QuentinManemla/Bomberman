@@ -21,6 +21,7 @@ public:
 
 	std::vector<GameObject *>	generateMap( void );
 	void						pushObject( int type, int x, int y ); // may take level int in future;
+	void						setDoor( void );
 
 	void						debugPrintMap( void ); // debug // test
 	void						debugPrintEnemies( void ); // debug // test

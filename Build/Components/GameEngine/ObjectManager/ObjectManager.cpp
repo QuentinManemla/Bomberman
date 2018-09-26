@@ -74,7 +74,6 @@ void	ObjectManager::render(void){
 				this->engine->drawModel(SOLIDWALL, this->bomb->blast[i].first, this->bomb->blast[i].second , 0.02f);
 			}
 	}
-	
 }
 
 void	ObjectManager::requestMove(GameObject *actor, eControls key){
@@ -93,11 +92,6 @@ void	ObjectManager::requestMove(GameObject *actor, eControls key){
 		move(actor, vectorDifference);
 		return;
 	}
-
-	//if (actor->eType == ENEMY)
-	//	if (rand() % 20 == 0)
-	//		getOpenDirection(actor); // chance of random direciton change
-
 	std::cout << "2vectorDifference = " << vectorDifference << std::endl; // debug
 
 	int truncX = trunc(actor->position->vX);

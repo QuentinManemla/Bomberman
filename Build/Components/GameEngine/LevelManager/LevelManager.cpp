@@ -114,7 +114,8 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 		}
 	}
 	std::cout << "solid = " << solidCountDebug << "\nopen = " << openCountDebug << "\nbreakable = " << breakableCountDebug << std::endl;
-	//this->debugPrintEnemies(); //debug
+	setDoor();
+	//this->debugPrintMap(); //debug
 	//exit(-1); // debug
 	return (this->testMap);
 }
@@ -143,6 +144,25 @@ void	LevelManager::pushObject( int type, int x, int y ){ // may take level int i
 	};
 	//std::cout << "object debug pre push" << object->strType << " " << object->position->vX << ";" << object->position->vY << std::endl; // debug
 	this->testMap.push_back(object);
+}
+
+void	LevelManager::setDoor( void ){
+	int	doorFlag = 0;
+	GameObject *door;
+
+	while (doorFlag == 0)
+		for (int i = 0; i < this->testMap.size(); i++){
+			if (doorFlag == 0){
+				if (this->testMap[i]->eType == WALL){
+					if (rand() % 50 == 0){
+						door = new Door(DOOR, new Vector3d(this->testMap[i]->position->vX, this->testMap[i]->position->vY, this->testMap[i]->position->vZ));
+						delete this->testMap[i];
+						this->testMap[i] = door;
+						doorFlag = 1;
+					}
+				}
+			}
+		}
 }
 
 void	LevelManager::debugPrintMap( void ){ // debug // test
