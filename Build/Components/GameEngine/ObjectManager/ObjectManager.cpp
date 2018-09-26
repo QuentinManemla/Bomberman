@@ -12,7 +12,7 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->placeEnemies(); // arbitrary int for now
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
-	this->fuseTime = 3.0f;
+	this->fuseTime = 2.0f;
 	this->bombRadius = 1;
 }
 
@@ -22,7 +22,8 @@ ObjectManager::~ObjectManager( void ){
 
 void	ObjectManager::update( eControls key, double deltaTime){
 	// PLAYER MOVE
-	requestMove(this->player, key);
+	if (this->player->state == ALIVE)
+		requestMove(this->player, key);
 
 	// ENEMY MOVE
 	for (int i = 0; i < this->enemies.size(); i++){
@@ -37,7 +38,7 @@ void	ObjectManager::update( eControls key, double deltaTime){
 			if (this->bomb->fuseTime < 0)
 				if (this->bomb->state == DYING) {
 					//draw explosion
-					if (this->bomb->fuseTime < -0.2f){ // save as blastTime
+					if (this->bomb->fuseTime < -0.1f){ // save as blastTime
 						delete this->bomb; // test
 						this->bomb = NULL;
 					}
@@ -112,17 +113,25 @@ void	ObjectManager::move( GameObject *actor, int vectorDifference ){
 	float move = 0;
 	switch (vectorDifference){
 		case 1:
-			move = ((trunc(actor->position->vX * 10) / 10) > trunc(actor->destination->vX * 10) / 10 ? -0.1 : 0.1);
+			move = (((actor->position->vX * 10) / 10) > (actor->destination->vX * 10) / 10 ? -0.1 : 0.1);
+			if (((actor->position->vX * 10) / 10) == (actor->destination->vX * 10) / 10)
+				move = 0;
 			//if (abs(actor->position->vX - actor->destination->vX) > 0.09)// test // debug // WORK BUT MOVE TO PRIMARY CONDITION
 				actor->position->vX += move;
 			//actor->position->vZ = getZStep(actor);
 			break;
 		case 2:
-			move = (actor->position->vY > actor->destination->vY ? -0.1 : 0.1);
+			move = (((actor->position->vY * 10) / 10) > (actor->destination->vY * 10) / 10 ? -0.1 : 0.1);
+			if (((actor->position->vY * 10) / 10) == (actor->destination->vY * 10) / 10)
+				move = 0;
+			//move = (actor->position->vY > actor->destination->vY ? -0.1 : 0.1);
 			actor->position->vY += move;
 			break;
 		case 3:
-			move = (actor->position->vZ > actor->destination->vZ ? -0.1 : 0.1);
+			move = (((actor->position->vZ * 10) / 10) > (actor->destination->vZ * 10) / 10 ? -0.1 : 0.1);
+			if (((actor->position->vZ * 10) / 10) == (actor->destination->vZ * 10) / 10)
+				move = 0;
+			//move = (actor->position->vZ > actor->destination->vZ ? -0.1 : 0.1);
 			actor->position->vZ += move;
 			break;
 	}
@@ -329,7 +338,8 @@ void	ObjectManager::explode( void ){
 	// KILL PLAYER IN BLAST // REDUCE HP FIRST
 	for (int i = 0; i < this->bomb->blast.size(); i++){
 		if (this->player->destination->vX == this->bomb->blast[i].first && this->player->destination->vY == this->bomb->blast[i].second){
-			this->player->state = DEAD;
+			if (this->player->hitPoints -= 1)
+				this->player->state = DEAD;
 		}
 	}
 
