@@ -12,7 +12,7 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->placeEnemies(); // arbitrary int for now
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
-	this->fuseTime = 2.0f;
+	this->fuseTime = 1.5f;
 	this->bombRadius = 1;
 }
 
@@ -22,6 +22,12 @@ ObjectManager::~ObjectManager( void ){
 
 void	ObjectManager::update( eControls key, double deltaTime){
 	// PLAYER MOVE
+	if (key == FIRE){
+		std::cout << "key = " << key << std::endl; // debug
+		if (this->player->state == ALIVE)
+			this->placeBomb(); // test
+	}
+
 	if (this->player->state == ALIVE)
 		requestMove(this->player, key);
 
@@ -33,24 +39,21 @@ void	ObjectManager::update( eControls key, double deltaTime){
 
 	// INCREMENT BOMB FUSE
 	if (this->bomb != NULL){
-		//if (this->bomb->state == ALIVE) {
-			this->bomb->fuseTime -= this->engine->_deltaTime; // to be replaced with deltaTime
-			if (this->bomb->fuseTime < 0)
-				if (this->bomb->state == DYING) {
-					//draw explosion
-					if (this->bomb->fuseTime < -0.1f){ // save as blastTime
-						delete this->bomb; // test
-						this->bomb = NULL;
-					}
+		this->bomb->fuseTime -= this->engine->_deltaTime; // to be replaced with deltaTime
+		if (this->bomb->fuseTime < 0)
+			if (this->bomb->state == DYING) {
+				//draw explosion
+				if (this->bomb->fuseTime < -0.1f){ // save as blastTime
+					delete this->bomb; // test
+					this->bomb = NULL;
 				}
-				else{
-					this->explode();
-					this->engine->bombAnim = 0;
-					this->engine->bombMove = 0.005f;
-				}
-		//}
+			}
+			else{
+				this->explode();
+				this->engine->bombAnim = 0;
+				this->engine->bombMove = 0.005f;
+			}
 	}
-
 	// IF PLAYER = MORTAL IF PLAYER COLLISION WITH ENEMY, PLAYER--
 }
 

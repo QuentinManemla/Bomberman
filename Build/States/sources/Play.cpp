@@ -40,8 +40,8 @@ void PlayState::update( eControls key ){
 	else if (key == IDLEKEY){
 		held = 0;
 	}
-	else if (key == FIRE)
-		this->_OM->placeBomb();
+	//else if (key == FIRE)
+	//	this->_OM->placeBomb();
 	this->_OM->update(key, 0.1f);
 	this->_GM->update(this->_OM->player, this->_remainingTime);
 }
