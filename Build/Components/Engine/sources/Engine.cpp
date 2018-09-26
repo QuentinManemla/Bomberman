@@ -202,6 +202,7 @@ void	Engine::engineInit( void ) {
 	this->_BreakableWall.init("Assets/Models/Crate-Break/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_Bomb.init("Assets/Models/rusty-bomb/source/Bomb.obj");
 	this->_Player.init("Assets/Models/Slime/MC Slime.obj");
+	this->_Enemy.init("Assets/Models/Enemy/89e64c1cd44944659f70b75891693405.blend.obj");
 }
 
 void	Engine::clear( void ) {
@@ -223,7 +224,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	// render the loaded model
 	glm::mat4 model = glm::mat4(1.0f);
 	//										x		y		z
-	if (type == PLAYER) {
+	if (type == PLAYER || type == ENEMY) {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
 	} else if (type == BOMB) {
@@ -243,6 +244,9 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	this->_ModelShader.setMat4("model", model);
 
 	switch (type) {
+		case ( ENEMY ):
+			this->_Enemy.Draw(_ModelShader);
+			break;
 		case ( BOMB ):
 			this->_Bomb.Draw(_ModelShader);
 			break;

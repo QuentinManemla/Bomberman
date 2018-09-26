@@ -132,6 +132,7 @@ class	Engine {
 		Model					_BreakableWall;
 		Model					_Player;
 		Model					_Bomb;
+		Model					_Enemy;
 
 
 

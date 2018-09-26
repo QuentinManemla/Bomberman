@@ -7,7 +7,8 @@ enum eGameObjectType {
 	BOMB,
 	WALL,
 	SOLIDWALL,
-	DOOR
+	DOOR,
+	EXPLOSION
 };
 
 #endif

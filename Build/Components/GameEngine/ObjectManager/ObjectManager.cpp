@@ -49,7 +49,7 @@ void	ObjectManager::render(void){
 		this->engine->drawModel(PLAYER, (this->player->position->vX), (this->player->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	for (int i = 0; i < this->enemies.size(); i++){
 		if (this->enemies[i]->state == ALIVE)
-			this->engine->drawModel(PLAYER, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+			this->engine->drawModel(ENEMY, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	}
 	if (this->bomb != NULL) {
 		if (this->bomb->state == ALIVE)
