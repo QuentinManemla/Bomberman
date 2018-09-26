@@ -23,10 +23,11 @@ public:
 	void						pushObject( int type, int x, int y ); // may take level int in future;
 
 	void						debugPrintMap( void ); // debug // test
+	void						debugPrintEnemies( void ); // debug // test
 
 	static int					level;
 	int							duration;
-	static int					enemies;
+	std::vector<pair<int, int>>	enemies;
 	static int					walls;
 	int							mapWidth;
 	int							mapHeight;
