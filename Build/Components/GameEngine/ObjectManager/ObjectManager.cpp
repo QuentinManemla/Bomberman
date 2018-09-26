@@ -12,7 +12,7 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->placeEnemies(); // arbitrary int for now
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
-	this->fuseTime = 3.0f;
+	this->fuseTime = 1.5f;
 	this->bombRadius = 1;
 }
 
@@ -22,7 +22,14 @@ ObjectManager::~ObjectManager( void ){
 
 void	ObjectManager::update( eControls key, double deltaTime){
 	// PLAYER MOVE
-	requestMove(this->player, key);
+	if (key == FIRE){
+		std::cout << "key = " << key << std::endl; // debug
+		if (this->player->state == ALIVE)
+			this->placeBomb(); // test
+	}
+
+	if (this->player->state == ALIVE)
+		requestMove(this->player, key);
 
 	// ENEMY MOVE
 	for (int i = 0; i < this->enemies.size(); i++){
@@ -32,13 +39,21 @@ void	ObjectManager::update( eControls key, double deltaTime){
 
 	// INCREMENT BOMB FUSE
 	if (this->bomb != NULL){
-		if (this->bomb->state == ALIVE) {
-			this->bomb->fuseTime -= this->engine->_deltaTime; // to be replaced with deltaTime
-			if (this->bomb->fuseTime < 0)
+		this->bomb->fuseTime -= this->engine->_deltaTime; // to be replaced with deltaTime
+		if (this->bomb->fuseTime < 0)
+			if (this->bomb->state == DYING) {
+				//draw explosion
+				if (this->bomb->fuseTime < -0.1f){ // save as blastTime
+					delete this->bomb; // test
+					this->bomb = NULL;
+				}
+			}
+			else{
 				this->explode();
-		}
+				this->engine->bombAnim = 0;
+				this->engine->bombMove = 0.005f;
+			}
 	}
-
 	// IF PLAYER = MORTAL IF PLAYER COLLISION WITH ENEMY, PLAYER--
 }
 
@@ -54,7 +69,12 @@ void	ObjectManager::render(void){
 	if (this->bomb != NULL) {
 		if (this->bomb->state == ALIVE)
 			this->engine->drawModel(BOMB, (this->bomb->position->vX), (this->bomb->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+		else if (this->bomb->state == DYING)
+			for (int i = 0; i < this->bomb->blast.size(); i++){
+				this->engine->drawModel(SOLIDWALL, this->bomb->blast[i].first, this->bomb->blast[i].second , 0.02f);
+			}
 	}
+	
 }
 
 void	ObjectManager::requestMove(GameObject *actor, eControls key){
@@ -73,6 +93,11 @@ void	ObjectManager::requestMove(GameObject *actor, eControls key){
 		move(actor, vectorDifference);
 		return;
 	}
+
+	//if (actor->eType == ENEMY)
+	//	if (rand() % 20 == 0)
+	//		getOpenDirection(actor); // chance of random direciton change
+
 	std::cout << "2vectorDifference = " << vectorDifference << std::endl; // debug
 
 	int truncX = trunc(actor->position->vX);
@@ -93,24 +118,55 @@ void	ObjectManager::requestMove(GameObject *actor, eControls key){
 
 void	ObjectManager::move( GameObject *actor, int vectorDifference ){
 	std::cout << "VD in move: " << vectorDifference << std::endl; // debug
-	float move = 0;
+	float move = actor->velocity;
 	switch (vectorDifference){
 		case 1:
-			move = ((trunc(actor->position->vX * 10) / 10) > trunc(actor->destination->vX * 10) / 10 ? -0.1 : 0.1);
+			move *= (((actor->position->vX * 10) / 10) > (actor->destination->vX * 10) / 10 ? -1.0f : 1.0f);
+			if (((actor->position->vX * 10) / 10) == (actor->destination->vX * 10) / 10)
+				move = 0;
 			//if (abs(actor->position->vX - actor->destination->vX) > 0.09)// test // debug // WORK BUT MOVE TO PRIMARY CONDITION
-				actor->position->vX += move;
+				actor->position->vX += move * this->engine->_deltaTime;
 			//actor->position->vZ = getZStep(actor);
 			break;
 		case 2:
-			move = (actor->position->vY > actor->destination->vY ? -0.1 : 0.1);
-			actor->position->vY += move;
+			move *= (((actor->position->vY * 10) / 10) > (actor->destination->vY * 10) / 10 ? -1.0f : 1.0f);
+			if (((actor->position->vY * 10) / 10) == (actor->destination->vY * 10) / 10)
+				move = 0;
+			//move = (actor->position->vY > actor->destination->vY ? -0.1 : 0.1);
+			actor->position->vY += move * this->engine->_deltaTime;
 			break;
 		case 3:
-			move = (actor->position->vZ > actor->destination->vZ ? -0.1 : 0.1);
-			actor->position->vZ += move;
+			move *= (((actor->position->vZ * 10) / 10) > (actor->destination->vZ * 10) / 10 ? -1.0f : 1.0f);
+			if (((actor->position->vZ * 10) / 10) == (actor->destination->vZ * 10) / 10)
+				move = 0;
+			//move = (actor->position->vZ > actor->destination->vZ ? -0.1 : 0.1);
+			actor->position->vZ += move * this->engine->_deltaTime;
 			break;
 	}
 }
+
+/*
+void    ObjectManager::move( GameObject *actor, int vectorDifference ){
+    std::cout << "VD in move: " << vectorDifference << std::endl; // debug
+    float move = 0;
+    switch (vectorDifference){
+        case 1:
+            move = ((trunc(actor->position->vX * 10) / 10) > trunc(actor->destination->vX * 10) / 10 ? -0.1 : 0.1);
+            //if (abs(actor->position->vX - actor->destination->vX) > 0.09)// test // debug // WORK BUT MOVE TO PRIMARY CONDITION
+                actor->position->vX += (move + 3.0f * this->engine->_deltaTime);
+            //actor->position->vZ = getZStep(actor);
+            break;
+        case 2:
+            move = (actor->position->vY > actor->destination->vY ? -0.1 : 0.1);
+            actor->position->vY += (move + 3.0f * this->engine->_deltaTime);
+            break;
+        case 3:
+            move = (actor->position->vZ > actor->destination->vZ ? -0.1 : 0.1);
+            actor->position->vZ += (move + 3.0f * this->engine->_deltaTime);
+            break;
+    }
+}
+*/
 
 float	ObjectManager::getZStep( GameObject *actor){
 	float ret = 0;
@@ -127,7 +183,7 @@ float	ObjectManager::getZStep( GameObject *actor){
 
 int		ObjectManager::isOpen(int x, int y){
 	if (this->bomb != NULL)
-		if (x == this->bomb->position->vX && y == this->bomb->position->vY) // debug
+		if (x == this->bomb->position->vX && y == this->bomb->position->vY && this->bomb->state == ALIVE) // debug
 			return (0);
 	for (int i = 0; i < this->map.size(); i++){
 		if (this->map[i]->position->vX == x && this->map[i]->position->vY == y)
@@ -160,6 +216,7 @@ void	ObjectManager::requestEnemyMove( GameObject *actor ){
 	getForward(actor->currentDirection, &forwardX, &forwardY);
 	if (isOpen(forwardX, forwardY) == 0)
 		getOpenDirection(actor);
+
 	else if (actor->stuck != 1){
 		this->requestMove(actor, actor->currentDirection);
 	}
@@ -313,7 +370,8 @@ void	ObjectManager::explode( void ){
 	// KILL PLAYER IN BLAST // REDUCE HP FIRST
 	for (int i = 0; i < this->bomb->blast.size(); i++){
 		if (this->player->destination->vX == this->bomb->blast[i].first && this->player->destination->vY == this->bomb->blast[i].second){
-			this->player->state = DEAD;
+			if (this->player->hitPoints -= 1)
+				this->player->state = DEAD;
 		}
 	}
 
@@ -328,7 +386,8 @@ void	ObjectManager::explode( void ){
 	}
 	//exit(-1); // debug
 
-	delete this->bomb; // test
-	this->bomb = NULL;
+	//delete this->bomb; // test
+	//this->bomb = NULL;
+	this->bomb->state = DYING;
 	std::cout << "boom" << std::endl;
 }

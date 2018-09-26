@@ -107,9 +107,9 @@ class	Engine {
 		float					volume;
 
 		/** Animation Variables **/
-		int						_Bombanim;
-		float					_Bombmove;
-
+		int						bombAnim;
+		float					bombMove;
+		
 	private:
 		GLFWwindow				*_Window;
 		const GLFWvidmode		*_Mode;

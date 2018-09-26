@@ -7,6 +7,7 @@ Enemy::Enemy( eGameObjectType type, Vector3d *position ){
 	this->state = ALIVE;
 	this->step = 0;
 	this->currentDirection = static_cast<eControls>(rand() % 4); // set random start dir
+	this->velocity = 2.0;
 }
 
 Enemy::~Enemy( void ){

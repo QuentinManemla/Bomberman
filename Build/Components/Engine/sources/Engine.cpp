@@ -23,7 +23,7 @@ glm::vec3 cubePositions[] = {
 
 int		Engine::held = 1;
 
-Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _deltaTime(0.0f), _Bombanim(0), _Bombmove(0.005f) {
+Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _deltaTime(0.0f), bombAnim(0), bombMove(0.005f) {
 	std::cout << "Engine constructed" << std::endl;
 	/* GLFW Initialization */
 	if (!glfwInit()) {
@@ -228,13 +228,13 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
 	} else if (type == BOMB) {
-		this->_Bombanim++;
+		this->bombAnim++;
 		model = glm::translate(model, glm::vec3(transX, transY + 0.009f, transZ));
-		if (this->_Bombanim++ < 5) {
-			model = glm::scale(model, glm::vec3(this->_Bombmove, this->_Bombmove, this->_Bombmove));
-			this->_Bombmove += 0.00008f;
+		if (this->bombAnim++ < 5) {
+			model = glm::scale(model, glm::vec3(this->bombMove, this->bombMove, this->bombMove));
+			this->bombMove += 0.00008f;
 		} else
-			model = glm::scale(model, glm::vec3(this->_Bombmove, this->_Bombmove, this->_Bombmove));
+			model = glm::scale(model, glm::vec3(this->bombMove, this->bombMove, this->bombMove));
 		model = glm::rotate(model, 2.0f, glm::vec3(1.5f, 0.0f, 0.0f));
 	} else {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
@@ -246,6 +246,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	switch (type) {
 		case ( DOOR ):
 			this->_Door.Draw(_ModelShader);
+			break;
 		case ( ENEMY ):
 			this->_Enemy.Draw(_ModelShader);
 			break;
@@ -264,7 +265,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 			std::cout << "draw player" << std::endl;
 			break;
 	}
-	this->_Bombanim = 0;
+	this->bombAnim = 0;
 }
 
 
