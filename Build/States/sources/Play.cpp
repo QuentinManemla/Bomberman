@@ -9,7 +9,7 @@ PlayState::PlayState( Engine & engine ){ // first init?
 	_positionPitch = 0.0f;
 
 	this->begin = std::chrono::steady_clock::now();
-	this->_engine->triangle();
+	this->_engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
 	this->_OM = new ObjectManager( engine );
 	this->_GM = new GUIManager( engine );
 }
@@ -70,7 +70,7 @@ void PlayState::render( void ) {
 	}
 	this->_engine->clear();
 	this->drawMap(); // move to engine
-	this->_engine->draw(); //rename
+	this->_engine->drawBackground(); //rename
 	this->_OM->render();
 	this->_GM->render();
 	this->_engine->render();

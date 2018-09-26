@@ -61,7 +61,7 @@ Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _delt
 	/* Initialize Sound, Text & Camera Engine */
 	this->_TextEngine.init("Assets/Fonts/neon_pixel.ttf", 30, this->_WindowWidth, this->_WindowHeight);
 	this->_SoundEngine.init();
-	this->muteSound();
+	//this->muteSound();
 	//this->setFullScreen();
 	this->engineInit();
 	this->_Camera.init(glm::vec3(0.48f, -0.48f, 3.5f)); // use position of player in future
@@ -83,7 +83,7 @@ Engine::~Engine() {
 	glfwTerminate();
 }
 
-void	Engine::triangle( void ) {
+void	Engine::backgroundTexture( std::string path ) {
 	float vertices[] = {
 		// positions          // texture coords
 		 0.5f,  0.5f, 0.0f,   0.5f, 1.0f, // top right
@@ -130,7 +130,7 @@ void	Engine::triangle( void ) {
 	// load image, create texture and generate mipmaps
 	int width, height, nrChannels;
 	stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-	unsigned char *data = stbi_load("Assets/Textures/stone-wall.jpg", &width, &height, &nrChannels, 0);
+	unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 	if (data) {
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
@@ -140,12 +140,12 @@ void	Engine::triangle( void ) {
 	}
 	stbi_image_free(data);
 
-	this->_Shader.use(); 
+	this->_Shader.use();
 	this->_Shader.setInt("texture1", 0);
 	this->_Shader.setInt("texture2", 1);
 }
 
-void	Engine::draw( void ) {
+void	Engine::drawBackground( void ) {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
 	glActiveTexture(GL_TEXTURE1);
@@ -174,17 +174,15 @@ void	Engine::draw( void ) {
 	// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
 	this->_Shader.setMat4("projection", projection);
 
-
 	glBindVertexArray(VAO);
 	for(unsigned int i = 0; i < 10; i++) {
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, cubePositions[i]);
-		//model = glm::rotate(model, (float)glfwGetTime(), cubePositions[i]);
-		float angle = 20.0f * i; 
-		//model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+		float angle = 20.0f * i;
 		this->_Shader.setMat4("model", model);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	}
+
 }
 
 /********************************************************************************/
@@ -194,6 +192,7 @@ void	Engine::draw( void ) {
 void	Engine::engineInit( void ) {
 	/* Shader Initialization */
 	this->_Shader.init("Assets/Shaders/Textures/shader.vs", "Assets/Shaders/Textures/shader.fs");
+	this->_BackgroundShader.init("Assets/Shaders/Textures/shader.vs", "Assets/Shaders/Textures/shader.fs");
 	this->_ModelShader.init("Assets/Shaders/Model/shader.vs", "Assets/Shaders/Model/shader.fs");
 	this->_Lighting.init("Assets/Shaders/Lighting/shader.vs", "Assets/Shaders/Lighting/shader.fs");
 
