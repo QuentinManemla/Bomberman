@@ -203,6 +203,7 @@ void	Engine::engineInit( void ) {
 	this->_Bomb.init("Assets/Models/rusty-bomb/source/Bomb.obj");
 	this->_Player.init("Assets/Models/Slime/MC Slime.obj");
 	this->_Enemy.init("Assets/Models/Enemy/89e64c1cd44944659f70b75891693405.blend.obj");
+	this->_Door.init("Assets/Models/Door/89e64c1cd44944659f70b75891693405.blend.obj");
 }
 
 void	Engine::clear( void ) {
@@ -224,7 +225,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	// render the loaded model
 	glm::mat4 model = glm::mat4(1.0f);
 	//										x		y		z
-	if (type == PLAYER || type == ENEMY) {
+	if ( type == PLAYER || type == ENEMY || type == DOOR ) {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
 	} else if (type == BOMB) {
@@ -244,6 +245,8 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	this->_ModelShader.setMat4("model", model);
 
 	switch (type) {
+		case ( DOOR ):
+			this->_Door.Draw(_ModelShader);
 		case ( ENEMY ):
 			this->_Enemy.Draw(_ModelShader);
 			break;

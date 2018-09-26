@@ -133,6 +133,7 @@ class	Engine {
 		Model					_Player;
 		Model					_Bomb;
 		Model					_Enemy;
+		Model					_Door;
 
 
 
