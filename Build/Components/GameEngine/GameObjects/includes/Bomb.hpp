@@ -1,15 +1,16 @@
 #ifndef BOMB_HPP
 # define BOMB_HPP
 
-# include <string>
+# include "GameObject.hpp"
+# include "../../Vector3d/Vector3d.hpp"
 
-# include "Bomb.hpp"
-
-class Bomb {
+class Bomb : public GameObject {
 public:
-	Bomb( void );
+	Bomb( eGameObjectType type, Vector3d *position, float fuseTime );
 	~Bomb( void );
 
+	float							fuseTime;
+	std::vector<pair<int, int>>	blast;
 protected:
 
 private:

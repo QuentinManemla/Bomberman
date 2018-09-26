@@ -2,6 +2,7 @@
 # define PLAYER_HPP
 
 # include "GameObject.hpp"
+# include "../../Vector3d/Vector3d.hpp"
 
 class Player : public GameObject{
 public:

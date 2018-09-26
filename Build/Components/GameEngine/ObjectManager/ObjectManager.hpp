@@ -17,22 +17,31 @@ public:
 	ObjectManager( void ); // may need reference to playstate
 	~ObjectManager( void );
 
-	void	update(eControls key, double deltaTime);
-	void	render(void);
-	void	requestMove(GameObject *actor, eControls key); // returns direction // or void and calls move directly
-	int		canMove(int x, int y);
-	void	move( GameObject *actor, int vectorDifference );
-	void	AI( GameObject *actor );
-	int		getVectorDifference(GameObject *actor);
-	float	getZStep( GameObject *actor );
-	void	placeEnemies( int level );
+	void		update(eControls key, double deltaTime);
+	void		render(void);
+	void		requestMove(GameObject *actor, eControls key); // returns direction // or void and calls move directly
+	int			isOpen(int x, int y);
+	int			isMortal(int x, int y); // test
+	void		move( GameObject *actor, int vectorDifference );
+	void		requestEnemyMove( GameObject *actor );
+	int			getVectorDifference(GameObject *actor);
+	float		getZStep( GameObject *actor );
+	void		placeEnemies( int level );
+	bool		isAtDestination( GameObject *actor);
+	void		getForward( eControls key , int *x, int *y);
+	void		getOpenDirection( GameObject *actor );
+	void		placeBomb( void );
+	void		explode( void );
+	void		checkEnemyCollision( void );
 
-	LevelManager				*LM;
 	Engine						*engine;
+	LevelManager				*LM;
 	std::vector<GameObject *>	map;
-	GameObject					*player;
 	std::vector<GameObject *>	enemies;
+	GameObject					*player;
 	Bomb						*bomb;
+	float						fuseTime;
+	int							bombRadius;
 
 protected:
 

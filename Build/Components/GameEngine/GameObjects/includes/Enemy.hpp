@@ -2,6 +2,7 @@
 # define ENEMY_HPP
 
 # include "GameObject.hpp"
+# include "../../Vector3d/Vector3d.hpp"
 
 class Enemy : public GameObject{
 public:
