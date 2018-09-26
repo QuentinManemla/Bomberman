@@ -7,6 +7,7 @@ Player::Player( eGameObjectType type, Vector3d *position ) {
 	this->hitPoints = 3;
 	this->state = ALIVE;
 	this->step = 0;
+	this->velocity = 5.0;
 }
 
 Player::~Player( void ){

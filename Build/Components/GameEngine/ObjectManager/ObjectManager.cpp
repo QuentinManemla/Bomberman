@@ -93,6 +93,11 @@ void	ObjectManager::requestMove(GameObject *actor, eControls key){
 		move(actor, vectorDifference);
 		return;
 	}
+
+	//if (actor->eType == ENEMY)
+	//	if (rand() % 20 == 0)
+	//		getOpenDirection(actor); // chance of random direciton change
+
 	std::cout << "2vectorDifference = " << vectorDifference << std::endl; // debug
 
 	int truncX = trunc(actor->position->vX);
@@ -113,32 +118,55 @@ void	ObjectManager::requestMove(GameObject *actor, eControls key){
 
 void	ObjectManager::move( GameObject *actor, int vectorDifference ){
 	std::cout << "VD in move: " << vectorDifference << std::endl; // debug
-	float move = 0;
+	float move = actor->velocity;
 	switch (vectorDifference){
 		case 1:
-			move = (((actor->position->vX * 10) / 10) > (actor->destination->vX * 10) / 10 ? -0.1 : 0.1);
+			move *= (((actor->position->vX * 10) / 10) > (actor->destination->vX * 10) / 10 ? -1.0f : 1.0f);
 			if (((actor->position->vX * 10) / 10) == (actor->destination->vX * 10) / 10)
 				move = 0;
 			//if (abs(actor->position->vX - actor->destination->vX) > 0.09)// test // debug // WORK BUT MOVE TO PRIMARY CONDITION
-				actor->position->vX += move;
+				actor->position->vX += move * this->engine->_deltaTime;
 			//actor->position->vZ = getZStep(actor);
 			break;
 		case 2:
-			move = (((actor->position->vY * 10) / 10) > (actor->destination->vY * 10) / 10 ? -0.1 : 0.1);
+			move *= (((actor->position->vY * 10) / 10) > (actor->destination->vY * 10) / 10 ? -1.0f : 1.0f);
 			if (((actor->position->vY * 10) / 10) == (actor->destination->vY * 10) / 10)
 				move = 0;
 			//move = (actor->position->vY > actor->destination->vY ? -0.1 : 0.1);
-			actor->position->vY += move;
+			actor->position->vY += move * this->engine->_deltaTime;
 			break;
 		case 3:
-			move = (((actor->position->vZ * 10) / 10) > (actor->destination->vZ * 10) / 10 ? -0.1 : 0.1);
+			move *= (((actor->position->vZ * 10) / 10) > (actor->destination->vZ * 10) / 10 ? -1.0f : 1.0f);
 			if (((actor->position->vZ * 10) / 10) == (actor->destination->vZ * 10) / 10)
 				move = 0;
 			//move = (actor->position->vZ > actor->destination->vZ ? -0.1 : 0.1);
-			actor->position->vZ += move;
+			actor->position->vZ += move * this->engine->_deltaTime;
 			break;
 	}
 }
+
+/*
+void    ObjectManager::move( GameObject *actor, int vectorDifference ){
+    std::cout << "VD in move: " << vectorDifference << std::endl; // debug
+    float move = 0;
+    switch (vectorDifference){
+        case 1:
+            move = ((trunc(actor->position->vX * 10) / 10) > trunc(actor->destination->vX * 10) / 10 ? -0.1 : 0.1);
+            //if (abs(actor->position->vX - actor->destination->vX) > 0.09)// test // debug // WORK BUT MOVE TO PRIMARY CONDITION
+                actor->position->vX += (move + 3.0f * this->engine->_deltaTime);
+            //actor->position->vZ = getZStep(actor);
+            break;
+        case 2:
+            move = (actor->position->vY > actor->destination->vY ? -0.1 : 0.1);
+            actor->position->vY += (move + 3.0f * this->engine->_deltaTime);
+            break;
+        case 3:
+            move = (actor->position->vZ > actor->destination->vZ ? -0.1 : 0.1);
+            actor->position->vZ += (move + 3.0f * this->engine->_deltaTime);
+            break;
+    }
+}
+*/
 
 float	ObjectManager::getZStep( GameObject *actor){
 	float ret = 0;
@@ -188,6 +216,7 @@ void	ObjectManager::requestEnemyMove( GameObject *actor ){
 	getForward(actor->currentDirection, &forwardX, &forwardY);
 	if (isOpen(forwardX, forwardY) == 0)
 		getOpenDirection(actor);
+
 	else if (actor->stuck != 1){
 		this->requestMove(actor, actor->currentDirection);
 	}
