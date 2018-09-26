@@ -92,7 +92,7 @@ FetchContent_Declare(
 FetchContent_GetProperties(irrklang)
 if(NOT irrklang_POPULATED)
 	FetchContent_Populate(irrklang)
-	link_directories(${irrklang_SOURCE_DIR}/macosx-gcc)
+	link_directories(${irrklang_SOURCE_DIR}/bin/macosx-gcc)
 	#include the headerfiles and libs
 endif()
 message (STATUS ">>>>>>>>>>>>>>>>irrklang Should be downloaded")
@@ -149,10 +149,10 @@ target_include_directories(BomberMan PRIVATE ${stb_SOURCE_DIR})
 target_include_directories(BomberMan PRIVATE ${glm_SOURCE_DIR})
 target_include_directories(BomberMan PRIVATE ${freeglut_SOURCE_DIR}/include)
 
+find_library(ASSIMP_LIB assimp HINTS $ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/)
+#link_directories($ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/ )
 
-link_directories($ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/ )
-
-target_link_libraries(BomberMan glfw freetype irrklang glad assimp glut)
+target_link_libraries(BomberMan glfw freetype irrklang glad ${ASSIMP_LIB} glut)
 
 
 #add compiling flags
