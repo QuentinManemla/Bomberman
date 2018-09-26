@@ -26,7 +26,7 @@ public:
 	void		requestEnemyMove( GameObject *actor );
 	int			getVectorDifference(GameObject *actor);
 	float		getZStep( GameObject *actor );
-	void		placeEnemies( int level );
+	void		placeEnemies( void );
 	bool		isAtDestination( GameObject *actor);
 	void		getForward( eControls key , int *x, int *y);
 	void		getOpenDirection( GameObject *actor );

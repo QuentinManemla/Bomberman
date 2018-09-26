@@ -5,10 +5,10 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->LM = new LevelManager(1); // may move this codeblock to a level init function to be available on call rather than this constructor
 	this->map = this->LM->generateMap();
 	this->player = new Player( PLAYER, new Vector3d(2, 2, 0.1f) );
-	this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
-	this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
+	//this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
+	//this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
 	this->bomb = NULL;
-	//this->placeEnemies( 1 ); // arbitrary int for now
+	this->placeEnemies(); // arbitrary int for now
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	this->fuseTime = 3.0f;
@@ -172,18 +172,15 @@ int		ObjectManager::getVectorDifference(GameObject *actor){
 	return (0);
 }
 
-void	ObjectManager::placeEnemies( int level ){
-	int x = 1;
-	int y = 1;
+void	ObjectManager::placeEnemies( void ){
 
-	for ( y = 1; y <= this->LM->mapHeight; y++){
-		for ( x = 1; x <= this->LM->mapWidth; x++){
-			if ((this->isOpen(x, y) == 0)){
-				this->enemies.push_back(new GameObject( ENEMY, new Vector3d(x, y, 0.1f) ));
-				std::cout << "placed at " << x << ";" << y << std::endl; // debug
-				return; // test // debug// only returning here to limit enemies to 1 for now
-			}
-		}
+	int x;
+	int y;
+
+	for ( int i = 0; i < this->LM->enemies.size(); i++){
+		x = this->LM->enemies[i].first;
+		y = this->LM->enemies[i].second;
+		this->enemies.push_back(new Enemy( ENEMY, new Vector3d(x, y, 0.1f) )); // test // debug
 	}
 }
 
@@ -310,7 +307,7 @@ void	ObjectManager::explode( void ){
 			}
 		}
 	}
-	// KILL PLAYER IN BLAST
+	// KILL PLAYER IN BLAST // REDUCE HP FIRST
 	for (int i = 0; i < this->bomb->blast.size(); i++){
 		if (this->player->destination->vX == this->bomb->blast[i].first && this->player->destination->vY == this->bomb->blast[i].second){
 			this->player->state = DEAD;
