@@ -1,16 +1,7 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.11)
 
 project (BomberMan)
 message (STATUS "####################################################")
-
-#installing what is nessesry
-message ("Installing libraries")
-#execute_process(COMMAND brew install xquartz)
-#execute_process(COMMAND brew install freeglut)
-execute_process(COMMAND brew install glew)
-message(STATUS "glew should be installed")
-execute_process(COMMAND brew install pkgconfig)
-message(STATUS "pkgconfig should be installed")
 
 
 #Get all project source files
@@ -38,6 +29,14 @@ endforeach()
 list(REMOVE_DUPLICATES LIB_INCLUDE_DIRS)
 #message (STATUS "The include Directories are: ${LIB_INCLUDE_DIRS}")
 
+
+#installing what is nessesry
+message ("Installing libraries")
+
+#needs xquartz from the softwear managment center on mac
+execute_process(COMMAND brew install assimp) #don't need this?
+message (STATUS ">>>>>>>>>>>>>>>>assimp Should be downloaded")
+
 include("FetchContent")
 
 FetchContent_Declare(
@@ -51,7 +50,7 @@ if(NOT glad_POPULATED)
 	FetchContent_Populate(glad)
 	add_subdirectory(${glad_SOURCE_DIR} ${glad_BINARY_DIR})
 endif()
-message (STATUS "glad Should be downloaded")
+message (STATUS ">>>>>>>>>>>>>>>>glad Should be downloaded")
 
 
 FetchContent_Declare(
@@ -67,7 +66,7 @@ if(NOT glfw_POPULATED)
 	  #SOURCE_DIR "")
   add_subdirectory(${glfw_SOURCE_DIR} ${glfw_BINARY_DIR})
 endif()
-message (STATUS "The glfw lib should be downloaded")
+message (STATUS ">>>>>>>>>>>>>>>>The glfw lib should be downloaded")
 
 
 FetchContent_Declare(
@@ -81,24 +80,81 @@ if(NOT glm_POPULATED)
 	FetchContent_Populate(glm)
 	add_subdirectory(${glm_SOURCE_DIR} ${glm_BINARY_DIR})
 endif()
-message (STATUS "glm Should be downloaded")
+message (STATUS ">>>>>>>>>>>>>>>>glm Should be downloaded")
 
 
 FetchContent_Declare(
-	assimp
-	GIT_REPOSITORY https://github.com/assimp/assimp.git
-	GIT_TAG		   v4.1.0
+	irrklang
+	GIT_REPOSITORY https://github.com/Jerome-Damhuis/irrKlang-dep_for_Bomberman.git
+	GIT_TAG		   1.0.0
 )
 
-FetchContent_GetProperties(assimp)
-if(NOT assimp_POPULATED)
-	FetchContent_Populate(assimp)
-	add_subdirectory(${assimp_SOURCE_DIR} ${assimp_BINARY_DIR})
+FetchContent_GetProperties(irrklang)
+if(NOT irrklang_POPULATED)
+	FetchContent_Populate(irrklang)
+	link_directories(${irrklang_SOURCE_DIR}/macosx-gcc)
+	#include the headerfiles and libs
 endif()
-message (STATUS "assimp Should be downloaded")
+message (STATUS ">>>>>>>>>>>>>>>>irrklang Should be downloaded")
+
+
+FetchContent_Declare(
+	stb
+	GIT_REPOSITORY https://github.com/nothings/stb.git
+)
+
+FetchContent_GetProperties(stb)
+if(NOT stb)
+	FetchContent_Populate(stb)
+	#include the headerfiles and libs
+endif()
+message (STATUS ">>>>>>>>>>>>>>>>stb Should be downloaded")
+
+
+FetchContent_Declare(
+	freetype
+	GIT_REPOSITORY https://github.com/aseprite/freetype2.git
+	GIT_TAG		   VER-2-6-3 
+)
+
+FetchContent_GetProperties(freetype)
+if(NOT freetype_POPULATED)
+	FetchContent_Populate(freetype)
+	add_subdirectory(${freetype_SOURCE_DIR} ${freetype_BINARY_DIR})
+endif()
+message (STATUS ">>>>>>>>>>>>>>>>freetype Should be downloaded")
+
+FetchContent_Declare(
+	freeglut
+	GIT_REPOSITORY https://github.com/Jerome-Damhuis/glut-dep_for_bomberman.git
+	#GIT_TAG		   VER-2-6-3 
+)
+
+FetchContent_GetProperties(freeglut)
+if(NOT freeglut_POPULATED)
+	FetchContent_Populate(freeglut)
+	add_subdirectory(${freeglut_SOURCE_DIR} ${freeglut_BINARY_DIR})
+endif()
+message (STATUS ">>>>>>>>>>>>>>>>freeglut Should be downloaded")
+
+message ("The libraries are installed")
 
 add_executable (BomberMan ${BomberMan_SOURCES})
-#target_include_directories(BomberMan PRIVATE ${LIB_INCLUDE_DIRS} ${BomberMan_INCLUDE_DIRS})
+target_include_directories(BomberMan PRIVATE ${LIB_INCLUDE_DIRS} ${BomberMan_INCLUDE_DIRS})
+target_include_directories(BomberMan PRIVATE $ENV{HOME}/.brew/Cellar/assimp/4.1.0/include/)
+target_include_directories(BomberMan PRIVATE ${freetype_SOURCE_DIR}/include)
+target_include_directories(BomberMan PRIVATE ${glfw_SOURCE_DIR}/include)
+target_include_directories(BomberMan PRIVATE ${irrklang_SOURCE_DIR}/include)
+target_include_directories(BomberMan PRIVATE ${stb_SOURCE_DIR})
+target_include_directories(BomberMan PRIVATE ${glm_SOURCE_DIR})
+target_include_directories(BomberMan PRIVATE ${freeglut_SOURCE_DIR}/include)
+
+
+link_directories($ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/ )
+
+target_link_libraries(BomberMan glfw freetype irrklang glad assimp glut)
+
+
 #add compiling flags
 target_compile_options(BomberMan PRIVATE "-Wall" "-Wextra" "-Wpedantic" "-std=c++11")
 
