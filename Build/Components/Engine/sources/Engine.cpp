@@ -247,6 +247,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	switch (type) {
 		case ( DOOR ):
 			this->_Door.Draw(_ModelShader);
+			break;
 		case ( ENEMY ):
 			this->_Enemy.Draw(_ModelShader);
 			break;
