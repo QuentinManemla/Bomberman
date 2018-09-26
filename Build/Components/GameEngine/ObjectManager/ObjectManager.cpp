@@ -32,11 +32,22 @@ void	ObjectManager::update( eControls key, double deltaTime){
 
 	// INCREMENT BOMB FUSE
 	if (this->bomb != NULL){
-		if (this->bomb->state == ALIVE) {
+		//if (this->bomb->state == ALIVE) {
 			this->bomb->fuseTime -= this->engine->_deltaTime; // to be replaced with deltaTime
 			if (this->bomb->fuseTime < 0)
-				this->explode();
-		}
+				if (this->bomb->state == DYING) {
+					//draw explosion
+					if (this->bomb->fuseTime < -0.2f){ // save as blastTime
+						delete this->bomb; // test
+						this->bomb = NULL;
+					}
+				}
+				else{
+					this->explode();
+					this->engine->bombAnim = 0;
+					this->engine->bombMove = 0.005f;
+				}
+		//}
 	}
 
 	// IF PLAYER = MORTAL IF PLAYER COLLISION WITH ENEMY, PLAYER--
@@ -54,7 +65,12 @@ void	ObjectManager::render(void){
 	if (this->bomb != NULL) {
 		if (this->bomb->state == ALIVE)
 			this->engine->drawModel(BOMB, (this->bomb->position->vX), (this->bomb->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+		else if (this->bomb->state == DYING)
+			for (int i = 0; i < this->bomb->blast.size(); i++){
+				this->engine->drawModel(SOLIDWALL, this->bomb->blast[i].first, this->bomb->blast[i].second , 0.02f);
+			}
 	}
+	
 }
 
 void	ObjectManager::requestMove(GameObject *actor, eControls key){
@@ -127,7 +143,7 @@ float	ObjectManager::getZStep( GameObject *actor){
 
 int		ObjectManager::isOpen(int x, int y){
 	if (this->bomb != NULL)
-		if (x == this->bomb->position->vX && y == this->bomb->position->vY) // debug
+		if (x == this->bomb->position->vX && y == this->bomb->position->vY && this->bomb->state == ALIVE) // debug
 			return (0);
 	for (int i = 0; i < this->map.size(); i++){
 		if (this->map[i]->position->vX == x && this->map[i]->position->vY == y)
@@ -328,7 +344,8 @@ void	ObjectManager::explode( void ){
 	}
 	//exit(-1); // debug
 
-	delete this->bomb; // test
-	this->bomb = NULL;
+	//delete this->bomb; // test
+	//this->bomb = NULL;
+	this->bomb->state = DYING;
 	std::cout << "boom" << std::endl;
 }
