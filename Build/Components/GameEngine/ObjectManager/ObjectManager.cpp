@@ -1,5 +1,6 @@
 #include "ObjectManager.hpp"
 
+
 ObjectManager::ObjectManager( Engine & engine ){
 	this->engine = &engine;
 	this->LM = new LevelManager(1); // may move this codeblock to a level init function to be available on call rather than this constructor
@@ -31,8 +32,8 @@ void	ObjectManager::update( eControls key, double deltaTime){
 
 	// INCREMENT BOMB FUSE
 	if (this->bomb != NULL){
-		if (this->bomb->state == ALIVE){
-			this->bomb->fuseTime -= 0.016f; // to be replaced with deltaTime
+		if (this->bomb->state == ALIVE) {
+			this->bomb->fuseTime -= this->engine->_deltaTime; // to be replaced with deltaTime
 			if (this->bomb->fuseTime < 0)
 				this->explode();
 		}
@@ -50,8 +51,10 @@ void	ObjectManager::render(void){
 		if (this->enemies[i]->state == ALIVE)
 			this->engine->drawModel(PLAYER, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	}
-	if (this->bomb != NULL)
-		this->engine->drawModel(PLAYER, (this->bomb->position->vX), (this->bomb->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+	if (this->bomb != NULL) {
+		if (this->bomb->state == ALIVE)
+			this->engine->drawModel(BOMB, (this->bomb->position->vX), (this->bomb->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+	}
 }
 
 void	ObjectManager::requestMove(GameObject *actor, eControls key){
@@ -319,9 +322,11 @@ void	ObjectManager::explode( void ){
 
 	std::cout << "pre exit" << std::endl;
 
+	//this->engine->drawModel(WALL, (this->bomb->blast[0].first), (this->bomb->blast[0].second), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+
 	// RENDER EXPLOSION // NEEDS TO BE MOVED AND PROLONGED
-	for (int i = 0; i < this->bomb->blast.size(); i++){
-		std::cout << "splode" << std::endl;
+	for (int i = 0; i < this->bomb->blast.size(); i++) {
+		std::cout << "SPLODE" << std::endl;
 		this->engine->drawModel(WALL, (this->bomb->blast[i].first), (this->bomb->blast[i].second), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	}
 	//exit(-1); // debug

@@ -10,7 +10,7 @@ public:
 	~Bomb( void );
 
 	float							fuseTime;
-	std::vector<pair<int, int>>	blast;
+	std::vector<pair<int, int>>		blast;
 protected:
 
 private:

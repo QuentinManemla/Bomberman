@@ -22,10 +22,8 @@ glm::vec3 cubePositions[] = {
 };
 
 int		Engine::held = 1;
-int		_anim = 0;
-float	_move = 0.0008f;
 
-Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _deltaTime(0.0f) {
+Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _deltaTime(0.0f), _Bombanim(0), _Bombmove(0.005f) {
 	std::cout << "Engine constructed" << std::endl;
 	/* GLFW Initialization */
 	if (!glfwInit()) {
@@ -202,6 +200,7 @@ void	Engine::engineInit( void ) {
 	/* Model Initialization */
 	this->_SolidWall.init("Assets/Models/Crate/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_BreakableWall.init("Assets/Models/Crate-Break/89e64c1cd44944659f70b75891693405.blend.obj");
+	this->_Bomb.init("Assets/Models/rusty-bomb/source/Bomb.obj");
 	this->_Player.init("Assets/Models/Slime/MC Slime.obj");
 }
 
@@ -227,6 +226,15 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	if (type == PLAYER) {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+	} else if (type == BOMB) {
+		this->_Bombanim++;
+		model = glm::translate(model, glm::vec3(transX, transY + 0.009f, transZ));
+		if (this->_Bombanim++ < 5) {
+			model = glm::scale(model, glm::vec3(this->_Bombmove, this->_Bombmove, this->_Bombmove));
+			this->_Bombmove += 0.00008f;
+		} else
+			model = glm::scale(model, glm::vec3(this->_Bombmove, this->_Bombmove, this->_Bombmove));
+		model = glm::rotate(model, 2.0f, glm::vec3(1.5f, 0.0f, 0.0f));
 	} else {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
@@ -235,6 +243,9 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	this->_ModelShader.setMat4("model", model);
 
 	switch (type) {
+		case ( BOMB ):
+			this->_Bomb.Draw(_ModelShader);
+			break;
 		case( SOLIDWALL ):
 			this->_SolidWall.Draw(_ModelShader);
 			break;
@@ -247,6 +258,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 			std::cout << "draw player" << std::endl;
 			break;
 	}
+	this->_Bombanim = 0;
 }
 
 

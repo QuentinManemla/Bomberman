@@ -103,6 +103,10 @@ class	Engine {
 		static int				held; // test
 		Camera 					_Camera;
 
+		/** Animation Variables **/
+		int						_Bombanim;
+		float					_Bombmove;
+
 	private:
 		GLFWwindow				*_Window;
 		const GLFWvidmode		*_Mode;
@@ -127,6 +131,7 @@ class	Engine {
 		Model					_SolidWall;
 		Model					_BreakableWall;
 		Model					_Player;
+		Model					_Bomb;
 
 
 
