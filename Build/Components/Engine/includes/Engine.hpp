@@ -54,8 +54,8 @@ class	Engine {
 		void			render( void );
 		void			clear( void );
 
-		void			triangle( void );
-		void			draw( void );
+		void			drawBackground( void );
+		void			backgroundTexture( std::string path );
 		void 			drawModel( eGameObjectType type, float transX, float transY, float transZ );
 		GLuint			createShader(const char* vertexPath, const char* fragmentPath);
 		void 			checkCompileErrors(unsigned int shader, std::string type);
@@ -103,10 +103,16 @@ class	Engine {
 		static int				held; // test
 		Camera 					_Camera;
 
-		/** Animation Variables **/
-		int						_Bombanim;
-		float					_Bombmove;
+		/** Sound Variables **/
+		float					volume;
 
+		/** Animation Variables **/
+		int						bombAnim;
+		float					bombMove;
+		
+		int						explodeAnim;
+		float					explodeMove;
+		
 	private:
 		GLFWwindow				*_Window;
 		const GLFWvidmode		*_Mode;
@@ -123,6 +129,7 @@ class	Engine {
 
 		/** Shaders **/
 		Shader					_Shader;
+		Shader					_BackgroundShader;
 		Shader					_ModelShader;
 		Shader					_ShaderText;
 		Shader					_Lighting;
@@ -134,17 +141,7 @@ class	Engine {
 		Model					_Bomb;
 		Model					_Enemy;
 		Model					_Door;
-
-
-
-
-
-
-
-
-
-
-
+		Model					_Explosion;
 
 
 

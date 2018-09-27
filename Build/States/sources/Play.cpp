@@ -9,7 +9,7 @@ PlayState::PlayState( Engine & engine ){ // first init?
 	_positionPitch = 0.0f;
 
 	this->begin = std::chrono::steady_clock::now();
-	this->_engine->triangle();
+	this->_engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
 	this->_OM = new ObjectManager( engine );
 	this->_GM = new GUIManager( engine );
 }
@@ -19,7 +19,7 @@ PlayState::PlayState( void ){
 }
 
 PlayState::~PlayState( void ){
-	this->_engine->_Camera.init(glm::vec3(0.48f, -0.48f, 3.0f));
+	this->_engine->_Camera.init(glm::vec3(0.48f, -1.1f, 2.7f));
 	this->_engine->stopSound();
 }
 
@@ -40,8 +40,8 @@ void PlayState::update( eControls key ){
 	else if (key == IDLEKEY){
 		held = 0;
 	}
-	else if (key == FIRE)
-		this->_OM->placeBomb();
+	// else if (key == FIRE)
+	// 	this->_engine->_Camera.DefaultPos();
 	this->_OM->update(key, 0.1f);
 	this->_GM->update(this->_OM->player, this->_remainingTime);
 }
@@ -64,13 +64,17 @@ void PlayState::render( void ) {
 		this->_engine->playSound("Assets/Audio/Bomberman-Music.wav", true);
 		this->_isPlaying = true;
 	}
+	if ( this->_positionPitch < 7.5f) {
+		this->_engine->_Camera.ProcessMouseMovement(0.0f, this->_positionPitch);
+		this->_positionPitch += 0.1f;
+	}
 	if ( this->_positionTime < 0.11f ) {
 		this->_engine->_Camera.ProcessKeyboard(CAMERA_FORWARD, this->_positionTime);
 		this->_positionTime += 0.01f;
 	}
 	this->_engine->clear();
 	this->drawMap(); // move to engine
-	this->_engine->draw(); //rename
+	this->_engine->drawBackground(); //rename
 	this->_OM->render();
 	this->_GM->render();
 	this->_engine->render();
