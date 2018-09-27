@@ -13,7 +13,7 @@ LevelManager::LevelManager( int level ){
 
 	switch(level) {
 		case(1):
-			this->duration = 100;
+			this->duration = 5; // test debug was 100
 			break;
 		case(2):
 			this->duration = 80;

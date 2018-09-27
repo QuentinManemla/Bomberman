@@ -12,6 +12,9 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->placeEnemies(); // 
 	this->playerScore = 0;
 
+	// INITS
+	this->timeSpeedupFlag = 0;
+
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	this->fuseTime = 1.5f;
 	this->bombRadius = 2;
@@ -23,9 +26,10 @@ ObjectManager::~ObjectManager( void ){
 	delete this->player; // test
 }
 
-void	ObjectManager::update( eControls key, double remainingTime){
+void	ObjectManager::update( eControls key, int remainingTime){
 	// ADJUST VALUES BASED ON TIME
 	this->processRemaingingTime(remainingTime);
+	this->levelProcess( remainingTime );
 
 	// PLACE BOMB
 	if (key == FIRE){
@@ -437,14 +441,17 @@ void	ObjectManager::ImmortalTick( void ){
 	}
 }
 
-void	ObjectManager::processRemaingingTime( double remainingTime ){
+void	ObjectManager::processRemaingingTime( int remainingTime ){
 	std::cout << "remaining time: " << remainingTime << std::endl; // debug
-	//exit(-1); // debug
-	/*if (remainingTime > 10.0f){
+	if (remainingTime == 0)
+		;//end level fail
+
+	if (remainingTime < 20 && this->timeSpeedupFlag == 0){ // enemies speed up when time drops below 20 seconds remaining
 		for (int i = 0; i < this->enemies.size(); i++){
-			this->enemies[i]->velocity += 1.0f;
+			this->enemies[i]->velocity += 2.0f;
+			this->timeSpeedupFlag = 1;
 		}
-	}*/
+	}
 }
 
 
@@ -465,4 +472,19 @@ void	ObjectManager::processRemaingingTime( double remainingTime ){
 
 void	ObjectManager::updatePlayerScore( int amount ){
 	this->playerScore += amount;
+}
+
+int		ObjectManager::allEnemiesDead( void ){
+	for (int i = 0; i < this->enemies.size(); i++){
+		if (this->enemies[i]->state == ALIVE)
+			return (1);
+	}
+	return (0);
+}
+
+void	ObjectManager::levelProcess( int remainingTime ){
+	// check time and adjust enemy speed
+	// check if player collide with door
+		// check if all enemies dead
+		// if true then end level and initiate next one if there is one (endlevel(success))
 }
