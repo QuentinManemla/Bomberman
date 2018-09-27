@@ -7,7 +7,7 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->map = this->LM->generateMap();
 	this->player = new Player( PLAYER, new Vector3d(2, 2, 0.1f) );
 	this->bomb = NULL;
-	this->placeEnemies(); // arbitrary int for now
+	this->placeEnemies(); // 
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	this->fuseTime = 1.5f;
@@ -50,10 +50,9 @@ void	ObjectManager::update( eControls key, double deltaTime){
 
 	// INCREMENT BOMB FUSE
 	if (this->bomb != NULL){
-		this->bomb->fuseTime -= this->engine->_deltaTime; // to be replaced with deltaTime
+		this->bomb->fuseTime -= this->engine->_deltaTime;
 		if (this->bomb->fuseTime < 0)
 			if (this->bomb->state == DYING) {
-				//draw explosion
 				if (this->bomb->fuseTime < -0.1f) { // save as blastTime
 					delete this->bomb; // test
 					this->bomb = NULL;
@@ -61,8 +60,8 @@ void	ObjectManager::update( eControls key, double deltaTime){
 			}
 			else{
 				this->explode();
-				this->engine->bombAnim = 0;
-				this->engine->bombMove = 0.005f;
+				//this->engine->bombAnim = 0;
+				//this->engine->bombMove = 0.005f;
 			}
 	}
 	// IF PLAYER = MORTAL IF PLAYER COLLISION WITH ENEMY, PLAYER--
@@ -158,29 +157,6 @@ void	ObjectManager::move( GameObject *actor, int vectorDifference ){
 	}
 }
 
-/*
-void    ObjectManager::move( GameObject *actor, int vectorDifference ){
-    std::cout << "VD in move: " << vectorDifference << std::endl; // debug
-    float move = 0;
-    switch (vectorDifference){
-        case 1:
-            move = ((trunc(actor->position->vX * 10) / 10) > trunc(actor->destination->vX * 10) / 10 ? -0.1 : 0.1);
-            //if (abs(actor->position->vX - actor->destination->vX) > 0.09)// test // debug // WORK BUT MOVE TO PRIMARY CONDITION
-                actor->position->vX += (move + 3.0f * this->engine->_deltaTime);
-            //actor->position->vZ = getZStep(actor);
-            break;
-        case 2:
-            move = (actor->position->vY > actor->destination->vY ? -0.1 : 0.1);
-            actor->position->vY += (move + 3.0f * this->engine->_deltaTime);
-            break;
-        case 3:
-            move = (actor->position->vZ > actor->destination->vZ ? -0.1 : 0.1);
-            actor->position->vZ += (move + 3.0f * this->engine->_deltaTime);
-            break;
-    }
-}
-*/
-
 float	ObjectManager::getZStep( GameObject *actor){
 	float ret = 0;
 
@@ -246,15 +222,15 @@ int		ObjectManager::getVectorDifference(GameObject *actor){
 }
 
 void	ObjectManager::placeEnemies( void ){
-
 	int x;
 	int y;
 
-	for ( int i = 0; i < this->LM->enemies.size(); i++){
-		x = this->LM->enemies[i].first;
-		y = this->LM->enemies[i].second;
-		this->enemies.push_back(new Enemy( ENEMY, new Vector3d(x, y, 0.1f) )); // test // debug
-	}
+	if (this->LM->enemies.size() > 0)
+		for ( int i = 0; i < this->LM->enemies.size(); i++){
+			x = this->LM->enemies[i].first;
+			y = this->LM->enemies[i].second;
+			this->enemies.push_back(new Enemy( ENEMY, new Vector3d(x, y, 0.1f) )); // test // debug
+		}
 }
 
 bool	ObjectManager::isAtDestination( GameObject *actor){
@@ -395,21 +371,12 @@ void	ObjectManager::explode( void ){
 		}
 	}
 
-	std::cout << "pre exit" << std::endl;
-
-	//this->engine->drawModel(WALL, (this->bomb->blast[0].first), (this->bomb->blast[0].second), 0.02f);//this->player->position->vZ); // moved math to drawModel()
-
 	// RENDER EXPLOSION // NEEDS TO BE MOVED AND PROLONGED
 	for (int i = 0; i < this->bomb->blast.size(); i++) {
-		std::cout << "SPLODE" << std::endl;
 		this->engine->drawModel(WALL, (this->bomb->blast[i].first), (this->bomb->blast[i].second), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	}
-	//exit(-1); // debug
 
-	//delete this->bomb; // test
-	//this->bomb = NULL;
 	this->bomb->state = DYING;
-	std::cout << "boom" << std::endl;
 }
 
 void	ObjectManager::playerDied( void ){
@@ -451,5 +418,3 @@ void	ObjectManager::ImmortalTick( void ){
 // certain wall gets door = true attribute
 // if a wall dies and door is true, spawn door object
 // door object has own properties
-
-// bomb blast needs to stop at first destroyed block. currently doesnt
