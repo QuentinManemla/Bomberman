@@ -6,13 +6,14 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->LM = new LevelManager(1); // may move this codeblock to a level init function to be available on call rather than this constructor
 	this->map = this->LM->generateMap();
 	this->player = new Player( PLAYER, new Vector3d(2, 2, 0.1f) );
+	this->playerReset(); // start with temp immortality
 	this->bomb = NULL;
 	this->placeEnemies(); // 
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	this->fuseTime = 1.5f;
 	this->bombRadius = 2;
-	this->playerImmortalTime = 1.0;
+	this->playerImmortalTime = 2.0;
 }
 
 ObjectManager::~ObjectManager( void ){
@@ -350,8 +351,14 @@ void	ObjectManager::explode( void ){
 	for (int j = 0; j < this->map.size(); j++){
 		for (int i = 0; i < this->bomb->blast.size(); i++){
 			if (this->map[j]->position->vX == this->bomb->blast[i].first && this->map[j]->position->vY == this->bomb->blast[i].second && this->map[j]->state == ALIVE && this->map[j]->mortal == 1){
-				//std::cout << "dead coord: " << this->map[j]->position->vX << ";" << this->map[j]->position->vY << std::endl; // debug
 				this->map[j]->state = DEAD;
+				// DOOR TEST
+				//if (this->map[j]->door == 1){
+					// new Door gets map[j] pos,
+					// delete this->map[j]
+					// this->map[i] = door;
+				//}
+				// END DOOR TEST
 			}
 		}
 	}
