@@ -37,6 +37,7 @@ public:
 	int			isDestVectorEqual(Vector3d *first, Vector3d *second);
 	void		playerReset( void );
 	void		ImmortalTick( void );
+	void		levelEnd( /*maybe points and powerups*/ );
 
 
 	Engine						*engine;

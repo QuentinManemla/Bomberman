@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+36f4510c788d53663c8b620e28efb21e CMakeFiles/glad-generate-files
+c3504bce0fceaf73c569c3cbdca4bd90 src/glad.c

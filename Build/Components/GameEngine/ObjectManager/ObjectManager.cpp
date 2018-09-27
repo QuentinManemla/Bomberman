@@ -1,6 +1,7 @@
 #include "ObjectManager.hpp"
 
 static int	fuse_time = 0;
+
 ObjectManager::ObjectManager( Engine & engine ){
 	this->engine = &engine;
 	this->LM = new LevelManager(1); // may move this codeblock to a level init function to be available on call rather than this constructor
@@ -420,6 +421,10 @@ void	ObjectManager::ImmortalTick( void ){
 		this->player->state = ALIVE;
 	}
 }
+
+//void	ObjectManager::LevelEnd(/*stuff probably*/){
+//	
+//}
 
 // in level manager
 // certain wall gets door = true attribute

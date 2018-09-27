@@ -156,10 +156,8 @@ void	LevelManager::setDoor( void ){
 				if (this->testMap[i]->eType == WALL){
 					if (rand() % 50 == 0){
 						door = new Door(DOOR, new Vector3d(this->testMap[i]->position->vX, this->testMap[i]->position->vY, this->testMap[i]->position->vZ));
-						//delete this->testMap[i];
-						//this->testMap[i] = door;
 						doorFlag = 1;
-						this->testMap.push_back(door); // test
+						this->testMap.push_back(door);
 						std::cout << "Door placed at " << door->position->vX << ";" << door->position->vY << std::endl; // debug
 					}
 				}

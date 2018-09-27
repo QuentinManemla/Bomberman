@@ -9,8 +9,8 @@ GUIManager::GUIManager( void ) { return ; }
 GUIManager::~GUIManager( void ) { return ; }
 
 void		GUIManager::update( GameObject *player, int	elapsedSec) {
-	this->_lives = "Lives: 1";
-	this->_timeElapsed = "Time: " + std::to_string(elapsedSec);
+	this->_lives = "Lives: " + std::to_string(player->hitPoints);
+	this->_timeElapsed = "Time:  " + std::to_string(elapsedSec);
 }
 
 void		GUIManager::render( void ) {
