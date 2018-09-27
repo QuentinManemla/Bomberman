@@ -54,6 +54,9 @@ void Game::_switchState( void ){
 			case FULLSCREEN:
 				this->_stateStack.push(new OptionsFullScreenState(this->_engine));
 				break;
+			case VOLUME:
+				this->_stateStack.push(new OptionsVolumeState(this->_engine));
+				break;
 			case BACK:
 				if (this->_stateStack.top()->getType() != "Quit"){ // special case when esc is pressed in quit state
 					delete this->_stateStack.top();

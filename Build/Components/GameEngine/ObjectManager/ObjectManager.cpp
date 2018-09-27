@@ -324,6 +324,7 @@ void	ObjectManager::getOpenDirection( GameObject *actor ){
 }
 
 void	ObjectManager::placeBomb( void ){
+	this->engine->_SoundEngine.playSoundSource(this->engine->_SoundEngine._PlaceBomb, false);
 	this->engine->playSound("Assets/Audio/punch.wav", false);
 	// check for bomb related powerup and then change bomb params accordingly
 	if (this->bomb == NULL)
@@ -337,7 +338,8 @@ void	ObjectManager::explode( void ){
 	// extend in open dirs as far as radius including bomb pos
 	// check if collision with any mortal object
 	// clean up the carnage
-	this->engine->playSound("Assets/Audio/bomb-explode.wav", false);
+	this->engine->_SoundEngine.playSoundSource(this->engine->_SoundEngine._Explode, false);
+
 	int	dir = -1;
 	int	index = -1;
 	int	x = static_cast<int>(this->bomb->position->vX);

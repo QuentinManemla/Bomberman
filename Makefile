@@ -56,6 +56,63 @@ CMAKE_BINARY_DIR = /goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/Bomberma
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target package_source
+package_source:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cpack --config ./CPackSourceConfig.cmake /goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/Bomberman/CPackSourceConfig.cmake
+.PHONY : package_source
+
+# Special rule for the target package_source
+package_source/fast: package_source
+
+.PHONY : package_source/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +134,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target package
+package: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cpack --config ./CPackConfig.cmake
+.PHONY : package
+
+# Special rule for the target package
+package/fast: package
+
+.PHONY : package/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,17 +179,121 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Bomberman
+# Target rules for targets named BomberMan
 
 # Build rule for target.
-Bomberman: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Bomberman
-.PHONY : Bomberman
+BomberMan: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 BomberMan
+.PHONY : BomberMan
 
 # fast build rule for target.
-Bomberman/fast:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/build
-.PHONY : Bomberman/fast
+BomberMan/fast:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/build
+.PHONY : BomberMan/fast
+
+#=============================================================================
+# Target rules for targets named glad
+
+# Build rule for target.
+glad: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 glad
+.PHONY : glad
+
+# fast build rule for target.
+glad/fast:
+	$(MAKE) -f _deps/glad-build/CMakeFiles/glad.dir/build.make _deps/glad-build/CMakeFiles/glad.dir/build
+.PHONY : glad/fast
+
+#=============================================================================
+# Target rules for targets named glad-generate-files
+
+# Build rule for target.
+glad-generate-files: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 glad-generate-files
+.PHONY : glad-generate-files
+
+# fast build rule for target.
+glad-generate-files/fast:
+	$(MAKE) -f _deps/glad-build/CMakeFiles/glad-generate-files.dir/build.make _deps/glad-build/CMakeFiles/glad-generate-files.dir/build
+.PHONY : glad-generate-files/fast
+
+#=============================================================================
+# Target rules for targets named uninstall
+
+# Build rule for target.
+uninstall: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 uninstall
+.PHONY : uninstall
+
+# fast build rule for target.
+uninstall/fast:
+	$(MAKE) -f _deps/glfw-build/CMakeFiles/uninstall.dir/build.make _deps/glfw-build/CMakeFiles/uninstall.dir/build
+.PHONY : uninstall/fast
+
+#=============================================================================
+# Target rules for targets named glfw
+
+# Build rule for target.
+glfw: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 glfw
+.PHONY : glfw
+
+# fast build rule for target.
+glfw/fast:
+	$(MAKE) -f _deps/glfw-build/src/CMakeFiles/glfw.dir/build.make _deps/glfw-build/src/CMakeFiles/glfw.dir/build
+.PHONY : glfw/fast
+
+#=============================================================================
+# Target rules for targets named glm_shared
+
+# Build rule for target.
+glm_shared: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 glm_shared
+.PHONY : glm_shared
+
+# fast build rule for target.
+glm_shared/fast:
+	$(MAKE) -f _deps/glm-build/glm/CMakeFiles/glm_shared.dir/build.make _deps/glm-build/glm/CMakeFiles/glm_shared.dir/build
+.PHONY : glm_shared/fast
+
+#=============================================================================
+# Target rules for targets named glm_static
+
+# Build rule for target.
+glm_static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 glm_static
+.PHONY : glm_static
+
+# fast build rule for target.
+glm_static/fast:
+	$(MAKE) -f _deps/glm-build/glm/CMakeFiles/glm_static.dir/build.make _deps/glm-build/glm/CMakeFiles/glm_static.dir/build
+.PHONY : glm_static/fast
+
+#=============================================================================
+# Target rules for targets named dist
+
+# Build rule for target.
+dist: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 dist
+.PHONY : dist
+
+# fast build rule for target.
+dist/fast:
+	$(MAKE) -f _deps/freetype-build/CMakeFiles/dist.dir/build.make _deps/freetype-build/CMakeFiles/dist.dir/build
+.PHONY : dist/fast
+
+#=============================================================================
+# Target rules for targets named freetype
+
+# Build rule for target.
+freetype: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 freetype
+.PHONY : freetype
+
+# fast build rule for target.
+freetype/fast:
+	$(MAKE) -f _deps/freetype-build/CMakeFiles/freetype.dir/build.make _deps/freetype-build/CMakeFiles/freetype.dir/build
+.PHONY : freetype/fast
 
 Build/Components/Engine/sources/Engine.o: Build/Components/Engine/sources/Engine.cpp.o
 
@@ -129,7 +301,7 @@ Build/Components/Engine/sources/Engine.o: Build/Components/Engine/sources/Engine
 
 # target to build an object file
 Build/Components/Engine/sources/Engine.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Engine.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.o
 .PHONY : Build/Components/Engine/sources/Engine.cpp.o
 
 Build/Components/Engine/sources/Engine.i: Build/Components/Engine/sources/Engine.cpp.i
@@ -138,7 +310,7 @@ Build/Components/Engine/sources/Engine.i: Build/Components/Engine/sources/Engine
 
 # target to preprocess a source file
 Build/Components/Engine/sources/Engine.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Engine.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.i
 .PHONY : Build/Components/Engine/sources/Engine.cpp.i
 
 Build/Components/Engine/sources/Engine.s: Build/Components/Engine/sources/Engine.cpp.s
@@ -147,35 +319,8 @@ Build/Components/Engine/sources/Engine.s: Build/Components/Engine/sources/Engine
 
 # target to generate assembly for a file
 Build/Components/Engine/sources/Engine.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Engine.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.s
 .PHONY : Build/Components/Engine/sources/Engine.cpp.s
-
-Build/Components/Engine/sources/Image.o: Build/Components/Engine/sources/Image.cpp.o
-
-.PHONY : Build/Components/Engine/sources/Image.o
-
-# target to build an object file
-Build/Components/Engine/sources/Image.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Image.cpp.o
-.PHONY : Build/Components/Engine/sources/Image.cpp.o
-
-Build/Components/Engine/sources/Image.i: Build/Components/Engine/sources/Image.cpp.i
-
-.PHONY : Build/Components/Engine/sources/Image.i
-
-# target to preprocess a source file
-Build/Components/Engine/sources/Image.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Image.cpp.i
-.PHONY : Build/Components/Engine/sources/Image.cpp.i
-
-Build/Components/Engine/sources/Image.s: Build/Components/Engine/sources/Image.cpp.s
-
-.PHONY : Build/Components/Engine/sources/Image.s
-
-# target to generate assembly for a file
-Build/Components/Engine/sources/Image.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Image.cpp.s
-.PHONY : Build/Components/Engine/sources/Image.cpp.s
 
 Build/Components/Engine/sources/Model.o: Build/Components/Engine/sources/Model.cpp.o
 
@@ -183,7 +328,7 @@ Build/Components/Engine/sources/Model.o: Build/Components/Engine/sources/Model.c
 
 # target to build an object file
 Build/Components/Engine/sources/Model.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Model.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.o
 .PHONY : Build/Components/Engine/sources/Model.cpp.o
 
 Build/Components/Engine/sources/Model.i: Build/Components/Engine/sources/Model.cpp.i
@@ -192,7 +337,7 @@ Build/Components/Engine/sources/Model.i: Build/Components/Engine/sources/Model.c
 
 # target to preprocess a source file
 Build/Components/Engine/sources/Model.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Model.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.i
 .PHONY : Build/Components/Engine/sources/Model.cpp.i
 
 Build/Components/Engine/sources/Model.s: Build/Components/Engine/sources/Model.cpp.s
@@ -201,7 +346,7 @@ Build/Components/Engine/sources/Model.s: Build/Components/Engine/sources/Model.c
 
 # target to generate assembly for a file
 Build/Components/Engine/sources/Model.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Model.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.s
 .PHONY : Build/Components/Engine/sources/Model.cpp.s
 
 Build/Components/Engine/sources/Shader.o: Build/Components/Engine/sources/Shader.cpp.o
@@ -210,7 +355,7 @@ Build/Components/Engine/sources/Shader.o: Build/Components/Engine/sources/Shader
 
 # target to build an object file
 Build/Components/Engine/sources/Shader.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Shader.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.o
 .PHONY : Build/Components/Engine/sources/Shader.cpp.o
 
 Build/Components/Engine/sources/Shader.i: Build/Components/Engine/sources/Shader.cpp.i
@@ -219,7 +364,7 @@ Build/Components/Engine/sources/Shader.i: Build/Components/Engine/sources/Shader
 
 # target to preprocess a source file
 Build/Components/Engine/sources/Shader.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Shader.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.i
 .PHONY : Build/Components/Engine/sources/Shader.cpp.i
 
 Build/Components/Engine/sources/Shader.s: Build/Components/Engine/sources/Shader.cpp.s
@@ -228,7 +373,7 @@ Build/Components/Engine/sources/Shader.s: Build/Components/Engine/sources/Shader
 
 # target to generate assembly for a file
 Build/Components/Engine/sources/Shader.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Shader.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.s
 .PHONY : Build/Components/Engine/sources/Shader.cpp.s
 
 Build/Components/Engine/sources/Text.o: Build/Components/Engine/sources/Text.cpp.o
@@ -237,7 +382,7 @@ Build/Components/Engine/sources/Text.o: Build/Components/Engine/sources/Text.cpp
 
 # target to build an object file
 Build/Components/Engine/sources/Text.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Text.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.o
 .PHONY : Build/Components/Engine/sources/Text.cpp.o
 
 Build/Components/Engine/sources/Text.i: Build/Components/Engine/sources/Text.cpp.i
@@ -246,7 +391,7 @@ Build/Components/Engine/sources/Text.i: Build/Components/Engine/sources/Text.cpp
 
 # target to preprocess a source file
 Build/Components/Engine/sources/Text.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Text.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.i
 .PHONY : Build/Components/Engine/sources/Text.cpp.i
 
 Build/Components/Engine/sources/Text.s: Build/Components/Engine/sources/Text.cpp.s
@@ -255,7 +400,7 @@ Build/Components/Engine/sources/Text.s: Build/Components/Engine/sources/Text.cpp
 
 # target to generate assembly for a file
 Build/Components/Engine/sources/Text.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Engine/sources/Text.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.s
 .PHONY : Build/Components/Engine/sources/Text.cpp.s
 
 Build/Components/Game/sources/Game.o: Build/Components/Game/sources/Game.cpp.o
@@ -264,7 +409,7 @@ Build/Components/Game/sources/Game.o: Build/Components/Game/sources/Game.cpp.o
 
 # target to build an object file
 Build/Components/Game/sources/Game.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Game/sources/Game.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.o
 .PHONY : Build/Components/Game/sources/Game.cpp.o
 
 Build/Components/Game/sources/Game.i: Build/Components/Game/sources/Game.cpp.i
@@ -273,7 +418,7 @@ Build/Components/Game/sources/Game.i: Build/Components/Game/sources/Game.cpp.i
 
 # target to preprocess a source file
 Build/Components/Game/sources/Game.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Game/sources/Game.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.i
 .PHONY : Build/Components/Game/sources/Game.cpp.i
 
 Build/Components/Game/sources/Game.s: Build/Components/Game/sources/Game.cpp.s
@@ -282,8 +427,35 @@ Build/Components/Game/sources/Game.s: Build/Components/Game/sources/Game.cpp.s
 
 # target to generate assembly for a file
 Build/Components/Game/sources/Game.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Game/sources/Game.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.s
 .PHONY : Build/Components/Game/sources/Game.cpp.s
+
+Build/Components/GameEngine/GUIManager/GUIManager.o: Build/Components/GameEngine/GUIManager/GUIManager.cpp.o
+
+.PHONY : Build/Components/GameEngine/GUIManager/GUIManager.o
+
+# target to build an object file
+Build/Components/GameEngine/GUIManager/GUIManager.cpp.o:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.o
+.PHONY : Build/Components/GameEngine/GUIManager/GUIManager.cpp.o
+
+Build/Components/GameEngine/GUIManager/GUIManager.i: Build/Components/GameEngine/GUIManager/GUIManager.cpp.i
+
+.PHONY : Build/Components/GameEngine/GUIManager/GUIManager.i
+
+# target to preprocess a source file
+Build/Components/GameEngine/GUIManager/GUIManager.cpp.i:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.i
+.PHONY : Build/Components/GameEngine/GUIManager/GUIManager.cpp.i
+
+Build/Components/GameEngine/GUIManager/GUIManager.s: Build/Components/GameEngine/GUIManager/GUIManager.cpp.s
+
+.PHONY : Build/Components/GameEngine/GUIManager/GUIManager.s
+
+# target to generate assembly for a file
+Build/Components/GameEngine/GUIManager/GUIManager.cpp.s:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.s
+.PHONY : Build/Components/GameEngine/GUIManager/GUIManager.cpp.s
 
 Build/Components/GameEngine/GameObjects/sources/Bomb.o: Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.o
 
@@ -291,7 +463,7 @@ Build/Components/GameEngine/GameObjects/sources/Bomb.o: Build/Components/GameEng
 
 # target to build an object file
 Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.o
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.o
 
 Build/Components/GameEngine/GameObjects/sources/Bomb.i: Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.i
@@ -300,7 +472,7 @@ Build/Components/GameEngine/GameObjects/sources/Bomb.i: Build/Components/GameEng
 
 # target to preprocess a source file
 Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.i
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.i
 
 Build/Components/GameEngine/GameObjects/sources/Bomb.s: Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.s
@@ -309,7 +481,7 @@ Build/Components/GameEngine/GameObjects/sources/Bomb.s: Build/Components/GameEng
 
 # target to generate assembly for a file
 Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.s
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.s
 
 Build/Components/GameEngine/GameObjects/sources/Door.o: Build/Components/GameEngine/GameObjects/sources/Door.cpp.o
@@ -318,7 +490,7 @@ Build/Components/GameEngine/GameObjects/sources/Door.o: Build/Components/GameEng
 
 # target to build an object file
 Build/Components/GameEngine/GameObjects/sources/Door.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.o
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Door.cpp.o
 
 Build/Components/GameEngine/GameObjects/sources/Door.i: Build/Components/GameEngine/GameObjects/sources/Door.cpp.i
@@ -327,7 +499,7 @@ Build/Components/GameEngine/GameObjects/sources/Door.i: Build/Components/GameEng
 
 # target to preprocess a source file
 Build/Components/GameEngine/GameObjects/sources/Door.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.i
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Door.cpp.i
 
 Build/Components/GameEngine/GameObjects/sources/Door.s: Build/Components/GameEngine/GameObjects/sources/Door.cpp.s
@@ -336,7 +508,7 @@ Build/Components/GameEngine/GameObjects/sources/Door.s: Build/Components/GameEng
 
 # target to generate assembly for a file
 Build/Components/GameEngine/GameObjects/sources/Door.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.s
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Door.cpp.s
 
 Build/Components/GameEngine/GameObjects/sources/Enemy.o: Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.o
@@ -345,7 +517,7 @@ Build/Components/GameEngine/GameObjects/sources/Enemy.o: Build/Components/GameEn
 
 # target to build an object file
 Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.o
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.o
 
 Build/Components/GameEngine/GameObjects/sources/Enemy.i: Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.i
@@ -354,7 +526,7 @@ Build/Components/GameEngine/GameObjects/sources/Enemy.i: Build/Components/GameEn
 
 # target to preprocess a source file
 Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.i
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.i
 
 Build/Components/GameEngine/GameObjects/sources/Enemy.s: Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.s
@@ -363,7 +535,7 @@ Build/Components/GameEngine/GameObjects/sources/Enemy.s: Build/Components/GameEn
 
 # target to generate assembly for a file
 Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.s
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.s
 
 Build/Components/GameEngine/GameObjects/sources/GameObject.o: Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.o
@@ -372,7 +544,7 @@ Build/Components/GameEngine/GameObjects/sources/GameObject.o: Build/Components/G
 
 # target to build an object file
 Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.o
 .PHONY : Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.o
 
 Build/Components/GameEngine/GameObjects/sources/GameObject.i: Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.i
@@ -381,7 +553,7 @@ Build/Components/GameEngine/GameObjects/sources/GameObject.i: Build/Components/G
 
 # target to preprocess a source file
 Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.i
 .PHONY : Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.i
 
 Build/Components/GameEngine/GameObjects/sources/GameObject.s: Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.s
@@ -390,7 +562,7 @@ Build/Components/GameEngine/GameObjects/sources/GameObject.s: Build/Components/G
 
 # target to generate assembly for a file
 Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.s
 .PHONY : Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.s
 
 Build/Components/GameEngine/GameObjects/sources/Player.o: Build/Components/GameEngine/GameObjects/sources/Player.cpp.o
@@ -399,7 +571,7 @@ Build/Components/GameEngine/GameObjects/sources/Player.o: Build/Components/GameE
 
 # target to build an object file
 Build/Components/GameEngine/GameObjects/sources/Player.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.o
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Player.cpp.o
 
 Build/Components/GameEngine/GameObjects/sources/Player.i: Build/Components/GameEngine/GameObjects/sources/Player.cpp.i
@@ -408,7 +580,7 @@ Build/Components/GameEngine/GameObjects/sources/Player.i: Build/Components/GameE
 
 # target to preprocess a source file
 Build/Components/GameEngine/GameObjects/sources/Player.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.i
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Player.cpp.i
 
 Build/Components/GameEngine/GameObjects/sources/Player.s: Build/Components/GameEngine/GameObjects/sources/Player.cpp.s
@@ -417,7 +589,7 @@ Build/Components/GameEngine/GameObjects/sources/Player.s: Build/Components/GameE
 
 # target to generate assembly for a file
 Build/Components/GameEngine/GameObjects/sources/Player.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.s
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Player.cpp.s
 
 Build/Components/GameEngine/GameObjects/sources/SolidWall.o: Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.o
@@ -426,7 +598,7 @@ Build/Components/GameEngine/GameObjects/sources/SolidWall.o: Build/Components/Ga
 
 # target to build an object file
 Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.o
 .PHONY : Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.o
 
 Build/Components/GameEngine/GameObjects/sources/SolidWall.i: Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.i
@@ -435,7 +607,7 @@ Build/Components/GameEngine/GameObjects/sources/SolidWall.i: Build/Components/Ga
 
 # target to preprocess a source file
 Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.i
 .PHONY : Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.i
 
 Build/Components/GameEngine/GameObjects/sources/SolidWall.s: Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.s
@@ -444,7 +616,7 @@ Build/Components/GameEngine/GameObjects/sources/SolidWall.s: Build/Components/Ga
 
 # target to generate assembly for a file
 Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.s
 .PHONY : Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.s
 
 Build/Components/GameEngine/GameObjects/sources/Wall.o: Build/Components/GameEngine/GameObjects/sources/Wall.cpp.o
@@ -453,7 +625,7 @@ Build/Components/GameEngine/GameObjects/sources/Wall.o: Build/Components/GameEng
 
 # target to build an object file
 Build/Components/GameEngine/GameObjects/sources/Wall.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.o
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Wall.cpp.o
 
 Build/Components/GameEngine/GameObjects/sources/Wall.i: Build/Components/GameEngine/GameObjects/sources/Wall.cpp.i
@@ -462,7 +634,7 @@ Build/Components/GameEngine/GameObjects/sources/Wall.i: Build/Components/GameEng
 
 # target to preprocess a source file
 Build/Components/GameEngine/GameObjects/sources/Wall.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.i
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Wall.cpp.i
 
 Build/Components/GameEngine/GameObjects/sources/Wall.s: Build/Components/GameEngine/GameObjects/sources/Wall.cpp.s
@@ -471,7 +643,7 @@ Build/Components/GameEngine/GameObjects/sources/Wall.s: Build/Components/GameEng
 
 # target to generate assembly for a file
 Build/Components/GameEngine/GameObjects/sources/Wall.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.s
 .PHONY : Build/Components/GameEngine/GameObjects/sources/Wall.cpp.s
 
 Build/Components/GameEngine/LevelManager/LevelManager.o: Build/Components/GameEngine/LevelManager/LevelManager.cpp.o
@@ -480,7 +652,7 @@ Build/Components/GameEngine/LevelManager/LevelManager.o: Build/Components/GameEn
 
 # target to build an object file
 Build/Components/GameEngine/LevelManager/LevelManager.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.o
 .PHONY : Build/Components/GameEngine/LevelManager/LevelManager.cpp.o
 
 Build/Components/GameEngine/LevelManager/LevelManager.i: Build/Components/GameEngine/LevelManager/LevelManager.cpp.i
@@ -489,7 +661,7 @@ Build/Components/GameEngine/LevelManager/LevelManager.i: Build/Components/GameEn
 
 # target to preprocess a source file
 Build/Components/GameEngine/LevelManager/LevelManager.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.i
 .PHONY : Build/Components/GameEngine/LevelManager/LevelManager.cpp.i
 
 Build/Components/GameEngine/LevelManager/LevelManager.s: Build/Components/GameEngine/LevelManager/LevelManager.cpp.s
@@ -498,7 +670,7 @@ Build/Components/GameEngine/LevelManager/LevelManager.s: Build/Components/GameEn
 
 # target to generate assembly for a file
 Build/Components/GameEngine/LevelManager/LevelManager.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.s
 .PHONY : Build/Components/GameEngine/LevelManager/LevelManager.cpp.s
 
 Build/Components/GameEngine/ObjectManager/ObjectManager.o: Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.o
@@ -507,7 +679,7 @@ Build/Components/GameEngine/ObjectManager/ObjectManager.o: Build/Components/Game
 
 # target to build an object file
 Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.o
 .PHONY : Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.o
 
 Build/Components/GameEngine/ObjectManager/ObjectManager.i: Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.i
@@ -516,7 +688,7 @@ Build/Components/GameEngine/ObjectManager/ObjectManager.i: Build/Components/Game
 
 # target to preprocess a source file
 Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.i
 .PHONY : Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.i
 
 Build/Components/GameEngine/ObjectManager/ObjectManager.s: Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.s
@@ -525,7 +697,7 @@ Build/Components/GameEngine/ObjectManager/ObjectManager.s: Build/Components/Game
 
 # target to generate assembly for a file
 Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.s
 .PHONY : Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.s
 
 Build/Components/GameEngine/Vector3d/Vector3d.o: Build/Components/GameEngine/Vector3d/Vector3d.cpp.o
@@ -534,7 +706,7 @@ Build/Components/GameEngine/Vector3d/Vector3d.o: Build/Components/GameEngine/Vec
 
 # target to build an object file
 Build/Components/GameEngine/Vector3d/Vector3d.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.o
 .PHONY : Build/Components/GameEngine/Vector3d/Vector3d.cpp.o
 
 Build/Components/GameEngine/Vector3d/Vector3d.i: Build/Components/GameEngine/Vector3d/Vector3d.cpp.i
@@ -543,7 +715,7 @@ Build/Components/GameEngine/Vector3d/Vector3d.i: Build/Components/GameEngine/Vec
 
 # target to preprocess a source file
 Build/Components/GameEngine/Vector3d/Vector3d.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.i
 .PHONY : Build/Components/GameEngine/Vector3d/Vector3d.cpp.i
 
 Build/Components/GameEngine/Vector3d/Vector3d.s: Build/Components/GameEngine/Vector3d/Vector3d.cpp.s
@@ -552,7 +724,7 @@ Build/Components/GameEngine/Vector3d/Vector3d.s: Build/Components/GameEngine/Vec
 
 # target to generate assembly for a file
 Build/Components/GameEngine/Vector3d/Vector3d.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.s
 .PHONY : Build/Components/GameEngine/Vector3d/Vector3d.cpp.s
 
 Build/Components/Sound/sources/Sound.o: Build/Components/Sound/sources/Sound.cpp.o
@@ -561,7 +733,7 @@ Build/Components/Sound/sources/Sound.o: Build/Components/Sound/sources/Sound.cpp
 
 # target to build an object file
 Build/Components/Sound/sources/Sound.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Sound/sources/Sound.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.o
 .PHONY : Build/Components/Sound/sources/Sound.cpp.o
 
 Build/Components/Sound/sources/Sound.i: Build/Components/Sound/sources/Sound.cpp.i
@@ -570,7 +742,7 @@ Build/Components/Sound/sources/Sound.i: Build/Components/Sound/sources/Sound.cpp
 
 # target to preprocess a source file
 Build/Components/Sound/sources/Sound.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Sound/sources/Sound.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.i
 .PHONY : Build/Components/Sound/sources/Sound.cpp.i
 
 Build/Components/Sound/sources/Sound.s: Build/Components/Sound/sources/Sound.cpp.s
@@ -579,7 +751,7 @@ Build/Components/Sound/sources/Sound.s: Build/Components/Sound/sources/Sound.cpp
 
 # target to generate assembly for a file
 Build/Components/Sound/sources/Sound.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/Components/Sound/sources/Sound.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.s
 .PHONY : Build/Components/Sound/sources/Sound.cpp.s
 
 Build/States/sources/Credits.o: Build/States/sources/Credits.cpp.o
@@ -588,7 +760,7 @@ Build/States/sources/Credits.o: Build/States/sources/Credits.cpp.o
 
 # target to build an object file
 Build/States/sources/Credits.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Credits.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.o
 .PHONY : Build/States/sources/Credits.cpp.o
 
 Build/States/sources/Credits.i: Build/States/sources/Credits.cpp.i
@@ -597,7 +769,7 @@ Build/States/sources/Credits.i: Build/States/sources/Credits.cpp.i
 
 # target to preprocess a source file
 Build/States/sources/Credits.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Credits.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.i
 .PHONY : Build/States/sources/Credits.cpp.i
 
 Build/States/sources/Credits.s: Build/States/sources/Credits.cpp.s
@@ -606,7 +778,7 @@ Build/States/sources/Credits.s: Build/States/sources/Credits.cpp.s
 
 # target to generate assembly for a file
 Build/States/sources/Credits.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Credits.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.s
 .PHONY : Build/States/sources/Credits.cpp.s
 
 Build/States/sources/Intro.o: Build/States/sources/Intro.cpp.o
@@ -615,7 +787,7 @@ Build/States/sources/Intro.o: Build/States/sources/Intro.cpp.o
 
 # target to build an object file
 Build/States/sources/Intro.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Intro.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.o
 .PHONY : Build/States/sources/Intro.cpp.o
 
 Build/States/sources/Intro.i: Build/States/sources/Intro.cpp.i
@@ -624,7 +796,7 @@ Build/States/sources/Intro.i: Build/States/sources/Intro.cpp.i
 
 # target to preprocess a source file
 Build/States/sources/Intro.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Intro.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.i
 .PHONY : Build/States/sources/Intro.cpp.i
 
 Build/States/sources/Intro.s: Build/States/sources/Intro.cpp.s
@@ -633,7 +805,7 @@ Build/States/sources/Intro.s: Build/States/sources/Intro.cpp.s
 
 # target to generate assembly for a file
 Build/States/sources/Intro.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Intro.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.s
 .PHONY : Build/States/sources/Intro.cpp.s
 
 Build/States/sources/Menu.o: Build/States/sources/Menu.cpp.o
@@ -642,7 +814,7 @@ Build/States/sources/Menu.o: Build/States/sources/Menu.cpp.o
 
 # target to build an object file
 Build/States/sources/Menu.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Menu.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.o
 .PHONY : Build/States/sources/Menu.cpp.o
 
 Build/States/sources/Menu.i: Build/States/sources/Menu.cpp.i
@@ -651,7 +823,7 @@ Build/States/sources/Menu.i: Build/States/sources/Menu.cpp.i
 
 # target to preprocess a source file
 Build/States/sources/Menu.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Menu.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.i
 .PHONY : Build/States/sources/Menu.cpp.i
 
 Build/States/sources/Menu.s: Build/States/sources/Menu.cpp.s
@@ -660,7 +832,7 @@ Build/States/sources/Menu.s: Build/States/sources/Menu.cpp.s
 
 # target to generate assembly for a file
 Build/States/sources/Menu.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Menu.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.s
 .PHONY : Build/States/sources/Menu.cpp.s
 
 Build/States/sources/MenuParentState.o: Build/States/sources/MenuParentState.cpp.o
@@ -669,7 +841,7 @@ Build/States/sources/MenuParentState.o: Build/States/sources/MenuParentState.cpp
 
 # target to build an object file
 Build/States/sources/MenuParentState.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/MenuParentState.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.o
 .PHONY : Build/States/sources/MenuParentState.cpp.o
 
 Build/States/sources/MenuParentState.i: Build/States/sources/MenuParentState.cpp.i
@@ -678,7 +850,7 @@ Build/States/sources/MenuParentState.i: Build/States/sources/MenuParentState.cpp
 
 # target to preprocess a source file
 Build/States/sources/MenuParentState.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/MenuParentState.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.i
 .PHONY : Build/States/sources/MenuParentState.cpp.i
 
 Build/States/sources/MenuParentState.s: Build/States/sources/MenuParentState.cpp.s
@@ -687,7 +859,7 @@ Build/States/sources/MenuParentState.s: Build/States/sources/MenuParentState.cpp
 
 # target to generate assembly for a file
 Build/States/sources/MenuParentState.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/MenuParentState.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.s
 .PHONY : Build/States/sources/MenuParentState.cpp.s
 
 Build/States/sources/Options.o: Build/States/sources/Options.cpp.o
@@ -696,7 +868,7 @@ Build/States/sources/Options.o: Build/States/sources/Options.cpp.o
 
 # target to build an object file
 Build/States/sources/Options.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Options.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.o
 .PHONY : Build/States/sources/Options.cpp.o
 
 Build/States/sources/Options.i: Build/States/sources/Options.cpp.i
@@ -705,7 +877,7 @@ Build/States/sources/Options.i: Build/States/sources/Options.cpp.i
 
 # target to preprocess a source file
 Build/States/sources/Options.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Options.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.i
 .PHONY : Build/States/sources/Options.cpp.i
 
 Build/States/sources/Options.s: Build/States/sources/Options.cpp.s
@@ -714,7 +886,7 @@ Build/States/sources/Options.s: Build/States/sources/Options.cpp.s
 
 # target to generate assembly for a file
 Build/States/sources/Options.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Options.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.s
 .PHONY : Build/States/sources/Options.cpp.s
 
 Build/States/sources/OptionsControls.o: Build/States/sources/OptionsControls.cpp.o
@@ -723,7 +895,7 @@ Build/States/sources/OptionsControls.o: Build/States/sources/OptionsControls.cpp
 
 # target to build an object file
 Build/States/sources/OptionsControls.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsControls.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.o
 .PHONY : Build/States/sources/OptionsControls.cpp.o
 
 Build/States/sources/OptionsControls.i: Build/States/sources/OptionsControls.cpp.i
@@ -732,7 +904,7 @@ Build/States/sources/OptionsControls.i: Build/States/sources/OptionsControls.cpp
 
 # target to preprocess a source file
 Build/States/sources/OptionsControls.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsControls.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.i
 .PHONY : Build/States/sources/OptionsControls.cpp.i
 
 Build/States/sources/OptionsControls.s: Build/States/sources/OptionsControls.cpp.s
@@ -741,7 +913,7 @@ Build/States/sources/OptionsControls.s: Build/States/sources/OptionsControls.cpp
 
 # target to generate assembly for a file
 Build/States/sources/OptionsControls.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsControls.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.s
 .PHONY : Build/States/sources/OptionsControls.cpp.s
 
 Build/States/sources/OptionsFullScreen.o: Build/States/sources/OptionsFullScreen.cpp.o
@@ -750,7 +922,7 @@ Build/States/sources/OptionsFullScreen.o: Build/States/sources/OptionsFullScreen
 
 # target to build an object file
 Build/States/sources/OptionsFullScreen.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsFullScreen.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.o
 .PHONY : Build/States/sources/OptionsFullScreen.cpp.o
 
 Build/States/sources/OptionsFullScreen.i: Build/States/sources/OptionsFullScreen.cpp.i
@@ -759,7 +931,7 @@ Build/States/sources/OptionsFullScreen.i: Build/States/sources/OptionsFullScreen
 
 # target to preprocess a source file
 Build/States/sources/OptionsFullScreen.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsFullScreen.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.i
 .PHONY : Build/States/sources/OptionsFullScreen.cpp.i
 
 Build/States/sources/OptionsFullScreen.s: Build/States/sources/OptionsFullScreen.cpp.s
@@ -768,7 +940,7 @@ Build/States/sources/OptionsFullScreen.s: Build/States/sources/OptionsFullScreen
 
 # target to generate assembly for a file
 Build/States/sources/OptionsFullScreen.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsFullScreen.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.s
 .PHONY : Build/States/sources/OptionsFullScreen.cpp.s
 
 Build/States/sources/OptionsResolution.o: Build/States/sources/OptionsResolution.cpp.o
@@ -777,7 +949,7 @@ Build/States/sources/OptionsResolution.o: Build/States/sources/OptionsResolution
 
 # target to build an object file
 Build/States/sources/OptionsResolution.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsResolution.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.o
 .PHONY : Build/States/sources/OptionsResolution.cpp.o
 
 Build/States/sources/OptionsResolution.i: Build/States/sources/OptionsResolution.cpp.i
@@ -786,7 +958,7 @@ Build/States/sources/OptionsResolution.i: Build/States/sources/OptionsResolution
 
 # target to preprocess a source file
 Build/States/sources/OptionsResolution.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsResolution.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.i
 .PHONY : Build/States/sources/OptionsResolution.cpp.i
 
 Build/States/sources/OptionsResolution.s: Build/States/sources/OptionsResolution.cpp.s
@@ -795,7 +967,7 @@ Build/States/sources/OptionsResolution.s: Build/States/sources/OptionsResolution
 
 # target to generate assembly for a file
 Build/States/sources/OptionsResolution.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsResolution.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.s
 .PHONY : Build/States/sources/OptionsResolution.cpp.s
 
 Build/States/sources/OptionsVolume.o: Build/States/sources/OptionsVolume.cpp.o
@@ -804,7 +976,7 @@ Build/States/sources/OptionsVolume.o: Build/States/sources/OptionsVolume.cpp.o
 
 # target to build an object file
 Build/States/sources/OptionsVolume.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsVolume.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.o
 .PHONY : Build/States/sources/OptionsVolume.cpp.o
 
 Build/States/sources/OptionsVolume.i: Build/States/sources/OptionsVolume.cpp.i
@@ -813,7 +985,7 @@ Build/States/sources/OptionsVolume.i: Build/States/sources/OptionsVolume.cpp.i
 
 # target to preprocess a source file
 Build/States/sources/OptionsVolume.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsVolume.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.i
 .PHONY : Build/States/sources/OptionsVolume.cpp.i
 
 Build/States/sources/OptionsVolume.s: Build/States/sources/OptionsVolume.cpp.s
@@ -822,7 +994,7 @@ Build/States/sources/OptionsVolume.s: Build/States/sources/OptionsVolume.cpp.s
 
 # target to generate assembly for a file
 Build/States/sources/OptionsVolume.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/OptionsVolume.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.s
 .PHONY : Build/States/sources/OptionsVolume.cpp.s
 
 Build/States/sources/Pause.o: Build/States/sources/Pause.cpp.o
@@ -831,7 +1003,7 @@ Build/States/sources/Pause.o: Build/States/sources/Pause.cpp.o
 
 # target to build an object file
 Build/States/sources/Pause.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Pause.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.o
 .PHONY : Build/States/sources/Pause.cpp.o
 
 Build/States/sources/Pause.i: Build/States/sources/Pause.cpp.i
@@ -840,7 +1012,7 @@ Build/States/sources/Pause.i: Build/States/sources/Pause.cpp.i
 
 # target to preprocess a source file
 Build/States/sources/Pause.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Pause.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.i
 .PHONY : Build/States/sources/Pause.cpp.i
 
 Build/States/sources/Pause.s: Build/States/sources/Pause.cpp.s
@@ -849,7 +1021,7 @@ Build/States/sources/Pause.s: Build/States/sources/Pause.cpp.s
 
 # target to generate assembly for a file
 Build/States/sources/Pause.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Pause.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.s
 .PHONY : Build/States/sources/Pause.cpp.s
 
 Build/States/sources/PauseQuit.o: Build/States/sources/PauseQuit.cpp.o
@@ -858,7 +1030,7 @@ Build/States/sources/PauseQuit.o: Build/States/sources/PauseQuit.cpp.o
 
 # target to build an object file
 Build/States/sources/PauseQuit.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/PauseQuit.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.o
 .PHONY : Build/States/sources/PauseQuit.cpp.o
 
 Build/States/sources/PauseQuit.i: Build/States/sources/PauseQuit.cpp.i
@@ -867,7 +1039,7 @@ Build/States/sources/PauseQuit.i: Build/States/sources/PauseQuit.cpp.i
 
 # target to preprocess a source file
 Build/States/sources/PauseQuit.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/PauseQuit.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.i
 .PHONY : Build/States/sources/PauseQuit.cpp.i
 
 Build/States/sources/PauseQuit.s: Build/States/sources/PauseQuit.cpp.s
@@ -876,7 +1048,7 @@ Build/States/sources/PauseQuit.s: Build/States/sources/PauseQuit.cpp.s
 
 # target to generate assembly for a file
 Build/States/sources/PauseQuit.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/PauseQuit.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.s
 .PHONY : Build/States/sources/PauseQuit.cpp.s
 
 Build/States/sources/PauseResume.o: Build/States/sources/PauseResume.cpp.o
@@ -885,7 +1057,7 @@ Build/States/sources/PauseResume.o: Build/States/sources/PauseResume.cpp.o
 
 # target to build an object file
 Build/States/sources/PauseResume.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/PauseResume.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.o
 .PHONY : Build/States/sources/PauseResume.cpp.o
 
 Build/States/sources/PauseResume.i: Build/States/sources/PauseResume.cpp.i
@@ -894,7 +1066,7 @@ Build/States/sources/PauseResume.i: Build/States/sources/PauseResume.cpp.i
 
 # target to preprocess a source file
 Build/States/sources/PauseResume.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/PauseResume.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.i
 .PHONY : Build/States/sources/PauseResume.cpp.i
 
 Build/States/sources/PauseResume.s: Build/States/sources/PauseResume.cpp.s
@@ -903,7 +1075,7 @@ Build/States/sources/PauseResume.s: Build/States/sources/PauseResume.cpp.s
 
 # target to generate assembly for a file
 Build/States/sources/PauseResume.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/PauseResume.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.s
 .PHONY : Build/States/sources/PauseResume.cpp.s
 
 Build/States/sources/PauseSaveQuit.o: Build/States/sources/PauseSaveQuit.cpp.o
@@ -912,7 +1084,7 @@ Build/States/sources/PauseSaveQuit.o: Build/States/sources/PauseSaveQuit.cpp.o
 
 # target to build an object file
 Build/States/sources/PauseSaveQuit.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/PauseSaveQuit.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.o
 .PHONY : Build/States/sources/PauseSaveQuit.cpp.o
 
 Build/States/sources/PauseSaveQuit.i: Build/States/sources/PauseSaveQuit.cpp.i
@@ -921,7 +1093,7 @@ Build/States/sources/PauseSaveQuit.i: Build/States/sources/PauseSaveQuit.cpp.i
 
 # target to preprocess a source file
 Build/States/sources/PauseSaveQuit.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/PauseSaveQuit.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.i
 .PHONY : Build/States/sources/PauseSaveQuit.cpp.i
 
 Build/States/sources/PauseSaveQuit.s: Build/States/sources/PauseSaveQuit.cpp.s
@@ -930,7 +1102,7 @@ Build/States/sources/PauseSaveQuit.s: Build/States/sources/PauseSaveQuit.cpp.s
 
 # target to generate assembly for a file
 Build/States/sources/PauseSaveQuit.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/PauseSaveQuit.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.s
 .PHONY : Build/States/sources/PauseSaveQuit.cpp.s
 
 Build/States/sources/Play.o: Build/States/sources/Play.cpp.o
@@ -939,7 +1111,7 @@ Build/States/sources/Play.o: Build/States/sources/Play.cpp.o
 
 # target to build an object file
 Build/States/sources/Play.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Play.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.o
 .PHONY : Build/States/sources/Play.cpp.o
 
 Build/States/sources/Play.i: Build/States/sources/Play.cpp.i
@@ -948,7 +1120,7 @@ Build/States/sources/Play.i: Build/States/sources/Play.cpp.i
 
 # target to preprocess a source file
 Build/States/sources/Play.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Play.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.i
 .PHONY : Build/States/sources/Play.cpp.i
 
 Build/States/sources/Play.s: Build/States/sources/Play.cpp.s
@@ -957,7 +1129,7 @@ Build/States/sources/Play.s: Build/States/sources/Play.cpp.s
 
 # target to generate assembly for a file
 Build/States/sources/Play.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Play.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.s
 .PHONY : Build/States/sources/Play.cpp.s
 
 Build/States/sources/Quit.o: Build/States/sources/Quit.cpp.o
@@ -966,7 +1138,7 @@ Build/States/sources/Quit.o: Build/States/sources/Quit.cpp.o
 
 # target to build an object file
 Build/States/sources/Quit.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Quit.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.o
 .PHONY : Build/States/sources/Quit.cpp.o
 
 Build/States/sources/Quit.i: Build/States/sources/Quit.cpp.i
@@ -975,7 +1147,7 @@ Build/States/sources/Quit.i: Build/States/sources/Quit.cpp.i
 
 # target to preprocess a source file
 Build/States/sources/Quit.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Quit.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.i
 .PHONY : Build/States/sources/Quit.cpp.i
 
 Build/States/sources/Quit.s: Build/States/sources/Quit.cpp.s
@@ -984,7 +1156,7 @@ Build/States/sources/Quit.s: Build/States/sources/Quit.cpp.s
 
 # target to generate assembly for a file
 Build/States/sources/Quit.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/States/sources/Quit.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.s
 .PHONY : Build/States/sources/Quit.cpp.s
 
 Build/main.o: Build/main.cpp.o
@@ -993,7 +1165,7 @@ Build/main.o: Build/main.cpp.o
 
 # target to build an object file
 Build/main.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/main.cpp.o
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/main.cpp.o
 .PHONY : Build/main.cpp.o
 
 Build/main.i: Build/main.cpp.i
@@ -1002,7 +1174,7 @@ Build/main.i: Build/main.cpp.i
 
 # target to preprocess a source file
 Build/main.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/main.cpp.i
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/main.cpp.i
 .PHONY : Build/main.cpp.i
 
 Build/main.s: Build/main.cpp.s
@@ -1011,143 +1183,8 @@ Build/main.s: Build/main.cpp.s
 
 # target to generate assembly for a file
 Build/main.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Build/main.cpp.s
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/main.cpp.s
 .PHONY : Build/main.cpp.s
-
-CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.o: CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.o
-
-.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.o
-
-# target to build an object file
-CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.o
-.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.o
-
-CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.i: CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.i
-
-.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.i
-
-# target to preprocess a source file
-CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.i
-.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.i
-
-CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.s: CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.s
-
-.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.s
-
-# target to generate assembly for a file
-CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.s
-.PHONY : CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.s
-
-Libraries/glad/example/c++/hellowindow2.o: Libraries/glad/example/c++/hellowindow2.cpp.o
-
-.PHONY : Libraries/glad/example/c++/hellowindow2.o
-
-# target to build an object file
-Libraries/glad/example/c++/hellowindow2.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/glad/example/c++/hellowindow2.cpp.o
-.PHONY : Libraries/glad/example/c++/hellowindow2.cpp.o
-
-Libraries/glad/example/c++/hellowindow2.i: Libraries/glad/example/c++/hellowindow2.cpp.i
-
-.PHONY : Libraries/glad/example/c++/hellowindow2.i
-
-# target to preprocess a source file
-Libraries/glad/example/c++/hellowindow2.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/glad/example/c++/hellowindow2.cpp.i
-.PHONY : Libraries/glad/example/c++/hellowindow2.cpp.i
-
-Libraries/glad/example/c++/hellowindow2.s: Libraries/glad/example/c++/hellowindow2.cpp.s
-
-.PHONY : Libraries/glad/example/c++/hellowindow2.s
-
-# target to generate assembly for a file
-Libraries/glad/example/c++/hellowindow2.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/glad/example/c++/hellowindow2.cpp.s
-.PHONY : Libraries/glad/example/c++/hellowindow2.cpp.s
-
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.o: Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.o
-
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.o
-
-# target to build an object file
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.o
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.o
-
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.i: Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.i
-
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.i
-
-# target to preprocess a source file
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.i
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.i
-
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.s: Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.s
-
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.s
-
-# target to generate assembly for a file
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.s
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.cpp.s
-
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.o: Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.o
-
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.o
-
-# target to build an object file
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.o
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.o
-
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.i: Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.i
-
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.i
-
-# target to preprocess a source file
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.i
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.i
-
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.s: Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.s
-
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.s
-
-# target to generate assembly for a file
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.s
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.cpp.s
-
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.o: Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.o
-
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.o
-
-# target to build an object file
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.o:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.o
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.o
-
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.i: Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.i
-
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.i
-
-# target to preprocess a source file
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.i:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.i
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.i
-
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.s: Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.s
-
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.s
-
-# target to generate assembly for a file
-Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.s:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.s
-.PHONY : Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.cpp.s
 
 # Help Target
 help:
@@ -1155,15 +1192,26 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... install"
+	@echo "... list_install_components"
+	@echo "... package_source"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... Bomberman"
+	@echo "... package"
+	@echo "... BomberMan"
+	@echo "... glad"
+	@echo "... glad-generate-files"
+	@echo "... uninstall"
+	@echo "... glfw"
+	@echo "... glm_shared"
+	@echo "... glm_static"
+	@echo "... dist"
+	@echo "... freetype"
 	@echo "... Build/Components/Engine/sources/Engine.o"
 	@echo "... Build/Components/Engine/sources/Engine.i"
 	@echo "... Build/Components/Engine/sources/Engine.s"
-	@echo "... Build/Components/Engine/sources/Image.o"
-	@echo "... Build/Components/Engine/sources/Image.i"
-	@echo "... Build/Components/Engine/sources/Image.s"
 	@echo "... Build/Components/Engine/sources/Model.o"
 	@echo "... Build/Components/Engine/sources/Model.i"
 	@echo "... Build/Components/Engine/sources/Model.s"
@@ -1176,6 +1224,9 @@ help:
 	@echo "... Build/Components/Game/sources/Game.o"
 	@echo "... Build/Components/Game/sources/Game.i"
 	@echo "... Build/Components/Game/sources/Game.s"
+	@echo "... Build/Components/GameEngine/GUIManager/GUIManager.o"
+	@echo "... Build/Components/GameEngine/GUIManager/GUIManager.i"
+	@echo "... Build/Components/GameEngine/GUIManager/GUIManager.s"
 	@echo "... Build/Components/GameEngine/GameObjects/sources/Bomb.o"
 	@echo "... Build/Components/GameEngine/GameObjects/sources/Bomb.i"
 	@echo "... Build/Components/GameEngine/GameObjects/sources/Bomb.s"
@@ -1257,21 +1308,6 @@ help:
 	@echo "... Build/main.o"
 	@echo "... Build/main.i"
 	@echo "... Build/main.s"
-	@echo "... CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.o"
-	@echo "... CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.i"
-	@echo "... CMakeFiles/3.12.0/CompilerIdCXX/CMakeCXXCompilerId.s"
-	@echo "... Libraries/glad/example/c++/hellowindow2.o"
-	@echo "... Libraries/glad/example/c++/hellowindow2.i"
-	@echo "... Libraries/glad/example/c++/hellowindow2.s"
-	@echo "... Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.o"
-	@echo "... Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.i"
-	@echo "... Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamLoaderMP3.s"
-	@echo "... Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.o"
-	@echo "... Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.i"
-	@echo "... Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/CIrrKlangAudioStreamMP3.s"
-	@echo "... Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.o"
-	@echo "... Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.i"
-	@echo "... Libraries/irrKlang-64bit-1.6.0/plugins/ikpMP3/ikpMP3.s"
 .PHONY : help
 
 

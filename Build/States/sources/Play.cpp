@@ -1,13 +1,13 @@
 #include "../includes/Play.hpp"
 
-PlayState::PlayState( Engine & engine ){ // first init?
+PlayState::PlayState( Engine & engine ) { // first init?
 	this->_engine = &engine;
 	this->_type = "Play";
 	std::cout << "Play constructed" << std::endl;
 
 	_positionTime = 0.0f;
 	_positionPitch = 0.0f;
-
+	this->_isPlaying = false;
 	this->begin = std::chrono::steady_clock::now();
 	this->_engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
 	this->_OM = new ObjectManager( engine );
@@ -61,7 +61,7 @@ void PlayState::drawMap( void ) { // needs to move to render engine
 
 void PlayState::render( void ) {
 	if (!_isPlaying) {
-		this->_engine->playSound("Assets/Audio/Bomberman-Music.wav", true);
+		this->_engine->_SoundEngine.playSoundSource(this->_engine->_SoundEngine._Play, true);
 		this->_isPlaying = true;
 	}
 	if ( this->_positionPitch < 7.5f) {
