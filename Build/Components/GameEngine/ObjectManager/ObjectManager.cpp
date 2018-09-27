@@ -1,6 +1,6 @@
 #include "ObjectManager.hpp"
 
-
+static int	fuse_time = 0;
 ObjectManager::ObjectManager( Engine & engine ){
 	this->engine = &engine;
 	this->LM = new LevelManager(1); // may move this codeblock to a level init function to be available on call rather than this constructor
@@ -56,7 +56,7 @@ void	ObjectManager::update( eControls key, double deltaTime){
 		if (this->bomb->fuseTime < 0)
 			if (this->bomb->state == DYING) {
 				//draw explosion
-				if (this->bomb->fuseTime < -0.1f){ // save as blastTime
+				if (this->bomb->fuseTime < -0.1f) { // save as blastTime
 					delete this->bomb; // test
 					this->bomb = NULL;
 				}
@@ -89,8 +89,11 @@ void	ObjectManager::render(void){
 			this->engine->drawModel(BOMB, (this->bomb->position->vX), (this->bomb->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 		else if (this->bomb->state == DYING)
 			for (int i = 0; i < this->bomb->blast.size(); i++){
-				this->engine->drawModel(SOLIDWALL, this->bomb->blast[i].first, this->bomb->blast[i].second , 0.02f);
+				this->engine->drawModel(EXPLOSION, this->bomb->blast[i].first, this->bomb->blast[i].second , 0.02f);
 			}
+	} else {
+		this->engine->explodeAnim = 0;
+		this->engine->explodeMove = 0.02f;
 	}
 }
 
@@ -321,6 +324,7 @@ void	ObjectManager::getOpenDirection( GameObject *actor ){
 }
 
 void	ObjectManager::placeBomb( void ){
+	this->engine->playSound("Assets/Audio/punch.wav", false);
 	// check for bomb related powerup and then change bomb params accordingly
 	if (this->bomb == NULL)
 		this->bomb = new Bomb(BOMB, new Vector3d(this->player->destination->vX, this->player->destination->vY, this->player->destination->vZ), this->fuseTime); // params subject to powerup
@@ -333,6 +337,7 @@ void	ObjectManager::explode( void ){
 	// extend in open dirs as far as radius including bomb pos
 	// check if collision with any mortal object
 	// clean up the carnage
+	this->engine->playSound("Assets/Audio/bomb-explode.wav", false);
 	int	dir = -1;
 	int	index = -1;
 	int	x = static_cast<int>(this->bomb->position->vX);
