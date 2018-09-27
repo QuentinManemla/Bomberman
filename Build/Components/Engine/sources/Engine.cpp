@@ -381,14 +381,14 @@ int			Engine::menuHandler( eControls key, int & menuIndex, int lastIndex ){
 
 void		Engine::controlChange(int i)
 {
-	if (i == 0)
+	if (i == 1)
 	{
 		this->_sControls.LEFT_KEY = GLFW_KEY_A;
 		this->_sControls.UP_KEY = GLFW_KEY_W;
 		this->_sControls.RIGHT_KEY = GLFW_KEY_D;
 		this->_sControls.DOWN_KEY = GLFW_KEY_S;
 	}
-	else if (i == 1)
+	else if (i == 0)
 	{
 		this->_sControls.LEFT_KEY = GLFW_KEY_LEFT;
 		this->_sControls.UP_KEY = GLFW_KEY_UP;
