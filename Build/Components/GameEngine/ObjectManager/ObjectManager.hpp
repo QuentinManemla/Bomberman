@@ -57,6 +57,7 @@ public:
 	float						playerImmortalTicker;
 	int							playerScore;
 	bool						timeSpeedupFlag;
+	Vector3d					*doorPos;
 
 
 

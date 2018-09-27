@@ -14,6 +14,7 @@ ObjectManager::ObjectManager( Engine & engine ){
 
 	// INITS
 	this->timeSpeedupFlag = 0;
+	
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	this->fuseTime = 1.5f;
@@ -32,7 +33,7 @@ void	ObjectManager::update( eControls key, int remainingTime){
 	this->levelProcess( remainingTime );
 
 	// PLACE BOMB
-	if (key == FIRE){
+	if (key == FIRE && this->allEnemiesDead() == 0){ // added for extra difficulty
 		if (this->player->state == ALIVE)
 			this->placeBomb(); // test
 	}
@@ -339,7 +340,7 @@ void	ObjectManager::explode( void ){
 		while (++index < this->bombRadius){
 			this->getForward(static_cast<eControls>(dir), &forwardX, &forwardY);
 			if (this->isOpen(forwardX, forwardY) == 0){
-				if (this->isMortal(forwardX, forwardY) == 0) // issue with mortal
+				if (this->isMortal(forwardX, forwardY) == 0)
 					break;
 				else if (this->isMortal(forwardX, forwardY) == 1)
 					mortalDestroyed++;
@@ -367,13 +368,6 @@ void	ObjectManager::explode( void ){
 			if (this->map[j]->position->vX == this->bomb->blast[i].first && this->map[j]->position->vY == this->bomb->blast[i].second && this->map[j]->state == ALIVE && this->map[j]->mortal == 1){
 				this->map[j]->state = DEAD;
 				this->updatePlayerScore(10);
-				// DOOR TEST
-				//if (this->map[j]->door == 1){
-					// new Door gets map[j] pos,
-					// delete this->map[j]
-					// this->map[i] = door;
-				//}
-				// END DOOR TEST
 			}
 		}
 	}
@@ -386,6 +380,10 @@ void	ObjectManager::explode( void ){
 			}
 		}
 	}
+
+	// REDUCE POINTS FOR BOMBING DOOR
+	// copy loop from levelProcess to check if bomb blast hits door
+
 	// KILL PLAYER IN BLAST // REDUCE HP FIRST
 	for (int i = 0; i < this->bomb->blast.size(); i++){
 		if (this->player->destination->vX == this->bomb->blast[i].first && this->player->destination->vY == this->bomb->blast[i].second){
@@ -477,9 +475,9 @@ void	ObjectManager::updatePlayerScore( int amount ){
 int		ObjectManager::allEnemiesDead( void ){
 	for (int i = 0; i < this->enemies.size(); i++){
 		if (this->enemies[i]->state == ALIVE)
-			return (1);
+			return (0);
 	}
-	return (0);
+	return (1);
 }
 
 void	ObjectManager::levelProcess( int remainingTime ){
@@ -487,4 +485,29 @@ void	ObjectManager::levelProcess( int remainingTime ){
 	// check if player collide with door
 		// check if all enemies dead
 		// if true then end level and initiate next one if there is one (endlevel(success))
+	std::cout << "remaining time: " << remainingTime << std::endl; // debug
+	if (remainingTime == 0)
+		;//end level fail
+
+	if (remainingTime < 20 && this->timeSpeedupFlag == 0){ // enemies speed up when time drops below 20 seconds remaining
+		for (int i = 0; i < this->enemies.size(); i++){
+			this->enemies[i]->velocity += 2.0f;
+			this->timeSpeedupFlag = 1;
+		}
+	}
+
+	if (allEnemiesDead() == 1)
+		std::cout << "enemies dead!" << std::endl;
+	else
+		std::cout << "still enemies!" << std::endl;
+
+	if (isDestVectorEqual(this->player->position, this->player->destination)){
+		if (isDestVectorEqual(this->player->destination, this->map[this->map.size() - 1]->position) && this->allEnemiesDead() == 1){
+			this->updatePlayerScore(remainingTime + 1000); // test // debug 1000
+			//endlevel(success)
+		}
+	}
 }
+
+// WHAT NEEDS TO HAPPEND WHEN STARTING A NEW LEVEL
+// 
