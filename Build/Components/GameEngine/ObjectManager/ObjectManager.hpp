@@ -17,7 +17,7 @@ public:
 	ObjectManager( void ); // may need reference to playstate
 	~ObjectManager( void );
 
-	void		update(eControls key, double deltaTime);
+	void		update(eControls key, double remainingTime);
 	void		render(void);
 	void		requestMove(GameObject *actor, eControls key); // returns direction // or void and calls move directly
 	int			isOpen(int x, int y);
@@ -37,7 +37,9 @@ public:
 	int			isDestVectorEqual(Vector3d *first, Vector3d *second);
 	void		playerReset( void );
 	void		ImmortalTick( void );
+	void		processRemaingingTime( double remainingTime );
 	void		levelEnd( /*maybe points and powerups*/ );
+	void		updatePlayerScore( int amount );
 
 
 	Engine						*engine;
@@ -50,6 +52,8 @@ public:
 	int							bombRadius;
 	float						playerImmortalTime;
 	float						playerImmortalTicker;
+	int							playerScore;
+
 
 
 protected:

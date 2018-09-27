@@ -11,13 +11,14 @@ class GUIManager {
 		GUIManager( void );
 		~GUIManager( void );
 	
-	void			update( GameObject *player, int	elapsedSec);
+	void			update( GameObject *player, int	elapsedSec, int playerScore);
 	void			render( void );
 
 	Engine			*engine;
 	std::string		_lives;
 	std::string		_level;
 	std::string		_timeElapsed;
+	std::string		_points;
 };
 
 #endif // !GUIMANAGER_HPP

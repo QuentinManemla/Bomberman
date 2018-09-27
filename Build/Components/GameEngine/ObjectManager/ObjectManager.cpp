@@ -10,6 +10,7 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->playerReset(); // start with temp immortality
 	this->bomb = NULL;
 	this->placeEnemies(); // 
+	this->playerScore = 0;
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	this->fuseTime = 1.5f;
@@ -22,13 +23,17 @@ ObjectManager::~ObjectManager( void ){
 	delete this->player; // test
 }
 
-void	ObjectManager::update( eControls key, double deltaTime){
-	// PLAYER MOVE
+void	ObjectManager::update( eControls key, double remainingTime){
+	// ADJUST VALUES BASED ON TIME
+	this->processRemaingingTime(remainingTime);
+
+	// PLACE BOMB
 	if (key == FIRE){
 		if (this->player->state == ALIVE)
 			this->placeBomb(); // test
 	}
 
+	// CHECK PLAYER STATE // MIGHT NOT BE NEEDED
 	if (this->player->hitPoints == 0)
 		this->playerDied();
 
@@ -56,14 +61,12 @@ void	ObjectManager::update( eControls key, double deltaTime){
 		if (this->bomb->fuseTime < 0)
 			if (this->bomb->state == DYING) {
 				if (this->bomb->fuseTime < -0.1f) { // save as blastTime
-					delete this->bomb; // test
+					delete this->bomb;
 					this->bomb = NULL;
 				}
 			}
 			else{
 				this->explode();
-				//this->engine->bombAnim = 0;
-				//this->engine->bombMove = 0.005f;
 			}
 	}
 	// IF PLAYER = MORTAL IF PLAYER COLLISION WITH ENEMY, PLAYER--
@@ -353,6 +356,7 @@ void	ObjectManager::explode( void ){
 		for (int i = 0; i < this->bomb->blast.size(); i++){
 			if (this->map[j]->position->vX == this->bomb->blast[i].first && this->map[j]->position->vY == this->bomb->blast[i].second && this->map[j]->state == ALIVE && this->map[j]->mortal == 1){
 				this->map[j]->state = DEAD;
+				this->updatePlayerScore(10);
 				// DOOR TEST
 				//if (this->map[j]->door == 1){
 					// new Door gets map[j] pos,
@@ -368,6 +372,7 @@ void	ObjectManager::explode( void ){
 		for (int i = 0; i < this->bomb->blast.size(); i++){
 			if (this->enemies[j]->destination->vX == this->bomb->blast[i].first && this->enemies[j]->destination->vY == this->bomb->blast[i].second && this->enemies[j]->state == ALIVE){
 				this->enemies[j]->state = DEAD;
+				this->updatePlayerScore(50); // score
 			}
 		}
 	}
@@ -376,6 +381,7 @@ void	ObjectManager::explode( void ){
 		if (this->player->destination->vX == this->bomb->blast[i].first && this->player->destination->vY == this->bomb->blast[i].second){
 			this->player->hitPoints -= 1;
 			this->playerReset();
+			this->updatePlayerScore(-20); // score
 		}
 	}
 
@@ -388,6 +394,8 @@ void	ObjectManager::explode( void ){
 }
 
 void	ObjectManager::playerDied( void ){
+	//this->updatePlayerScore(-100); // score
+	this->playerScore = -100;
 	this->player->state = DEAD;
 }
 
@@ -402,6 +410,7 @@ int		ObjectManager::isDestVectorEqual(Vector3d *first, Vector3d *second){
 }
 
 void	ObjectManager::playerReset( void ){
+	this->updatePlayerScore(-10); // score
 	this->player->position->vX = 2.0f;
 	this->player->position->vY = 2.0f;
 	this->player->destination->vX = 2.0f;
@@ -422,6 +431,17 @@ void	ObjectManager::ImmortalTick( void ){
 	}
 }
 
+void	ObjectManager::processRemaingingTime( double remainingTime ){
+	std::cout << "remaining time: " << remainingTime << std::endl; // debug
+	//exit(-1); // debug
+	/*if (remainingTime > 10.0f){
+		for (int i = 0; i < this->enemies.size(); i++){
+			this->enemies[i]->velocity += 1.0f;
+		}
+	}*/
+}
+
+
 //void	ObjectManager::LevelEnd(/*stuff probably*/){
 //	
 //}
@@ -430,3 +450,13 @@ void	ObjectManager::ImmortalTick( void ){
 // certain wall gets door = true attribute
 // if a wall dies and door is true, spawn door object
 // door object has own properties
+
+// Level transition:
+// Level complete! continue to level X
+// GO!
+// save
+// quit to menu
+
+void	ObjectManager::updatePlayerScore( int amount ){
+	this->playerScore += amount;
+}

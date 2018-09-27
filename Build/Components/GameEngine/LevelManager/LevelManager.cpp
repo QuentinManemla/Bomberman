@@ -13,13 +13,13 @@ LevelManager::LevelManager( int level ){
 
 	switch(level) {
 		case(1):
-			this->duration = 200;
+			this->duration = 100;
 			break;
 		case(2):
-			this->duration = 400;
+			this->duration = 80;
 			break;
 		case(3):
-			this->duration = 600;
+			this->duration = 60;
 			break;
 	}
 
