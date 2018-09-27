@@ -6,25 +6,23 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->LM = new LevelManager(1); // may move this codeblock to a level init function to be available on call rather than this constructor
 	this->map = this->LM->generateMap();
 	this->player = new Player( PLAYER, new Vector3d(2, 2, 0.1f) );
-	//this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
-	//this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
 	this->bomb = NULL;
 	this->placeEnemies(); // arbitrary int for now
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	this->fuseTime = 1.5f;
-	this->bombRadius = 1;
+	this->bombRadius = 2;
 	this->playerImmortalTime = 1.0;
 }
 
 ObjectManager::~ObjectManager( void ){
 	delete this->LM;
+	delete this->player; // test
 }
 
 void	ObjectManager::update( eControls key, double deltaTime){
 	// PLAYER MOVE
 	if (key == FIRE){
-		std::cout << "key = " << key << std::endl; // debug
 		if (this->player->state == ALIVE)
 			this->placeBomb(); // test
 	}
@@ -34,13 +32,13 @@ void	ObjectManager::update( eControls key, double deltaTime){
 
 	// ENEMY - PLAYER COLLISION DETECTION
 	for (int i = 0; i < this->enemies.size(); i++){
-		if (isDestVectorEqual(this->player->destination, this->enemies[i]->destination) && this->enemies[i]->state == ALIVE){
+		if (isDestVectorEqual(this->player->destination, this->enemies[i]->destination) && this->enemies[i]->state == ALIVE && this->player->state == ALIVE){
 			this->player->hitPoints -= 1; // move to 2;2 and become INVINCIBLE FOR A BIT 
-			if (this->player->hitPoints != 0)
-				this->playerReset();
+			this->playerReset();
 		}
 	}
 
+	// PLAYER MOVE
 	if (this->player->state == ALIVE || this->player->state == DYING)
 		requestMove(this->player, key);
 
@@ -324,22 +322,19 @@ void	ObjectManager::getOpenDirection( GameObject *actor ){
 }
 
 void	ObjectManager::placeBomb( void ){
-	this->engine->playSound("Assets/Audio/punch.wav", false);
+	this->engine->playSound("Assets/Audio/fuse.wav", false);
 	// check for bomb related powerup and then change bomb params accordingly
 	if (this->bomb == NULL)
 		this->bomb = new Bomb(BOMB, new Vector3d(this->player->destination->vX, this->player->destination->vY, this->player->destination->vZ), this->fuseTime); // params subject to powerup
 }
 
 void	ObjectManager::explode( void ){
-	// check if bomb related powerup - adjust values as necessary
-	// push values to bomb positional array
-	// check open dirs for bomb
-	// extend in open dirs as far as radius including bomb pos
-	// check if collision with any mortal object
-	// clean up the carnage
+	this->engine->bombAnim = 0;
+	this->engine->bombMove = 0.005f;
 	this->engine->playSound("Assets/Audio/bomb-explode.wav", false);
 	int	dir = -1;
 	int	index = -1;
+	int	mortalDestroyed = 0;
 	int	x = static_cast<int>(this->bomb->position->vX);
 	int	y = static_cast<int>(this->bomb->position->vY);
 
@@ -352,11 +347,19 @@ void	ObjectManager::explode( void ){
 	while (++dir < 4){
 		while (++index < this->bombRadius){
 			this->getForward(static_cast<eControls>(dir), &forwardX, &forwardY);
-			if (!(this->isOpen(forwardX, forwardY)))
+			if (this->isOpen(forwardX, forwardY) == 0){
 				if (this->isMortal(forwardX, forwardY) == 0) // issue with mortal
 					break;
+				else if (this->isMortal(forwardX, forwardY) == 1)
+					mortalDestroyed++;
+				else if (mortalDestroyed > 1)
+					break;
+			}
 			this->bomb->blast.push_back( std::pair<int, int>(forwardX, forwardY));
+			if (mortalDestroyed > 0)
+				break;
 		}
+		mortalDestroyed = 0;
 		index = -1;
 		forwardX = x;
 		forwardY = y;
@@ -388,6 +391,7 @@ void	ObjectManager::explode( void ){
 	for (int i = 0; i < this->bomb->blast.size(); i++){
 		if (this->player->destination->vX == this->bomb->blast[i].first && this->player->destination->vY == this->bomb->blast[i].second){
 			this->player->hitPoints -= 1;
+			this->playerReset();
 		}
 	}
 
@@ -431,6 +435,10 @@ void	ObjectManager::playerReset( void ){
 }
 
 void	ObjectManager::ImmortalTick( void ){
+	if (this->player->hitPoints < 1){
+		this->playerDied();
+		return;
+	}
 	if (this->playerImmortalTicker < this->playerImmortalTime)
 		this->playerImmortalTicker += this->engine->_deltaTime;
 	else{
@@ -438,3 +446,10 @@ void	ObjectManager::ImmortalTick( void ){
 		this->player->state = ALIVE;
 	}
 }
+
+// in level manager
+// certain wall gets door = true attribute
+// if a wall dies and door is true, spawn door object
+// door object has own properties
+
+// bomb blast needs to stop at first destroyed block. currently doesnt
