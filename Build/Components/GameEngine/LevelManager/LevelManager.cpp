@@ -13,13 +13,13 @@ LevelManager::LevelManager( int level ){
 
 	switch(level) {
 		case(1):
-			this->duration = 200;
+			this->duration = 100;
 			break;
 		case(2):
-			this->duration = 400;
+			this->duration = 80;
 			break;
 		case(3):
-			this->duration = 600;
+			this->duration = 60;
 			break;
 	}
 
@@ -98,12 +98,12 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 		}
 
 		//RANDOM CHANCE FOR DOOR // FIXXXXXXX
-		if (type == 2){
+		/*if (type == 2){
 			if (rand() % 10 == 0 && doorFlag < 1){
 				doorFlag++;
 				type = 4; // test
 			}
-		}
+		}*/
 
 		// std::cout << i << " type =" << type << "; totalline (x;y) = " << x << ";" << y << std::endl; // debug
 		pushObject(type, x, y);
@@ -114,7 +114,8 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 		}
 	}
 	std::cout << "solid = " << solidCountDebug << "\nopen = " << openCountDebug << "\nbreakable = " << breakableCountDebug << std::endl;
-	//this->debugPrintEnemies(); //debug
+	setDoor();
+	//this->debugPrintMap(); //debug
 	//exit(-1); // debug
 	return (this->testMap);
 }
@@ -145,12 +146,31 @@ void	LevelManager::pushObject( int type, int x, int y ){ // may take level int i
 	this->testMap.push_back(object);
 }
 
+void	LevelManager::setDoor( void ){
+	int	doorFlag = 0;
+	GameObject *door;
+
+	while (doorFlag == 0)
+		for (int i = 0; i < this->testMap.size(); i++){
+			if (doorFlag == 0){
+				if (this->testMap[i]->eType == WALL){
+					if (rand() % 50 == 0){
+						door = new Door(DOOR, new Vector3d(this->testMap[i]->position->vX, this->testMap[i]->position->vY, this->testMap[i]->position->vZ));
+						doorFlag = 1;
+						this->testMap.push_back(door);
+						std::cout << "Door placed at " << door->position->vX << ";" << door->position->vY << std::endl; // debug
+					}
+				}
+			}
+		}
+}
+
 void	LevelManager::debugPrintMap( void ){ // debug // test
 	std::cout << "total = " <<testMap.size() << std::endl;
 	for (int i = 0; i < testMap.size(); i++){
 		//std::cout << testMap[i]->strType << " = " << testMap[i]->position->vX << ";" << testMap[i]->position->vY << std::endl;
 		std::cout << testMap[i]->eType;
-		if (i & this->mapWidth == 0)
+		if (i % this->mapWidth == 0)
 			std::cout << std::endl;
 	}
 }

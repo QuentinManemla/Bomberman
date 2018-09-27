@@ -39,7 +39,6 @@ private:
 	/*  Functions   */
 	// loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
 	void loadModel(string const &path) {
-		std::cout << "Load Model Function" << std::endl;
 		// read file via ASSIMP
 		Assimp::Importer importer;
 		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
@@ -101,22 +100,18 @@ private:
 			}
 			else {
 				vertex.TexCoords = glm::vec2(0.0f, 0.0f);
-				std::cout << "ELSE" << std::endl;
 			}
-			std::cout << "OUTSIDE ELSE" << std::endl;
 			// tangent
 			vector.x = mesh->mTangents[i].x;
 			vector.y = mesh->mTangents[i].y;
 			vector.z = mesh->mTangents[i].z;
 			vertex.Tangent = vector;
-			std::cout << "TANGENT" << std::endl;
 			// bitangent
 			vector.x = mesh->mBitangents[i].x;
 			vector.y = mesh->mBitangents[i].y;
 			vector.z = mesh->mBitangents[i].z;
 			vertex.Bitangent = vector;
 			vertices.push_back(vertex);
-			std::cout << "bitangent" << std::endl;
 		}
 		// now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
 		for(unsigned int i = 0; i < mesh->mNumFaces; i++) {

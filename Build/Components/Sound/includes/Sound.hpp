@@ -18,9 +18,19 @@ class Sound {
 
 		void		init( void );
 		void		play2DSound( std::string soundPath, bool loop );
-		void		playSoundSource(	irrklang::ISoundSource* sound , float volume);
+		void		playSoundSource(	irrklang::ISoundSource* sound, bool loop );
 		void		stopSound( void );
+
+		/** Sound Sources **/
+		irrklang::ISoundSource*		_Intro;
+		irrklang::ISoundSource*		_Selection;
+		irrklang::ISoundSource*		_EnterKey;
+		irrklang::ISoundSource*		_Play;
+		irrklang::ISoundSource*		_PlaceBomb;
+		irrklang::ISoundSource*		_Explode;
+		float						_volume;
+
 	private:
-		irrklang::ISoundEngine  *_soundEngine;
+		irrklang::ISoundEngine		*_soundEngine;
 };
 #endif //!SOUND_HPP

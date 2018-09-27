@@ -1,15 +1,16 @@
 #include "../includes/Play.hpp"
 
-PlayState::PlayState( Engine & engine ){ // first init?
+PlayState::PlayState( Engine & engine ) { // first init?
 	this->_engine = &engine;
 	this->_type = "Play";
 	std::cout << "Play constructed" << std::endl;
 
 	_positionTime = 0.0f;
 	_positionPitch = 0.0f;
-
+	this->_isPlaying = false;
 	this->begin = std::chrono::steady_clock::now();
 	this->_engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
+
 	this->_OM = new ObjectManager( engine );
 	this->_GM = new GUIManager( engine );
 }
@@ -29,7 +30,7 @@ void PlayState::update( eControls key ){
 	this->_elapsedSec = std::chrono::duration_cast<std::chrono::seconds>(end - this->begin).count();
 	this->_remainingTime = this->_OM->LM->duration - this->_elapsedSec;
 
-	std::cout << "TIME ELAPSED: " << this->_elapsedSec << std::endl;
+	// std::cout << "TIME ELAPSED: " << this->_elapsedSec << std::endl;
 	static	int held = 1; // set to 1 initially to avoid accidental selection on state switch // debug // test
 	std::cout << "Play update" << std::endl;
 	if (key == ESCAPE){
@@ -40,10 +41,8 @@ void PlayState::update( eControls key ){
 	else if (key == IDLEKEY){
 		held = 0;
 	}
-	// else if (key == FIRE)
-	// 	this->_engine->_Camera.DefaultPos();
 	this->_OM->update(key, 0.1f);
-	this->_GM->update(this->_OM->player, this->_remainingTime);
+	this->_GM->update(this->_OM->player, this->_remainingTime, this->_OM->playerScore);
 }
 
 void PlayState::drawMap( void ) { // needs to move to render engine
@@ -52,8 +51,8 @@ void PlayState::drawMap( void ) { // needs to move to render engine
 
 	for (int i = 0; i < this->_OM->map.size(); i++) {
 		if (this->_OM->map[i]->state == ALIVE){
-			ModelX = (this->_OM->map[i]->position->vX);// - 1) * 0.08f;// + start_x; - 0.48
-			ModelY = (this->_OM->map[i]->position->vY);// - 1) * 0.08f;// - start_y; - 0.48
+			ModelX = (this->_OM->map[i]->position->vX);
+			ModelY = (this->_OM->map[i]->position->vY);
 			this->_engine->drawModel(this->_OM->map[i]->eType, ModelX, ModelY, 0.02f);
 		}
 	}
@@ -61,7 +60,7 @@ void PlayState::drawMap( void ) { // needs to move to render engine
 
 void PlayState::render( void ) {
 	if (!_isPlaying) {
-		this->_engine->playSound("Assets/Audio/Bomberman-Music.wav", true);
+		this->_engine->_SoundEngine.playSoundSource(this->_engine->_SoundEngine._Play, true);
 		this->_isPlaying = true;
 	}
 	if ( this->_positionPitch < 7.5f) {
