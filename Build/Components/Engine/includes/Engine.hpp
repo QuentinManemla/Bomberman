@@ -80,6 +80,7 @@ class	Engine {
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
 
+		void		Engine::controlChange(int i);
 		eControls		getInput( void );
 		static void		processKeys(unsigned char key, int x, int y);
 
