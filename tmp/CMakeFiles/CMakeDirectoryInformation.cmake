@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)

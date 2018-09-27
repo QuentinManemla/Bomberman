@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github
+CMAKE_BINARY_DIR = /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp
 
 # Include any dependencies generated for this target.
 include CMakeFiles/BomberMan.dir/depend.make
@@ -58,8 +58,8 @@ include CMakeFiles/BomberMan.dir/progress.make
 include CMakeFiles/BomberMan.dir/flags.make
 
 CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.o: Build/Components/Engine/sources/Engine.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.o: ../Build/Components/Engine/sources/Engine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Engine/sources/Engine.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.i: cmake_force
@@ -71,8 +71,8 @@ CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.s: cmake_for
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Engine/sources/Engine.cpp -o CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Engine.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.o: Build/Components/Engine/sources/Model.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.o: ../Build/Components/Engine/sources/Model.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Engine/sources/Model.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.i: cmake_force
@@ -84,8 +84,8 @@ CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.s: cmake_forc
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Engine/sources/Model.cpp -o CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Model.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.o: Build/Components/Engine/sources/Shader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.o: ../Build/Components/Engine/sources/Shader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Engine/sources/Shader.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.i: cmake_force
@@ -97,8 +97,8 @@ CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.s: cmake_for
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Engine/sources/Shader.cpp -o CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Shader.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.o: Build/Components/Engine/sources/Text.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.o: ../Build/Components/Engine/sources/Text.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Engine/sources/Text.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.i: cmake_force
@@ -110,8 +110,8 @@ CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Engine/sources/Text.cpp -o CMakeFiles/BomberMan.dir/Build/Components/Engine/sources/Text.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.o: Build/Components/Game/sources/Game.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.o: ../Build/Components/Game/sources/Game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Game/sources/Game.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.i: cmake_force
@@ -123,8 +123,8 @@ CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Game/sources/Game.cpp -o CMakeFiles/BomberMan.dir/Build/Components/Game/sources/Game.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.o: Build/Components/GameEngine/GUIManager/GUIManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.o: ../Build/Components/GameEngine/GUIManager/GUIManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GUIManager/GUIManager.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.i: cmake_force
@@ -136,8 +136,8 @@ CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.s
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GUIManager/GUIManager.cpp -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GUIManager/GUIManager.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.o: Build/Components/GameEngine/GameObjects/sources/Bomb.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.o: ../Build/Components/GameEngine/GameObjects/sources/Bomb.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.i: cmake_force
@@ -149,8 +149,8 @@ CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Bomb.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.o: Build/Components/GameEngine/GameObjects/sources/Door.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.o: ../Build/Components/GameEngine/GameObjects/sources/Door.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/Door.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.i: cmake_force
@@ -162,8 +162,8 @@ CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/Door.cpp -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Door.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.o: Build/Components/GameEngine/GameObjects/sources/Enemy.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.o: ../Build/Components/GameEngine/GameObjects/sources/Enemy.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.i: cmake_force
@@ -175,8 +175,8 @@ CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.c
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Enemy.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.o: Build/Components/GameEngine/GameObjects/sources/GameObject.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.o: ../Build/Components/GameEngine/GameObjects/sources/GameObject.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.i: cmake_force
@@ -188,8 +188,8 @@ CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObj
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/GameObject.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.o: Build/Components/GameEngine/GameObjects/sources/Player.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.o: ../Build/Components/GameEngine/GameObjects/sources/Player.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/Player.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.i: cmake_force
@@ -201,8 +201,8 @@ CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/Player.cpp -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Player.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.o: Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.o: ../Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.i: cmake_force
@@ -214,8 +214,8 @@ CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWa
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/SolidWall.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.o: Build/Components/GameEngine/GameObjects/sources/Wall.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.o: ../Build/Components/GameEngine/GameObjects/sources/Wall.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/Wall.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.i: cmake_force
@@ -227,8 +227,8 @@ CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/sources/Wall.cpp -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/GameObjects/sources/Wall.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.o: Build/Components/GameEngine/LevelManager/LevelManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.o: ../Build/Components/GameEngine/LevelManager/LevelManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/LevelManager/LevelManager.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.i: cmake_force
@@ -240,8 +240,8 @@ CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.c
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/LevelManager/LevelManager.cpp -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/LevelManager/LevelManager.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.o: Build/Components/GameEngine/ObjectManager/ObjectManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.o: ../Build/Components/GameEngine/ObjectManager/ObjectManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.i: cmake_force
@@ -253,8 +253,8 @@ CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.o: Build/Components/GameEngine/Vector3d/Vector3d.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.o: ../Build/Components/GameEngine/Vector3d/Vector3d.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/Vector3d/Vector3d.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.i: cmake_force
@@ -266,8 +266,8 @@ CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.s: cm
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/Vector3d/Vector3d.cpp -o CMakeFiles/BomberMan.dir/Build/Components/GameEngine/Vector3d/Vector3d.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.o: Build/Components/Sound/sources/Sound.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.o"
+CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.o: ../Build/Components/Sound/sources/Sound.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Sound/sources/Sound.cpp
 
 CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.i: cmake_force
@@ -279,8 +279,8 @@ CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Sound/sources/Sound.cpp -o CMakeFiles/BomberMan.dir/Build/Components/Sound/sources/Sound.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.o: Build/States/sources/Credits.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.o: ../Build/States/sources/Credits.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Credits.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.i: cmake_force
@@ -292,8 +292,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Credits.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.o: Build/States/sources/Intro.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.o: ../Build/States/sources/Intro.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Intro.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.i: cmake_force
@@ -305,8 +305,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Intro.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.o: Build/States/sources/Menu.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.o: ../Build/States/sources/Menu.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Menu.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.i: cmake_force
@@ -318,8 +318,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Menu.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/Menu.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.o: Build/States/sources/MenuParentState.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.o: ../Build/States/sources/MenuParentState.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/MenuParentState.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.i: cmake_force
@@ -331,8 +331,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/MenuParentState.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/MenuParentState.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.o: Build/States/sources/Options.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.o: ../Build/States/sources/Options.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Options.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.i: cmake_force
@@ -344,8 +344,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Options.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/Options.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.o: Build/States/sources/OptionsControls.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.o: ../Build/States/sources/OptionsControls.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/OptionsControls.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.i: cmake_force
@@ -357,8 +357,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/OptionsControls.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/OptionsControls.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.o: Build/States/sources/OptionsFullScreen.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.o: ../Build/States/sources/OptionsFullScreen.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/OptionsFullScreen.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.i: cmake_force
@@ -370,8 +370,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.s: cmake_for
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/OptionsFullScreen.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/OptionsFullScreen.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.o: Build/States/sources/OptionsResolution.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.o: ../Build/States/sources/OptionsResolution.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/OptionsResolution.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.i: cmake_force
@@ -383,8 +383,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.s: cmake_for
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/OptionsResolution.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/OptionsResolution.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.o: Build/States/sources/OptionsVolume.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.o: ../Build/States/sources/OptionsVolume.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/OptionsVolume.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.i: cmake_force
@@ -396,8 +396,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/OptionsVolume.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/OptionsVolume.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.o: Build/States/sources/Pause.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.o: ../Build/States/sources/Pause.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Pause.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.i: cmake_force
@@ -409,8 +409,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Pause.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/Pause.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.o: Build/States/sources/PauseQuit.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.o: ../Build/States/sources/PauseQuit.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/PauseQuit.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.i: cmake_force
@@ -422,8 +422,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/PauseQuit.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/PauseQuit.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.o: Build/States/sources/PauseResume.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.o: ../Build/States/sources/PauseResume.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/PauseResume.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.i: cmake_force
@@ -435,8 +435,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/PauseResume.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/PauseResume.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.o: Build/States/sources/PauseSaveQuit.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.o: ../Build/States/sources/PauseSaveQuit.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/PauseSaveQuit.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.i: cmake_force
@@ -448,8 +448,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/PauseSaveQuit.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/PauseSaveQuit.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.o: Build/States/sources/Play.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.o: ../Build/States/sources/Play.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Play.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.i: cmake_force
@@ -461,8 +461,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Play.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/Play.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.o: Build/States/sources/Quit.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.o"
+CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.o: ../Build/States/sources/Quit.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Quit.cpp
 
 CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.i: cmake_force
@@ -474,8 +474,8 @@ CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.s: cmake_force
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/States/sources/Quit.cpp -o CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.s
 
 CMakeFiles/BomberMan.dir/Build/main.cpp.o: CMakeFiles/BomberMan.dir/flags.make
-CMakeFiles/BomberMan.dir/Build/main.cpp.o: Build/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/BomberMan.dir/Build/main.cpp.o"
+CMakeFiles/BomberMan.dir/Build/main.cpp.o: ../Build/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/BomberMan.dir/Build/main.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BomberMan.dir/Build/main.cpp.o -c /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/main.cpp
 
 CMakeFiles/BomberMan.dir/Build/main.cpp.i: cmake_force
@@ -570,7 +570,7 @@ BomberMan: /usr/lib/libz.dylib
 BomberMan: /usr/lib/libbz2.dylib
 BomberMan: /goinfre/bmoodley/.brew/lib/libpng.dylib
 BomberMan: CMakeFiles/BomberMan.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Linking CXX executable BomberMan"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Linking CXX executable BomberMan"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/BomberMan.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -583,6 +583,6 @@ CMakeFiles/BomberMan.dir/clean:
 .PHONY : CMakeFiles/BomberMan.dir/clean
 
 CMakeFiles/BomberMan.dir/depend:
-	cd /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles/BomberMan.dir/DependInfo.cmake --color=$(COLOR)
+	cd /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/tmp/CMakeFiles/BomberMan.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/BomberMan.dir/depend
 
