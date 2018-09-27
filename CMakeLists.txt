@@ -4,6 +4,8 @@ project (BomberMan)
 message (STATUS "####################################################")
 
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11")
+
 #Get all project source files
 file(GLOB_RECURSE BomberMan_SOURCES "Build/*.cpp")
 
@@ -34,8 +36,11 @@ list(REMOVE_DUPLICATES LIB_INCLUDE_DIRS)
 message ("Installing libraries")
 
 #needs xquartz from the softwear managment center on mac
-execute_process(COMMAND brew install assimp) #don't need this?
+execute_process(COMMAND brew install assimp)
 message (STATUS ">>>>>>>>>>>>>>>>assimp Should be downloaded")
+
+execute_process(COMMAND brew install freeglut)
+message (STATUS ">>>>>>>>>>>>>>>>freeglut Should be downloaded")
 
 include("FetchContent")
 
@@ -124,35 +129,23 @@ if(NOT freetype_POPULATED)
 endif()
 message (STATUS ">>>>>>>>>>>>>>>>freetype Should be downloaded")
 
-FetchContent_Declare(
-	freeglut
-	GIT_REPOSITORY https://github.com/Jerome-Damhuis/glut-dep_for_bomberman.git
-	#GIT_TAG		   VER-2-6-3 
-)
-
-FetchContent_GetProperties(freeglut)
-if(NOT freeglut_POPULATED)
-	FetchContent_Populate(freeglut)
-	add_subdirectory(${freeglut_SOURCE_DIR} ${freeglut_BINARY_DIR})
-endif()
-message (STATUS ">>>>>>>>>>>>>>>>freeglut Should be downloaded")
-
 message ("The libraries are installed")
 
 add_executable (BomberMan ${BomberMan_SOURCES})
 target_include_directories(BomberMan PRIVATE ${LIB_INCLUDE_DIRS} ${BomberMan_INCLUDE_DIRS})
-target_include_directories(BomberMan PRIVATE $ENV{HOME}/.brew/Cellar/assimp/4.1.0/include/)
 target_include_directories(BomberMan PRIVATE ${freetype_SOURCE_DIR}/include)
 target_include_directories(BomberMan PRIVATE ${glfw_SOURCE_DIR}/include)
 target_include_directories(BomberMan PRIVATE ${irrklang_SOURCE_DIR}/include)
 target_include_directories(BomberMan PRIVATE ${stb_SOURCE_DIR})
 target_include_directories(BomberMan PRIVATE ${glm_SOURCE_DIR})
-target_include_directories(BomberMan PRIVATE ${freeglut_SOURCE_DIR}/include)
+target_include_directories(BomberMan PRIVATE $ENV{HOME}/.brew/Cellar/assimp/4.1.0/include/)
+target_include_directories(BomberMan PRIVATE $ENV{HOME}/.brew/Cellar/freeglut/3.0.0/include)
 
 find_library(ASSIMP_LIB assimp HINTS $ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/)
 #link_directories($ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/ )
+find_library(GLUT_LIB glut HINTS $ENV{HOME}/.brew/Cellar/freeglut/3.0.0/lib/)
 
-target_link_libraries(BomberMan glfw freetype irrklang glad ${ASSIMP_LIB} glut)
+target_link_libraries(BomberMan glfw freetype irrklang glad ${ASSIMP_LIB} ${GLUT_LIB})
 
 
 #add compiling flags
