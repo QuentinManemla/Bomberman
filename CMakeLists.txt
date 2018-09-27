@@ -66,10 +66,11 @@ FetchContent_Declare(
 
 FetchContent_GetProperties(glfw)
 if(NOT glfw_POPULATED)
-  FetchContent_Populate(
-	  glfw)
-	  #SOURCE_DIR "")
-  add_subdirectory(${glfw_SOURCE_DIR} ${glfw_BINARY_DIR})
+	FetchContent_Populate(glfw)
+	set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+	set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+	set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+	add_subdirectory(${glfw_SOURCE_DIR} ${glfw_BINARY_DIR})
 endif()
 message (STATUS ">>>>>>>>>>>>>>>>The glfw lib should be downloaded")
 
@@ -83,6 +84,7 @@ FetchContent_Declare(
 FetchContent_GetProperties(glm)
 if(NOT glm_POPULATED)
 	FetchContent_Populate(glm)
+	set(GLM_TEST_ENABLE OFF CACHE BOOL "" FORCE)
 	add_subdirectory(${glm_SOURCE_DIR} ${glm_BINARY_DIR})
 endif()
 message (STATUS ">>>>>>>>>>>>>>>>glm Should be downloaded")
@@ -144,6 +146,8 @@ target_include_directories(BomberMan PRIVATE $ENV{HOME}/.brew/Cellar/freeglut/3.
 find_library(ASSIMP_LIB assimp HINTS $ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/)
 #link_directories($ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/ )
 find_library(GLUT_LIB glut HINTS $ENV{HOME}/.brew/Cellar/freeglut/3.0.0/lib/)
+
+execute_process(COMMAND install_name_tool -id "${irrklang_SOURCE_DIR}/bin/macosx-gcc/libirrklang.dylib" ${irrklang_SOURCE_DIR}/bin/macosx-gcc/libirrklang.dylib)
 
 target_link_libraries(BomberMan glfw freetype irrklang glad ${ASSIMP_LIB} ${GLUT_LIB})
 
