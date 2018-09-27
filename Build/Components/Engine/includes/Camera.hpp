@@ -95,6 +95,14 @@ class Camera {
 				Position -= Up * velocity;
 			updateCameraVectors();
 		}
+		void DefaultPos() {
+			float yoffset = 22.6;
+			yoffset *= MouseSensitivity;
+			Pitch += yoffset;
+
+			// Update Front, Right and Up Vectors using the updated Euler angles
+			updateCameraVectors();
+		}
 		void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true) {
 			xoffset *= MouseSensitivity;
 			yoffset *= MouseSensitivity;
@@ -102,6 +110,7 @@ class Camera {
 			Yaw   += xoffset;
 			Pitch += yoffset;
 
+			std::cout << "PITCH :" << yoffset << std::endl;
 			// Make sure that when pitch is out of bounds, screen doesn't get flipped
 			if (constrainPitch)
 			{

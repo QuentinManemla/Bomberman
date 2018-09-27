@@ -110,6 +110,9 @@ class	Engine {
 		int						bombAnim;
 		float					bombMove;
 		
+		int						explodeAnim;
+		float					explodeMove;
+		
 	private:
 		GLFWwindow				*_Window;
 		const GLFWvidmode		*_Mode;
@@ -138,6 +141,7 @@ class	Engine {
 		Model					_Bomb;
 		Model					_Enemy;
 		Model					_Door;
+		Model					_Explosion;
 
 
 

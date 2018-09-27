@@ -9,7 +9,7 @@ unsigned int lightVAO;
 unsigned int texture1, texture2;
 
 glm::vec3 cubePositions[] = {
-  glm::vec3( 0.48f, -0.48f,  0.0f), // same as camera offset
+  glm::vec3( 0.48f, -0.48f,  -0.1f), // same as camera offset
   glm::vec3( 2.0f,  5.0f, -15.0f), 
   glm::vec3(-1.5f, -2.2f, -2.5f),  
   glm::vec3(-3.8f, -2.0f, -12.3f),  
@@ -23,7 +23,7 @@ glm::vec3 cubePositions[] = {
 
 int		Engine::held = 1;
 
-Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _deltaTime(0.0f), bombAnim(0), bombMove(0.005f) {
+Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _deltaTime(0.0f), bombAnim(0), explodeAnim(0), bombMove(0.005f), explodeMove(0.02f) {
 	std::cout << "Engine constructed" << std::endl;
 	/* GLFW Initialization */
 	if (!glfwInit()) {
@@ -64,7 +64,7 @@ Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _delt
 	//this->muteSound();
 	//this->setFullScreen();
 	this->engineInit();
-	this->_Camera.init(glm::vec3(0.48f, -0.48f, 3.5f)); // use position of player in future
+	this->_Camera.init(glm::vec3(0.48f, -1.1f, 2.7f)); // use position of player in future
 
 	// initialising controls struct
 	this->_sControls.LEFT_KEY = GLFW_KEY_LEFT;//263;
@@ -145,6 +145,7 @@ void	Engine::backgroundTexture( std::string path ) {
 	this->_Shader.setInt("texture2", 1);
 }
 
+//22.6
 void	Engine::drawBackground( void ) {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
@@ -159,7 +160,7 @@ void	Engine::drawBackground( void ) {
 
 	model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
 	projection = glm::perspective(glm::radians(45.0f), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
-	
+
 	float radius = 10.0f;
 	float camX = sin(glfwGetTime()) * radius;
 	float camZ = cos(glfwGetTime()) * radius;
@@ -178,6 +179,7 @@ void	Engine::drawBackground( void ) {
 	for(unsigned int i = 0; i < 10; i++) {
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, cubePositions[i]);
+		model = glm::scale(model, glm::vec3(1.06f, 1.06f, 0.0f));
 		float angle = 20.0f * i;
 		this->_Shader.setMat4("model", model);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -203,6 +205,7 @@ void	Engine::engineInit( void ) {
 	this->_Player.init("Assets/Models/Slime/MC Slime.obj");
 	this->_Enemy.init("Assets/Models/Enemy/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_Door.init("Assets/Models/Door/89e64c1cd44944659f70b75891693405.blend.obj");
+	this->_Explosion.init("Assets/Models/Explosion/89e64c1cd44944659f70b75891693405.blend.obj");
 }
 
 void	Engine::clear( void ) {
@@ -236,6 +239,15 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 		} else
 			model = glm::scale(model, glm::vec3(this->bombMove, this->bombMove, this->bombMove));
 		model = glm::rotate(model, 2.0f, glm::vec3(1.5f, 0.0f, 0.0f));
+	} else if ( type == EXPLOSION ){
+		this->explodeAnim++;
+		model = glm::translate(model, glm::vec3(transX, transY + 0.009f, transZ));
+		if (this->explodeAnim++ < 5) {
+			model = glm::scale(model, glm::vec3(this->explodeMove, this->explodeMove, this->explodeMove));
+			this->explodeMove -= 0.0008f;
+		} else {
+			model = glm::scale(model, glm::vec3(this->explodeMove, this->explodeMove, this->explodeMove));
+		}
 	} else {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
@@ -244,6 +256,9 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	this->_ModelShader.setMat4("model", model);
 
 	switch (type) {
+		case ( EXPLOSION ):
+			this->_Explosion.Draw(_ModelShader);
+			break;
 		case ( DOOR ):
 			this->_Door.Draw(_ModelShader);
 			break;
