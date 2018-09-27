@@ -14,6 +14,7 @@ ObjectManager::ObjectManager( Engine & engine ){
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	this->fuseTime = 1.5f;
 	this->bombRadius = 1;
+	this->playerImmortalTime = 1.0;
 }
 
 ObjectManager::~ObjectManager( void ){
@@ -28,7 +29,19 @@ void	ObjectManager::update( eControls key, double deltaTime){
 			this->placeBomb(); // test
 	}
 
-	if (this->player->state == ALIVE)
+	if (this->player->hitPoints == 0)
+		this->playerDied();
+
+	// ENEMY - PLAYER COLLISION DETECTION
+	for (int i = 0; i < this->enemies.size(); i++){
+		if (isDestVectorEqual(this->player->destination, this->enemies[i]->destination) && this->enemies[i]->state == ALIVE){
+			this->player->hitPoints -= 1; // move to 2;2 and become INVINCIBLE FOR A BIT 
+			if (this->player->hitPoints != 0)
+				this->playerReset();
+		}
+	}
+
+	if (this->player->state == ALIVE || this->player->state == DYING)
 		requestMove(this->player, key);
 
 	// ENEMY MOVE
@@ -55,6 +68,8 @@ void	ObjectManager::update( eControls key, double deltaTime){
 			}
 	}
 	// IF PLAYER = MORTAL IF PLAYER COLLISION WITH ENEMY, PLAYER--
+	if (this->player->state == DYING)
+		this->ImmortalTick();
 }
 
 void	ObjectManager::render(void){
@@ -62,6 +77,9 @@ void	ObjectManager::render(void){
 	// std::cout << "PLR TRUNC : " << trunc(this->player->position->vX) << ";" << trunc(this->player->position->vY) << std::endl; // debug
 	if (this->player->state == ALIVE)
 		this->engine->drawModel(PLAYER, (this->player->position->vX), (this->player->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+	else if (this->player->state == DYING)
+		this->engine->drawModel(PLAYER, (this->player->position->vX), (this->player->position->vY), 0.02f);// draw goD mode model/
+		
 	for (int i = 0; i < this->enemies.size(); i++){
 		if (this->enemies[i]->state == ALIVE)
 			this->engine->drawModel(ENEMY, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
@@ -77,7 +95,6 @@ void	ObjectManager::render(void){
 		this->engine->explodeAnim = 0;
 		this->engine->explodeMove = 0.02f;
 	}
-	
 }
 
 void	ObjectManager::requestMove(GameObject *actor, eControls key){
@@ -96,11 +113,6 @@ void	ObjectManager::requestMove(GameObject *actor, eControls key){
 		move(actor, vectorDifference);
 		return;
 	}
-
-	//if (actor->eType == ENEMY)
-	//	if (rand() % 20 == 0)
-	//		getOpenDirection(actor); // chance of random direciton change
-
 	std::cout << "2vectorDifference = " << vectorDifference << std::endl; // debug
 
 	int truncX = trunc(actor->position->vX);
@@ -375,8 +387,7 @@ void	ObjectManager::explode( void ){
 	// KILL PLAYER IN BLAST // REDUCE HP FIRST
 	for (int i = 0; i < this->bomb->blast.size(); i++){
 		if (this->player->destination->vX == this->bomb->blast[i].first && this->player->destination->vY == this->bomb->blast[i].second){
-			if (this->player->hitPoints -= 1)
-				this->player->state = DEAD;
+			this->player->hitPoints -= 1;
 		}
 	}
 
@@ -395,4 +406,35 @@ void	ObjectManager::explode( void ){
 	//this->bomb = NULL;
 	this->bomb->state = DYING;
 	std::cout << "boom" << std::endl;
+}
+
+void	ObjectManager::playerDied( void ){
+	this->player->state = DEAD;
+}
+
+int		ObjectManager::isDestVectorEqual(Vector3d *first, Vector3d *second){
+	if (trunc(first->vX) != trunc(second->vX))
+		return (0);
+	else if (trunc(first->vY) != trunc(second->vY))
+		return (0);
+	else if (trunc(first->vZ ) != trunc(second->vZ))
+		return (0);
+	return (1);
+}
+
+void	ObjectManager::playerReset( void ){
+	this->player->position->vX = 2.0f;
+	this->player->position->vY = 2.0f;
+	this->player->destination->vX = 2.0f;
+	this->player->destination->vY = 2.0f;
+	this->player->state = DYING;
+}
+
+void	ObjectManager::ImmortalTick( void ){
+	if (this->playerImmortalTicker < this->playerImmortalTime)
+		this->playerImmortalTicker += this->engine->_deltaTime;
+	else{
+		this->playerImmortalTicker = 0;
+		this->player->state = ALIVE;
+	}
 }

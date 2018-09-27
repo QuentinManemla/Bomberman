@@ -260,7 +260,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 			this->_Explosion.Draw(_ModelShader);
 			break;
 		case ( DOOR ):
-			this->_Door.Draw(_ModelShader);
+			this->_SolidWall.Draw(_ModelShader);
 			break;
 		case ( ENEMY ):
 			this->_Enemy.Draw(_ModelShader);

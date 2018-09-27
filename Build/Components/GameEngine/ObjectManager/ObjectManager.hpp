@@ -33,6 +33,11 @@ public:
 	void		placeBomb( void );
 	void		explode( void );
 	void		checkEnemyCollision( void );
+	void		playerDied( void );
+	int			isDestVectorEqual(Vector3d *first, Vector3d *second);
+	void		playerReset( void );
+	void		ImmortalTick( void );
+
 
 	Engine						*engine;
 	LevelManager				*LM;
@@ -42,6 +47,9 @@ public:
 	Bomb						*bomb;
 	float						fuseTime;
 	int							bombRadius;
+	float						playerImmortalTime;
+	float						playerImmortalTicker;
+
 
 protected:
 
