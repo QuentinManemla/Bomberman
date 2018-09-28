@@ -18,19 +18,6 @@ foreach (_headerFile ${BomberMan_HEADERS})
 endforeach()
 list(REMOVE_DUPLICATES BomberMan_INCLUDE_DIRS)
 
-#Get all the Library headers directories
-file(GLOB_RECURSE LIB_cHEADERS "Libraries/*.h")
-file(GLOB_RECURSE LIB_cppHEADERS "Libraries/*.hpp")
-list (APPEND LIB_cppHEADERS ${LIB_cHEADERS})
-set (LIB_INCLUDE_DIRS "")
-foreach (_headerFile ${LIB_cppHEADERS})
-    #message(STATUS "The current path is ${_headerFile}")
-	get_filename_component(_dir ${_headerFile} PATH)
-	list(APPEND LIB_INCLUDE_DIRS ${_dir})
-endforeach()
-list(REMOVE_DUPLICATES LIB_INCLUDE_DIRS)
-#message (STATUS "The include Directories are: ${LIB_INCLUDE_DIRS}")
-
 
 #installing what is nessesry
 message ("Installing libraries")
@@ -146,11 +133,13 @@ target_include_directories(BomberMan PRIVATE $ENV{HOME}/.brew/Cellar/freeglut/3.
 find_library(ASSIMP_LIB assimp HINTS $ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/)
 #link_directories($ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/ )
 find_library(GLUT_LIB glut HINTS $ENV{HOME}/.brew/Cellar/freeglut/3.0.0/lib/)
+find_library(OPENGL GL HINTS /System/Library/Frameworks/OpenGL.framework/Libraries)
 
 execute_process(COMMAND install_name_tool -id "${irrklang_SOURCE_DIR}/bin/macosx-gcc/libirrklang.dylib" ${irrklang_SOURCE_DIR}/bin/macosx-gcc/libirrklang.dylib)
 
-target_link_libraries(BomberMan glfw freetype irrklang glad ${ASSIMP_LIB} ${GLUT_LIB})
+target_link_libraries(BomberMan glfw freetype irrklang glad ${ASSIMP_LIB} ${GLUT_LIB} ${OPENGL})
 
+set_target_properties( BomberMan PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR} )
 
 #add compiling flags
 target_compile_options(BomberMan PRIVATE "-Wall" "-Wextra" "-Wpedantic" "-std=c++11")

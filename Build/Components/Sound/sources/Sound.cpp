@@ -19,3 +19,8 @@ void		Sound::stopSound( void ) {
 void		Sound::play2DSound( std::string soundPath, bool loop ) {
 	this->_soundEngine->play2D(soundPath.c_str(), loop);
 }
+
+void		Sound::playSoundSource(	irrklang::ISoundSource* sound , float volume) {
+	sound->setDefaultVolume(volume);
+	this->_soundEngine->play2D(sound);
+}

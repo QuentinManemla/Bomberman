@@ -2,7 +2,7 @@
 #include <iostream>
 
 int LevelManager::level = 0;
-int LevelManager::enemies = 0;
+//int LevelManager::enemies = 0;
 
 // I think LevelManager should only come into existence when creating a level,
 // then deleted. This way it can be reinitialized with the level value each time
@@ -10,11 +10,24 @@ int LevelManager::enemies = 0;
 LevelManager::LevelManager( int level ){
 	srand(time(NULL));
 	level = level;
+
+	switch(level) {
+		case(1):
+			this->duration = 200;
+			break;
+		case(2):
+			this->duration = 400;
+			break;
+		case(3):
+			this->duration = 600;
+			break;
+	}
+
 	this->mapWidth = 13; // must be odd between 7 and 31
 	this->mapHeight = 13; // must be odd between 7 and 31
 	assert(this->mapWidth >= 7 && this->mapWidth <= 31 && this->mapHeight % 2 != 0);
 	assert(this->mapHeight >= 7 && this->mapWidth <= 31 && this->mapWidth % 2 != 0);
-	enemies = this->mapWidth * this->mapHeight / 50 + (level * 2);
+	// enemies = this->mapWidth * this->mapHeight / 50 + (level * 2);
 	std::cout << "LevelManager constructed" << std::endl; // debug
 }
 
@@ -43,6 +56,7 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 	int	solidCountDebug = 0;
 	int	breakableCountDebug = 0;
 	int	openCountDebug = 0;
+	int	doorFlag = 0;
 
 	for (int i = 0; i < (h * w); i++){ // i will increment from 0 to (TOTAL_BLOCKS - 1)
 		type = 0;
@@ -72,7 +86,26 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 			breakableCountDebug++;
 		else if (type == 0)
 			openCountDebug++;
-		std::cout << i << " type =" << type << "; totalline (x;y) = " << x << ";" << y << std::endl; // debug
+
+		// if type == 0, random chance of spawning enemy
+		// if type == 1, if flag1 not set, random chance of placing a door
+		// make function to check if door is present, and how many enemies are present
+
+		// RANDOM CHANCE FOR ENEMY
+		if (type == 0){
+			if (rand() % 10 == 0)
+				type = 3; // test
+		}
+
+		//RANDOM CHANCE FOR DOOR // FIXXXXXXX
+		if (type == 2){
+			if (rand() % 10 == 0 && doorFlag < 1){
+				doorFlag++;
+				type = 4; // test
+			}
+		}
+
+		// std::cout << i << " type =" << type << "; totalline (x;y) = " << x << ";" << y << std::endl; // debug
 		pushObject(type, x, y);
 		x++;
 		if (x == w + 1){
@@ -81,7 +114,7 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 		}
 	}
 	std::cout << "solid = " << solidCountDebug << "\nopen = " << openCountDebug << "\nbreakable = " << breakableCountDebug << std::endl;
-	//this->debugPrintMap(); //debug
+	//this->debugPrintEnemies(); //debug
 	//exit(-1); // debug
 	return (this->testMap);
 }
@@ -90,14 +123,21 @@ void	LevelManager::pushObject( int type, int x, int y ){ // may take level int i
 	//std::cout << "pushObject" << " type =" << type << "; totalline (x;y) = " << x << ";" << y << std::endl;
 	GameObject *object;
 	switch (type){
+		case 0:
+			return;
 		case 1:
 			object = (new SolidWall(SOLIDWALL, new Vector3d(x, y, 0)));
 			break;
 		case 2:
 			object = (new Wall(WALL, new Vector3d(x, y, 0)));
 			break;
-		case 0:
+		case 3:
+			this->enemies.push_back(pair<int, int>(x, y));
 			return;
+		case 4:
+			object = (new Door(DOOR, new Vector3d(x, y, 0)));
+			std::cout << "door = " << x << ";" << y << std::endl;
+			break;
 		case 5:
 			return;
 	};
@@ -112,5 +152,12 @@ void	LevelManager::debugPrintMap( void ){ // debug // test
 		std::cout << testMap[i]->eType;
 		if (i & this->mapWidth == 0)
 			std::cout << std::endl;
+	}
+}
+
+void	LevelManager::debugPrintEnemies( void ){ // debug // test
+	std::cout << "total = " << enemies.size() << std::endl;
+	for (int i = 0; i < enemies.size(); i++){
+		std::cout << this->enemies[i].first << ";" << this->enemies[i].second << std::endl;
 	}
 }

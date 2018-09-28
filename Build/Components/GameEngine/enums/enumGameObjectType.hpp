@@ -4,9 +4,11 @@
 enum eGameObjectType {
 	PLAYER,
 	ENEMY,
+	BOMB,
 	WALL,
 	SOLIDWALL,
-	DOOR
+	DOOR,
+	EXPLOSION
 };
 
 #endif
