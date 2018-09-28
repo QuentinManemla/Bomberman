@@ -1,34 +1,52 @@
 #include "ObjectManager.hpp"
 
 static int	fuse_time = 0;
+
 ObjectManager::ObjectManager( Engine & engine ){
 	this->engine = &engine;
 	this->LM = new LevelManager(1); // may move this codeblock to a level init function to be available on call rather than this constructor
 	this->map = this->LM->generateMap();
 	this->player = new Player( PLAYER, new Vector3d(2, 2, 0.1f) );
-	//this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
-	//this->enemies.push_back(new Enemy( ENEMY, new Vector3d(3, 2, 0.1f) )); // test // debug
+	this->playerReset(); // start with temp immortality
 	this->bomb = NULL;
-	this->placeEnemies(); // arbitrary int for now
+	this->placeEnemies(); // 
+	this->playerScore = 0;
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	this->fuseTime = 1.5f;
-	this->bombRadius = 1;
+	this->bombRadius = 2;
+	this->playerImmortalTime = 2.0;
 }
 
 ObjectManager::~ObjectManager( void ){
 	delete this->LM;
+	delete this->player; // test
 }
 
-void	ObjectManager::update( eControls key, double deltaTime){
-	// PLAYER MOVE
+void	ObjectManager::update( eControls key, double remainingTime){
+	// ADJUST VALUES BASED ON TIME
+	this->processRemaingingTime(remainingTime);
+
+	// PLACE BOMB
 	if (key == FIRE){
-		std::cout << "key = " << key << std::endl; // debug
 		if (this->player->state == ALIVE)
 			this->placeBomb(); // test
 	}
 
-	if (this->player->state == ALIVE)
+	// CHECK PLAYER STATE // MIGHT NOT BE NEEDED
+	if (this->player->hitPoints == 0)
+		this->playerDied();
+
+	// ENEMY - PLAYER COLLISION DETECTION
+	for (int i = 0; i < this->enemies.size(); i++){
+		if (isDestVectorEqual(this->player->destination, this->enemies[i]->destination) && this->enemies[i]->state == ALIVE && this->player->state == ALIVE){
+			this->player->hitPoints -= 1; // move to 2;2 and become INVINCIBLE FOR A BIT 
+			this->playerReset();
+		}
+	}
+
+	// PLAYER MOVE
+	if (this->player->state == ALIVE || this->player->state == DYING)
 		requestMove(this->player, key);
 
 	// ENEMY MOVE
@@ -39,22 +57,21 @@ void	ObjectManager::update( eControls key, double deltaTime){
 
 	// INCREMENT BOMB FUSE
 	if (this->bomb != NULL){
-		this->bomb->fuseTime -= this->engine->_deltaTime; // to be replaced with deltaTime
+		this->bomb->fuseTime -= this->engine->_deltaTime;
 		if (this->bomb->fuseTime < 0)
 			if (this->bomb->state == DYING) {
-				//draw explosion
 				if (this->bomb->fuseTime < -0.1f) { // save as blastTime
-					delete this->bomb; // test
+					delete this->bomb;
 					this->bomb = NULL;
 				}
 			}
 			else{
 				this->explode();
-				this->engine->bombAnim = 0;
-				this->engine->bombMove = 0.005f;
 			}
 	}
 	// IF PLAYER = MORTAL IF PLAYER COLLISION WITH ENEMY, PLAYER--
+	if (this->player->state == DYING)
+		this->ImmortalTick();
 }
 
 void	ObjectManager::render(void){
@@ -62,6 +79,9 @@ void	ObjectManager::render(void){
 	// std::cout << "PLR TRUNC : " << trunc(this->player->position->vX) << ";" << trunc(this->player->position->vY) << std::endl; // debug
 	if (this->player->state == ALIVE)
 		this->engine->drawModel(PLAYER, (this->player->position->vX), (this->player->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+	else if (this->player->state == DYING)
+		this->engine->drawModel(PLAYER, (this->player->position->vX), (this->player->position->vY), 0.02f);// draw goD mode model/
+		
 	for (int i = 0; i < this->enemies.size(); i++){
 		if (this->enemies[i]->state == ALIVE)
 			this->engine->drawModel(ENEMY, (this->enemies[i]->position->vX), (this->enemies[i]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
@@ -77,7 +97,6 @@ void	ObjectManager::render(void){
 		this->engine->explodeAnim = 0;
 		this->engine->explodeMove = 0.02f;
 	}
-	
 }
 
 void	ObjectManager::requestMove(GameObject *actor, eControls key){
@@ -96,11 +115,6 @@ void	ObjectManager::requestMove(GameObject *actor, eControls key){
 		move(actor, vectorDifference);
 		return;
 	}
-
-	//if (actor->eType == ENEMY)
-	//	if (rand() % 20 == 0)
-	//		getOpenDirection(actor); // chance of random direciton change
-
 	std::cout << "2vectorDifference = " << vectorDifference << std::endl; // debug
 
 	int truncX = trunc(actor->position->vX);
@@ -147,29 +161,6 @@ void	ObjectManager::move( GameObject *actor, int vectorDifference ){
 			break;
 	}
 }
-
-/*
-void    ObjectManager::move( GameObject *actor, int vectorDifference ){
-    std::cout << "VD in move: " << vectorDifference << std::endl; // debug
-    float move = 0;
-    switch (vectorDifference){
-        case 1:
-            move = ((trunc(actor->position->vX * 10) / 10) > trunc(actor->destination->vX * 10) / 10 ? -0.1 : 0.1);
-            //if (abs(actor->position->vX - actor->destination->vX) > 0.09)// test // debug // WORK BUT MOVE TO PRIMARY CONDITION
-                actor->position->vX += (move + 3.0f * this->engine->_deltaTime);
-            //actor->position->vZ = getZStep(actor);
-            break;
-        case 2:
-            move = (actor->position->vY > actor->destination->vY ? -0.1 : 0.1);
-            actor->position->vY += (move + 3.0f * this->engine->_deltaTime);
-            break;
-        case 3:
-            move = (actor->position->vZ > actor->destination->vZ ? -0.1 : 0.1);
-            actor->position->vZ += (move + 3.0f * this->engine->_deltaTime);
-            break;
-    }
-}
-*/
 
 float	ObjectManager::getZStep( GameObject *actor){
 	float ret = 0;
@@ -236,15 +227,15 @@ int		ObjectManager::getVectorDifference(GameObject *actor){
 }
 
 void	ObjectManager::placeEnemies( void ){
-
 	int x;
 	int y;
 
-	for ( int i = 0; i < this->LM->enemies.size(); i++){
-		x = this->LM->enemies[i].first;
-		y = this->LM->enemies[i].second;
-		this->enemies.push_back(new Enemy( ENEMY, new Vector3d(x, y, 0.1f) )); // test // debug
-	}
+	if (this->LM->enemies.size() > 0)
+		for ( int i = 0; i < this->LM->enemies.size(); i++){
+			x = this->LM->enemies[i].first;
+			y = this->LM->enemies[i].second;
+			this->enemies.push_back(new Enemy( ENEMY, new Vector3d(x, y, 0.1f) )); // test // debug
+		}
 }
 
 bool	ObjectManager::isAtDestination( GameObject *actor){
@@ -312,7 +303,7 @@ void	ObjectManager::getOpenDirection( GameObject *actor ){
 }
 
 void	ObjectManager::placeBomb( void ){
-	this->engine->playSound("Assets/Audio/punch.wav", false);
+	this->engine->_SoundEngine.playSoundSource(this->engine->_SoundEngine._PlaceBomb, false);
 	// check for bomb related powerup and then change bomb params accordingly
 	if (this->bomb == NULL)
 		this->bomb = new Bomb(BOMB, new Vector3d(this->player->destination->vX, this->player->destination->vY, this->player->destination->vZ), this->fuseTime); // params subject to powerup
@@ -325,9 +316,12 @@ void	ObjectManager::explode( void ){
 	// extend in open dirs as far as radius including bomb pos
 	// check if collision with any mortal object
 	// clean up the carnage
-	this->engine->playSound("Assets/Audio/bomb-explode.wav", false);
+	this->engine->_SoundEngine.playSoundSource(this->engine->_SoundEngine._Explode, false);
+	this->engine->bombAnim = 0;
+	this->engine->bombMove = 0.005f;
 	int	dir = -1;
 	int	index = -1;
+	int	mortalDestroyed = 0;
 	int	x = static_cast<int>(this->bomb->position->vX);
 	int	y = static_cast<int>(this->bomb->position->vY);
 
@@ -340,11 +334,19 @@ void	ObjectManager::explode( void ){
 	while (++dir < 4){
 		while (++index < this->bombRadius){
 			this->getForward(static_cast<eControls>(dir), &forwardX, &forwardY);
-			if (!(this->isOpen(forwardX, forwardY)))
+			if (this->isOpen(forwardX, forwardY) == 0){
 				if (this->isMortal(forwardX, forwardY) == 0) // issue with mortal
 					break;
+				else if (this->isMortal(forwardX, forwardY) == 1)
+					mortalDestroyed++;
+				else if (mortalDestroyed > 1)
+					break;
+			}
 			this->bomb->blast.push_back( std::pair<int, int>(forwardX, forwardY));
+			if (mortalDestroyed > 0)
+				break;
 		}
+		mortalDestroyed = 0;
 		index = -1;
 		forwardX = x;
 		forwardY = y;
@@ -359,8 +361,15 @@ void	ObjectManager::explode( void ){
 	for (int j = 0; j < this->map.size(); j++){
 		for (int i = 0; i < this->bomb->blast.size(); i++){
 			if (this->map[j]->position->vX == this->bomb->blast[i].first && this->map[j]->position->vY == this->bomb->blast[i].second && this->map[j]->state == ALIVE && this->map[j]->mortal == 1){
-				//std::cout << "dead coord: " << this->map[j]->position->vX << ";" << this->map[j]->position->vY << std::endl; // debug
 				this->map[j]->state = DEAD;
+				this->updatePlayerScore(10);
+				// DOOR TEST
+				//if (this->map[j]->door == 1){
+					// new Door gets map[j] pos,
+					// delete this->map[j]
+					// this->map[i] = door;
+				//}
+				// END DOOR TEST
 			}
 		}
 	}
@@ -369,30 +378,91 @@ void	ObjectManager::explode( void ){
 		for (int i = 0; i < this->bomb->blast.size(); i++){
 			if (this->enemies[j]->destination->vX == this->bomb->blast[i].first && this->enemies[j]->destination->vY == this->bomb->blast[i].second && this->enemies[j]->state == ALIVE){
 				this->enemies[j]->state = DEAD;
+				this->updatePlayerScore(50); // score
 			}
 		}
 	}
 	// KILL PLAYER IN BLAST // REDUCE HP FIRST
 	for (int i = 0; i < this->bomb->blast.size(); i++){
 		if (this->player->destination->vX == this->bomb->blast[i].first && this->player->destination->vY == this->bomb->blast[i].second){
-			if (this->player->hitPoints -= 1)
-				this->player->state = DEAD;
+			this->player->hitPoints -= 1;
+			this->playerReset();
+			this->updatePlayerScore(-20); // score
 		}
 	}
 
-	std::cout << "pre exit" << std::endl;
-
-	//this->engine->drawModel(WALL, (this->bomb->blast[0].first), (this->bomb->blast[0].second), 0.02f);//this->player->position->vZ); // moved math to drawModel()
-
 	// RENDER EXPLOSION // NEEDS TO BE MOVED AND PROLONGED
 	for (int i = 0; i < this->bomb->blast.size(); i++) {
-		std::cout << "SPLODE" << std::endl;
 		this->engine->drawModel(WALL, (this->bomb->blast[i].first), (this->bomb->blast[i].second), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	}
-	//exit(-1); // debug
 
-	//delete this->bomb; // test
-	//this->bomb = NULL;
 	this->bomb->state = DYING;
-	std::cout << "boom" << std::endl;
+}
+
+void	ObjectManager::playerDied( void ){
+	//this->updatePlayerScore(-100); // score
+	this->playerScore = -100;
+	this->player->state = DEAD;
+}
+
+int		ObjectManager::isDestVectorEqual(Vector3d *first, Vector3d *second){
+	if (trunc(first->vX) != trunc(second->vX))
+		return (0);
+	else if (trunc(first->vY) != trunc(second->vY))
+		return (0);
+	else if (trunc(first->vZ ) != trunc(second->vZ))
+		return (0);
+	return (1);
+}
+
+void	ObjectManager::playerReset( void ){
+	this->updatePlayerScore(-10); // score
+	this->player->position->vX = 2.0f;
+	this->player->position->vY = 2.0f;
+	this->player->destination->vX = 2.0f;
+	this->player->destination->vY = 2.0f;
+	this->player->state = DYING;
+}
+
+void	ObjectManager::ImmortalTick( void ){
+	if (this->player->hitPoints < 1){
+		this->playerDied();
+		return;
+	}
+	if (this->playerImmortalTicker < this->playerImmortalTime)
+		this->playerImmortalTicker += this->engine->_deltaTime;
+	else{
+		this->playerImmortalTicker = 0;
+		this->player->state = ALIVE;
+	}
+}
+
+void	ObjectManager::processRemaingingTime( double remainingTime ){
+	std::cout << "remaining time: " << remainingTime << std::endl; // debug
+	//exit(-1); // debug
+	/*if (remainingTime > 10.0f){
+		for (int i = 0; i < this->enemies.size(); i++){
+			this->enemies[i]->velocity += 1.0f;
+		}
+	}*/
+}
+
+
+//void	ObjectManager::LevelEnd(/*stuff probably*/){
+//	
+//}
+
+// in level manager
+// certain wall gets door = true attribute
+// if a wall dies and door is true, spawn door object
+// door object has own properties
+
+// Level transition:
+// Level complete! continue to level X
+// GO!
+// save
+// quit to menu
+
+void	ObjectManager::updatePlayerScore( int amount ){
+	this->playerScore += amount;
 }

@@ -18,7 +18,6 @@ foreach (_headerFile ${BomberMan_HEADERS})
 endforeach()
 list(REMOVE_DUPLICATES BomberMan_INCLUDE_DIRS)
 
-
 #installing what is nessesry
 message ("Installing libraries")
 

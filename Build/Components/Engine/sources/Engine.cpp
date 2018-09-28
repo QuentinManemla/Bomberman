@@ -23,7 +23,7 @@ glm::vec3 cubePositions[] = {
 
 int		Engine::held = 1;
 
-Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _deltaTime(0.0f), bombAnim(0), explodeAnim(0), bombMove(0.005f), explodeMove(0.02f) {
+Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _deltaTime(0.0f), bombAnim(0), explodeAnim(0), bombMove(0.005f), explodeMove(0.2f) {
 	std::cout << "Engine constructed" << std::endl;
 	/* GLFW Initialization */
 	if (!glfwInit()) {
@@ -34,6 +34,7 @@ Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _delt
 	// GLFW Window Hints
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	#ifdef __APPLE__
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -56,6 +57,7 @@ Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _delt
 	glfwSetInputMode(this->_Window, GLFW_STICKY_KEYS, GL_TRUE);
 	glEnable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_MULTISAMPLE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	/* Initialize Sound, Text & Camera Engine */
@@ -244,7 +246,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 		model = glm::translate(model, glm::vec3(transX, transY + 0.009f, transZ));
 		if (this->explodeAnim++ < 5) {
 			model = glm::scale(model, glm::vec3(this->explodeMove, this->explodeMove, this->explodeMove));
-			this->explodeMove -= 0.0008f;
+			this->explodeMove -= 0.008f;
 		} else {
 			model = glm::scale(model, glm::vec3(this->explodeMove, this->explodeMove, this->explodeMove));
 		}
@@ -302,6 +304,10 @@ void		Engine::stopSound( void ) {
 void		Engine::muteSound( void ) {
 	this->_Mute = !_Mute;
 }
+
+void		Engine::setVolume(float level) {
+	this->_SoundEngine._volume = level;
+}
 /********************************************************************************/
 /*	Text and Menu Rendering Function											*/
 /********************************************************************************/
@@ -344,19 +350,19 @@ int			Engine::menuHandler( eControls key, int & menuIndex, int lastIndex ){
 			case UP:
 			if (!(this->held)) {
 				menuIndex == 0 ? menuIndex = 0 : menuIndex--;
-				this->playSound("Assets/Audio/Selection.wav", false);
+				this->_SoundEngine.playSoundSource(this->_SoundEngine._Selection, false);
 			}
 			this->held = 1;
 			break;
 		case DOWN:
 			if (!(this->held)) {
 				menuIndex == lastIndex ? menuIndex = lastIndex : menuIndex++;
-				this->playSound("Assets/Audio/Selection.wav", false);
+				this->_SoundEngine.playSoundSource(this->_SoundEngine._Selection, false);
 			}
 			this->held = 1;
 			break;
 		case ENTER:
-			this->playSound("Assets/Audio/Enter_Key.wav", false);
+			this->_SoundEngine.playSoundSource(this->_SoundEngine._EnterKey, false);
 			if (!(this->held))
 				return (1);
 			this->held = 1;

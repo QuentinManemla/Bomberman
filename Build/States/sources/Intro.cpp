@@ -23,7 +23,7 @@ void IntroState::update( eControls key ) {
 	std::cout << "time: " << time << std::endl; // test
 	this->_engine->clear();
 	if (time == 1)
-		this->_engine->playSound("Assets/Audio/Intro_State.wav", true);
+		this->_engine->_SoundEngine.playSoundSource(this->_engine->_SoundEngine._Intro, true);
 	if (time >= 500){ // test // to be replaced by "end of intro/animation" flag
 		this->_engine->stopSound();
 		std::cout << "Intro over!" << std::endl;
