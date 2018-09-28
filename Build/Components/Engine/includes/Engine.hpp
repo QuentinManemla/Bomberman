@@ -104,8 +104,9 @@ class	Engine {
 		static int				held; // test
 		Camera 					_Camera;
 
-		/** Sound Variables **/
-		float					volume;
+		/** Sound  **/
+		Sound					_SoundEngine;
+		void					setVolume(float level);
 
 		/** Animation Variables **/
 		int						bombAnim;
@@ -119,7 +120,6 @@ class	Engine {
 		const GLFWvidmode		*_Mode;
 		GLFWmonitor				*_Monitor;
 		eControls				_ActiveKey;
-		Sound					_SoundEngine;
 		Text					_TextEngine;
 		sControls				_sControls;
 		bool					_getKey( int key );
