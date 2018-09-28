@@ -337,10 +337,11 @@ void	ObjectManager::getOpenDirection( GameObject *actor ){
 }
 
 void	ObjectManager::placeBomb( void ){
-	this->engine->_SoundEngine.playSoundSource(this->engine->_SoundEngine._PlaceBomb, false);
 	// check for bomb related powerup and then change bomb params accordingly
-	if (this->bomb == NULL)
+	if (this->bomb == NULL){
+		this->engine->_SoundEngine.playSoundSource(this->engine->_SoundEngine._PlaceBomb, false);
 		this->bomb = new Bomb(BOMB, new Vector3d(this->player->destination->vX, this->player->destination->vY, this->player->destination->vZ), this->fuseTime); // params subject to powerup
+	}
 }
 
 void	ObjectManager::explode( void ){
@@ -499,6 +500,7 @@ void	ObjectManager::initLevel( int level, bool success ){
 			this->startTime = std::chrono::steady_clock::now();
 			this->player->hitPoints++;
 			this->powerupCount = 0;
+			this->timeSpeedupFlag = 0;
 			this->playerReset(0);
 			this->placeEnemies();
 			std::cout << "success" << std::endl;
@@ -540,12 +542,12 @@ void	ObjectManager::levelProcess( int remainingTime ){
 		// check if all enemies dead
 		// if true then end level and initiate next one if there is one (endlevel(success))
 
-	if (remainingTime < 20 && this->timeSpeedupFlag == 0){ // enemies speed up when time drops below 20 seconds remaining
-		for (int i = 0; i < this->enemies.size(); i++){
-			this->enemies[i]->velocity += 2.0f;
-			this->timeSpeedupFlag = 1;
-		}
-	}
+	//if (remainingTime < 20 && this->timeSpeedupFlag == 0){ // enemies speed up when time drops below 20 seconds remaining
+	//	for (int i = 0; i < this->enemies.size(); i++){
+	//		this->enemies[i]->velocity += 2.0f;
+	//		this->timeSpeedupFlag = 1;
+	//	}
+	//}
 
 	if (allEnemiesDead() == 1)
 		std::cout << "enemies dead!" << std::endl;
@@ -562,7 +564,6 @@ void	ObjectManager::levelProcess( int remainingTime ){
 		}
 	}
 
-	std::cout << "remaining time: " << remainingTime << std::endl; // debug
 	if (this->displayTime == 0){
 		//exit(-1);//end level fail
 		std::cout << "initLevel time up: 538" << std::endl; // debug
@@ -570,17 +571,19 @@ void	ObjectManager::levelProcess( int remainingTime ){
 		return;
 	}
 
-	if (this->remainingTime < 50 && this->timeSpeedupFlag == 0){ // enemies speed up when time drops below 20 seconds remaining
+	if (this->displayTime < 50 && this->timeSpeedupFlag == 0){ // enemies speed up when time drops below 20 seconds remaining
 		for (int i = 0; i < this->enemies.size(); i++){
-			this->enemies[i]->velocity += 2.0f;
+			this->enemies[i]->velocity += 1.0f;
 			this->timeSpeedupFlag = 1;
 		}
 	}
+	std::cout << "remaining time: " << this->displayTime << std::endl; // debug
+	std::cout << "timeflag: " << this->timeSpeedupFlag << std::endl; // debug
 }
 
 void	ObjectManager::placePowerup( float x, float y){
 	if (this->powerupCount < this->powerupMax){
-		if (rand() % 2 == 0){
+		if (rand() % 30 == 0){
 			this->powerups.push_back(new SolidWall(SOLIDWALL, new Vector3d(x, y, 0.1f)));
 			this->powerupCount++;
 		}
