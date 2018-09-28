@@ -96,3 +96,11 @@ game settings. It must be possible to customize at least:
 It could be a regular save system or a campain mecanic. As long as the feature
 is present, it’s up to you to integrate it in your game. Anyway, This persitance
 MUST remain even if the game is exited completly and executed again.
+
+## To run and install on WeThinkCode_ Mac OS.
+• Have Xquartz installed through Managment Software Center
+• Have brew installed ( sh -c "$(curl -fsSL https://raw.githubusercontent.com/Tolsadus/42homebrewfix/master/install.sh)" )
+• Have cmake installed ( brew install cmake )
+• generate the Makefile with "cmake -B./tmp -H."
+• compile with "make -C tmp"
+• run witn "./BomberMan"
