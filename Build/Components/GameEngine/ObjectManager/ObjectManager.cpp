@@ -454,6 +454,8 @@ int		ObjectManager::isDestVectorEqual(Vector3d *first, Vector3d *second){
 void	ObjectManager::playerReset( int penalize ){
 	if (penalize == 1)
 		this->updatePlayerScore(-10); // score
+	this->bombRadius = 1; // new // test
+	this->powerupCount = 0; // new // test
 	this->player->position->vX = 2.0f;
 	this->player->position->vY = 2.0f;
 	this->player->destination->vX = 2.0f;
