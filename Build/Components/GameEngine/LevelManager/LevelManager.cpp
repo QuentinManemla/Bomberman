@@ -13,13 +13,16 @@ LevelManager::LevelManager( int level ){
 
 	switch(level) {
 		case(1):
-			this->duration = 1000; // test debug was 100
+			this->duration = 100; // test debug was 100
+			this->numEnemies = 7; // get based on level
 			break;
 		case(2):
 			this->duration = 80;
+			this->numEnemies = 10; // get based on level
 			break;
 		case(3):
 			this->duration = 60;
+			this->numEnemies = 13; // get based on level
 			break;
 	}
 
@@ -92,10 +95,10 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 		// make function to check if door is present, and how many enemies are present
 
 		// RANDOM CHANCE FOR ENEMY
-		if (type == 0){
-			if (rand() % 10 == 0)
-				type = 3; // test
-		}
+		//if (type == 0){
+		//	if (rand() % 10 == 0)
+		//		type = 3; // test
+		//}
 
 		//RANDOM CHANCE FOR DOOR // FIXXXXXXX
 		/*if (type == 2){
@@ -115,9 +118,10 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 	}
 	std::cout << "solid = " << solidCountDebug << "\nopen = " << openCountDebug << "\nbreakable = " << breakableCountDebug << std::endl;
 	setDoor();
+	setEnemies();
 	//this->debugPrintMap(); //debug
 	//exit(-1); // debug
-	return (this->testMap);
+	return (this->map);
 }
 
 void	LevelManager::pushObject( int type, int x, int y ){ // may take level int in future;
@@ -125,6 +129,7 @@ void	LevelManager::pushObject( int type, int x, int y ){ // may take level int i
 	GameObject *object;
 	switch (type){
 		case 0:
+			this->openBlock.push_back(pair<int, int>(x, y));
 			return;
 		case 1:
 			object = (new SolidWall(SOLIDWALL, new Vector3d(x, y, 0)));
@@ -132,9 +137,9 @@ void	LevelManager::pushObject( int type, int x, int y ){ // may take level int i
 		case 2:
 			object = (new Wall(WALL, new Vector3d(x, y, 0)));
 			break;
-		case 3:
-			this->enemies.push_back(pair<int, int>(x, y));
-			return;
+		//case 3:
+		//	this->enemies.push_back(pair<int, int>(x, y));
+		//	return;
 		case 4:
 			object = (new Door(DOOR, new Vector3d(x, y, 0)));
 			std::cout << "door = " << x << ";" << y << std::endl;
@@ -143,7 +148,7 @@ void	LevelManager::pushObject( int type, int x, int y ){ // may take level int i
 			return;
 	};
 	//std::cout << "object debug pre push" << object->strType << " " << object->position->vX << ";" << object->position->vY << std::endl; // debug
-	this->testMap.push_back(object);
+	this->map.push_back(object);
 }
 
 void	LevelManager::setDoor( void ){
@@ -151,13 +156,13 @@ void	LevelManager::setDoor( void ){
 	GameObject *door;
 
 	while (doorFlag == 0)
-		for (int i = 0; i < this->testMap.size(); i++){
+		for (int i = 0; i < this->map.size(); i++){
 			if (doorFlag == 0){
-				if (this->testMap[i]->eType == WALL){
+				if (this->map[i]->eType == WALL){
 					if (rand() % 50 == 0){
-						door = new Door(DOOR, new Vector3d(this->testMap[i]->position->vX, this->testMap[i]->position->vY, this->testMap[i]->position->vZ));
+						door = new Door(DOOR, new Vector3d(this->map[i]->position->vX, this->map[i]->position->vY, this->map[i]->position->vZ));
 						doorFlag = 1;
-						this->testMap.push_back(door);
+						this->map.push_back(door);
 						std::cout << "Door placed at " << door->position->vX << ";" << door->position->vY << std::endl; // debug
 					}
 				}
@@ -165,11 +170,28 @@ void	LevelManager::setDoor( void ){
 		}
 }
 
+void	LevelManager::setEnemies( void ){	
+	while (this->numEnemies > 0){
+		for (int i = 0; i < this->openBlock.size(); i++){
+			if (rand() % 50 == 0){
+				this->enemies.push_back(std::pair<int, int>(this->openBlock[i].first, this->openBlock[i].second));
+				//std::cout << "openBlock popped at " << this->openBlock[i].first << ";" << this->openBlock[i].second << " : "<< i << std::endl; // debug
+				this->numEnemies--;
+				this->openBlock.erase(this->openBlock.begin() + i);
+			}
+			if (this->numEnemies == 0)
+				break;
+		}
+	}
+	//exit(-1);//debug
+}
+
+
 void	LevelManager::debugPrintMap( void ){ // debug // test
-	std::cout << "total = " <<testMap.size() << std::endl;
-	for (int i = 0; i < testMap.size(); i++){
-		//std::cout << testMap[i]->strType << " = " << testMap[i]->position->vX << ";" << testMap[i]->position->vY << std::endl;
-		std::cout << testMap[i]->eType;
+	std::cout << "total = " <<map.size() << std::endl;
+	for (int i = 0; i < map.size(); i++){
+		//std::cout << map[i]->strType << " = " << map[i]->position->vX << ";" << map[i]->position->vY << std::endl;
+		std::cout << map[i]->eType;
 		if (i % this->mapWidth == 0)
 			std::cout << std::endl;
 	}
