@@ -393,6 +393,8 @@ void		Engine::controlChange(int i)
 		this->_sControls.UP_KEY = GLFW_KEY_W;
 		this->_sControls.RIGHT_KEY = GLFW_KEY_D;
 		this->_sControls.DOWN_KEY = GLFW_KEY_S;
+		this->_sControls.FIRE_KEY = GLFW_KEY_SLASH;
+		this->_sControls.ACTION_KEY = GLFW_KEY_PERIOD;
 	}
 	else if (i == 0)
 	{
@@ -400,6 +402,8 @@ void		Engine::controlChange(int i)
 		this->_sControls.UP_KEY = GLFW_KEY_UP;
 		this->_sControls.RIGHT_KEY = GLFW_KEY_RIGHT;
 		this->_sControls.DOWN_KEY = GLFW_KEY_DOWN;
+		this->_sControls.FIRE_KEY = GLFW_KEY_Z;
+		this->_sControls.ACTION_KEY = GLFW_KEY_X;
 	}
 }
 

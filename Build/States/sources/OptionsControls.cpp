@@ -6,7 +6,7 @@ OptionsControlsState::OptionsControlsState( Engine & engine ) {
 	this->_engine = &engine;
 	this->_menuIndex = 0;
 
-	std::string arrMainMenu[3] = {"wasd", "arrowkeys"};
+	std::string arrMainMenu[2] = {"wasd", "arrowkeys"};
 	this->_menu.insert(this->_menu.end(), std::begin(arrMainMenu), std::end(arrMainMenu));
 }
 
@@ -17,8 +17,8 @@ OptionsControlsState::~OptionsControlsState( void ){
 void	OptionsControlsState::_makeSelection( void ){
 	std::cout << "Selected " << this->_menu[this->_menuIndex] << "! (" << this->_menuIndex << ")" << std::endl; // debug
 	
-	if (this->_menuIndex == 0)
-		this->_engine->controlChange(0);
 	if (this->_menuIndex == 1)
+		this->_engine->controlChange(0);
+	if (this->_menuIndex == 0)
 		this->_engine->controlChange(1);
 }

@@ -21,13 +21,10 @@ void	OptionsState::_makeSelection( void){
 		this->_engine->state = FULLSCREEN;
 	if (this->_menuIndex == 2) // test
 		this->_engine->state = RESOLUTION; // test
-<<<<<<< HEAD
 	if (this->_menuIndex == 0)
 		this->_engine->state = CONTROLS;
-=======
 	if (this->_menuIndex == 3)
 		this->_engine->state = VOLUME;
->>>>>>> 28e7b11e3ecc59d43955367a158caa3ae8342d96
 	/*if (this->_menuIndex == 0) // test
 		this->_engine->state = PLAY; // test
 	if (this->_menuIndex == 4) // test
