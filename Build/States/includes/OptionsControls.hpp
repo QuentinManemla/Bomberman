@@ -1,5 +1,5 @@
-#ifndef OPTIONFULLSCREEN_HPP
-# define OPTIONFULLSCREEN_HPP
+#ifndef OPTIONCONTROLS_HPP
+# define OPTIONCONTROLS_HPP
 
 # include <iostream>
 # include <vector>
