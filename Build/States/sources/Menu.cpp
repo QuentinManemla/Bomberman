@@ -20,6 +20,8 @@ void	MenuState::_makeSelection( void ){
 	// update state depending on selection:
 	if (this->_menuIndex == 0) // test
 		this->_engine->state = PLAY; // test
+	if (this->_menuIndex == 1)
+		this->_engine->state = LOADGAME;
 	if (this->_menuIndex == 2) // test
 		this->_engine->state = OPTIONS; // test
 	if (this->_menuIndex == 4) // test

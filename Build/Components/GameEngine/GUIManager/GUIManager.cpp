@@ -10,7 +10,10 @@ GUIManager::~GUIManager( void ) { return ; }
 
 void		GUIManager::update( GameObject *player, int	elapsedSec, int playerScore) {
 	this->_lives = "Lives: " + std::to_string(player->hitPoints);
-	this->_timeElapsed = "Time:  " + std::to_string(elapsedSec);
+	if (elapsedSec > 0)
+		this->_timeElapsed = "Time:  " + std::to_string(elapsedSec);
+	else 
+		this->_timeElapsed = "Time:  OVER!";
 	this->_points = "Score: " + std::to_string(playerScore);
 }
 

@@ -54,6 +54,12 @@ void Game::_switchState( void ){
 			case FULLSCREEN:
 				this->_stateStack.push(new OptionsFullScreenState(this->_engine));
 				break;
+			case SAVEQUIT:
+				this->_stateStack.push(new SaveQuitState(this->_engine));
+				break;
+			case LOADGAME:
+				this->_stateStack.push(new LoadGameState(this->_engine));
+				break;
 			case VOLUME:
 				this->_stateStack.push(new OptionsVolumeState(this->_engine));
 				break;

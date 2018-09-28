@@ -8,7 +8,7 @@
 # include "../../Engine/includes/Engine.hpp"
 
 // state related includes
-# include "../../../States/includes/enumState.hpp" // hopefully cmake sorts this out
+# include "../../../States/includes/enumState.hpp"
 # include "../../../States/includes/IState.hpp"
 # include "../../../States/includes/Intro.hpp"
 # include "../../../States/includes/Menu.hpp"
@@ -19,7 +19,10 @@
 # include "../../../States/includes/Pause.hpp"
 # include "../../../States/includes/OptionsResolution.hpp"
 # include "../../../States/includes/OptionsFullScreen.hpp"
+# include "../../../States/includes/PauseSaveQuit.hpp"
 # include "../../../States/includes/OptionsVolume.hpp"
+# include "../../../States/includes/LevelTransition.hpp"
+# include "../../../States/includes/LoadGame.hpp"
 
 class Game {
 public:

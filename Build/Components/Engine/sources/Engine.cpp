@@ -5,8 +5,10 @@
 /*	Required functions															*/
 /********************************************************************************/
 unsigned int VBO, VAO, EBO;
-unsigned int lightVAO;
 unsigned int texture1, texture2;
+
+unsigned int BVBO, BVAO, BEBO;
+unsigned int Btexture1, Btexture2;
 
 glm::vec3 cubePositions[] = {
   glm::vec3( 0.48f, -0.48f,  -0.1f), // same as camera offset
@@ -63,7 +65,7 @@ Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _delt
 	/* Initialize Sound, Text & Camera Engine */
 	this->_TextEngine.init("Assets/Fonts/neon_pixel.ttf", 30, this->_WindowWidth, this->_WindowHeight);
 	this->_SoundEngine.init();
-	//this->muteSound();
+	this->_SoundEngine._volume = 0.0f;
 	//this->setFullScreen();
 	this->engineInit();
 	this->_Camera.init(glm::vec3(0.48f, -1.1f, 2.7f)); // use position of player in future
@@ -83,6 +85,68 @@ Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _delt
 Engine::~Engine() {
 	std::cout << "Engine destructed" << std::endl;
 	glfwTerminate();
+}
+
+void	Engine::BigTexture( std::string path ) {
+	float vertices[] = {
+		// positions          // texture coords
+		 0.5f,  0.5f, 0.0f,   0.5f, 1.0f, // top right
+		 0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // bottom right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, // bottom left
+		-0.5f,  0.5f, 0.0f,   0.0f, 1.0f  // top left 
+	};
+	unsigned int indices[] = {
+		0, 1, 3, // first triangle
+		1, 2, 3  // second triangle
+	};
+
+	glGenVertexArrays(1, &BVAO);
+	glGenBuffers(1, &BVBO);
+	glGenBuffers(1, &BEBO);
+
+	glBindVertexArray(BVAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, BVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, BEBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// texture coord attribute
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	// load and create a texture 
+	// -------------------------
+	// texture 1
+	// ---------
+	glGenTextures(1, &Btexture1);
+	glBindTexture(GL_TEXTURE_2D, Btexture1);
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// load image, create texture and generate mipmaps
+	int width, height, nrChannels;
+	stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+	unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else {
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
+
+	this->_BackgroundShader.use();
+	this->_BackgroundShader.setInt("texture1", 0);
+	this->_BackgroundShader.setInt("texture2", 1);
 }
 
 void	Engine::backgroundTexture( std::string path ) {
@@ -147,7 +211,40 @@ void	Engine::backgroundTexture( std::string path ) {
 	this->_Shader.setInt("texture2", 1);
 }
 
-//22.6
+void	Engine::drawBigBackground( void ) {
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, Btexture1);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, Btexture2);
+	this->_BackgroundShader.use();
+
+	// create transformations
+	glm::mat4 model = glm::mat4(1.0f);
+	glm::mat4 view = glm::mat4(1.0f);
+	glm::mat4 projection = glm::mat4(1.0f);
+	projection = glm::perspective(glm::radians(45.0f), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
+
+	float radius = 10.0f;
+	float camX = sin(glfwGetTime()) * radius;
+	float camZ = cos(glfwGetTime()) * radius;
+	view = this->_Camera.GetViewMatrix();
+	unsigned int modelLoc = glGetUniformLocation(this->_BackgroundShader.ID, "model");
+	unsigned int viewLoc  = glGetUniformLocation(this->_BackgroundShader.ID, "view");
+	
+	// pass them to the shaders (3 different ways)
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+	
+	// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+	this->_BackgroundShader.setMat4("projection", projection);
+
+	glBindVertexArray(VAO);
+	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));
+	model = glm::scale(model, glm::vec3(2.06f, 2.06f, -1.0f));
+	this->_BackgroundShader.setMat4("model", model);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}
+
 void	Engine::drawBackground( void ) {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
@@ -186,7 +283,6 @@ void	Engine::drawBackground( void ) {
 		this->_Shader.setMat4("model", model);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	}
-
 }
 
 /********************************************************************************/
@@ -211,7 +307,7 @@ void	Engine::engineInit( void ) {
 }
 
 void	Engine::clear( void ) {
-	glClearColor(255.0, 255.0, 255.0, 0.0);
+	glClearColor(0.0, 0.65, 0.88, 0.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
@@ -229,9 +325,12 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	// render the loaded model
 	glm::mat4 model = glm::mat4(1.0f);
 	//										x		y		z
-	if ( type == PLAYER || type == ENEMY || type == DOOR ) {
+	if ( type == PLAYER ) {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
-		model = glm::scale(model, glm::vec3(0.015f, 0.015f, 0.015f));
+		model = glm::scale(model, glm::vec3(0.014f, 0.014f, 0.014f));
+	} else if (type == ENEMY) {
+		model = glm::translate(model, glm::vec3(transX, transY, transZ));
+		model = glm::scale(model, glm::vec3(0.010f, 0.010f, 0.010f));
 	} else if (type == BOMB) {
 		this->bombAnim++;
 		model = glm::translate(model, glm::vec3(transX, transY + 0.009f, transZ));
@@ -250,6 +349,9 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 		} else {
 			model = glm::scale(model, glm::vec3(this->explodeMove, this->explodeMove, this->explodeMove));
 		}
+	} else if ( type == DOOR ) {
+		model = glm::translate(model, glm::vec3(transX, transY, transZ));
+		model = glm::scale(model, glm::vec3(0.016f, 0.016f, 0.016f));
 	} else {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
@@ -291,6 +393,40 @@ void	Engine::render( void ) {
 	glfwPollEvents();
 }
 
+void		Engine::saveGame( void ) {
+	std::string fileName = "save.save";
+	std::string filePath = ".save/" + fileName;
+	std::ofstream saveFile;
+	saveFile.open(filePath);
+	std::string data = std::to_string(this->_Save.health) + "," + std::to_string(this->_Save.level)
+	+ ',' + std::to_string(this->_Save.points) + ',' + std::to_string(this->_Save.remainingTime);
+	saveFile << data;
+	saveFile.close();
+}
+
+template <class Container>
+void split2(const std::string& str, Container& cont, char delim = ' ')
+{
+	std::stringstream ss(str);
+	std::string token;
+	while (std::getline(ss, token, delim)) {
+		cont.push_back(token);
+	}
+}
+
+void		Engine::loadGame( void ) {
+	std::ifstream saveFile (".save/save.save");
+	std::string line;
+	if (saveFile.is_open()) {
+		getline (saveFile,line);
+	}
+	saveFile.close();
+
+	std::vector<std::string> words;
+	split2(line, words, ',');
+	std::copy(words.begin(), words.end(),
+	std::ostream_iterator<std::string>(std::cout, "\n"));
+}
 
 void		Engine::playSound( std::string soundPath, bool loop) {
 	if (!this->_Mute)

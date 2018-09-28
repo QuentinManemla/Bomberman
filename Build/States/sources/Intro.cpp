@@ -6,6 +6,7 @@ IntroState::IntroState( Engine & engine ){
 	this->_type = "Intro";
 	std::cout << "Intro constructed" << std::endl;
 	this->_engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
+	this->_engine->BigTexture("Assets/Textures/stone-wall.jpg");
 }
 
 IntroState::IntroState( void ){
@@ -38,6 +39,7 @@ void IntroState::update( eControls key ) {
 
 void IntroState::render( void ) {
 	this->_engine->drawBackground();
+	this->_engine->drawBigBackground();
 	this->_engine->render();
 	std::cout << "Intro render" << std::endl;
 }

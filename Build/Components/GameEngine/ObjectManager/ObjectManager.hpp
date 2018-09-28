@@ -17,7 +17,9 @@ public:
 	ObjectManager( void ); // may need reference to playstate
 	~ObjectManager( void );
 
-	void		update(eControls key, double remainingTime);
+
+	//needs init() function
+	void		update(eControls key/*, int remainingTime*/);
 	void		render(void);
 	void		requestMove(GameObject *actor, eControls key); // returns direction // or void and calls move directly
 	int			isOpen(int x, int y);
@@ -35,26 +37,42 @@ public:
 	void		checkEnemyCollision( void );
 	void		playerDied( void );
 	int			isDestVectorEqual(Vector3d *first, Vector3d *second);
-	void		playerReset( void );
+	void		playerReset( int penalize );
 	void		ImmortalTick( void );
-	void		processRemaingingTime( double remainingTime );
-	void		levelEnd( /*maybe points and powerups*/ );
+	//void		processRemaingingTime( int remainingTime );
+	void		levelProcess( int remainingTime );
 	void		updatePlayerScore( int amount );
+	int			allEnemiesDead( void );
+	void		initLevel( int level, bool success );
+	void		placePowerup( float x, float y);
+	void		powerupCollision( void );
+
+
 
 
 	Engine						*engine;
 	LevelManager				*LM;
-	std::vector<GameObject *>	map;
+	std::vector<GameObject *>	map; // pointer or reference
 	std::vector<GameObject *>	enemies;
+	std::vector<GameObject *>	powerups; // new
 	GameObject					*player;
 	Bomb						*bomb;
-	float						fuseTime;
+	const float					fuseTime;
+	const float					playerImmortalTime;
+	const int					powerupMax;
+	int							powerupCount;
 	int							bombRadius;
-	float						playerImmortalTime;
+	float						blastTime;
 	float						playerImmortalTicker;
 	int							playerScore;
+	bool						timeSpeedupFlag;
+	Vector3d					*doorPos;
+	int							level;
 
-
+	std::chrono::steady_clock::time_point startTime;
+	int				elapsedSec;
+	int 			remainingTime;
+	int 			displayTime;
 
 protected:
 
