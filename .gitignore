@@ -6,6 +6,7 @@ CPackSourceConfig.cmake
 Makefile
 .vscode
 Bomberman
+BomberMan
 a.out
 .DS_STORE
 tmp/
