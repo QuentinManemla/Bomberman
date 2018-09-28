@@ -30,6 +30,11 @@ void PlayState::update( eControls key ){
 	this->_elapsedSec = std::chrono::duration_cast<std::chrono::seconds>(end - this->begin).count();
 	this->_remainingTime = this->_OM->LM->duration - this->_elapsedSec;
 
+	this->_engine->_Save.health = this->_OM->player->hitPoints;
+	this->_engine->_Save.level = this->_OM->LM->level;
+	this->_engine->_Save.points = this->_OM->playerScore;
+	this->_engine->_Save.remainingTime = this->_remainingTime;
+
 	// std::cout << "TIME ELAPSED: " << this->_elapsedSec << std::endl;
 	static	int held = 1; // set to 1 initially to avoid accidental selection on state switch // debug // test
 	std::cout << "Play update" << std::endl;

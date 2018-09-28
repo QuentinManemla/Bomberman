@@ -1,7 +1,7 @@
 #include "../includes/OptionsFullScreen.hpp"
 
 OptionsFullScreenState::OptionsFullScreenState( Engine & engine ) {
-	this->_type = "Resolution";
+	this->_type = "FullScreen";
 	std::cout << this->getType() << " constructed" << std::endl; // debug
 	this->_engine = &engine;
 	this->_menuIndex = 0;

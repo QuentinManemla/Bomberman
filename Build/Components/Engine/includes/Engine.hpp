@@ -18,7 +18,8 @@
 # include <fstream>
 # include <sstream>
 # include <iostream>
-
+# include <numeric>
+# include <chrono>
 # include <assimp/Importer.hpp>
 # include <assimp/scene.h>
 # include <assimp/postprocess.h>
@@ -37,6 +38,7 @@
 # include "Text.hpp"
 # include "Camera.hpp"
 # include "Model.hpp"
+# include "Save.hpp"
 # include <string.h>
 # include <vector>
 # include "../../Sound/includes/Sound.hpp"
@@ -54,6 +56,10 @@ class	Engine {
 		void			render( void );
 		void			clear( void );
 
+
+		void			drawBigBackground( void );
+		void			BigTexture( std::string path );
+
 		void			drawBackground( void );
 		void			backgroundTexture( std::string path );
 		void 			drawModel( eGameObjectType type, float transX, float transY, float transZ );
@@ -63,6 +69,9 @@ class	Engine {
 		void			playSound( std::string soundPath, bool loop);
 		void			stopSound( void );
 		void			muteSound( void );
+
+		void			saveGame( void );
+		void			loadGame( void );
 		/********************************************************************************************/
 		/*	Text Rendering Functions 																*/
 		/*	print2DText() Takes in the text and X & Y position to print out on the Window			*/
@@ -114,6 +123,9 @@ class	Engine {
 		int						explodeAnim;
 		float					explodeMove;
 		
+		/** Save **/
+		structSave				_Save;
+
 	private:
 		GLFWwindow				*_Window;
 		const GLFWvidmode		*_Mode;

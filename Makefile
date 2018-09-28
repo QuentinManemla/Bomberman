@@ -808,6 +808,60 @@ Build/States/sources/Intro.cpp.s:
 	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Intro.cpp.s
 .PHONY : Build/States/sources/Intro.cpp.s
 
+Build/States/sources/LevelTransition.o: Build/States/sources/LevelTransition.cpp.o
+
+.PHONY : Build/States/sources/LevelTransition.o
+
+# target to build an object file
+Build/States/sources/LevelTransition.cpp.o:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/LevelTransition.cpp.o
+.PHONY : Build/States/sources/LevelTransition.cpp.o
+
+Build/States/sources/LevelTransition.i: Build/States/sources/LevelTransition.cpp.i
+
+.PHONY : Build/States/sources/LevelTransition.i
+
+# target to preprocess a source file
+Build/States/sources/LevelTransition.cpp.i:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/LevelTransition.cpp.i
+.PHONY : Build/States/sources/LevelTransition.cpp.i
+
+Build/States/sources/LevelTransition.s: Build/States/sources/LevelTransition.cpp.s
+
+.PHONY : Build/States/sources/LevelTransition.s
+
+# target to generate assembly for a file
+Build/States/sources/LevelTransition.cpp.s:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/LevelTransition.cpp.s
+.PHONY : Build/States/sources/LevelTransition.cpp.s
+
+Build/States/sources/LoadGame.o: Build/States/sources/LoadGame.cpp.o
+
+.PHONY : Build/States/sources/LoadGame.o
+
+# target to build an object file
+Build/States/sources/LoadGame.cpp.o:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/LoadGame.cpp.o
+.PHONY : Build/States/sources/LoadGame.cpp.o
+
+Build/States/sources/LoadGame.i: Build/States/sources/LoadGame.cpp.i
+
+.PHONY : Build/States/sources/LoadGame.i
+
+# target to preprocess a source file
+Build/States/sources/LoadGame.cpp.i:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/LoadGame.cpp.i
+.PHONY : Build/States/sources/LoadGame.cpp.i
+
+Build/States/sources/LoadGame.s: Build/States/sources/LoadGame.cpp.s
+
+.PHONY : Build/States/sources/LoadGame.s
+
+# target to generate assembly for a file
+Build/States/sources/LoadGame.cpp.s:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/LoadGame.cpp.s
+.PHONY : Build/States/sources/LoadGame.cpp.s
+
 Build/States/sources/Menu.o: Build/States/sources/Menu.cpp.o
 
 .PHONY : Build/States/sources/Menu.o
@@ -1266,6 +1320,12 @@ help:
 	@echo "... Build/States/sources/Intro.o"
 	@echo "... Build/States/sources/Intro.i"
 	@echo "... Build/States/sources/Intro.s"
+	@echo "... Build/States/sources/LevelTransition.o"
+	@echo "... Build/States/sources/LevelTransition.i"
+	@echo "... Build/States/sources/LevelTransition.s"
+	@echo "... Build/States/sources/LoadGame.o"
+	@echo "... Build/States/sources/LoadGame.i"
+	@echo "... Build/States/sources/LoadGame.s"
 	@echo "... Build/States/sources/Menu.o"
 	@echo "... Build/States/sources/Menu.i"
 	@echo "... Build/States/sources/Menu.s"

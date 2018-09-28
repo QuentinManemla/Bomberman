@@ -1,16 +1,15 @@
-#ifndef SAVEQUIT_HPP
-# define SAVEQUIT_HPP_HPP
+#ifndef LOADGAME_HPP
+# define LOADGAME_HPP
 
 # include <iostream>
 # include <vector>
 # include "MenuParentState.hpp"
-# include <dirent.h>
 
-class SaveQuitState : public MenuParentState {
+class LoadGameState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
-	SaveQuitState( Engine & engine );
-	~SaveQuitState( void );
+	LoadGameState( Engine & engine );
+	~LoadGameState( void );
 
 private:
 	void	_makeSelection( void );

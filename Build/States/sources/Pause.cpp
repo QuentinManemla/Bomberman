@@ -20,6 +20,8 @@ void	PauseState::_makeSelection( void ){
 	// update state depending on selection:
 	if (this->_menuIndex == 0) // test
 		this->_engine->state = BACK; // test
+	else if (this->_menuIndex == 1)
+		this->_engine->state = SAVEQUIT;
 	else if (this->_menuIndex == 2)
 		this->_engine->state = BACK_TO_MAIN;
 }
