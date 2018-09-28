@@ -53,13 +53,12 @@ public:
 	Bomb						*bomb;
 	float						fuseTime;
 	int							bombRadius;
+	float						blastTime;
 	float						playerImmortalTime;
 	float						playerImmortalTicker;
 	int							playerScore;
 	bool						timeSpeedupFlag;
 	Vector3d					*doorPos;
-
-
 
 protected:
 

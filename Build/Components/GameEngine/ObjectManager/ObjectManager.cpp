@@ -9,8 +9,9 @@ ObjectManager::ObjectManager( Engine & engine ){
 	this->player = new Player( PLAYER, new Vector3d(2, 2, 0.1f) );
 	this->playerReset(); // start with temp immortality
 	this->bomb = NULL;
-	this->placeEnemies(); // 
+	this->placeEnemies(); //
 	this->playerScore = 0;
+	this->blastTime = -0.1f;
 
 	// INITS
 	this->timeSpeedupFlag = 0;
@@ -19,7 +20,7 @@ ObjectManager::ObjectManager( Engine & engine ){
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	this->fuseTime = 1.5f;
 	this->bombRadius = 2;
-	this->playerImmortalTime = 2.0;
+	this->playerImmortalTime = 3.0;
 }
 
 ObjectManager::~ObjectManager( void ){
@@ -33,7 +34,7 @@ void	ObjectManager::update( eControls key, int remainingTime){
 	this->levelProcess( remainingTime );
 
 	// PLACE BOMB
-	if (key == FIRE && this->allEnemiesDead() == 0){ // added for extra difficulty
+	if (key == FIRE){ // added for extra difficulty
 		if (this->player->state == ALIVE)
 			this->placeBomb(); // test
 	}
@@ -65,7 +66,7 @@ void	ObjectManager::update( eControls key, int remainingTime){
 		this->bomb->fuseTime -= this->engine->_deltaTime;
 		if (this->bomb->fuseTime < 0)
 			if (this->bomb->state == DYING) {
-				if (this->bomb->fuseTime < -0.1f) { // save as blastTime
+				if (this->bomb->fuseTime < this->blastTime) { // save as blastTime
 					delete this->bomb;
 					this->bomb = NULL;
 				}
@@ -487,7 +488,7 @@ void	ObjectManager::levelProcess( int remainingTime ){
 		// if true then end level and initiate next one if there is one (endlevel(success))
 	std::cout << "remaining time: " << remainingTime << std::endl; // debug
 	if (remainingTime == 0)
-		;//end level fail
+		exit(-1);//end level fail
 
 	if (remainingTime < 20 && this->timeSpeedupFlag == 0){ // enemies speed up when time drops below 20 seconds remaining
 		for (int i = 0; i < this->enemies.size(); i++){
@@ -504,10 +505,13 @@ void	ObjectManager::levelProcess( int remainingTime ){
 	if (isDestVectorEqual(this->player->position, this->player->destination)){
 		if (isDestVectorEqual(this->player->destination, this->map[this->map.size() - 1]->position) && this->allEnemiesDead() == 1){
 			this->updatePlayerScore(remainingTime + 1000); // test // debug 1000
-			//endlevel(success)
+			exit(-1);//endlevel(success)
 		}
 	}
 }
 
 // WHAT NEEDS TO HAPPEND WHEN STARTING A NEW LEVEL
 // 
+
+// FIX ENEMY PLACEMENT
+// randomly placed like doors, up to specific amount (much more consistent than current system)
