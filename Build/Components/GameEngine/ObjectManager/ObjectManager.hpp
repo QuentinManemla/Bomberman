@@ -37,13 +37,16 @@ public:
 	void		checkEnemyCollision( void );
 	void		playerDied( void );
 	int			isDestVectorEqual(Vector3d *first, Vector3d *second);
-	void		playerReset( void );
+	void		playerReset( int penalize );
 	void		ImmortalTick( void );
 	//void		processRemaingingTime( int remainingTime );
 	void		levelProcess( int remainingTime );
 	void		updatePlayerScore( int amount );
 	int			allEnemiesDead( void );
 	void		initLevel( int level, bool success );
+	void		placePowerup( float x, float y);
+	void		powerupCollision( void );
+
 
 
 
@@ -51,10 +54,13 @@ public:
 	LevelManager				*LM;
 	std::vector<GameObject *>	map; // pointer or reference
 	std::vector<GameObject *>	enemies;
+	std::vector<GameObject *>	powerups; // new
 	GameObject					*player;
 	Bomb						*bomb;
 	const float					fuseTime;
 	const float					playerImmortalTime;
+	const int					powerupMax;
+	int							powerupCount;
 	int							bombRadius;
 	float						blastTime;
 	float						playerImmortalTicker;
