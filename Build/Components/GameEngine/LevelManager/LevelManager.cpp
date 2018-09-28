@@ -13,15 +13,15 @@ LevelManager::LevelManager( int level ){
 
 	switch(level) {
 		case(1):
-			this->duration = 100; // test debug was 100
+			this->duration = 150; // test debug was 100
 			this->numEnemies = 7; // get based on level
 			break;
 		case(2):
-			this->duration = 80;
+			this->duration = 140;
 			this->numEnemies = 10; // get based on level
 			break;
 		case(3):
-			this->duration = 60;
+			this->duration = 130;
 			this->numEnemies = 13; // get based on level
 			break;
 	}
@@ -89,24 +89,6 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 			breakableCountDebug++;
 		else if (type == 0)
 			openCountDebug++;
-
-		// if type == 0, random chance of spawning enemy
-		// if type == 1, if flag1 not set, random chance of placing a door
-		// make function to check if door is present, and how many enemies are present
-
-		// RANDOM CHANCE FOR ENEMY
-		//if (type == 0){
-		//	if (rand() % 10 == 0)
-		//		type = 3; // test
-		//}
-
-		//RANDOM CHANCE FOR DOOR // FIXXXXXXX
-		/*if (type == 2){
-			if (rand() % 10 == 0 && doorFlag < 1){
-				doorFlag++;
-				type = 4; // test
-			}
-		}*/
 
 		// std::cout << i << " type =" << type << "; totalline (x;y) = " << x << ";" << y << std::endl; // debug
 		pushObject(type, x, y);

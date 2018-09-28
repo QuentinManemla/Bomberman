@@ -8,7 +8,7 @@ PlayState::PlayState( Engine & engine ) { // first init?
 	_positionTime = 0.0f;
 	_positionPitch = 0.0f;
 	this->_isPlaying = false;
-	this->begin = std::chrono::steady_clock::now();
+	//this->begin = std::chrono::steady_clock::now(); MAY NEED
 	this->_engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
 
 	this->_OM = new ObjectManager( engine );
@@ -25,10 +25,10 @@ PlayState::~PlayState( void ){
 }
 
 void PlayState::update( eControls key ){
-	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-
-	this->_elapsedSec = std::chrono::duration_cast<std::chrono::seconds>(end - this->begin).count();
-	this->_remainingTime = (this->_OM->LM->duration - this->_elapsedSec) > 0 ? this->_OM->LM->duration - this->_elapsedSec : 0;
+	//std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+//
+	//this->_elapsedSec = std::chrono::duration_cast<std::chrono::seconds>(end - this->startTime).count();
+	//this->_remainingTime = (this->_OM->LM->duration - this->_elapsedSec) > 0 ? this->_OM->LM->duration - this->_elapsedSec : 0;
 
 
 	static	int held = 1; // set to 1 initially to avoid accidental selection on state switch // debug // test
@@ -41,8 +41,8 @@ void PlayState::update( eControls key ){
 	else if (key == IDLEKEY){
 		held = 0;
 	}
-	this->_OM->update(key, this->_remainingTime);
-	this->_GM->update(this->_OM->player, this->_remainingTime, this->_OM->playerScore);
+	this->_OM->update(key/*, this->_remainingTime*/);
+	this->_GM->update(this->_OM->player, this->_OM->displayTime, this->_OM->playerScore);
 }
 
 void PlayState::drawMap( void ) { // needs to move to render engine

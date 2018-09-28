@@ -32,9 +32,9 @@ private:
 	Engine			*_engine;
 	std::string		_type; // debug
 
-	std::chrono::steady_clock::time_point begin;
-	int				_elapsedSec;
-	int 			_remainingTime;
+	//std::chrono::steady_clock::time_point startTime;
+	//int				_elapsedSec;
+	//int 			_remainingTime;
 
 	float			_positionTime;
 	float			_positionPitch;

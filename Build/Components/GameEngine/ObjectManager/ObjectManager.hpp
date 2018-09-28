@@ -19,7 +19,7 @@ public:
 
 
 	//needs init() function
-	void		update(eControls key, int remainingTime);
+	void		update(eControls key/*, int remainingTime*/);
 	void		render(void);
 	void		requestMove(GameObject *actor, eControls key); // returns direction // or void and calls move directly
 	int			isOpen(int x, int y);
@@ -39,26 +39,34 @@ public:
 	int			isDestVectorEqual(Vector3d *first, Vector3d *second);
 	void		playerReset( void );
 	void		ImmortalTick( void );
-	void		processRemaingingTime( int remainingTime );
+	//void		processRemaingingTime( int remainingTime );
 	void		levelProcess( int remainingTime );
 	void		updatePlayerScore( int amount );
 	int			allEnemiesDead( void );
+	void		initLevel( int level, bool success );
+
 
 
 	Engine						*engine;
 	LevelManager				*LM;
-	std::vector<GameObject *>	map;
+	std::vector<GameObject *>	map; // pointer or reference
 	std::vector<GameObject *>	enemies;
 	GameObject					*player;
 	Bomb						*bomb;
-	float						fuseTime;
+	const float					fuseTime;
+	const float					playerImmortalTime;
 	int							bombRadius;
 	float						blastTime;
-	float						playerImmortalTime;
 	float						playerImmortalTicker;
 	int							playerScore;
 	bool						timeSpeedupFlag;
 	Vector3d					*doorPos;
+	int							level;
+
+	std::chrono::steady_clock::time_point startTime;
+	int				elapsedSec;
+	int 			remainingTime;
+	int 			displayTime;
 
 protected:
 

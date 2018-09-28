@@ -2,25 +2,27 @@
 
 static int	fuse_time = 0;
 
-ObjectManager::ObjectManager( Engine & engine ){
+ObjectManager::ObjectManager( Engine & engine ) : fuseTime(1.5f), playerImmortalTime(3.0f) {
 	this->engine = &engine;
 	this->LM = new LevelManager(1); // may move this codeblock to a level init function to be available on call rather than this constructor
-	this->map = this->LM->generateMap();
 	this->player = new Player( PLAYER, new Vector3d(2, 2, 0.1f) );
+	this->map = this->LM->generateMap();
 	this->playerReset(); // start with temp immortality
-	this->bomb = NULL;
 	this->placeEnemies(); //
 	this->playerScore = 0;
 	this->blastTime = -0.1f;
 
 	// INITS
+	this->startTime = std::chrono::steady_clock::now();
+	this->bomb = NULL;
 	this->timeSpeedupFlag = 0;
+	this->playerImmortalTicker = 0;
 	
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
-	this->fuseTime = 1.5f;
+	//this->fuseTime = 1.5f;
 	this->bombRadius = 2;
-	this->playerImmortalTime = 3.0;
+	//this->playerImmortalTime = 3.0;
 }
 
 ObjectManager::~ObjectManager( void ){
@@ -28,13 +30,20 @@ ObjectManager::~ObjectManager( void ){
 	delete this->player; // test
 }
 
-void	ObjectManager::update( eControls key, int remainingTime){
+void	ObjectManager::update( eControls key/*, int remainingTime*/){
+
+	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+	this->elapsedSec = std::chrono::duration_cast<std::chrono::seconds>(end - this->startTime).count();
+	this->remainingTime, this->displayTime = this->LM->duration - this->elapsedSec;
+	if (this->remainingTime < 0)
+		this->displayTime = 0;
+
 	// ADJUST VALUES BASED ON TIME
-	this->processRemaingingTime(remainingTime);
-	this->levelProcess( remainingTime );
+	//this->processRemaingingTime(remainingTime);
+	this->levelProcess( this->remainingTime );
 
 	// PLACE BOMB
-	if (key == FIRE){ // added for extra difficulty
+	if (key == FIRE){
 		if (this->player->state == ALIVE)
 			this->placeBomb(); // test
 	}
@@ -52,8 +61,12 @@ void	ObjectManager::update( eControls key, int remainingTime){
 	}
 
 	// PLAYER MOVE
-	if (this->player->state == ALIVE || this->player->state == DYING)
-		requestMove(this->player, key);
+	if (this->player->state == ALIVE || this->player->state == DYING){
+		if (this->player->state == DYING)
+			this->ImmortalTick();
+		if (this->playerImmortalTicker > 1.0f || this->playerImmortalTicker == 0)
+			requestMove(this->player, key);
+	}
 
 	// ENEMY MOVE
 	for (int i = 0; i < this->enemies.size(); i++){
@@ -406,6 +419,9 @@ void	ObjectManager::playerDied( void ){
 	//this->updatePlayerScore(-100); // score
 	this->playerScore = -100;
 	this->player->state = DEAD;
+	std::cout << "initLevel player died: 414" << std::endl; // debug
+	this->initLevel(1, 0); // fail
+	return;
 }
 
 int		ObjectManager::isDestVectorEqual(Vector3d *first, Vector3d *second){
@@ -439,24 +455,42 @@ void	ObjectManager::ImmortalTick( void ){
 		this->player->state = ALIVE;
 	}
 }
-
+/*
 void	ObjectManager::processRemaingingTime( int remainingTime ){
 	std::cout << "remaining time: " << remainingTime << std::endl; // debug
-	if (remainingTime == 0)
-		;//end level fail
+	if (remainingTime == 0){
+		this->initLevel(2, 1);//end level fail
 
-	if (remainingTime < 20 && this->timeSpeedupFlag == 0){ // enemies speed up when time drops below 20 seconds remaining
-		for (int i = 0; i < this->enemies.size(); i++){
-			this->enemies[i]->velocity += 2.0f;
-			this->timeSpeedupFlag = 1;
-		}
-	}
+
+
 }
+*/
 
-
-//void	ObjectManager::LevelEnd(/*stuff probably*/){
-//	
-//}
+void	ObjectManager::initLevel( int level, bool success ){
+	delete (this->LM);
+	std::cout << "delete lm" << std::endl;
+	if (this->bomb != NULL) {
+		delete this->bomb;
+		this->bomb = NULL;
+	}
+	std::cout << "pre success" << std::endl;
+	switch (success){
+		case 1:
+			//win screen (continue, save, quit without saving)
+			this->LM = new LevelManager(2);
+			this->map = this->LM->generateMap();
+			this->startTime = std::chrono::steady_clock::now();
+			this->playerReset();
+			this->placeEnemies();
+			std::cout << "success" << std::endl;
+			break;
+		case 0:
+			std::cout << "fail" << std::endl;
+			exit(-1);//lose screen (restart level, quit to menu)
+			break;
+	};
+	std::cout << "get here?" << std::endl;
+}
 
 // in level manager
 // certain wall gets door = true attribute
@@ -486,9 +520,6 @@ void	ObjectManager::levelProcess( int remainingTime ){
 	// check if player collide with door
 		// check if all enemies dead
 		// if true then end level and initiate next one if there is one (endlevel(success))
-	std::cout << "remaining time: " << remainingTime << std::endl; // debug
-	if (remainingTime == 0)
-		exit(-1);//end level fail
 
 	if (remainingTime < 20 && this->timeSpeedupFlag == 0){ // enemies speed up when time drops below 20 seconds remaining
 		for (int i = 0; i < this->enemies.size(); i++){
@@ -504,14 +535,28 @@ void	ObjectManager::levelProcess( int remainingTime ){
 
 	if (isDestVectorEqual(this->player->position, this->player->destination)){
 		if (isDestVectorEqual(this->player->destination, this->map[this->map.size() - 1]->position) && this->allEnemiesDead() == 1){
-			this->updatePlayerScore(remainingTime + 1000); // test // debug 1000
-			exit(-1);//endlevel(success)
+			this->updatePlayerScore(remainingTime); // test // debug 1000
+			std::cout << "initLevel entered door: 529" << std::endl; // debug
+			this->initLevel(2, 1);//end level success
+			return;
+			//exit(-1);//endlevel(success)
+		}
+	}
+
+	std::cout << "remaining time: " << remainingTime << std::endl; // debug
+	if (this->displayTime == 0){
+		//exit(-1);//end level fail
+		std::cout << "initLevel time up: 538" << std::endl; // debug
+		this->initLevel(2, 0);//end level fail
+		return;
+	}
+
+	if (this->remainingTime < 50 && this->timeSpeedupFlag == 0){ // enemies speed up when time drops below 20 seconds remaining
+		for (int i = 0; i < this->enemies.size(); i++){
+			this->enemies[i]->velocity += 2.0f;
+			this->timeSpeedupFlag = 1;
 		}
 	}
 }
 
-// WHAT NEEDS TO HAPPEND WHEN STARTING A NEW LEVEL
-// 
-
-// FIX ENEMY PLACEMENT
-// randomly placed like doors, up to specific amount (much more consistent than current system)
+// TIME MANAGEMENT ACROSS LEVELS AND PAUSE NEEDS FIXING
