@@ -22,17 +22,20 @@ public:
 	std::vector<GameObject *>	generateMap( void );
 	void						pushObject( int type, int x, int y ); // may take level int in future;
 	void						setDoor( void );
+	void						setEnemies( void );
 
 	void						debugPrintMap( void ); // debug // test
 	void						debugPrintEnemies( void ); // debug // test
 
 	static int					level;
 	int							duration;
-	std::vector<pair<int, int>>	enemies;
+	std::vector<pair<int, int>>	openBlock; // changed from enemies
+	std::vector<pair<int, int>>	enemies; // changed from enemies
 	static int					walls;
 	int							mapWidth;
 	int							mapHeight;
-	std::vector<GameObject *>	testMap; // map = vector of game objects // breakable walls can "contain" other objects // can have predetermined or drop based on rng
+	std::vector<GameObject *>	map; // map = vector of game objects // breakable walls can "contain" other objects // can have predetermined or drop based on rng
+	int							numEnemies;
 
 protected:
 
