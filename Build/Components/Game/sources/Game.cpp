@@ -48,6 +48,9 @@ void Game::_switchState( void ){
 			case OPTIONS:
 				this->_stateStack.push(new OptionsState(this->_engine));
 				break;
+			case CONTROLS:
+				this->_stateStack.push(new OptionsControlsState(this->_engine));
+				break;
 			case RESOLUTION:
 				this->_stateStack.push(new OptionsResolutionState(this->_engine));
 				break;

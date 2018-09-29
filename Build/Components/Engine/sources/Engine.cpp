@@ -521,6 +521,28 @@ int			Engine::menuHandler( eControls key, int & menuIndex, int lastIndex ){
 /*	Keyboard input functions													*/
 /********************************************************************************/
 
+void		Engine::controlChange(int i)
+{
+	if (i == 1)
+	{
+		this->_sControls.LEFT_KEY = GLFW_KEY_A;
+		this->_sControls.UP_KEY = GLFW_KEY_W;
+		this->_sControls.RIGHT_KEY = GLFW_KEY_D;
+		this->_sControls.DOWN_KEY = GLFW_KEY_S;
+		this->_sControls.FIRE_KEY = GLFW_KEY_SLASH;
+		this->_sControls.ACTION_KEY = GLFW_KEY_PERIOD;
+	}
+	else if (i == 0)
+	{
+		this->_sControls.LEFT_KEY = GLFW_KEY_LEFT;
+		this->_sControls.UP_KEY = GLFW_KEY_UP;
+		this->_sControls.RIGHT_KEY = GLFW_KEY_RIGHT;
+		this->_sControls.DOWN_KEY = GLFW_KEY_DOWN;
+		this->_sControls.FIRE_KEY = GLFW_KEY_Z;
+		this->_sControls.ACTION_KEY = GLFW_KEY_X;
+	}
+}
+
 eControls	Engine::getInput(){
 	// run through array or struct of values. struct most likely
 	if (this->_getKey( this->_sControls.LEFT_KEY ))

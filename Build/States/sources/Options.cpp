@@ -21,6 +21,8 @@ void	OptionsState::_makeSelection( void){
 		this->_engine->state = FULLSCREEN;
 	if (this->_menuIndex == 2) // test
 		this->_engine->state = RESOLUTION; // test
+	if (this->_menuIndex == 0)
+		this->_engine->state = CONTROLS;
 	if (this->_menuIndex == 3)
 		this->_engine->state = VOLUME;
 	/*if (this->_menuIndex == 0) // test

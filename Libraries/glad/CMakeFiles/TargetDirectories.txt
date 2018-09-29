@@ -1,4 +1,0 @@
-/goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/test/glad/CMakeFiles/rebuild_cache.dir
-/goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/test/glad/CMakeFiles/edit_cache.dir
-/goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/test/glad/CMakeFiles/glad.dir
-/goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/test/glad/CMakeFiles/glad-generate-files.dir
