@@ -25,6 +25,7 @@ int		Engine::held = 1;
 
 Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _deltaTime(0.0f), bombAnim(0), explodeAnim(0), bombMove(0.005f), explodeMove(0.2f) {
 	std::cout << "Engine constructed" << std::endl;
+	this->isPaused = 0;
 	/* GLFW Initialization */
 	if (!glfwInit()) {
 		std::string errMsg = "[Error: Code 00 - (Render Engine)] : GLFW Failed to Initialize, Please Check your Includes";

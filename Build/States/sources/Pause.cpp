@@ -18,8 +18,11 @@ void	PauseState::_makeSelection( void ){
 	std::cout << "Selected " << this->_menu[this->_menuIndex] << "! (" << this->_menuIndex << ")" << std::endl; // debug
 
 	// update state depending on selection:
-	if (this->_menuIndex == 0) // test
+	if (this->_menuIndex == 0){ // test
 		this->_engine->state = BACK; // test
-	else if (this->_menuIndex == 2)
+		this->_engine->isPaused = 0;
+	}
+	else if (this->_menuIndex == 2){
 		this->_engine->state = BACK_TO_MAIN;
+	}
 }

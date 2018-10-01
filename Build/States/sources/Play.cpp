@@ -34,14 +34,17 @@ void PlayState::update( eControls key ){
 	static	int held = 1; // set to 1 initially to avoid accidental selection on state switch // debug // test
 	std::cout << "Play update" << std::endl;
 	if (key == ESCAPE){
-		if (!(held))
+		if (!(held)){
 			this->_engine->state = PAUSE;
+		}
 		held = 1;
 	}
 	else if (key == IDLEKEY){
 		held = 0;
 	}
-	this->_OM->update(key/*, this->_remainingTime*/);
+	if (this->_engine->isPaused == 0){
+		this->_OM->update(key/*, this->_remainingTime*/);
+	}
 	this->_GM->update(this->_OM->player, this->_OM->displayTime, this->_OM->playerScore);
 }
 
