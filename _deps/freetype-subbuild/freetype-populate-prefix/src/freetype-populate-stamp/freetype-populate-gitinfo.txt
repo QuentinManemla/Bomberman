@@ -1,3 +1,0 @@
-repository='https://github.com/aseprite/freetype2.git'
-module=''
-tag=''

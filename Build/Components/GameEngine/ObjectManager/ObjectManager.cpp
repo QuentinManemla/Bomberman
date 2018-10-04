@@ -26,6 +26,31 @@ ObjectManager::ObjectManager( Engine & engine ) : fuseTime(1.5f), playerImmortal
 	//this->playerImmortalTime = 3.0;
 }
 
+ObjectManager::ObjectManager( Engine & engine, int level, int score, int retime ) : fuseTime(1.5f), playerImmortalTime(3.0f), powerupMax(3){
+	this->engine = &engine;
+	this->LM = new LevelManager(level); // may move this codeblock to a level init function to be available on call rather than this constructor
+	this->player = new Player( PLAYER, new Vector3d(2, 2, 0.1f) );
+	this->map = this->LM->generateMap();
+	this->playerReset(0); // start with temp immortality
+	this->placeEnemies(); //
+	this->playerScore = score;
+	this->blastTime = -0.1f;
+	this->remainingTime = retime;
+
+	// INITS
+	this->powerupCount = 0;
+	this->startTime = std::chrono::steady_clock::now();
+	this->bomb = NULL;
+	this->timeSpeedupFlag = 0;
+	this->playerImmortalTicker = 0;
+	
+
+	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
+	//this->fuseTime = 1.5f;
+	this->bombRadius = 1;
+	//this->playerImmortalTime = 3.0;
+}
+
 ObjectManager::~ObjectManager( void ){
 	delete this->LM;
 	delete this->player; // test
@@ -38,6 +63,12 @@ void	ObjectManager::update( eControls key/*, int remainingTime*/){
 	this->remainingTime, this->displayTime = this->LM->duration - this->elapsedSec;
 	if (this->remainingTime < 0)
 		this->displayTime = 0;
+
+	/** UPDATE SAVE VALUES **/
+	this->engine->_Save.health = this->player->hitPoints;
+	this->engine->_Save.level = this->LM->level;
+	this->engine->_Save.points = this->playerScore;
+	this->engine->_Save.remainingTime = this->remainingTime;
 
 	// ADJUST VALUES BASED ON TIME
 	//this->processRemaingingTime(remainingTime);
@@ -495,19 +526,23 @@ void	ObjectManager::initLevel( int level, bool success ){
 	switch (success){
 		case 1:
 			//win screen (continue, save, quit without saving)
-			this->LM = new LevelManager(2);
-			this->map = this->LM->generateMap();
-			this->startTime = std::chrono::steady_clock::now();
-			this->player->hitPoints++;
-			this->powerupCount = 0;
-			this->timeSpeedupFlag = 0;
-			this->playerReset(0);
-			this->placeEnemies();
+			// this->LM = new LevelManager(2);
+			// this->map = this->LM->generateMap();
+			// this->startTime = std::chrono::steady_clock::now();
+			// this->player->hitPoints++;
+			// this->powerupCount = 0;
+			// this->timeSpeedupFlag = 0;
+			// this->playerReset(0);
+			// this->placeEnemies();
+			this->engine->_Camera.init(glm::vec3(0.48f, -1.1f, 2.7f));
+			this->engine->state = SUCCESS;
 			std::cout << "success" << std::endl;
 			break;
 		case 0:
 			std::cout << "fail" << std::endl;
-			exit(-1);//lose screen (restart level, quit to menu)
+			this->engine->_Camera.init(glm::vec3(0.48f, -1.1f, 2.7f));
+			this->engine->state = FAIL;
+			// exit(-1);//lose screen (restart level, quit to menu)
 			break;
 	};
 	std::cout << "get here?" << std::endl;
@@ -584,7 +619,7 @@ void	ObjectManager::levelProcess( int remainingTime ){
 void	ObjectManager::placePowerup( float x, float y){
 	if (this->powerupCount < this->powerupMax){
 		if (rand() % 30 == 0){
-			this->powerups.push_back(new SolidWall(SOLIDWALL, new Vector3d(x, y, 0.1f)));
+			this->powerups.push_back(new SolidWall(POWERUP, new Vector3d(x, y, 0.1f)));
 			this->powerupCount++;
 		}
 	}

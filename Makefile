@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/cmake
+CMAKE_COMMAND = /goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake
 
 # The command to remove a file.
-RM = /goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/cmake -E remove -f
+RM = /goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github
+CMAKE_SOURCE_DIR = /goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/Bomberman
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github
+CMAKE_BINARY_DIR = /goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/Bomberman
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,37 +59,37 @@ CMAKE_BINARY_DIR = /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
 install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
 install/strip/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/cmake -P cmake_install.cmake
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/cmake -P cmake_install.cmake
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target list_install_components
@@ -105,7 +105,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	/goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/cpack --config ./CPackSourceConfig.cmake /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CPackSourceConfig.cmake
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cpack --config ./CPackSourceConfig.cmake /goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/Bomberman/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -116,7 +116,7 @@ package_source/fast: package_source
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -127,7 +127,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -138,7 +138,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
-	/goinfre/bmoodley/.brew/Cellar/cmake/3.12.1/bin/cpack --config ./CPackConfig.cmake
+	/goinfre/qmanamel/.brew/Cellar/cmake/3.12.0/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package
@@ -148,9 +148,9 @@ package/fast: package
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/Bomberman/CMakeFiles /goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/Bomberman/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /goinfre/qmanamel/Documents/WeThinkCode_/Modules/C++/Bomberman/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -781,6 +781,33 @@ Build/States/sources/Credits.cpp.s:
 	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Credits.cpp.s
 .PHONY : Build/States/sources/Credits.cpp.s
 
+Build/States/sources/FailState.o: Build/States/sources/FailState.cpp.o
+
+.PHONY : Build/States/sources/FailState.o
+
+# target to build an object file
+Build/States/sources/FailState.cpp.o:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/FailState.cpp.o
+.PHONY : Build/States/sources/FailState.cpp.o
+
+Build/States/sources/FailState.i: Build/States/sources/FailState.cpp.i
+
+.PHONY : Build/States/sources/FailState.i
+
+# target to preprocess a source file
+Build/States/sources/FailState.cpp.i:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/FailState.cpp.i
+.PHONY : Build/States/sources/FailState.cpp.i
+
+Build/States/sources/FailState.s: Build/States/sources/FailState.cpp.s
+
+.PHONY : Build/States/sources/FailState.s
+
+# target to generate assembly for a file
+Build/States/sources/FailState.cpp.s:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/FailState.cpp.s
+.PHONY : Build/States/sources/FailState.cpp.s
+
 Build/States/sources/Intro.o: Build/States/sources/Intro.cpp.o
 
 .PHONY : Build/States/sources/Intro.o
@@ -1213,6 +1240,33 @@ Build/States/sources/Quit.cpp.s:
 	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/Quit.cpp.s
 .PHONY : Build/States/sources/Quit.cpp.s
 
+Build/States/sources/WinState.o: Build/States/sources/WinState.cpp.o
+
+.PHONY : Build/States/sources/WinState.o
+
+# target to build an object file
+Build/States/sources/WinState.cpp.o:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/WinState.cpp.o
+.PHONY : Build/States/sources/WinState.cpp.o
+
+Build/States/sources/WinState.i: Build/States/sources/WinState.cpp.i
+
+.PHONY : Build/States/sources/WinState.i
+
+# target to preprocess a source file
+Build/States/sources/WinState.cpp.i:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/WinState.cpp.i
+.PHONY : Build/States/sources/WinState.cpp.i
+
+Build/States/sources/WinState.s: Build/States/sources/WinState.cpp.s
+
+.PHONY : Build/States/sources/WinState.s
+
+# target to generate assembly for a file
+Build/States/sources/WinState.cpp.s:
+	$(MAKE) -f CMakeFiles/BomberMan.dir/build.make CMakeFiles/BomberMan.dir/Build/States/sources/WinState.cpp.s
+.PHONY : Build/States/sources/WinState.cpp.s
+
 Build/main.o: Build/main.cpp.o
 
 .PHONY : Build/main.o
@@ -1317,6 +1371,9 @@ help:
 	@echo "... Build/States/sources/Credits.o"
 	@echo "... Build/States/sources/Credits.i"
 	@echo "... Build/States/sources/Credits.s"
+	@echo "... Build/States/sources/FailState.o"
+	@echo "... Build/States/sources/FailState.i"
+	@echo "... Build/States/sources/FailState.s"
 	@echo "... Build/States/sources/Intro.o"
 	@echo "... Build/States/sources/Intro.i"
 	@echo "... Build/States/sources/Intro.s"
@@ -1365,6 +1422,9 @@ help:
 	@echo "... Build/States/sources/Quit.o"
 	@echo "... Build/States/sources/Quit.i"
 	@echo "... Build/States/sources/Quit.s"
+	@echo "... Build/States/sources/WinState.o"
+	@echo "... Build/States/sources/WinState.i"
+	@echo "... Build/States/sources/WinState.s"
 	@echo "... Build/main.o"
 	@echo "... Build/main.i"
 	@echo "... Build/main.s"

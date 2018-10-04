@@ -8,5 +8,6 @@ Makefile
 Bomberman
 BomberMan
 a.out
+_deps
 .DS_STORE
 tmp/

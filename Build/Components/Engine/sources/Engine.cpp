@@ -300,10 +300,11 @@ void	Engine::engineInit( void ) {
 	this->_SolidWall.init("Assets/Models/Crate/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_BreakableWall.init("Assets/Models/Crate-Break/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_Bomb.init("Assets/Models/rusty-bomb/source/Bomb.obj");
-	this->_Player.init("Assets/Models/Slime/MC Slime.obj");
+	this->_Player.init("Assets/Models/Player/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_Enemy.init("Assets/Models/Enemy/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_Door.init("Assets/Models/Door/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_Explosion.init("Assets/Models/Explosion/89e64c1cd44944659f70b75891693405.blend.obj");
+	this->_PowerUp.init("Assets/Models/PowerUp/89e64c1cd44944659f70b75891693405.blend.obj");
 }
 
 void	Engine::clear( void ) {
@@ -325,7 +326,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	// render the loaded model
 	glm::mat4 model = glm::mat4(1.0f);
 	//										x		y		z
-	if ( type == PLAYER ) {
+	if ( type == PLAYER || type == POWERUP) {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.014f, 0.014f, 0.014f));
 	} else if (type == ENEMY) {
@@ -363,6 +364,9 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 		case ( EXPLOSION ):
 			this->_Explosion.Draw(_ModelShader);
 			break;
+		case ( POWERUP ):
+			this->_PowerUp.Draw(_ModelShader);
+			break;
 		case ( DOOR ):
 			this->_Door.Draw(_ModelShader);
 			break;
@@ -379,8 +383,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 			this->_BreakableWall.Draw(_ModelShader);
 			break;
 		case( PLAYER ):
-			//this->_Player.Draw(_ModelShader);
-			this->_SolidWall.Draw(_ModelShader);
+			this->_Player.Draw(_ModelShader);
 			std::cout << "draw player" << std::endl;
 			break;
 	}
@@ -393,6 +396,37 @@ void	Engine::render( void ) {
 	glfwPollEvents();
 }
 
+void		Engine::keyBindings( int bindID ) {
+	if (bindID == 1) {
+		this->_sControls.LEFT_KEY = GLFW_KEY_LEFT;//263;
+		this->_sControls.UP_KEY = GLFW_KEY_UP;//265;
+		this->_sControls.RIGHT_KEY = GLFW_KEY_RIGHT;//262;
+		this->_sControls.DOWN_KEY = GLFW_KEY_DOWN;//264;
+		this->_sControls.ENTER_KEY = GLFW_KEY_ENTER;//257;
+		this->_sControls.ESCAPE_KEY = GLFW_KEY_ESCAPE;//256;
+		this->_sControls.FIRE_KEY = GLFW_KEY_Z;//90; defaults to z
+		this->_sControls.ACTION_KEY = GLFW_KEY_X;//88; defaults to x
+	} else if (bindID == 2) {
+		this->_sControls.LEFT_KEY = GLFW_KEY_A;//263;
+		this->_sControls.UP_KEY = GLFW_KEY_W;//265;
+		this->_sControls.RIGHT_KEY = GLFW_KEY_D;//262;
+		this->_sControls.DOWN_KEY = GLFW_KEY_S;//264;
+		this->_sControls.ENTER_KEY = GLFW_KEY_ENTER;//257;
+		this->_sControls.ESCAPE_KEY = GLFW_KEY_ESCAPE;//256;
+		this->_sControls.FIRE_KEY = GLFW_KEY_K;//90; defaults to z
+		this->_sControls.ACTION_KEY = GLFW_KEY_L;//88; defaults to x
+	} else if (bindID == 3) {
+		this->_sControls.LEFT_KEY = GLFW_KEY_LEFT;//263;
+		this->_sControls.UP_KEY = GLFW_KEY_UP;//265;
+		this->_sControls.RIGHT_KEY = GLFW_KEY_RIGHT;//262;
+		this->_sControls.DOWN_KEY = GLFW_KEY_DOWN;//264;
+		this->_sControls.ENTER_KEY = GLFW_KEY_ENTER;//257;
+		this->_sControls.ESCAPE_KEY = GLFW_KEY_ESCAPE;//256;
+		this->_sControls.FIRE_KEY = GLFW_KEY_Q;//90; defaults to z
+		this->_sControls.ACTION_KEY = GLFW_KEY_W;//88; defaults to x
+	}
+}
+
 void		Engine::saveGame( void ) {
 	std::string fileName = "save.save";
 	std::string filePath = ".save/" + fileName;
@@ -401,6 +435,7 @@ void		Engine::saveGame( void ) {
 	std::string data = std::to_string(this->_Save.health) + "," + std::to_string(this->_Save.level)
 	+ ',' + std::to_string(this->_Save.points) + ',' + std::to_string(this->_Save.remainingTime);
 	saveFile << data;
+	std::cout << "DATA: " << data << std::endl; 
 	saveFile.close();
 }
 

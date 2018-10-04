@@ -1,3 +1,0 @@
-repository='https://github.com/Jerome-Damhuis/irrKlang-dep_for_Bomberman.git'
-module=''
-tag=''

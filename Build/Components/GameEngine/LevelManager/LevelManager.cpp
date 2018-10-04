@@ -1,15 +1,15 @@
 #include "LevelManager.hpp"
 #include <iostream>
 
-int LevelManager::level = 0;
+//int LevelManager::level = 0;
 //int LevelManager::enemies = 0;
 
 // I think LevelManager should only come into existence when creating a level,
 // then deleted. This way it can be reinitialized with the level value each time
 
-LevelManager::LevelManager( int level ){
+LevelManager::LevelManager( int _level ){
 	srand(time(NULL));
-	level = level;
+	this->level = _level;
 
 	switch(level) {
 		case(1):
@@ -22,6 +22,33 @@ LevelManager::LevelManager( int level ){
 			break;
 		case(3):
 			this->duration = 130;
+			this->numEnemies = 13; // get based on level
+			break;
+	}
+
+	this->mapWidth = 13; // must be odd between 7 and 31
+	this->mapHeight = 13; // must be odd between 7 and 31
+	assert(this->mapWidth >= 7 && this->mapWidth <= 31 && this->mapHeight % 2 != 0);
+	assert(this->mapHeight >= 7 && this->mapWidth <= 31 && this->mapWidth % 2 != 0);
+	// enemies = this->mapWidth * this->mapHeight / 50 + (level * 2);
+	std::cout << "LevelManager constructed" << std::endl; // debug
+}
+
+LevelManager::LevelManager( int _level, int duration){
+	srand(time(NULL));
+	this->level = _level;
+
+	switch(level) {
+		case(1):
+			this->duration = duration; // test debug was 100
+			this->numEnemies = 7; // get based on level
+			break;
+		case(2):
+			this->duration = duration;
+			this->numEnemies = 10; // get based on level
+			break;
+		case(3):
+			this->duration = duration;
 			this->numEnemies = 13; // get based on level
 			break;
 	}

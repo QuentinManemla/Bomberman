@@ -72,6 +72,7 @@ class	Engine {
 
 		void			saveGame( void );
 		void			loadGame( void );
+		void			keyBindings( int bindID );
 		/********************************************************************************************/
 		/*	Text Rendering Functions 																*/
 		/*	print2DText() Takes in the text and X & Y position to print out on the Window			*/
@@ -155,6 +156,7 @@ class	Engine {
 		Model					_Enemy;
 		Model					_Door;
 		Model					_Explosion;
+		Model					_PowerUp;
 
 
 

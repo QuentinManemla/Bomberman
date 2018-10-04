@@ -24,6 +24,8 @@
 # include "../../../States/includes/OptionsVolume.hpp"
 # include "../../../States/includes/LevelTransition.hpp"
 # include "../../../States/includes/LoadGame.hpp"
+# include "../../../States/includes/FailState.hpp"
+# include "../../../States/includes/WinState.hpp"
 
 class Game {
 public:

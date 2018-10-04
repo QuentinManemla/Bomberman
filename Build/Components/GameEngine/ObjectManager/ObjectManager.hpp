@@ -14,6 +14,7 @@
 class ObjectManager {
 public:
 	ObjectManager( Engine & engine ); // may need reference to playstate
+	ObjectManager( Engine & engine, int level, int score, int retime ); // may need reference to playstate
 	ObjectManager( void ); // may need reference to playstate
 	~ObjectManager( void );
 

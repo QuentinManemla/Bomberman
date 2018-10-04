@@ -15,6 +15,8 @@ public:
 	// constructor that takes ptr to GameEngine
 	PlayState( void );
 	PlayState( Engine & engine );
+	PlayState( Engine & engine, std::string savePath, bool restart );
+	PlayState( Engine & engine, bool cont );
 	~PlayState( void );
 
 	std::string		getType( void ); // debug
