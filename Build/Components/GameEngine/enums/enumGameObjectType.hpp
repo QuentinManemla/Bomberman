@@ -7,6 +7,7 @@ enum eGameObjectType {
 	BOMB,
 	WALL,
 	SOLIDWALL,
+	POWERUP,
 	DOOR,
 	EXPLOSION
 };

@@ -166,7 +166,7 @@ private:
 			}
 			if(!skip) {
 				Texture texture;
-				texture.id = TextureFromFile(str.C_Str(), this->directory, false);
+				texture.id = TextureFromFile(str.C_Str(), this->directory);
 				texture.type = typeName;
 				texture.path = str.C_Str();
 				textures.push_back(texture);
@@ -176,7 +176,7 @@ private:
 		return textures;
 	}
 
-	unsigned int TextureFromFile(const char *path, const string &directory, bool gamma) {
+	unsigned int TextureFromFile(const char *path, const string &directory) {
 		string filename = string(path);
 		filename = directory + '/' + filename;
 
@@ -187,7 +187,7 @@ private:
 		unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
 		if (data)
 		{
-			GLenum format;
+			GLenum format = 0;
 			if (nrComponents == 1)
 				format = GL_RED;
 			else if (nrComponents == 3)

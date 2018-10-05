@@ -72,6 +72,7 @@ class	Engine {
 
 		void			saveGame( void );
 		void			loadGame( void );
+		void			keyBindings( int bindID );
 		/********************************************************************************************/
 		/*	Text Rendering Functions 																*/
 		/*	print2DText() Takes in the text and X & Y position to print out on the Window			*/
@@ -89,6 +90,7 @@ class	Engine {
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
 
+		void			controlChange(int i);
 		eControls		getInput( void );
 		static void		processKeys(unsigned char key, int x, int y);
 
@@ -154,6 +156,7 @@ class	Engine {
 		Model					_Enemy;
 		Model					_Door;
 		Model					_Explosion;
+		Model					_PowerUp;
 
 
 

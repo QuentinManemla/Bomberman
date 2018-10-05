@@ -15,7 +15,8 @@
 
 class LevelManager {
 public:
-	LevelManager( int level );
+	LevelManager( int _level );
+	LevelManager( int _level, int duration );
 	LevelManager( void );
 	~LevelManager( void );
 
@@ -27,7 +28,7 @@ public:
 	void						debugPrintMap( void ); // debug // test
 	void						debugPrintEnemies( void ); // debug // test
 
-	static int					level;
+	int							level;
 	int							duration;
 	std::vector<pair<int, int>>	openBlock; // changed from enemies
 	std::vector<pair<int, int>>	enemies; // changed from enemies

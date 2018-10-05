@@ -36,8 +36,25 @@ void Game::_switchState( void ){
 			case PLAY:
 				this->_stateStack.push(new PlayState(this->_engine));
 				break;
+			case PLAYLOADGAME:
+				this->_stateStack.push(new PlayState(this->_engine, "./save/save.save", false));
+				break;
+			case RESTARTLEVEL:
+				delete this->_stateStack.top();
+				this->_stateStack.pop();
+				this->_stateStack.push(new PlayState(this->_engine, "./save/save.save", true));
+				break;
+			case FAIL:
+				this->_stateStack.push(new FailState(this->_engine));
+				break;
 			case CREDITS:
 				this->_stateStack.push(new CreditsState(this->_engine));
+				break;
+			case SUCCESS:
+				this->_stateStack.push(new WinState(this->_engine));
+				break;
+			case CONTINUE:
+				this->_stateStack.push(new PlayState(this->_engine, true));
 				break;
 			case QUIT:
 				this->_stateStack.push(new QuitState(this->_engine));
@@ -47,6 +64,9 @@ void Game::_switchState( void ){
 				break;
 			case OPTIONS:
 				this->_stateStack.push(new OptionsState(this->_engine));
+				break;
+			case CONTROLS:
+				this->_stateStack.push(new OptionsControlsState(this->_engine));
 				break;
 			case RESOLUTION:
 				this->_stateStack.push(new OptionsResolutionState(this->_engine));
