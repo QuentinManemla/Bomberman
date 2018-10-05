@@ -272,6 +272,15 @@ void	ObjectManager::requestEnemyMove( GameObject *actor ){
 	int forwardX = x;
 	int forwardY = y;
 
+	int vectorDifference = 0;
+
+	if ((vectorDifference = this->getVectorDifference(actor)) == 0){
+		if (rand() % 5 == 0)
+			getOpenDirection(actor);
+
+			//getRandomOpenDirection(actor); // randomly change direction
+	}
+
 	getForward(actor->currentDirection, &forwardX, &forwardY);
 	if (isOpen(forwardX, forwardY) == 0)
 		getOpenDirection(actor);
@@ -366,6 +375,98 @@ void	ObjectManager::getOpenDirection( GameObject *actor ){
 	}
 	actor->stuck = 1;
 }
+
+void	ObjectManager::getRandomOpenDirection( GameObject *actor ){
+
+	int	newDirection = 0;
+	int	tries = 0;
+
+	int	x = actor->position->vX;
+	int	y = actor->position->vY;
+
+	// rand to decide + or -
+	if (rand() % 2 == 0)
+		newDirection = static_cast<int>(actor->currentDirection) + 1;
+	else
+		newDirection = static_cast<int>(actor->currentDirection) - 1;
+	// if actor currentDirection
+	while (tries < 2){
+		switch (newDirection){
+			case 0:
+				if (isOpen(x - 1, y) && newDirection != (actor->currentDirection + 2) % 4){
+					std::cout << "return_left" << std::endl;
+					actor->currentDirection = LEFT;
+					return;
+				}
+			case 1:
+				if (isOpen(x, y - 1) && newDirection != (actor->currentDirection + 2) % 4){
+					std::cout << "return_up" << std::endl;
+					actor->currentDirection = UP;
+					return;
+				}
+			case 2:
+				if (isOpen(x + 1, y) && newDirection != (actor->currentDirection + 2) % 4){
+					std::cout << "return_right" << std::endl;
+					actor->currentDirection = RIGHT;
+					return;
+				}
+			case 3:
+				if (isOpen(x, y + 1) && newDirection != (actor->currentDirection + 2) % 4){
+					std::cout << "return_down" << std::endl;
+					actor->currentDirection = DOWN;
+					return;
+				}
+		}
+		newDirection += 2;
+		newDirection %= 4;
+		tries++;
+	}
+
+/*
+	int	start = (rand() % 4);
+	int	tries = 3;
+
+	int	x = actor->position->vX;
+	int	y = actor->position->vY;
+
+	actor->stuck = 0;
+	while (tries-- != 0){
+		if (start == (static_cast<int>(actor->currentDirection) + 2) % 4){
+			start++;
+			start %= 4;
+		}
+			switch (start){
+				case 0:
+					if (isOpen(x - 1, y)){
+						std::cout << "return left" << std::endl;
+						actor->currentDirection = LEFT;
+						return;
+					}
+				case 1:
+					if (isOpen(x, y - 1)){
+						std::cout << "return up" << std::endl;
+						actor->currentDirection = UP;
+						return;
+					}
+				case 2:
+					if (isOpen(x + 1, y)){
+						std::cout << "return right" << std::endl;
+						actor->currentDirection = RIGHT;
+						return;
+					}
+				case 3:
+					if (isOpen(x, y + 1)){
+						std::cout << "return down" << std::endl;
+						actor->currentDirection = DOWN;
+						return;
+					}
+			}
+			start = start++ % 4;
+	}
+	actor->stuck = 1;
+	*/
+}
+
 
 void	ObjectManager::placeBomb( void ){
 	// check for bomb related powerup and then change bomb params accordingly
@@ -618,7 +719,7 @@ void	ObjectManager::levelProcess( int remainingTime ){
 
 void	ObjectManager::placePowerup( float x, float y){
 	if (this->powerupCount < this->powerupMax){
-		if (rand() % 30 == 0){
+		if (rand() % 10 == 0){
 			this->powerups.push_back(new SolidWall(POWERUP, new Vector3d(x, y, 0.1f)));
 			this->powerupCount++;
 		}

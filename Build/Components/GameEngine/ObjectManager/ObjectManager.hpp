@@ -33,6 +33,8 @@ public:
 	bool		isAtDestination( GameObject *actor);
 	void		getForward( eControls key , int *x, int *y);
 	void		getOpenDirection( GameObject *actor );
+	void		getRandomOpenDirection( GameObject *actor );
+
 	void		placeBomb( void );
 	void		explode( void );
 	void		checkEnemyCollision( void );

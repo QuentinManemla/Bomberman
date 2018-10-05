@@ -452,6 +452,12 @@ Shader.hpp
 
 /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Game/includes/enumControls.hpp
 
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/includes/Bomb.hpp
+GameObject.hpp
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/includes/GameObject.hpp
+../../Vector3d/Vector3d.hpp
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/Vector3d/Vector3d.hpp
+
 /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/includes/Door.hpp
 GameObject.hpp
 /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/includes/GameObject.hpp
@@ -496,12 +502,6 @@ GameObject.hpp
 ../../Vector3d/Vector3d.hpp
 /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/Vector3d/Vector3d.hpp
 
-/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/LevelManager/LevelManager.cpp
-LevelManager.hpp
-/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/LevelManager/LevelManager.hpp
-iostream
--
-
 /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/LevelManager/LevelManager.hpp
 vector
 -
@@ -523,6 +523,28 @@ LevelManager.hpp
 /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/includes/Wall.hpp
 ../GameObjects/includes/SolidWall.hpp
 /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/includes/SolidWall.hpp
+
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/ObjectManager/ObjectManager.cpp
+ObjectManager.hpp
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/ObjectManager/ObjectManager.hpp
+
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/ObjectManager/ObjectManager.hpp
+vector
+-
+ObjectManager.hpp
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/ObjectManager/ObjectManager.hpp
+../GameObjects/includes/GameObject.hpp
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/includes/GameObject.hpp
+../enums/enumGameObjectType.hpp
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/enums/enumGameObjectType.hpp
+../GameObjects/includes/Bomb.hpp
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/GameObjects/includes/Bomb.hpp
+../../Game/includes/enumControls.hpp
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Game/includes/enumControls.hpp
+../LevelManager/LevelManager.hpp
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/LevelManager/LevelManager.hpp
+../../Engine/includes/Engine.hpp
+/sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/Engine/includes/Engine.hpp
 
 /sgoinfre/sgoinfre/Users/BMOodley/42_bomberman_github/Build/Components/GameEngine/Vector3d/Vector3d.hpp
 
