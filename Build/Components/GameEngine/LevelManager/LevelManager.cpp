@@ -96,7 +96,7 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 		}
 		else { // if not boarder
 			// insert random objects here avoiding player spawn zone in top left corner
-			if ((x == 2 && y <= 4) || (y == 2 && x <= 4)){// keeps player start area clear
+			if (isSafeZone(x, y)){// Creates initial safe zone for player
 				type = 5; // type 5 indicates safe zone where no blocks will spawn
 			}
 			else
@@ -126,6 +126,7 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 		}
 	}
 	std::cout << "solid = " << solidCountDebug << "\nopen = " << openCountDebug << "\nbreakable = " << breakableCountDebug << std::endl;
+	encloseSafeZone();
 	setDoor();
 	setEnemies();
 	//this->debugPrintMap(); //debug
@@ -149,15 +150,39 @@ void	LevelManager::pushObject( int type, int x, int y ){ // may take level int i
 		//case 3:
 		//	this->enemies.push_back(pair<int, int>(x, y));
 		//	return;
-		case 4:
-			object = (new Door(DOOR, new Vector3d(x, y, 0)));
-			std::cout << "door = " << x << ";" << y << std::endl;
-			break;
+		//case 4:
+		//	object = (new Door(DOOR, new Vector3d(x, y, 0)));
+		//	std::cout << "door = " << x << ";" << y << std::endl;
+		//	break;
 		case 5:
 			return;
 	};
 	//std::cout << "object debug pre push" << object->strType << " " << object->position->vX << ";" << object->position->vY << std::endl; // debug
 	this->map.push_back(object);
+}
+
+void	LevelManager::encloseSafeZone( void ){
+	int topBarrier = 0;
+	int midBarrier = 0;
+	int bottomBarrier = 0;
+
+	for (int i = 0; i < this->map.size(); i++){
+		if (this->map[i]->position->vX == 5 && this->map[i]->position->vY == 2){
+			topBarrier = 1;
+		}
+		else if (this->map[i]->position->vX == 2 && this->map[i]->position->vY == 5){
+			bottomBarrier = 1;
+		}
+		else if (this->map[i]->position->vX == 4 && this->map[i]->position->vY == 4){
+			midBarrier = 1;
+		}
+	}
+	if (!(bottomBarrier))
+		this->pushObject(2, 2, 5);
+	if (!(topBarrier))
+		this->pushObject(2, 5, 2);
+	if (!(midBarrier))
+		this->pushObject(2, 4, 4);
 }
 
 void	LevelManager::setDoor( void ){
@@ -182,7 +207,7 @@ void	LevelManager::setDoor( void ){
 void	LevelManager::setEnemies( void ){	
 	while (this->numEnemies > 0){
 		for (int i = 0; i < this->openBlock.size(); i++){
-			if (rand() % 50 == 0){
+			if (rand() % 50 == 0 && this->openBlock[i].first > 5 && this->openBlock[i].second > 5){
 				this->enemies.push_back(std::pair<int, int>(this->openBlock[i].first, this->openBlock[i].second));
 				//std::cout << "openBlock popped at " << this->openBlock[i].first << ";" << this->openBlock[i].second << " : "<< i << std::endl; // debug
 				this->numEnemies--;
@@ -195,6 +220,12 @@ void	LevelManager::setEnemies( void ){
 	//exit(-1);//debug
 }
 
+bool	LevelManager::isSafeZone(int x, int y){
+	if ((x == 2 && y <= 4) || (y == 2 && x <= 4)){
+		return (1);
+	}
+	return (0);
+}
 
 void	LevelManager::debugPrintMap( void ){ // debug // test
 	std::cout << "total = " <<map.size() << std::endl;

@@ -24,6 +24,8 @@ public:
 	void						pushObject( int type, int x, int y ); // may take level int in future;
 	void						setDoor( void );
 	void						setEnemies( void );
+	void						encloseSafeZone( void );
+	bool						isSafeZone(int x, int y);
 
 	void						debugPrintMap( void ); // debug // test
 	void						debugPrintEnemies( void ); // debug // test
