@@ -24,6 +24,9 @@ ObjectManager::ObjectManager( Engine & engine ) : fuseTime(1.5f), playerImmortal
 	//this->fuseTime = 1.5f;
 	this->bombRadius = 1;
 	//this->playerImmortalTime = 3.0;
+
+	// TIME TEST
+	this->remainingTime = this->LM->duration;
 }
 
 ObjectManager::ObjectManager( Engine & engine, int level, int score, int retime ) : fuseTime(1.5f), playerImmortalTime(3.0f), powerupMax(3){
@@ -35,7 +38,7 @@ ObjectManager::ObjectManager( Engine & engine, int level, int score, int retime 
 	this->placeEnemies(); //
 	this->playerScore = score;
 	this->blastTime = -0.1f;
-	this->remainingTime = retime;
+	this->remainingTime = this->LM->duration;//retime;
 
 	// INITS
 	this->powerupCount = 0;
@@ -58,11 +61,15 @@ ObjectManager::~ObjectManager( void ){
 
 void	ObjectManager::update( eControls key/*, int remainingTime*/){
 
+	// UPDATE TIME REMAINING
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 	this->elapsedSec = std::chrono::duration_cast<std::chrono::seconds>(end - this->startTime).count();
 	this->remainingTime, this->displayTime = this->LM->duration - this->elapsedSec;
 	if (this->remainingTime < 0)
 		this->displayTime = 0;
+	this->remainingTime -= this->engine->_deltaTime; // test
+	std::cout << static_cast<int>(this->timeTest) << std::endl; // debug
+	
 
 	/** UPDATE SAVE VALUES **/
 	this->engine->_Save.health = this->player->hitPoints;

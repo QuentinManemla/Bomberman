@@ -13,15 +13,15 @@ LevelManager::LevelManager( int _level ){
 
 	switch(level) {
 		case(1):
-			this->duration = 150; // test debug was 100
+			this->duration = 15; // test debug was 100
 			this->numEnemies = 7; // get based on level
 			break;
 		case(2):
-			this->duration = 140;
+			this->duration = 14;
 			this->numEnemies = 10; // get based on level
 			break;
 		case(3):
-			this->duration = 130;
+			this->duration = 13;
 			this->numEnemies = 13; // get based on level
 			break;
 	}
@@ -147,13 +147,6 @@ void	LevelManager::pushObject( int type, int x, int y ){ // may take level int i
 		case 2:
 			object = (new Wall(WALL, new Vector3d(x, y, 0)));
 			break;
-		//case 3:
-		//	this->enemies.push_back(pair<int, int>(x, y));
-		//	return;
-		//case 4:
-		//	object = (new Door(DOOR, new Vector3d(x, y, 0)));
-		//	std::cout << "door = " << x << ";" << y << std::endl;
-		//	break;
 		case 5:
 			return;
 	};

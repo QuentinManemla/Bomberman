@@ -74,6 +74,7 @@ public:
 	int				elapsedSec;
 	int 			remainingTime;
 	int 			displayTime;
+	double			timeTest;
 
 protected:
 
