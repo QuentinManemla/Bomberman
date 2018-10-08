@@ -13,7 +13,9 @@ void		Sound::init( void ) {
 	
 	this->_Intro = this->_soundEngine->addSoundSourceFromFile("Assets/Audio/Intro_State.wav");
 	this->_Selection = this->_soundEngine->addSoundSourceFromFile("Assets/Audio/Enter_Key.wav");
-	this->_Play = this->_soundEngine->addSoundSourceFromFile("Assets/Audio/Bomberman-Music.wav");
+	this->_Play = this->_soundEngine->addSoundSourceFromFile("Assets/Audio/Bomberman-Music2.wav");
+	this->_Play2 = this->_soundEngine->addSoundSourceFromFile("Assets/Audio/Bomberman-Music3.wav");
+	this->_Play3 = this->_soundEngine->addSoundSourceFromFile("Assets/Audio/Bomberman-Music.wav");
 	this->_PlaceBomb = this->_soundEngine->addSoundSourceFromFile("Assets/Audio/punch.wav");
 	this->_EnterKey = this->_soundEngine->addSoundSourceFromFile("Assets/Audio/Selection.wav");
 	this->_Explode = this->_soundEngine->addSoundSourceFromFile("Assets/Audio/bomb-explode.wav");

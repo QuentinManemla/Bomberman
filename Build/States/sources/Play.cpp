@@ -19,7 +19,6 @@ PlayState::PlayState( Engine & engine ) { // first init?
 	_positionPitch = 0.0f;
 	this->_isPlaying = false;
 	//this->begin = std::chrono::steady_clock::now(); MAY NEED
-	this->_engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
 
 	this->_OM = new ObjectManager( engine );
 	this->_GM = new GUIManager( engine );
@@ -34,7 +33,6 @@ PlayState::PlayState( Engine & engine, std::string savePath, bool restart ) {
 	_positionPitch = 0.0f;
 	this->_isPlaying = false;
 	//this->begin = std::chrono::steady_clock::now(); MAY NEED
-	this->_engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
 	
 	if (restart) {
 		this->_OM = new ObjectManager( engine, this->_engine->_Save.level,0, 0 );
@@ -67,7 +65,6 @@ PlayState::PlayState( Engine & engine, bool cont ) {
 	_positionPitch = 0.0f;
 	this->_isPlaying = false;
 	//this->begin = std::chrono::steady_clock::now(); MAY NEED
-	this->_engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
 	
 	this->_OM = new ObjectManager( engine, this->_engine->_Save.level + 1, 0, 0 );
 	this->_GM = new GUIManager( engine );
@@ -117,10 +114,6 @@ void PlayState::drawMap( void ) { // needs to move to render engine
 }
 
 void PlayState::render( void ) {
-	if (!_isPlaying) {
-		this->_engine->_SoundEngine.playSoundSource(this->_engine->_SoundEngine._Play, true);
-		this->_isPlaying = true;
-	}
 	if ( this->_positionPitch < 7.5f) {
 		this->_engine->_Camera.ProcessMouseMovement(0.0f, this->_positionPitch);
 		this->_positionPitch += 0.1f;

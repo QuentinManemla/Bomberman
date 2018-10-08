@@ -497,6 +497,15 @@ int menuIndex, std::string backgroundPath) {
 	}
 }
 
+void		Engine::printIntro() {
+	float		y = (this->_WindowHeight / 2) * 32;
+
+	std::string introtext = "Welcome to Bomberman";
+
+	/* Render Menu Header Text */
+	float headingLength = introtext.length() * 1.5;
+	this->print2DText(introtext, 20,20, 0.5, 0.8f, 0.2f, 1.0f);
+}
 
 void		Engine::printMenu(std::vector<std::string> menuItems, std::string menuHeading, int menuIndex, std::string backgroundPath) {
 	float		x = 20;
