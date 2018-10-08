@@ -12,15 +12,6 @@ unsigned int Btexture1, Btexture2;
 
 glm::vec3 cubePositions[] = {
   glm::vec3( 0.48f, -0.48f,  -0.1f), // same as camera offset
-  glm::vec3( 2.0f,  5.0f, -15.0f), 
-  glm::vec3(-1.5f, -2.2f, -2.5f),  
-  glm::vec3(-3.8f, -2.0f, -12.3f),  
-  glm::vec3( 2.4f, -0.4f, -3.5f),  
-  glm::vec3(-1.7f,  3.0f, -7.5f),  
-  glm::vec3( 1.3f, -2.0f, -2.5f),  
-  glm::vec3( 1.5f,  2.0f, -2.5f), 
-  glm::vec3( 1.5f,  0.2f, -1.5f), 
-  glm::vec3(-1.3f,  1.0f, -1.5f)  
 };
 
 int		Engine::held = 1;
@@ -275,7 +266,7 @@ void	Engine::drawBackground( void ) {
 	this->_Shader.setMat4("projection", projection);
 
 	glBindVertexArray(VAO);
-	for(unsigned int i = 0; i < 10; i++) {
+	for(unsigned int i = 0; i < 1; i++) {
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, cubePositions[i]);
 		model = glm::scale(model, glm::vec3(1.06f, 1.06f, 0.0f));
