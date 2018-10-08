@@ -5,8 +5,6 @@ IntroState::IntroState( Engine & engine ){
 	this->_engine = &engine;
 	this->_type = "Intro";
 	std::cout << "Intro constructed" << std::endl;
-	this->_engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
-	this->_engine->BigTexture("Assets/Textures/stone-wall.jpg");
 }
 
 IntroState::IntroState( void ){
@@ -34,12 +32,10 @@ void IntroState::update( eControls key ) {
 		std::cout << "Skipping intro!" << std::endl;
 		this->_engine->state = BACK;
 	} else
-		this->_engine->print2DText("Intro", 20, 20, 0, 0, 0xff, 1.0f);
+		this->_engine->printIntro();
 }
 
 void IntroState::render( void ) {
-	this->_engine->drawBackground();
-	this->_engine->drawBigBackground();
 	this->_engine->render();
 	std::cout << "Intro render" << std::endl;
 }

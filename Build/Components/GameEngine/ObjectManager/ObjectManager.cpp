@@ -18,7 +18,8 @@ ObjectManager::ObjectManager( Engine & engine ) : fuseTime(1.5f), playerImmortal
 	this->bomb = NULL;
 	this->timeSpeedupFlag = 0;
 	this->playerImmortalTicker = 0;
-	
+	this->engine->_SoundEngine.playSoundSource(this->engine->_SoundEngine._Play, true);
+	this->engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	//this->fuseTime = 1.5f;
@@ -43,8 +44,26 @@ ObjectManager::ObjectManager( Engine & engine, int level, int score, int retime 
 	this->bomb = NULL;
 	this->timeSpeedupFlag = 0;
 	this->playerImmortalTicker = 0;
-	
 
+	this->engine->_SoundEngine.stopSound();
+	switch(level) {
+		case 1:
+			this->engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
+			this->engine->_SoundEngine.playSoundSource(this->engine->_SoundEngine._Play, true);
+			break;
+		case 2:
+			this->engine->backgroundTexture("Assets/Textures/brick-floor.jpg");
+			this->engine->_SoundEngine.playSoundSource(this->engine->_SoundEngine._Play2, true);
+			break;
+		case 3:
+			this->engine->backgroundTexture("Assets/Textures/stone2-wall.jpg");
+			this->engine->_SoundEngine.playSoundSource(this->engine->_SoundEngine._Play3, true);
+			break;
+		default:
+			this->engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
+			this->engine->_SoundEngine.playSoundSource(this->engine->_SoundEngine._Play, true);
+			break;
+	}
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
 	//this->fuseTime = 1.5f;
 	this->bombRadius = 1;

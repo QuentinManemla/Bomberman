@@ -26,6 +26,8 @@ class Sound {
 		irrklang::ISoundSource*		_Selection;
 		irrklang::ISoundSource*		_EnterKey;
 		irrklang::ISoundSource*		_Play;
+		irrklang::ISoundSource*		_Play2;
+		irrklang::ISoundSource*		_Play3;
 		irrklang::ISoundSource*		_PlaceBomb;
 		irrklang::ISoundSource*		_Explode;
 		float						_volume;
