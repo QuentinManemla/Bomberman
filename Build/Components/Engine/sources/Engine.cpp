@@ -511,7 +511,7 @@ void		Engine::printMenu(std::vector<std::string> menuItems, std::string menuHead
 		if (i == menuIndex)
 			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 25), y, 0.5, 0.8f, 0.2f, 1.0f);
 		else
-			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 25), y, 0.3, 0.7f, 0.9f, 1.0f);
+			this->print2DText(menuItems[i], (this->_WindowWidth / 2) - ((length / 2) * 25), y, 1.0f, 1.0f, 1.0f, 1.0f);
 		y += 50;
 	}
 }
