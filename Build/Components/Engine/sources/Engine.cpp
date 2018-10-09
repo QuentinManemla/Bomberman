@@ -56,7 +56,7 @@ Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _delt
 	/* Initialize Sound, Text & Camera Engine */
 	this->_TextEngine.init("Assets/Fonts/neon_pixel.ttf", 30, this->_WindowWidth, this->_WindowHeight);
 	this->_SoundEngine.init();
-	this->_SoundEngine._volume = 0.0f;
+	this->_SoundEngine._volume = 0.5f;
 	//this->setFullScreen();
 	this->engineInit();
 	this->_Camera.init(glm::vec3(0.48f, -1.1f, 2.7f)); // use position of player in future
@@ -553,17 +553,20 @@ int			Engine::menuHandler( eControls key, int & menuIndex, int lastIndex ){
 			this->held = 1;
 			break;
 		case ENTER:
-			this->_SoundEngine.playSoundSource(this->_SoundEngine._EnterKey, false);
-			if (!(this->held))
+			if (!(this->held)) {
+				this->_SoundEngine.playSoundSource(this->_SoundEngine._Selection, false);
 				return (1);
+			}
 			this->held = 1;
 			break;
 		case IDLEKEY:
 			this->held = 0;
 			break;
 		case ESCAPE:
-			if (!(this->held))
+			if (!(this->held)) {
 				this->state = BACK;
+				this->_SoundEngine.playSoundSource(this->_SoundEngine._Selection, false);
+			}
 			this->held = 1;
 			break;
 		default:

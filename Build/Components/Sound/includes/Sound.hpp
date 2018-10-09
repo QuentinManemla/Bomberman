@@ -30,6 +30,8 @@ class Sound {
 		irrklang::ISoundSource*		_Play3;
 		irrklang::ISoundSource*		_PlaceBomb;
 		irrklang::ISoundSource*		_Explode;
+		irrklang::ISoundSource*		_Credits;
+		irrklang::ISoundSource*		_Menu;
 		float						_volume;
 
 	private:

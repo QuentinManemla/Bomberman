@@ -31,6 +31,7 @@ void Game::_switchState( void ){
 				this->_stateStack.push(new IntroState(this->_engine));
 				break;
 			case MENU:
+				this->_engine._SoundEngine.playSoundSource(this->_engine._SoundEngine._Menu, true);
 				this->_stateStack.push(new MenuState(this->_engine));
 				break;
 			case PLAY:
@@ -48,6 +49,8 @@ void Game::_switchState( void ){
 				this->_stateStack.push(new FailState(this->_engine));
 				break;
 			case CREDITS:
+				this->_engine.setResolution(1920, 1080);
+				this->_engine.setFullScreen();
 				this->_stateStack.push(new CreditsState(this->_engine));
 				break;
 			case SUCCESS:

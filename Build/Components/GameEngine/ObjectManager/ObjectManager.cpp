@@ -22,9 +22,7 @@ ObjectManager::ObjectManager( Engine & engine ) : fuseTime(1.5f), playerImmortal
 	this->engine->backgroundTexture("Assets/Textures/stone-wall.jpg");
 
 	//SOME VALUES CHANGE BASED ON POWER UP: THESE ARE STARTING VALUES
-	//this->fuseTime = 1.5f;
 	this->bombRadius = 1;
-	//this->playerImmortalTime = 3.0;
 }
 
 ObjectManager::ObjectManager( Engine & engine, int level, int score, int retime ) : fuseTime(1.5f), playerImmortalTime(3.0f), powerupMax(3){

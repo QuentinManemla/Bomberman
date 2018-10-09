@@ -70,8 +70,6 @@ public:
 	float						playerImmortalTicker;
 	int							playerScore;
 	bool						timeSpeedupFlag;
-	Vector3d					*doorPos;
-	int							level;
 
 	std::chrono::steady_clock::time_point startTime;
 	int				elapsedSec;

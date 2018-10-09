@@ -24,6 +24,8 @@ void	MenuState::_makeSelection( void ){
 		this->_engine->state = LOADGAME;
 	if (this->_menuIndex == 2) // test
 		this->_engine->state = OPTIONS; // test
+	if (this->_menuIndex == 3)
+		this->_engine->state = CREDITS;
 	if (this->_menuIndex == 4) // test
 		this->_engine->state = BACK; // test
 }

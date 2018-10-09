@@ -2,26 +2,18 @@
 # define CREDITS_HPP
 
 # include <iostream>
-# include "IState.hpp"
+# include <vector>
+# include "MenuParentState.hpp"
 
-class CreditsState : public IState {
+class CreditsState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
-	CreditsState( void );
 	CreditsState( Engine & engine );
 	~CreditsState( void );
 
-	std::string		getType( void ); // debug
-
-	void			update( eControls key );
-	void			render( void );
-
-protected:
-
 private:
-	Engine			*_engine;
-	std::string		_type; // debug
-	
+	void	_makeSelection( void );
+
 };
 
 #endif
