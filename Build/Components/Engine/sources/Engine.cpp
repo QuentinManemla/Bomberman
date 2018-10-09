@@ -291,7 +291,7 @@ void	Engine::engineInit( void ) {
 	this->_SolidWall.init("Assets/Models/Crate/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_BreakableWall.init("Assets/Models/Crate-Break/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_Bomb.init("Assets/Models/rusty-bomb/source/Bomb.obj");
-	this->_Player.init("Assets/Models/Player/89e64c1cd44944659f70b75891693405.blend.obj");
+	this->_Player.init("Assets/Models/Slime/MC-Slime.obj");
 	this->_Enemy.init("Assets/Models/Enemy/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_Door.init("Assets/Models/Door/89e64c1cd44944659f70b75891693405.blend.obj");
 	this->_Explosion.init("Assets/Models/Explosion/89e64c1cd44944659f70b75891693405.blend.obj");
@@ -314,12 +314,34 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	this->_ModelShader.setMat4("projection", projection);
 	this->_ModelShader.setMat4("view", view);
 
+	static float rot = 0.0f;
+	static float val = 0.0f;
+
 	// render the loaded model
 	glm::mat4 model = glm::mat4(1.0f);
 	//										x		y		z
 	if ( type == PLAYER || type == POWERUP) {
-		model = glm::translate(model, glm::vec3(transX, transY, transZ));
-		model = glm::scale(model, glm::vec3(0.014f, 0.014f, 0.014f));
+		model = glm::translate(model, glm::vec3(transX, transY - 0.01f, transZ - 0.01f));
+		model = glm::scale(model, glm::vec3(0.0007f, 0.0007f, 0.0007f));
+		model = glm::rotate(model, 1.5f, glm::vec3(0.6f, 0.0f, 0.0f));
+
+	
+		if (this->_getKey(this->_sControls.LEFT_KEY)) {
+			rot = 1.8f;
+			val = -0.6f;
+		} else if (this->_getKey(this->_sControls.RIGHT_KEY)){
+			rot = 1.8f;
+			val = 0.6f;
+		} else if (this->_getKey(this->_sControls.UP_KEY)) {
+			rot = 3.2f;
+			val = 0.6f;
+		} else if (this->_getKey(this->_sControls.DOWN_KEY)) {
+			val = 0.6f;
+			rot = 0.0f;
+		}
+
+		if (rot != 0.0f && val != 0.0f)
+			model = glm::rotate(model, rot, glm::vec3(0.0f, val, 0.0f));
 	} else if (type == ENEMY) {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.010f, 0.010f, 0.010f));
