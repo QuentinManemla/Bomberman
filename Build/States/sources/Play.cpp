@@ -97,7 +97,7 @@ void PlayState::update( eControls key ){
 		held = 0;
 	}
 	this->_OM->update(key/*, this->_remainingTime*/);
-	this->_GM->update(this->_OM->player, this->_OM->displayTime, this->_OM->playerScore);
+	this->_GM->update(this->_OM->player, this->_OM->displayTime, this->_OM->playerScore, this->_OM->LM->level);
 }
 
 void PlayState::drawMap( void ) { // needs to move to render engine
