@@ -11,7 +11,7 @@ class GUIManager {
 		GUIManager( void );
 		~GUIManager( void );
 	
-	void			update( GameObject *player, int	elapsedSec, int playerScore);
+	void			update( GameObject *player, int	elapsedSec, int playerScore, int level);
 	void			render( void );
 
 	Engine			*engine;
