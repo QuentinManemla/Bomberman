@@ -7,6 +7,7 @@
 # include "../GameObjects/includes/GameObject.hpp"
 # include "../enums/enumGameObjectType.hpp"
 # include "../GameObjects/includes/Bomb.hpp"
+# include "../GameObjects/includes/Powerup.hpp"
 # include "../../Game/includes/enumControls.hpp"
 # include "../LevelManager/LevelManager.hpp"
 # include "../../Engine/includes/Engine.hpp"
