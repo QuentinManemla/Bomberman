@@ -320,17 +320,17 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 	// render the loaded model
 	glm::mat4 model = glm::mat4(1.0f);
 	//										x		y		z
-	if ( type == PLAYER || type == POWERUP) {
+	if ( type == PLAYER ) {
 		model = glm::translate(model, glm::vec3(transX, transY - 0.01f, transZ - 0.01f));
 		model = glm::scale(model, glm::vec3(0.0007f, 0.0007f, 0.0007f));
 		model = glm::rotate(model, 1.5f, glm::vec3(0.6f, 0.0f, 0.0f));
 
 	
 		if (this->_getKey(this->_sControls.LEFT_KEY)) {
-			rot = 1.8f;
+			rot = 1.6f;
 			val = -0.6f;
 		} else if (this->_getKey(this->_sControls.RIGHT_KEY)){
-			rot = 1.8f;
+			rot = 1.6f;
 			val = 0.6f;
 		} else if (this->_getKey(this->_sControls.UP_KEY)) {
 			rot = 3.2f;
@@ -363,14 +363,13 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 		} else {
 			model = glm::scale(model, glm::vec3(this->explodeMove, this->explodeMove, this->explodeMove));
 		}
-	} else if ( type == DOOR ) {
+	} else if ( type == DOOR || type == POWERUP ) {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.016f, 0.016f, 0.016f));
 	} else {
 		model = glm::translate(model, glm::vec3(transX, transY, transZ));
 		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
 	}
-	//model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5f, 1.0f, 0.0f));
 	this->_ModelShader.setMat4("model", model);
 
 	switch (type) {
@@ -397,7 +396,6 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 			break;
 		case( PLAYER ):
 			this->_Player.Draw(_ModelShader);
-			std::cout << "draw player" << std::endl;
 			break;
 	}
 	this->bombAnim = 0;

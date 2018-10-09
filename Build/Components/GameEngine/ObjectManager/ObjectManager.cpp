@@ -166,7 +166,7 @@ void	ObjectManager::render(void){
 	// RENDER POWERUP
 	for (int i = 0; i < this->powerups.size(); i++){
 		if (this->powerups[i]->state == ALIVE)
-			this->engine->drawModel(SOLIDWALL, (this->powerups[i]->position->vX), (this->powerups[i]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
+			this->engine->drawModel(POWERUP, (this->powerups[i]->position->vX), (this->powerups[i]->position->vY), 0.02f);//this->player->position->vZ); // moved math to drawModel()
 	}
 
 	// RENDER BOMB
@@ -638,7 +638,7 @@ void	ObjectManager::levelProcess( int remainingTime ){
 void	ObjectManager::placePowerup( float x, float y){
 	if (this->powerupCount < this->powerupMax){
 		if (rand() % 30 == 0){
-			this->powerups.push_back(new SolidWall(POWERUP, new Vector3d(x, y, 0.1f)));
+			this->powerups.push_back(new Powerup(POWERUP, new Vector3d(x, y, 0.1f)));
 			this->powerupCount++;
 		}
 	}
