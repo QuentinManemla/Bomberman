@@ -99,9 +99,17 @@ MUST remain even if the game is exited completly and executed again.
 
 ## To run and install on WeThinkCode_ Mac OS.
 • Have Xquartz installed through Managment Software Center
+
 • Have brew installed ( sh -c "$(curl -fsSL https://raw.githubusercontent.com/Tolsadus/42homebrewfix/master/install.sh)" )
+
 • Have cmake installed ( brew install cmake )
+
 • generate the Makefile with "cmake -B./tmp -H."
+
 • compile with "make -C tmp"
+
 • run witn "./BomberMan"
 
+
+![alt text](https://raw.githubusercontent.com/QuentinLucyyd/Bomberman/master/1.png)
+![alt text](https://raw.githubusercontent.com/QuentinLucyyd/Bomberman/master/2.png)
