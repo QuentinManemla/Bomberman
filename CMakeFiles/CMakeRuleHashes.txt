@@ -1,5 +1,0 @@
-# Hashes of file build rules.
-1b1be8e317f58f845627abf37e715d9b _deps/freetype-build/CMakeFiles/dist
-3df568f3d3d6b036f812a2d48ba807fe _deps/glad-build/CMakeFiles/glad-generate-files
-8593d21027160daad47e5b84f7f8b6a9 _deps/glad-build/src/glad.c
-ef08094b0985a05067b41bb0c9682e90 _deps/glfw-build/CMakeFiles/uninstall

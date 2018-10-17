@@ -34,18 +34,8 @@ private:
 	Engine			*_engine;
 	std::string		_type; // debug
 
-	//std::chrono::steady_clock::time_point startTime;
-	//int				_elapsedSec;
-	//int 			_remainingTime;
-
 	float			_positionTime;
 	float			_positionPitch;
-	float 			start_x;
-	float 			start_y;
-	float 			start_z;
-	float			y;
-	float			x;
-	float			z;
 };
 
 #endif

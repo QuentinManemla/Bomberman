@@ -1,6 +1,7 @@
 #include "../includes/Menu.hpp"
 
 MenuParentState::MenuParentState( Engine & engine ){
+	this->_engine = &engine;
 	this->_type = "MenuParent";
 	std::cout << this->getType() << " constructed" << std::endl; // debug
 	this->_menuIndex = 0;

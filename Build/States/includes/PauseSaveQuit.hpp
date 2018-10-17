@@ -1,5 +1,5 @@
 #ifndef SAVEQUIT_HPP
-# define SAVEQUIT_HPP_HPP
+# define SAVEQUIT_HPP
 
 # include <iostream>
 # include <vector>

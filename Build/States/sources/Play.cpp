@@ -37,7 +37,7 @@ PlayState::PlayState( Engine & engine, std::string savePath, bool restart ) {
 	if (restart) {
 		this->_OM = new ObjectManager( engine, this->_engine->_Save.level,0, 0 );
 	} else {
-		std::ifstream saveFile (".save/save.save");
+		std::ifstream saveFile (savePath);
 		std::string line;
 		if (saveFile.is_open()) {
 			getline (saveFile,line);
@@ -47,7 +47,6 @@ PlayState::PlayState( Engine & engine, std::string savePath, bool restart ) {
 		std::vector<std::string> words;
 		split2(line, words, ',');
 
-		int health = std::stoi(words[0]);
 		int level = std::stoi(words[1]);
 		int points = std::stoi(words[2]);
 		int remainingTime = std::stoi(words[3]);
@@ -61,6 +60,7 @@ PlayState::PlayState( Engine & engine, bool cont ) {
 	this->_type = "Play";
 	std::cout << "Play constructed WITH RESTART" << std::endl;
 
+	cont = true;
 	_positionTime = 0.0f;
 	_positionPitch = 0.0f;
 	this->_isPlaying = false;
@@ -104,7 +104,7 @@ void PlayState::drawMap( void ) { // needs to move to render engine
 	float ModelX = 0;
 	float ModelY = 0;
 
-	for (int i = 0; i < this->_OM->map.size(); i++) {
+	for (int i = 0; i < static_cast<int>(this->_OM->map.size()); i++) {
 		if (this->_OM->map[i]->state == ALIVE){
 			ModelX = (this->_OM->map[i]->position->vX);
 			ModelY = (this->_OM->map[i]->position->vY);

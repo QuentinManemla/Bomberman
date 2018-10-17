@@ -104,6 +104,8 @@ void Game::_switchState( void ){
 				this->_stateStack.pop();
 				exit(0);
 				break;
+			default:
+				break;
 		};
 		this->_engine.state = IDLE;
 	}
@@ -111,9 +113,6 @@ void Game::_switchState( void ){
 
 void Game::_mainLoop( void ){
 	int 	quit;
-	int		tick = 0;
-	int		statetest = 0;
-	double	startTime = 0;
 
 	quit = 0;
 	while (!(quit)){

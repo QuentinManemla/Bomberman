@@ -139,7 +139,7 @@ void	LevelManager::pushObject( int type, int x, int y ){ // may take level int i
 	GameObject *object;
 	switch (type){
 		case 0:
-			this->openBlock.push_back(pair<int, int>(x, y));
+			this->openBlock.push_back(std::pair<int, int>(x, y));
 			return;
 		case 1:
 			object = (new SolidWall(SOLIDWALL, new Vector3d(x, y, 0)));
