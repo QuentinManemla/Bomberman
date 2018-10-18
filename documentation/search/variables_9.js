@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['openblock',['openBlock',['../class_level_manager.html#afb464fe5072414369eb601e0fa1370c3',1,'LevelManager']]]
+  ['numenemies',['numEnemies',['../class_level_manager.html#a63279c406ddfc5495ae644f06ae979ec',1,'LevelManager']]]
 ];

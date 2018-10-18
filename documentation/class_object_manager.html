@@ -70,6 +70,11 @@ $(function() {
 <div class="title">ObjectManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>base class of all game objects  
+ <a href="class_object_manager.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_object_manager_8hpp_source.html">ObjectManager.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -77,48 +82,57 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ObjectManager</b> (<a class="el" href="class_engine.html">Engine</a> &amp;engine)</td></tr>
 <tr class="separator:ae3b598960542b0952237b0186d849a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad4dc6bdec8ccd141a7f4f07e6960300"><td class="memItemLeft" align="right" valign="top"><a id="aad4dc6bdec8ccd141a7f4f07e6960300"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ObjectManager</b> (<a class="el" href="class_engine.html">Engine</a> &amp;engine, int level, int score, int retime)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#aad4dc6bdec8ccd141a7f4f07e6960300">ObjectManager</a> (<a class="el" href="class_engine.html">Engine</a> &amp;engine, int level, int score, int retime)</td></tr>
+<tr class="memdesc:aad4dc6bdec8ccd141a7f4f07e6960300"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialize the variables when loading a game <br /></td></tr>
 <tr class="separator:aad4dc6bdec8ccd141a7f4f07e6960300"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a46b0495f6ff56317dcfe6cf02243ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#a2a46b0495f6ff56317dcfe6cf02243ff">update</a> (eControls key)</td></tr>
 <tr class="separator:a2a46b0495f6ff56317dcfe6cf02243ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc00962f9105ccd9cbadef6d8e227e84"><td class="memItemLeft" align="right" valign="top"><a id="afc00962f9105ccd9cbadef6d8e227e84"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>render</b> (void)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#afc00962f9105ccd9cbadef6d8e227e84">render</a> (void)</td></tr>
+<tr class="memdesc:afc00962f9105ccd9cbadef6d8e227e84"><td class="mdescLeft">&#160;</td><td class="mdescRight">draw the model of the objects occupying the map depending on their location <br /></td></tr>
 <tr class="separator:afc00962f9105ccd9cbadef6d8e227e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada63d59c236abd9370b02583fe241928"><td class="memItemLeft" align="right" valign="top"><a id="ada63d59c236abd9370b02583fe241928"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>requestMove</b> (<a class="el" href="class_game_object.html">GameObject</a> *actor, eControls key)</td></tr>
+<tr class="memitem:ada63d59c236abd9370b02583fe241928"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#ada63d59c236abd9370b02583fe241928">requestMove</a> (<a class="el" href="class_game_object.html">GameObject</a> *actor, eControls key)</td></tr>
 <tr class="separator:ada63d59c236abd9370b02583fe241928"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63d9fd81bdfdd2eb7b9f159a5dfd45d2"><td class="memItemLeft" align="right" valign="top"><a id="a63d9fd81bdfdd2eb7b9f159a5dfd45d2"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>isOpen</b> (int x, int y)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#a63d9fd81bdfdd2eb7b9f159a5dfd45d2">isOpen</a> (int x, int y)</td></tr>
+<tr class="memdesc:a63d9fd81bdfdd2eb7b9f159a5dfd45d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks for if the coordinate is available <br /></td></tr>
 <tr class="separator:a63d9fd81bdfdd2eb7b9f159a5dfd45d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4136d917ec46204fb1b86adda98fb64"><td class="memItemLeft" align="right" valign="top"><a id="ae4136d917ec46204fb1b86adda98fb64"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>isMortal</b> (int x, int y)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#ae4136d917ec46204fb1b86adda98fb64">isMortal</a> (int x, int y)</td></tr>
+<tr class="memdesc:ae4136d917ec46204fb1b86adda98fb64"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns a bool of death <br /></td></tr>
 <tr class="separator:ae4136d917ec46204fb1b86adda98fb64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29e5aee5b200341abac420bbdd347584"><td class="memItemLeft" align="right" valign="top"><a id="a29e5aee5b200341abac420bbdd347584"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>move</b> (<a class="el" href="class_game_object.html">GameObject</a> *actor, int vectorDifference)</td></tr>
+<tr class="memitem:a29e5aee5b200341abac420bbdd347584"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#a29e5aee5b200341abac420bbdd347584">move</a> (<a class="el" href="class_game_object.html">GameObject</a> *actor, int vectorDifference)</td></tr>
 <tr class="separator:a29e5aee5b200341abac420bbdd347584"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45d0536fbec109c499c3ffce69066e19"><td class="memItemLeft" align="right" valign="top"><a id="a45d0536fbec109c499c3ffce69066e19"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>requestEnemyMove</b> (<a class="el" href="class_game_object.html">GameObject</a> *actor)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#a45d0536fbec109c499c3ffce69066e19">requestEnemyMove</a> (<a class="el" href="class_game_object.html">GameObject</a> *actor)</td></tr>
+<tr class="memdesc:a45d0536fbec109c499c3ffce69066e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">check if the position the <a class="el" href="class_game_object.html" title="base game object">GameObject</a> is trying to access is available and move on to the position if it is <br /></td></tr>
 <tr class="separator:a45d0536fbec109c499c3ffce69066e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17f8bc80d64e6d14c275b31facdf6dee"><td class="memItemLeft" align="right" valign="top"><a id="a17f8bc80d64e6d14c275b31facdf6dee"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getVectorDifference</b> (<a class="el" href="class_game_object.html">GameObject</a> *actor)</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#a17f8bc80d64e6d14c275b31facdf6dee">getVectorDifference</a> (<a class="el" href="class_game_object.html">GameObject</a> *actor)</td></tr>
+<tr class="memdesc:a17f8bc80d64e6d14c275b31facdf6dee"><td class="mdescLeft">&#160;</td><td class="mdescRight">check for the position of the <a class="el" href="class_game_object.html" title="base game object">GameObject</a> and the destination of it, and check what's the difference <br /></td></tr>
 <tr class="separator:a17f8bc80d64e6d14c275b31facdf6dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8da436d012556ab33afdbac261276dbc"><td class="memItemLeft" align="right" valign="top"><a id="a8da436d012556ab33afdbac261276dbc"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>getZStep</b> (<a class="el" href="class_game_object.html">GameObject</a> *actor)</td></tr>
 <tr class="separator:a8da436d012556ab33afdbac261276dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeede8c234b9e2bcb6688e64ed51479fe"><td class="memItemLeft" align="right" valign="top"><a id="aeede8c234b9e2bcb6688e64ed51479fe"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>placeEnemies</b> (void)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#aeede8c234b9e2bcb6688e64ed51479fe">placeEnemies</a> (void)</td></tr>
+<tr class="memdesc:aeede8c234b9e2bcb6688e64ed51479fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">place enemies onto the game map <br /></td></tr>
 <tr class="separator:aeede8c234b9e2bcb6688e64ed51479fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac46202d57e0722a60862c86f7eee1458"><td class="memItemLeft" align="right" valign="top"><a id="ac46202d57e0722a60862c86f7eee1458"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAtDestination</b> (<a class="el" href="class_game_object.html">GameObject</a> *actor)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#ac46202d57e0722a60862c86f7eee1458">isAtDestination</a> (<a class="el" href="class_game_object.html">GameObject</a> *actor)</td></tr>
+<tr class="memdesc:ac46202d57e0722a60862c86f7eee1458"><td class="mdescLeft">&#160;</td><td class="mdescRight">check if the <a class="el" href="class_game_object.html" title="base game object">GameObject</a> is at the destination it tried to move to <br /></td></tr>
 <tr class="separator:ac46202d57e0722a60862c86f7eee1458"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0f597d1330aed3570798fc4a00b4731"><td class="memItemLeft" align="right" valign="top"><a id="af0f597d1330aed3570798fc4a00b4731"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>getForward</b> (eControls key, int *x, int *y)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#af0f597d1330aed3570798fc4a00b4731">getForward</a> (eControls key, int *x, int *y)</td></tr>
+<tr class="memdesc:af0f597d1330aed3570798fc4a00b4731"><td class="mdescLeft">&#160;</td><td class="mdescRight">update x and y to the next position <br /></td></tr>
 <tr class="separator:af0f597d1330aed3570798fc4a00b4731"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bc14c5da582540a6d55785c89004944"><td class="memItemLeft" align="right" valign="top"><a id="a8bc14c5da582540a6d55785c89004944"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>getOpenDirection</b> (<a class="el" href="class_game_object.html">GameObject</a> *actor)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#a8bc14c5da582540a6d55785c89004944">getOpenDirection</a> (<a class="el" href="class_game_object.html">GameObject</a> *actor)</td></tr>
+<tr class="memdesc:a8bc14c5da582540a6d55785c89004944"><td class="mdescLeft">&#160;</td><td class="mdescRight">choose a free direction to move in <br /></td></tr>
 <tr class="separator:a8bc14c5da582540a6d55785c89004944"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4b34ec6e3677a6d48dbf57099bd3e81"><td class="memItemLeft" align="right" valign="top"><a id="aa4b34ec6e3677a6d48dbf57099bd3e81"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>getRandomOpenDirection</b> (<a class="el" href="class_game_object.html">GameObject</a> *actor)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_object_manager.html#aa4b34ec6e3677a6d48dbf57099bd3e81">getRandomOpenDirection</a> (<a class="el" href="class_game_object.html">GameObject</a> *actor)</td></tr>
+<tr class="memdesc:aa4b34ec6e3677a6d48dbf57099bd3e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">randomly choose a free direction to move in <br /></td></tr>
 <tr class="separator:aa4b34ec6e3677a6d48dbf57099bd3e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8f250f441f6c8aff58638451f3ed2e5"><td class="memItemLeft" align="right" valign="top"><a id="af8f250f441f6c8aff58638451f3ed2e5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>placeBomb</b> (void)</td></tr>
@@ -223,7 +237,67 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>remainingTime</b></td>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>displayTime</b></td></tr>
 <tr class="separator:a1f978aaec34209473e4f75d8d948bbe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p class="">base class of all game objects </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a29e5aee5b200341abac420bbdd347584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29e5aee5b200341abac420bbdd347584">&#9670;&nbsp;</a></span>move()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ObjectManager::move </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_game_object.html">GameObject</a> *&#160;</td>
+          <td class="paramname"><em>actor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vectorDifference</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="">takes in a <a class="el" href="class_game_object.html" title="base game object">GameObject</a> and an int /n use function getVectorDifference and move accordingly </p>
+
+</div>
+</div>
+<a id="ada63d59c236abd9370b02583fe241928"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada63d59c236abd9370b02583fe241928">&#9670;&nbsp;</a></span>requestMove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ObjectManager::requestMove </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_game_object.html">GameObject</a> *&#160;</td>
+          <td class="paramname"><em>actor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">eControls&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="">takes in a <a class="el" href="class_game_object.html" title="base game object">GameObject</a> and the keypressed check if the <a class="el" href="class_game_object.html" title="base game object">GameObject</a> has finish moving yet, before taking in the input of a new direction check if the requested direction is possible call move to move to the direction requested </p>
+
+</div>
+</div>
 <a id="a2a46b0495f6ff56317dcfe6cf02243ff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2a46b0495f6ff56317dcfe6cf02243ff">&#9670;&nbsp;</a></span>update()</h2>
 
@@ -239,6 +313,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>displayTime</b></td></
         </tr>
       </table>
 </div><div class="memdoc">
+<p class="">update the movements/actions of everything on the map, update the movements/action of the player depending on the key passed into the function </p>
 <p class="">UPDATE SAVE VALUES </p>
 
 </div>

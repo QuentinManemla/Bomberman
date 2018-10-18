@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['textureid',['TextureID',['../struct_character.html#a51d894cc31d79e95fe1a47fb65c6e889',1,'Character']]]
+  ['size',['Size',['../struct_character.html#aaaa598050e0ef590fe6903fd2bab40b8',1,'Character']]]
 ];
