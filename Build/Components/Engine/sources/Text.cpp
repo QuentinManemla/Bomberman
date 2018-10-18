@@ -154,6 +154,7 @@ void		Text::init( const char *FontPath, int FontSize, int Width, int Height ) {
 
 Text::~Text( void ) { return ;}
 
+//! tacks in text along with the position, size and colour and renders it
 void Text::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
 {
 	// Activate corresponding render state	

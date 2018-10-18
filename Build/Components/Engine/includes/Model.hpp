@@ -21,7 +21,9 @@ public:
 	Model( void );
 	Model( std::string const &path );
 
+	//! loads aiScene from path passed in 
 	void init( std::string const &path );
+	//! for each Mesh in meshes it draws the Shader
 	void Draw(Shader shader);
 
 	std::vector<Texture> textures_loaded;

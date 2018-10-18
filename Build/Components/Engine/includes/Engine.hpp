@@ -46,6 +46,7 @@
 # include "../../../States/includes/enumState.hpp"
 # include "../../GameEngine/enums/enumGameObjectType.hpp"
 
+//! The game engine that everything runs from
 class	Engine {
 	public:
 		Engine();
@@ -65,12 +66,19 @@ class	Engine {
 		GLuint			createShader(const char* vertexPath, const char* fragmentPath);
 		void 			checkCompileErrors(unsigned int shader, std::string type);
 
+		//! takes in a string for the path of the sound file, and a boolean to check whether to put the music in a loop
+		//! check whether the _Mute variable is true, if not true then run play2DSound function to play the music
 		void			playSound( std::string soundPath, bool loop);
+		//! Stops the playing of all music
 		void			stopSound( void );
+		//! Changes the _Mute variable to the opposite of what it is
 		void			muteSound( void );
 
+		//! Write's the data of the current game into the save.save file in the .save folder
 		void			saveGame( void );
+		//! read and process the data of the file saved previously via the saveGame(void) function
 		void			loadGame( void );
+		//! takes in an int value and depending on the value, change the controls in game.( not used, see controlChange(int i))
 		void			keyBindings( int bindID );
 		/********************************************************************************************/
 		/*	Text Rendering Functions 																*/
@@ -78,9 +86,11 @@ class	Engine {
 		/*	current actively pressed key that is set using the key_callback function				*/
 		/********************************************************************************************/
 
+		//! Takes in the text and X & Y position to print out on the Window
 		void			print2DText(std::string text, float pos_x, float pos_y, float red, float green, float blue, float scale);
 		void			printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y, int menuIndex, std::string backgroundPath);		
 		void			printMenu(std::vector<std::string> menuItems, std::string menuHeading, int menuIndex, std::string backgroundPath);
+		//! print the intro of the game
 		void			printIntro();
 		int				menuHandler( eControls key, int & menuIndex, int lastIndex );
 
@@ -91,16 +101,20 @@ class	Engine {
 		/********************************************************************************************/
 
 		void			controlChange(int i);
+		//! check if the appropriate keys were pressed and return an enum value to the _mainLoop function
 		eControls		getInput( void );
 		static void		processKeys(unsigned char key, int x, int y);
 
 		/********************************************************************************************/
 		/*	Display Monitor Functions 																*/
-		/* */
+		/*																							*/
 		/********************************************************************************************/
 
+		//! sets the game to fullscreen
 		void			setFullScreen( void );
+		//! set the game to windowed
 		void			setWindowed( void );
+		//! sets the width and higth of the window to the values passed in
 		void			setResolution( int width, int height);
 
 
@@ -111,21 +125,23 @@ class	Engine {
 		eState					state;
 		int						_WindowHeight;
 		int						_WindowWidth;
-		static int				held; // test
+		static int				held; //!< test
 		Camera 					_Camera;
 
 		/** Sound  **/
 		Sound					_SoundEngine;
+		//! changes the volume to what is passed in as a percentage
 		void					setVolume(float level);
 
-		/** Animation Variables **/
-		int						bombAnim;
-		float					bombMove;
+		/*Animation Variables */
+		int						bombAnim;//!< Animation Variable
+		float					bombMove;//!< Animation Variable
 		
-		int						explodeAnim;
-		float					explodeMove;
+		int						explodeAnim; //!< Animation Variable
+		float					explodeMove; //!< Animation Variable
 		
 		/** Save **/
+		//! struct constaing all the info for a save game
 		structSave				_Save;
 
 	private:
@@ -162,6 +178,7 @@ class	Engine {
 
 
 		/** Exception **/
+		//! error handling in the Engine class
 		class EngineErr : public std::exception {
 		public:
 			EngineErr( std::string line );

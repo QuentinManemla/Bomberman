@@ -1,6 +1,7 @@
 #ifndef SCONTROLS_HPP
 # define SCONTROLS_HPP
 
+//! scruct containing the value for all key presses
 struct sControls {
 	int		ESCAPE_KEY;
 	int		LEFT_KEY;

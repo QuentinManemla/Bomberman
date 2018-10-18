@@ -32,6 +32,7 @@ struct Texture {
 	std::string path;
 };
 
+//! coppied from a tutorial
 class Mesh {
 public:
 	/*  Mesh Data  */
@@ -41,17 +42,17 @@ public:
 	unsigned int VAO;
 
 	/*  Functions  */
-	// constructor
+	/// constructor
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
 
-	// render the mesh
+	/// render the mesh
 	void Draw(Shader shader);
 
 private:
 	unsigned int VBO, EBO;
 
 	/*  Functions    */
-	// initializes all the buffer objects/arrays
+	/// initializes all the buffer objects/arrays
 	void setupMesh();
 };
 #endif

@@ -7,7 +7,7 @@
 
 # include <vector>
 
-// Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
+/// Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
 enum Camera_Movement {
 	CAMERA_FORWARD,
 	CAMERA_BACKWARD,
@@ -24,6 +24,7 @@ const float SPEED       =  2.5f;
 const float SENSITIVITY =  0.1f;
 const float ZOOM        =  45.0f;
 
+///  this class contain all camera related functions
 class Camera {
 	public:
 		// Camera Attributes
@@ -40,7 +41,7 @@ class Camera {
 		float MouseSensitivity;
 		float Zoom;
 
-		// Constructor with vectors
+		/// Constructor with vectors
 		Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM) {
 			Position = position;
 			WorldUp = up;
@@ -49,7 +50,7 @@ class Camera {
 
 			updateCameraVectors();
 		}
-		// Constructor with scalar values
+		/// Constructor with scalar values
 		Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch)
 		{
 			Position = glm::vec3(posX, posY, posZ);
@@ -59,6 +60,7 @@ class Camera {
 			updateCameraVectors();
 		}
 
+		/// Initilises the class variables with default values
 		void init(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) {
 			
 			Front = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -73,12 +75,12 @@ class Camera {
 
 			updateCameraVectors();
 		}
-		// Returns the view matrix calculated using Euler Angles and the LookAt Matrix
+		/// Returns the view matrix calculated using Euler Angles and the LookAt Matrix
 		glm::mat4 GetViewMatrix() {
 			return glm::lookAt(Position, Position + Front, Up);
 		}
 
-		// Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
+		/// Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
 		void ProcessKeyboard(Camera_Movement direction, float deltaTime) {
 			float velocity = MovementSpeed * deltaTime;
 			if (direction == CAMERA_FORWARD)
@@ -100,7 +102,7 @@ class Camera {
 			yoffset *= MouseSensitivity;
 			Pitch += yoffset;
 
-			// Update Front, Right and Up Vectors using the updated Euler angles
+			/// Update Front, Right and Up Vectors using the updated Euler angles
 			updateCameraVectors();
 		}
 		void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true) {
@@ -120,11 +122,11 @@ class Camera {
 					Pitch = -89.0f;
 			}
 
-			// Update Front, Right and Up Vectors using the updated Euler angles
+			/// Update Front, Right and Up Vectors using the updated Euler angles
 			updateCameraVectors();
 		}
 	private:
-		// Calculates the front vector from the Camera's (updated) Euler Angles
+		/// Calculates the front vector from the Camera's (updated) Euler Angles
 		void updateCameraVectors()
 		{
 			std::cout << "YAW: " << Yaw << std::endl;
