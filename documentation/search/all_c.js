@@ -7,5 +7,6 @@ var searchData=
   ['model',['Model',['../class_model.html',1,'']]],
   ['modelpath',['modelPath',['../class_game_object.html#a30e581717ad07383993397ba717c7fdd',1,'GameObject']]],
   ['mortal',['mortal',['../class_game_object.html#a2d24dc73e89a1895e33a84e73a5d3b55',1,'GameObject']]],
+  ['move',['move',['../class_object_manager.html#a29e5aee5b200341abac420bbdd347584',1,'ObjectManager']]],
   ['mutesound',['muteSound',['../class_engine.html#a4de0c2a6254c427df9aaac217d6661fa',1,'Engine']]]
 ];
