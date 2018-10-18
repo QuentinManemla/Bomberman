@@ -11,7 +11,6 @@
 
 # include <GLFW/glfw3.h>
 # include <glm/glm.hpp>
-# include <stb_image.h>
 # include <vector>
 # include <iostream>
 # include <string>
@@ -106,8 +105,8 @@ class	Engine {
 
 
 		/* Timer functions */
-		void			FPSManager();
-		float			_deltaTime;
+		void					FPSManager();
+		float					_deltaTime;
 
 		eState					state;
 		int						_WindowHeight;

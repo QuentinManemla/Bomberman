@@ -9,8 +9,8 @@ public:
 	Bomb( eGameObjectType type, Vector3d *position, float fuseTime );
 	~Bomb( void );
 
-	float							fuseTime;
-	std::vector<pair<int, int>>		blast;
+	float								fuseTime;
+	std::vector<std::pair<int, int>>	blast;
 protected:
 
 private:

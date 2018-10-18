@@ -8,8 +8,6 @@
 # include <chrono>
 # include <pthread.h>
 
-#pragma comment(lib, "irrKlang.lib")
-
 
 class Sound {
 	public:

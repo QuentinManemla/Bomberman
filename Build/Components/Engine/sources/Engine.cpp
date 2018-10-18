@@ -16,7 +16,7 @@ glm::vec3 cubePositions[] = {
 
 int		Engine::held = 1;
 
-Engine::Engine(): _WindowWidth(800),_WindowHeight(600), _Fullscreen(true), _deltaTime(0.0f), bombAnim(0), explodeAnim(0), bombMove(0.005f), explodeMove(0.2f) {
+Engine::Engine(): _deltaTime(0.0f), _WindowHeight(600), _WindowWidth(800), bombAnim(0), bombMove(0.005f), explodeAnim(0), explodeMove(0.2f), _Fullscreen(true){
 	std::cout << "Engine constructed" << std::endl;
 	/* GLFW Initialization */
 	if (!glfwInit()) {
@@ -215,9 +215,6 @@ void	Engine::drawBigBackground( void ) {
 	glm::mat4 projection = glm::mat4(1.0f);
 	projection = glm::perspective(glm::radians(45.0f), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
 
-	float radius = 10.0f;
-	float camX = sin(glfwGetTime()) * radius;
-	float camZ = cos(glfwGetTime()) * radius;
 	view = this->_Camera.GetViewMatrix();
 	unsigned int modelLoc = glGetUniformLocation(this->_BackgroundShader.ID, "model");
 	unsigned int viewLoc  = glGetUniformLocation(this->_BackgroundShader.ID, "view");
@@ -251,9 +248,6 @@ void	Engine::drawBackground( void ) {
 	model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
 	projection = glm::perspective(glm::radians(45.0f), (float)this->_WindowWidth / (float)this->_WindowHeight, 0.1f, 100.0f);
 
-	float radius = 10.0f;
-	float camX = sin(glfwGetTime()) * radius;
-	float camZ = cos(glfwGetTime()) * radius;
 	view = this->_Camera.GetViewMatrix();
 	unsigned int modelLoc = glGetUniformLocation(this->_Shader.ID, "model");
 	unsigned int viewLoc  = glGetUniformLocation(this->_Shader.ID, "view");
@@ -270,7 +264,6 @@ void	Engine::drawBackground( void ) {
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, cubePositions[i]);
 		model = glm::scale(model, glm::vec3(1.06f, 1.06f, 0.0f));
-		float angle = 20.0f * i;
 		this->_Shader.setMat4("model", model);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	}
@@ -498,8 +491,12 @@ void		Engine::print2DText(std::string text, float pos_x, float pos_y, float red,
 	this->_TextEngine.RenderText(text, pos_x, pos_y, scale , glm::vec3(red, green, blue));
 }
 
-void		Engine::printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y,
-int menuIndex, std::string backgroundPath) {
+void		Engine::printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y, int menuIndex, std::string backgroundPath) {
+	pos_x = 0;
+	pos_y = 0;
+	menuIndex = 0;
+	backgroundPath = " ";
+
 	float	x = 20;
 	float 	y = 20;
 	for (int i = menuItems.size() - 1;i >= 0; i--) {
@@ -509,19 +506,15 @@ int menuIndex, std::string backgroundPath) {
 }
 
 void		Engine::printIntro() {
-	float		y = (this->_WindowHeight / 2) * 32;
-
 	std::string introtext = "Welcome to Bomberman";
-
 	/* Render Menu Header Text */
-	float headingLength = introtext.length() * 1.5;
 	this->print2DText(introtext, 20,20, 0.5, 0.8f, 0.2f, 1.0f);
 }
 
 void		Engine::printMenu(std::vector<std::string> menuItems, std::string menuHeading, int menuIndex, std::string backgroundPath) {
-	float		x = 20;
 	float		y = (this->_WindowHeight / 2) - (menuItems.size() * 32);
-
+	backgroundPath = "";
+	
 	/* Render Menu Header Text */
 	float headingLength = menuHeading.length() * 1.5;
 	this->print2DText(menuHeading, (this->_WindowWidth / 2) - ((headingLength / 2) * 25), y + (50 * menuItems.size() + 20), 0.5, 0.8f, 0.2f, 1.5f);
