@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['held',['held',['../class_engine.html#ac96d416ac61003bf3165bbc7958e0f55',1,'Engine']]]
+  ['duration',['duration',['../class_level_manager.html#aade2f5f46eaa6ad79ac18114708c5e2b',1,'LevelManager']]]
 ];
