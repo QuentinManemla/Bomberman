@@ -73,6 +73,11 @@ $(function() {
 <div class="title">Engine Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The game engine that everything runs from.  
+ <a href="class_engine.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_engine_8hpp_source.html">Engine.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -108,26 +113,31 @@ GLuint&#160;</td><td class="memItemRight" valign="bottom"><b>createShader</b> (c
 <tr class="memitem:a3aebdbda91717b2ae09e6f07ca40a3f5"><td class="memItemLeft" align="right" valign="top"><a id="a3aebdbda91717b2ae09e6f07ca40a3f5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>checkCompileErrors</b> (unsigned int shader, std::string type)</td></tr>
 <tr class="separator:a3aebdbda91717b2ae09e6f07ca40a3f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a715ddade5443fb5d027eba1a7e92a16d"><td class="memItemLeft" align="right" valign="top"><a id="a715ddade5443fb5d027eba1a7e92a16d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>playSound</b> (std::string soundPath, bool loop)</td></tr>
+<tr class="memitem:a715ddade5443fb5d027eba1a7e92a16d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a715ddade5443fb5d027eba1a7e92a16d">playSound</a> (std::string soundPath, bool loop)</td></tr>
 <tr class="separator:a715ddade5443fb5d027eba1a7e92a16d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab648f0ac894f1ea02a2da57ebaf669d"><td class="memItemLeft" align="right" valign="top"><a id="aab648f0ac894f1ea02a2da57ebaf669d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>stopSound</b> (void)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#aab648f0ac894f1ea02a2da57ebaf669d">stopSound</a> (void)</td></tr>
+<tr class="memdesc:aab648f0ac894f1ea02a2da57ebaf669d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the playing of all music. <br /></td></tr>
 <tr class="separator:aab648f0ac894f1ea02a2da57ebaf669d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4de0c2a6254c427df9aaac217d6661fa"><td class="memItemLeft" align="right" valign="top"><a id="a4de0c2a6254c427df9aaac217d6661fa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>muteSound</b> (void)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a4de0c2a6254c427df9aaac217d6661fa">muteSound</a> (void)</td></tr>
+<tr class="memdesc:a4de0c2a6254c427df9aaac217d6661fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the _Mute variable to the opposite of what it is. <br /></td></tr>
 <tr class="separator:a4de0c2a6254c427df9aaac217d6661fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc5ea761cff8fd73fd61cec5d456c81f"><td class="memItemLeft" align="right" valign="top"><a id="adc5ea761cff8fd73fd61cec5d456c81f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>saveGame</b> (void)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#adc5ea761cff8fd73fd61cec5d456c81f">saveGame</a> (void)</td></tr>
+<tr class="memdesc:adc5ea761cff8fd73fd61cec5d456c81f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write's the data of the current game into the save.save file in the .save folder. <br /></td></tr>
 <tr class="separator:adc5ea761cff8fd73fd61cec5d456c81f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ec09a0317cc1e9e81c1a31096b075f3"><td class="memItemLeft" align="right" valign="top"><a id="a4ec09a0317cc1e9e81c1a31096b075f3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loadGame</b> (void)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a4ec09a0317cc1e9e81c1a31096b075f3">loadGame</a> (void)</td></tr>
+<tr class="memdesc:a4ec09a0317cc1e9e81c1a31096b075f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">read and process the data of the file saved previously via the <a class="el" href="class_engine.html#adc5ea761cff8fd73fd61cec5d456c81f" title="Write&#39;s the data of the current game into the save.save file in the .save folder.">saveGame(void)</a> function <br /></td></tr>
 <tr class="separator:a4ec09a0317cc1e9e81c1a31096b075f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae63bff397a304292debdcd1c5c6f8093"><td class="memItemLeft" align="right" valign="top"><a id="ae63bff397a304292debdcd1c5c6f8093"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>keyBindings</b> (int bindID)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#ae63bff397a304292debdcd1c5c6f8093">keyBindings</a> (int bindID)</td></tr>
+<tr class="memdesc:ae63bff397a304292debdcd1c5c6f8093"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes in an int value and depending on the value, change the controls in game.( not used, see controlChange(int i)) <br /></td></tr>
 <tr class="separator:ae63bff397a304292debdcd1c5c6f8093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa185b05fc486b66ad2b580cb01bdb79e"><td class="memItemLeft" align="right" valign="top"><a id="aa185b05fc486b66ad2b580cb01bdb79e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>print2DText</b> (std::string text, float pos_x, float pos_y, float red, float green, float blue, float scale)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#aa185b05fc486b66ad2b580cb01bdb79e">print2DText</a> (std::string text, float pos_x, float pos_y, float red, float green, float blue, float scale)</td></tr>
+<tr class="memdesc:aa185b05fc486b66ad2b580cb01bdb79e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes in the text and X &amp; Y position to print out on the Window. <br /></td></tr>
 <tr class="separator:aa185b05fc486b66ad2b580cb01bdb79e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ffdf5e80f28150695e1d2572540d7e8"><td class="memItemLeft" align="right" valign="top"><a id="a8ffdf5e80f28150695e1d2572540d7e8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>printMenu</b> (std::vector&lt; std::string &gt; menuItems, float pos_x, float pos_y, int menuIndex, std::string backgroundPath)</td></tr>
@@ -136,7 +146,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>printMenu</b> (std::v
 void&#160;</td><td class="memItemRight" valign="bottom"><b>printMenu</b> (std::vector&lt; std::string &gt; menuItems, std::string menuHeading, int menuIndex, std::string backgroundPath)</td></tr>
 <tr class="separator:a9b0d4d670fccbf236cc9a45b9aacb4ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a750a1178cf816d1b32464628c88608ef"><td class="memItemLeft" align="right" valign="top"><a id="a750a1178cf816d1b32464628c88608ef"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>printIntro</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a750a1178cf816d1b32464628c88608ef">printIntro</a> ()</td></tr>
+<tr class="memdesc:a750a1178cf816d1b32464628c88608ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">print the intro of the game <br /></td></tr>
 <tr class="separator:a750a1178cf816d1b32464628c88608ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b2ddae8be4f09ebafcffdb5c8e6256b"><td class="memItemLeft" align="right" valign="top"><a id="a4b2ddae8be4f09ebafcffdb5c8e6256b"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>menuHandler</b> (eControls key, int &amp;menuIndex, int lastIndex)</td></tr>
@@ -145,22 +156,27 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>menuHandler</b> (eCont
 void&#160;</td><td class="memItemRight" valign="bottom"><b>controlChange</b> (int i)</td></tr>
 <tr class="separator:ab87c9028b3c240ef3170180d26803734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2694f725965be0aa3b7b267d38db0ba0"><td class="memItemLeft" align="right" valign="top"><a id="a2694f725965be0aa3b7b267d38db0ba0"></a>
-eControls&#160;</td><td class="memItemRight" valign="bottom"><b>getInput</b> (void)</td></tr>
+eControls&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a2694f725965be0aa3b7b267d38db0ba0">getInput</a> (void)</td></tr>
+<tr class="memdesc:a2694f725965be0aa3b7b267d38db0ba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">check if the appropriate keys were pressed and return an enum value to the _mainLoop function <br /></td></tr>
 <tr class="separator:a2694f725965be0aa3b7b267d38db0ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b179359cbe50af2454df67acf959c04"><td class="memItemLeft" align="right" valign="top"><a id="a6b179359cbe50af2454df67acf959c04"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFullScreen</b> (void)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a6b179359cbe50af2454df67acf959c04">setFullScreen</a> (void)</td></tr>
+<tr class="memdesc:a6b179359cbe50af2454df67acf959c04"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the game to fullscreen <br /></td></tr>
 <tr class="separator:a6b179359cbe50af2454df67acf959c04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaeab5596661eea2f4185a01e97439a07"><td class="memItemLeft" align="right" valign="top"><a id="aaeab5596661eea2f4185a01e97439a07"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setWindowed</b> (void)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#aaeab5596661eea2f4185a01e97439a07">setWindowed</a> (void)</td></tr>
+<tr class="memdesc:aaeab5596661eea2f4185a01e97439a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the game to windowed <br /></td></tr>
 <tr class="separator:aaeab5596661eea2f4185a01e97439a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af897dde4ecd247ab6e078cd3bf76a3c9"><td class="memItemLeft" align="right" valign="top"><a id="af897dde4ecd247ab6e078cd3bf76a3c9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setResolution</b> (int width, int height)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#af897dde4ecd247ab6e078cd3bf76a3c9">setResolution</a> (int width, int height)</td></tr>
+<tr class="memdesc:af897dde4ecd247ab6e078cd3bf76a3c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the width and higth of the window to the values passed in <br /></td></tr>
 <tr class="separator:af897dde4ecd247ab6e078cd3bf76a3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada10f7643a4829d233608c53a6b06e0c"><td class="memItemLeft" align="right" valign="top"><a id="ada10f7643a4829d233608c53a6b06e0c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>FPSManager</b> ()</td></tr>
 <tr class="separator:ada10f7643a4829d233608c53a6b06e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94e08a46dfab837257d1214bcce6469d"><td class="memItemLeft" align="right" valign="top"><a id="a94e08a46dfab837257d1214bcce6469d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVolume</b> (float level)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a94e08a46dfab837257d1214bcce6469d">setVolume</a> (float level)</td></tr>
+<tr class="memdesc:a94e08a46dfab837257d1214bcce6469d"><td class="mdescLeft">&#160;</td><td class="mdescRight">changes the volume to what is passed in as a percentage <br /></td></tr>
 <tr class="separator:a94e08a46dfab837257d1214bcce6469d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
@@ -188,27 +204,36 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_WindowWidth</b></td><
 <tr class="separator:a308f44c6c04b165371708d796893b8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4bf57494e02c0c4bc75e1458d860fa1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sound.html">Sound</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#ac4bf57494e02c0c4bc75e1458d860fa1">_SoundEngine</a></td></tr>
 <tr class="separator:ac4bf57494e02c0c4bc75e1458d860fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f60ff7010411d12a85b989388f2cf6c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a2f60ff7010411d12a85b989388f2cf6c">bombAnim</a></td></tr>
+<tr class="memitem:a2f60ff7010411d12a85b989388f2cf6c"><td class="memItemLeft" align="right" valign="top"><a id="a2f60ff7010411d12a85b989388f2cf6c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a2f60ff7010411d12a85b989388f2cf6c">bombAnim</a></td></tr>
+<tr class="memdesc:a2f60ff7010411d12a85b989388f2cf6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Animation Variable. <br /></td></tr>
 <tr class="separator:a2f60ff7010411d12a85b989388f2cf6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b938deda63dd85670f4155416359b03"><td class="memItemLeft" align="right" valign="top"><a id="a1b938deda63dd85670f4155416359b03"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>bombMove</b></td></tr>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a1b938deda63dd85670f4155416359b03">bombMove</a></td></tr>
+<tr class="memdesc:a1b938deda63dd85670f4155416359b03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Animation Variable. <br /></td></tr>
 <tr class="separator:a1b938deda63dd85670f4155416359b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88a648bbec0814d1e760ef4db25b72e8"><td class="memItemLeft" align="right" valign="top"><a id="a88a648bbec0814d1e760ef4db25b72e8"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>explodeAnim</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a88a648bbec0814d1e760ef4db25b72e8">explodeAnim</a></td></tr>
+<tr class="memdesc:a88a648bbec0814d1e760ef4db25b72e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Animation Variable. <br /></td></tr>
 <tr class="separator:a88a648bbec0814d1e760ef4db25b72e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35716e7339dc8979b2086a434062527d"><td class="memItemLeft" align="right" valign="top"><a id="a35716e7339dc8979b2086a434062527d"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>explodeMove</b></td></tr>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#a35716e7339dc8979b2086a434062527d">explodeMove</a></td></tr>
+<tr class="memdesc:a35716e7339dc8979b2086a434062527d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Animation Variable. <br /></td></tr>
 <tr class="separator:a35716e7339dc8979b2086a434062527d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad989099c67c2a5e23dd0aa16be8aee62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structstruct_save.html">structSave</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#ad989099c67c2a5e23dd0aa16be8aee62">_Save</a></td></tr>
+<tr class="memdesc:ad989099c67c2a5e23dd0aa16be8aee62"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct constaing all the info for a save game  <a href="#ad989099c67c2a5e23dd0aa16be8aee62">More...</a><br /></td></tr>
 <tr class="separator:ad989099c67c2a5e23dd0aa16be8aee62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:ac96d416ac61003bf3165bbc7958e0f55"><td class="memItemLeft" align="right" valign="top"><a id="ac96d416ac61003bf3165bbc7958e0f55"></a>
-static int&#160;</td><td class="memItemRight" valign="bottom"><b>held</b> = 1</td></tr>
+static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_engine.html#ac96d416ac61003bf3165bbc7958e0f55">held</a> = 1</td></tr>
+<tr class="memdesc:ac96d416ac61003bf3165bbc7958e0f55"><td class="mdescLeft">&#160;</td><td class="mdescRight">test <br /></td></tr>
 <tr class="separator:ac96d416ac61003bf3165bbc7958e0f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p class="">The game engine that everything runs from. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8c98683b0a3aa28d8ab72a8bcd0d52f2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c98683b0a3aa28d8ab72a8bcd0d52f2">&#9670;&nbsp;</a></span>Engine()</h2>
 
@@ -227,6 +252,36 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><b>held</b> = 1</t
 
 </div>
 </div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a715ddade5443fb5d027eba1a7e92a16d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a715ddade5443fb5d027eba1a7e92a16d">&#9670;&nbsp;</a></span>playSound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Engine::playSound </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>soundPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>loop</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="">takes in a string for the path of the sound file, and a boolean to check whether to put the music in a loop check whether the _Mute variable is true, if not true then run play2DSound function to play the music </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ad989099c67c2a5e23dd0aa16be8aee62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad989099c67c2a5e23dd0aa16be8aee62">&#9670;&nbsp;</a></span>_Save</h2>
@@ -239,6 +294,8 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><b>held</b> = 1</t
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>struct constaing all the info for a save game </p>
 <p class="">Save </p>
 
 </div>
@@ -255,21 +312,6 @@ static int&#160;</td><td class="memItemRight" valign="bottom"><b>held</b> = 1</t
       </table>
 </div><div class="memdoc">
 <p class=""><a class="el" href="class_sound.html">Sound</a> </p>
-
-</div>
-</div>
-<a id="a2f60ff7010411d12a85b989388f2cf6c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f60ff7010411d12a85b989388f2cf6c">&#9670;&nbsp;</a></span>bombAnim</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Engine::bombAnim</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p class="">Animation Variables </p>
 
 </div>
 </div>

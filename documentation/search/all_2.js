@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['camera',['Camera',['../class_camera.html',1,'Camera'],['../class_camera.html#adad6423186f3d7e4c461cff7274f2c87',1,'Camera::Camera(glm::vec3 position=glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up=glm::vec3(0.0f, 1.0f, 0.0f), float yaw=YAW, float pitch=PITCH)'],['../class_camera.html#a3537fd723fdfb5fed73a084346270cf6',1,'Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch)']]],
-  ['character',['Character',['../struct_character.html',1,'']]],
-  ['creditsstate',['CreditsState',['../class_credits_state.html',1,'']]]
+  ['bearing',['Bearing',['../struct_character.html#afef98bf9c7f5313d96476f6f3f85f872',1,'Character']]],
+  ['bomb',['Bomb',['../class_bomb.html',1,'']]],
+  ['bombanim',['bombAnim',['../class_engine.html#a2f60ff7010411d12a85b989388f2cf6c',1,'Engine']]],
+  ['bombmove',['bombMove',['../class_engine.html#a1b938deda63dd85670f4155416359b03',1,'Engine']]],
+  ['bomberman',['Bomberman',['../index.html',1,'']]]
 ];

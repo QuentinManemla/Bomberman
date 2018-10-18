@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['bomb',['Bomb',['../class_bomb.html',1,'']]],
-  ['bombanim',['bombAnim',['../class_engine.html#a2f60ff7010411d12a85b989388f2cf6c',1,'Engine']]],
-  ['bomberman',['Bomberman',['../index.html',1,'']]]
+  ['advance',['Advance',['../struct_character.html#ab35bae8be6740729fc5839c237a659f6',1,'Character']]]
 ];
