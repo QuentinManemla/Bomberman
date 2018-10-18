@@ -11,3 +11,5 @@ a.out
 _deps
 .DS_STORE
 tmp/
+.DS_Store
+._.DS_Store
