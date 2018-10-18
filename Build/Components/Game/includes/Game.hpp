@@ -27,10 +27,24 @@
 # include "../../../States/includes/FailState.hpp"
 # include "../../../States/includes/WinState.hpp"
 
+//! The first object that runs which starts everything
 class Game {
 public:
+	/*!
+	 * inits the Engine
+	 * and adds the quit menue and intro state to the state list.
+	 */
 	Game( void );
 	~Game( void );
+	//! starts the game loop which does
+	/*! 
+	 using IState
+	 \arg update updates the states depending on key press
+	 \arg render draws everything to the screen
+	 \n \n
+	 \arg change changes the state if need be
+	 \arg FPSManager manages the fps using Engine
+	 */
 	void	run();
 
 protected:

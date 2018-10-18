@@ -46,7 +46,7 @@
 # include "../../../States/includes/enumState.hpp"
 # include "../../GameEngine/enums/enumGameObjectType.hpp"
 
-//! The game engine that everything runs from
+//! The graphics engine that everything runs from
 class	Engine {
 	public:
 		Engine();

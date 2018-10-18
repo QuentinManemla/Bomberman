@@ -6,23 +6,13 @@
 
 # include "../../enums/enumGameObjectState.hpp"
 # include "../../enums/enumGameObjectType.hpp"
-//# include "Enemy.hpp"
-//# include "Door.hpp"
-//# include "Bomb.hpp"
-//# include "Player.hpp"
-//# include "SolidWall.hpp"
-//# include "Wall.hpp"
 # include "../../Vector3d/Vector3d.hpp"
 # include "../../../Engine/includes/Engine.hpp"
 
-//# include "Door.hpp"
-//# include "Enemy.hpp"
-//# include "Player.hpp"
-//# include "Wall.hpp"
-
-
+//! base game object
 class GameObject {
 public:
+	//! constructer
 	GameObject( eGameObjectType type, Vector3d *position );
 	GameObject( void );
 	~GameObject( void );
@@ -30,18 +20,18 @@ public:
 	//addComponent
 	//getComponent
 
-	std::string				modelPath;
+	std::string				modelPath; //!< path the the model
 	std::string				spritePath;
-	Vector3d				*position;
+	Vector3d				*position; //!< position in 3D space
 	Vector3d				*destination;
 	int						step;
-	float					velocity;
+	float					velocity; //!< speed at which it can move
 	eGameObjectState		state;
-	eGameObjectType			eType;
+	eGameObjectType			eType; //!< the type of object it is
 	std::string				strType;
-	eControls				currentDirection;
-	int						hitPoints;
-	bool					mortal;
+	eControls				currentDirection; //!< current direction
+	int						hitPoints; //!< remaining health
+	bool					mortal; //!< bool of deathness
 	Model					_model;
 	int						stuck;
 	//Powerup					*powerup; // think about how bombs are ordered when powerup is active

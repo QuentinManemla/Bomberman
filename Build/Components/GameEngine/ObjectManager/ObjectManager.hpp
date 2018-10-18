@@ -12,28 +12,50 @@
 # include "../LevelManager/LevelManager.hpp"
 # include "../../Engine/includes/Engine.hpp"
 
+//! base class of all game objects
 class ObjectManager {
 public:
 	ObjectManager( Engine & engine ); // may need reference to playstate
+	//! initialize the variables when loading a game
 	ObjectManager( Engine & engine, int level, int score, int retime ); // may need reference to playstate
 	ObjectManager( void ); // may need reference to playstate
 	~ObjectManager( void );
 
 
 	//needs init() function
+	//! update the movements/actions of everything on the map, update the movements/action 
+	//! of the player depending on the key passed into the function
 	void		update(eControls key/*, int remainingTime*/);
+	//! draw the model of the objects occupying the map depending on their location
 	void		render(void);
+	/*! 
+	 * takes in a GameObject and the keypressed
+	 * check if the GameObject has finish moving yet, before taking in the input of a new direction
+	 * check if the requested direction is possible
+	 * call move to move to the direction requested
+	 */
 	void		requestMove(GameObject *actor, eControls key); // returns direction // or void and calls move directly
+	//! checks for if the coordinate is available
 	int			isOpen(int x, int y);
+	//! returns a bool of death
 	int			isMortal(int x, int y); // test
+	//! takes in a GameObject and an int
+	//! /n use function getVectorDifference and move accordingly
 	void		move( GameObject *actor, int vectorDifference );
+	//! check if the position the GameObject is trying to access is available and move on to the position if it is
 	void		requestEnemyMove( GameObject *actor );
+	//! check for the position of the GameObject and the destination of it, and check what's the difference
 	int			getVectorDifference(GameObject *actor);
 	float		getZStep( GameObject *actor );
+	//! place enemies onto the game map
 	void		placeEnemies( void );
+	//! check if the GameObject is at the destination it tried to move to
 	bool		isAtDestination( GameObject *actor);
+	//! update x and y to the next position
 	void		getForward( eControls key , int *x, int *y);
+	//! choose a free direction to move in
 	void		getOpenDirection( GameObject *actor );
+	//! randomly choose a free direction to move in
 	void		getRandomOpenDirection( GameObject *actor );
 
 	void		placeBomb( void );

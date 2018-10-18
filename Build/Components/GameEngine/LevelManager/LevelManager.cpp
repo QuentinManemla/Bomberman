@@ -125,7 +125,7 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 			y++;
 		}
 	}
-	std::cout << "solid = " << solidCountDebug << "\nopen = " << openCountDebug << "\nbreakable = " << breakableCountDebug << std::endl;
+	std::cout << "solid = " << solidCountDebug << "\nopen = " << openCountDebug << "\nbreakable = " << breakableCountDebug << std::endl; //debug
 	encloseSafeZone();
 	setDoor();
 	setEnemies();
