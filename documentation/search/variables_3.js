@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['explodeanim',['explodeAnim',['../class_engine.html#a88a648bbec0814d1e760ef4db25b72e8',1,'Engine']]],
-  ['explodemove',['explodeMove',['../class_engine.html#a35716e7339dc8979b2086a434062527d',1,'Engine']]]
+  ['currentdirection',['currentDirection',['../class_game_object.html#aca6e48754a4f5b1148635c1991450b50',1,'GameObject']]]
 ];
