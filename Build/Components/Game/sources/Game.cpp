@@ -12,6 +12,10 @@ Game::Game( void ){
 	_switchState();
 }
 
+Game::Game(Game const & src) {}
+
+Game	&Game::operator=(Game const &rhs) {}
+
 Game::~Game( void ){
 	std::cout << "Game destructed" << std::endl; // debug
 }

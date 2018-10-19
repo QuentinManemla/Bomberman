@@ -73,6 +73,10 @@ Engine::Engine(): _deltaTime(0.0f), _WindowHeight(600), _WindowWidth(800), bombA
 	return ;
 }
 
+Engine::Engine(Engine const & src) {}
+
+Engine	&Engine::operator=(Engine const &rhs) {}
+
 Engine::~Engine() {
 	std::cout << "Engine destructed" << std::endl;
 	glfwTerminate();

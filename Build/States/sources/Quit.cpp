@@ -10,6 +10,10 @@ QuitState::QuitState( Engine & engine ){
 	this->_menu.insert(this->_menu.end(), std::begin(arrQuitMenu), std::end(arrQuitMenu));
 }
 
+QuitState::QuitState(QuitState const & src) {}
+
+QuitState	&QuitState::operator=(QuitState const &rhs) {}
+
 QuitState::~QuitState( void ){
 	std::cout << this->getType() << " destructed" << std::endl;
 }

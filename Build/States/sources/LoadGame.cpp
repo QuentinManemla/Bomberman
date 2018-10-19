@@ -16,6 +16,10 @@ LoadGameState::LoadGameState( Engine & engine ) {
 	}
 }
 
+LoadGameState::LoadGameState(LoadGameState const & src) {}
+
+LoadGameState	&LoadGameState::operator=(LoadGameState const &rhs) {}
+
 LoadGameState::~LoadGameState( void ){
 	std::cout << this->getType() << " destructed" << std::endl; // debug
 }

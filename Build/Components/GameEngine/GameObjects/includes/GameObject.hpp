@@ -25,6 +25,8 @@ class GameObject {
 public:
 	GameObject( eGameObjectType type, Vector3d *position );
 	GameObject( void );
+	GameObject(GameObject const & src);
+	GameObject	&operator=(const GameObject &rhs);
 	~GameObject( void );
 
 	//addComponent

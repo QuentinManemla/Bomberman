@@ -16,6 +16,10 @@ CreditsState::CreditsState( Engine & engine ) {
 
 }
 
+CreditsState::CreditsState(CreditsState const & src) {}
+
+CreditsState	&CreditsState::operator=(CreditsState const &rhs) {}
+
 CreditsState::~CreditsState( void ){
 	std::cout << this->getType() << " destructed" << std::endl; // debug
 	this->_engine->_SoundEngine.stopSound();

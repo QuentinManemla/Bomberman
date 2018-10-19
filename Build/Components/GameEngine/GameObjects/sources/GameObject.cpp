@@ -11,6 +11,10 @@ GameObject::GameObject( eGameObjectType type, Vector3d *position ){
 GameObject::GameObject( void ){
 }
 
+GameObject::GameObject(GameObject const & src) {}
+
+GameObject	&GameObject::operator=(const GameObject &rhs) {}
+
 GameObject::~GameObject( void ){
 	delete this->position;
 }

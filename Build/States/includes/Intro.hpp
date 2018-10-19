@@ -9,6 +9,8 @@ public:
 	// constructor that takes ptr to GameEngine
 	IntroState( void );
 	IntroState( Engine & engine );
+	IntroState(IntroState const & src);
+	IntroState	&operator=(IntroState const &rhs);
 	~IntroState( void );
 
 	std::string		getType( void ); // debug

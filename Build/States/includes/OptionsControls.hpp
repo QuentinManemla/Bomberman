@@ -9,6 +9,8 @@ class OptionsControlsState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
 	OptionsControlsState( Engine & engine );
+	OptionsControlsState(OptionsControlsState const & src);
+	OptionsControlsState	&operator=(OptionsControlsState const &rhs);
 	~OptionsControlsState( void );
 
 private:

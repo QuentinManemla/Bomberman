@@ -9,6 +9,8 @@ class OptionsVolumeState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
 	OptionsVolumeState( Engine & engine );
+	OptionsVolumeState(OptionsVolumeState const & src);
+	OptionsVolumeState	&operator=(OptionsVolumeState const &rhs);
 	~OptionsVolumeState( void );
 
 private:

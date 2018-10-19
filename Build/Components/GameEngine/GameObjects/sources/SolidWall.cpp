@@ -8,6 +8,10 @@ SolidWall::SolidWall( eGameObjectType type, Vector3d *position ){
 	this->mortal = 0;
 }
 
+SolidWall::SolidWall(SolidWall const & src) {}
+
+SolidWall	&SolidWall::operator=(SolidWall const &rhs) {}
+
 SolidWall::~SolidWall( void ){
 
 }

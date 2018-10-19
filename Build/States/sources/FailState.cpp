@@ -12,6 +12,10 @@ FailState::FailState( Engine & engine ) {
 
 }
 
+FailState::FailState(FailState const & src) {}
+
+FailState	&FailState::operator=(FailState const &rhs) {}
+
 FailState::~FailState( void ){
 	std::cout << this->getType() << " destructed" << std::endl; // debug
 }

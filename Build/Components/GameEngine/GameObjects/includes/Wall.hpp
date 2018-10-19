@@ -7,6 +7,8 @@
 class Wall : public GameObject{
 public:
 	Wall( eGameObjectType type, Vector3d *position );
+	Wall(Wall const & src);
+	Wall	&operator=(Wall const &rhs);
 	~Wall( void );
 
 protected:

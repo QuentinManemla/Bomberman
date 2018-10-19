@@ -30,6 +30,8 @@
 class Game {
 public:
 	Game( void );
+	Game(Game const & src);
+	Game	&operator=(Game const &rhs);
 	~Game( void );
 	void	run();
 

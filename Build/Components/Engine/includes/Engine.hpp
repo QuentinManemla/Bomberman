@@ -49,6 +49,8 @@
 class	Engine {
 	public:
 		Engine();
+		Engine(Engine const & src);
+		Engine			&operator=(Engine const &rhs);
 		~Engine();
 
 		void			engineInit( void );

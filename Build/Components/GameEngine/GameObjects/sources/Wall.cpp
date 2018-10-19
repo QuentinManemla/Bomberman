@@ -8,6 +8,10 @@ Wall::Wall( eGameObjectType type, Vector3d *position ){
 	this->mortal = 1;
 }
 
+Wall::Wall(Wall const & src) {}
+
+Wall	&Wall::operator=(Wall const &rhs) {}
+
 Wall::~Wall( void ){
 
 }

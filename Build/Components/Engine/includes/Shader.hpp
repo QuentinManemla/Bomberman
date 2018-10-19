@@ -72,6 +72,9 @@ public:
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
 	}
+	Shader(Shader const & src) {}
+	Shader	&operator=(Shader const &rhs) {}
+	~Shader() {}
 	void	init(const char* vertexPath, const char* fragmentPath)
 	{
 		// 1. retrieve the vertex/fragment source code from filePath

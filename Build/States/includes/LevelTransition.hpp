@@ -9,6 +9,8 @@ class LevelTransitionState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
 	LevelTransitionState( Engine & engine );
+	LevelTransitionState(LevelTransitionState const & src);
+	LevelTransitionState	&operator=(LevelTransitionState const &rhs);
 	~LevelTransitionState( void );
 
 private:

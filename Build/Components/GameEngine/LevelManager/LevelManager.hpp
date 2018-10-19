@@ -18,6 +18,8 @@ public:
 	LevelManager( int _level );
 	LevelManager( int _level, int duration );
 	LevelManager( void );
+	LevelManager(LevelManager const & src);
+	LevelManager	&operator=(LevelManager const &rhs);
 	~LevelManager( void );
 
 	std::vector<GameObject *>	generateMap( void );

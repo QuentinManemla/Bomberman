@@ -10,6 +10,10 @@ MenuState::MenuState( Engine & engine ) {
 	this->_menu.insert(this->_menu.end(), std::begin(arrMainMenu), std::end(arrMainMenu));
 }
 
+MenuState::MenuState(MenuState const & src) {}
+
+MenuState	&MenuState::operator=(MenuState const &rhs) {}
+
 MenuState::~MenuState( void ){
 	std::cout << this->getType() << " destructed" << std::endl; // debug
 }

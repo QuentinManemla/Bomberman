@@ -13,6 +13,10 @@ LevelTransitionState::LevelTransitionState( Engine & engine ) {
 	this->_menu.insert(this->_menu.end(), std::begin(arrMainMenu), std::end(arrMainMenu));
 }
 
+LevelTransitionState::LevelTransitionState(LevelTransitionState const & src) {}
+
+LevelTransitionState	&LevelTransitionState::operator=(LevelTransitionState const &rhs) {}
+
 LevelTransitionState::~LevelTransitionState( void ) { return ; }
 
 void	LevelTransitionState::_makeSelection( void ){

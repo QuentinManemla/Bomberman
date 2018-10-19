@@ -65,6 +65,10 @@ LevelManager::LevelManager( void ){
 
 }
 
+LevelManager::LevelManager(LevelManager const & src) {}
+
+LevelManager	&LevelManager::operator=(LevelManager const &rhs) {}
+
 LevelManager::~LevelManager( void ){
 	std::cout << "LevelManager destructed" << std::endl; // debug
 

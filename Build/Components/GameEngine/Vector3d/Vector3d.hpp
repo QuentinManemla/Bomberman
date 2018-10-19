@@ -5,6 +5,8 @@ class Vector3d {
 public:
 	Vector3d( float vX, float vY, float vZ);
 	Vector3d( void );
+	Vector3d(Vector3d const & src);
+	Vector3d	&operator=(Vector3d const &rhs);
 	~Vector3d( void );
 
 	void	incX( float num);

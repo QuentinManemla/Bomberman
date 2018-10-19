@@ -7,6 +7,8 @@
 class Door : public GameObject {
 public:
 	Door( eGameObjectType type, Vector3d *position );
+	Door(Door const & src);
+	Door	&operator=(Door const &rhs);
 	~Door( void );
 
 protected:

@@ -11,6 +11,10 @@ IntroState::IntroState( void ){
 	std::cout << "Intro constructed" << std::endl;
 }
 
+IntroState::IntroState(IntroState const & src) {}
+
+IntroState	&IntroState::operator=(IntroState const &rhs) {}
+
 IntroState::~IntroState( void ){
 	std::cout << "Intro destructed" << std::endl;
 }

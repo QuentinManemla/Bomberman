@@ -9,6 +9,8 @@ class FailState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
 	FailState( Engine & engine );
+	FailState(FailState const & src);
+	FailState	&operator=(FailState const &rhs);
 	~FailState( void );
 
 private:

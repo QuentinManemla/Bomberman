@@ -10,6 +10,10 @@ OptionsVolumeState::OptionsVolumeState( Engine & engine ) {
 	this->_menu.insert(this->_menu.end(), std::begin(arrMainMenu), std::end(arrMainMenu));
 }
 
+OptionsVolumeState::OptionsVolumeState(OptionsVolumeState const & src) {}
+
+OptionsVolumeState	&OptionsVolumeState::operator=(OptionsVolumeState const &rhs) {}
+
 OptionsVolumeState::~OptionsVolumeState( void ){
 	std::cout << this->getType() << " destructed" << std::endl; // debug
 }

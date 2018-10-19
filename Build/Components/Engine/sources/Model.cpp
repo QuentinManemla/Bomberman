@@ -6,6 +6,12 @@ Model::Model( std::string const &path ) : gammaCorrection(false) {
 	this->loadModel(path);
 }
 
+Model::Model(Model const & src) {}
+
+Model	&Model::operator=(Model const &rhs) {}
+
+Model::~Model() {}
+
 void	Model::init( std::string const &path) { 
 	this->gammaCorrection = false;
 	this->loadModel(path); 

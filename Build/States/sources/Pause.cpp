@@ -10,6 +10,10 @@ PauseState::PauseState( Engine & engine ){
 	this->_menu.insert(this->_menu.end(), std::begin(arrPauseMenu), std::end(arrPauseMenu));
 }
 
+PauseState::PauseState(PauseState const & src) {}
+
+PauseState	&PauseState::operator=(PauseState const &rhs) {}
+
 PauseState::~PauseState( void ){
 	std::cout << this->getType() << " destructed" << std::endl; // debug
 }

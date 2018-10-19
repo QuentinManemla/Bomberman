@@ -9,6 +9,8 @@ class LoadGameState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
 	LoadGameState( Engine & engine );
+	LoadGameState(LoadGameState const & src);
+	LoadGameState	&operator=(LoadGameState const &rhs);
 	~LoadGameState( void );
 
 private:

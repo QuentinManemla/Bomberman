@@ -12,6 +12,8 @@
 class Sound {
 	public:
 		Sound( void );
+		Sound(Sound const & src);
+		Sound	&operator=(Sound const &rhs);
 		~Sound( void );
 
 		void		init( void );

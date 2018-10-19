@@ -9,6 +9,8 @@ class WinState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
 	WinState( Engine & engine );
+	WinState(WinState const & src);
+	WinState	&operator=(WinState const &rhs);
 	~WinState( void );
 
 private:

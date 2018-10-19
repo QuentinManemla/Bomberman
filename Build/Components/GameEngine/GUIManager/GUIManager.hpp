@@ -9,6 +9,8 @@ class GUIManager {
 	public:
 		GUIManager( Engine & engine);
 		GUIManager( void );
+		GUIManager(GUIManager const & src);
+		GUIManager	&operator=(GUIManager const &rhs);
 		~GUIManager( void );
 	
 	void			update( GameObject *player, int	elapsedSec, int playerScore, int level);

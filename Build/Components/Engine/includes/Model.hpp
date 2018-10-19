@@ -20,6 +20,9 @@ class Model {
 public:	
 	Model( void );
 	Model( std::string const &path );
+	Model(Model const & src);
+	Model	&operator=(Model const &rhs);
+	~Model();
 
 	void init( std::string const &path );
 	void Draw(Shader shader);

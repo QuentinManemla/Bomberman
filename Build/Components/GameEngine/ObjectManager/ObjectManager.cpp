@@ -68,6 +68,10 @@ ObjectManager::ObjectManager( Engine & engine, int level, int score, int retime 
 	//this->playerImmortalTime = 3.0;
 }
 
+ObjectManager::ObjectManager(ObjectManager const & src): fuseTime(1.5f), playerImmortalTime(3.0f), powerupMax(3) {}
+
+ObjectManager	&ObjectManager::operator=(ObjectManager const &rhs) {}
+
 ObjectManager::~ObjectManager( void ){
 	delete this->LM;
 	delete this->player; // test

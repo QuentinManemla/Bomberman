@@ -7,6 +7,8 @@
 class Powerup : public GameObject{
 public:
 	Powerup( eGameObjectType type, Vector3d *position );
+	Powerup(Powerup const & src);
+	Powerup	&operator=(Powerup const &rhs);
 	~Powerup( void );
 
 protected:

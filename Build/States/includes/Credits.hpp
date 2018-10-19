@@ -9,6 +9,8 @@ class CreditsState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
 	CreditsState( Engine & engine );
+	CreditsState(CreditsState const & src);
+	CreditsState	&operator=(CreditsState const &rhs);
 	~CreditsState( void );
 
 private:
