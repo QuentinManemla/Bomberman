@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['savegame',['saveGame',['../class_engine.html#adc5ea761cff8fd73fd61cec5d456c81f',1,'Engine']]],
-  ['setdoor',['setDoor',['../class_level_manager.html#ae28111a968bc72b85ae30255e86cd577',1,'LevelManager']]],
-  ['setenemies',['setEnemies',['../class_level_manager.html#a929184781c98d3225e8a76c5913de2fb',1,'LevelManager']]],
-  ['setfullscreen',['setFullScreen',['../class_engine.html#a6b179359cbe50af2454df67acf959c04',1,'Engine']]],
-  ['setresolution',['setResolution',['../class_engine.html#af897dde4ecd247ab6e078cd3bf76a3c9',1,'Engine']]],
-  ['setvolume',['setVolume',['../class_engine.html#a94e08a46dfab837257d1214bcce6469d',1,'Engine']]],
-  ['setwindowed',['setWindowed',['../class_engine.html#aaeab5596661eea2f4185a01e97439a07',1,'Engine']]],
-  ['shader',['Shader',['../class_shader.html#acc4a999059a118277839244fd330ff8f',1,'Shader']]],
-  ['stopsound',['stopSound',['../class_engine.html#aab648f0ac894f1ea02a2da57ebaf669d',1,'Engine']]]
+  ['render',['render',['../class_g_u_i_manager.html#a6cb41a641648fcafacc5a889d235d4c0',1,'GUIManager::render()'],['../class_object_manager.html#afc00962f9105ccd9cbadef6d8e227e84',1,'ObjectManager::render()'],['../class_intro_state.html#aac7d2171b36bd8637b1f9d6564f45e4f',1,'IntroState::render()'],['../class_play_state.html#a581829f2d9ed4226e923d9680aa5637e',1,'PlayState::render()']]],
+  ['rendertext',['RenderText',['../class_text.html#abefa2ead7ccd585c07995bb5d7d52c97',1,'Text']]],
+  ['requestenemymove',['requestEnemyMove',['../class_object_manager.html#a45d0536fbec109c499c3ffce69066e19',1,'ObjectManager']]],
+  ['requestmove',['requestMove',['../class_object_manager.html#ada63d59c236abd9370b02583fe241928',1,'ObjectManager']]],
+  ['run',['run',['../class_game.html#a1ab78f5ed0d5ea879157357cf2fb2afa',1,'Game']]]
 ];
