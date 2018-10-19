@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bomb',['Bomb',['../class_bomb.html#a2e2e671c0457c5c46b6552d7fac82ca2',1,'Bomb']]]
+  ['allenemiesdead',['allEnemiesDead',['../class_object_manager.html#ae9a9ed1809dcac34ae81df65ba02c1b5',1,'ObjectManager']]]
 ];
