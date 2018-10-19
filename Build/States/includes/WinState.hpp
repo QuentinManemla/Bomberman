@@ -5,7 +5,7 @@
 # include <vector>
 # include "MenuParentState.hpp"
 
-//! win menu state
+//! Win menu state
 class WinState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine

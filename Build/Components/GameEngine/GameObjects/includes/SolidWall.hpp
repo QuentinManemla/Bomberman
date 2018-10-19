@@ -4,7 +4,7 @@
 # include "GameObject.hpp"
 # include "../../Vector3d/Vector3d.hpp"
 
-//! side wall object
+//! solid wall GameObject
 class SolidWall : public GameObject{
 public:
 	SolidWall( eGameObjectType type, Vector3d *position );

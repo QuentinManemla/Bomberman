@@ -5,7 +5,7 @@
 # include <vector>
 # include "IState.hpp"
 
-//! manu state the all menues inherate from
+//! Menu state the all menues inherate from
 class MenuParentState : public IState {
 public:
 	MenuParentState( Engine & engine );

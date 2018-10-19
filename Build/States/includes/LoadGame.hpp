@@ -5,10 +5,10 @@
 # include <vector>
 # include "MenuParentState.hpp"
 
-//! load game state
+//! Load game state
 class LoadGameState : public MenuParentState {
 public:
-	// constructor that takes ptr to GameEngine
+	//! Constructor that takes ptr to GameEngine
 	LoadGameState( Engine & engine );
 	~LoadGameState( void );
 

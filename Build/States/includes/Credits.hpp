@@ -5,10 +5,10 @@
 # include <vector>
 # include "MenuParentState.hpp"
 
-//! state describing the credits
+//! State describing the credits inhereting from MenuParentState
 class CreditsState : public MenuParentState {
 public:
-	// constructor that takes ptr to GameEngine
+	//! Constructor that takes ptr to GameEngine
 	CreditsState( Engine & engine );
 	~CreditsState( void );
 

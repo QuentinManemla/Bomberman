@@ -8,7 +8,7 @@
 //! Control option state
 class OptionsControlsState : public MenuParentState {
 public:
-	// constructor that takes ptr to GameEngine
+	//! Constructor that takes ptr to GameEngine
 	OptionsControlsState( Engine & engine );
 	~OptionsControlsState( void );
 

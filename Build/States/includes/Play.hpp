@@ -10,7 +10,7 @@
 # include "../../Components/GameEngine/ObjectManager/ObjectManager.hpp"
 # include "../../Components/GameEngine/GUIManager/GUIManager.hpp"
 
-//! play state
+//! Play state
 class PlayState : public IState {
 public:
 	// constructor that takes ptr to GameEngine

@@ -4,7 +4,7 @@
 # include "GameObject.hpp"
 # include "../../Vector3d/Vector3d.hpp"
 
-//! wall object
+//! wall GameObject
 class Wall : public GameObject{
 public:
 	Wall( eGameObjectType type, Vector3d *position );

@@ -7,7 +7,7 @@
 //! intro state
 class IntroState : public IState {
 public:
-	// constructor that takes ptr to GameEngine
+	//! constructor that takes ptr to GameEngine
 	IntroState( void );
 	IntroState( Engine & engine );
 	~IntroState( void );

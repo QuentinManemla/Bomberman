@@ -5,10 +5,10 @@
 # include <vector>
 # include "MenuParentState.hpp"
 
-//! full screen option state
+//! Fullscreen option state
 class OptionsFullScreenState : public MenuParentState {
 public:
-	// constructor that takes ptr to GameEngine
+	//! Constructor that takes ptr to GameEngine
 	OptionsFullScreenState( Engine & engine );
 	~OptionsFullScreenState( void );
 

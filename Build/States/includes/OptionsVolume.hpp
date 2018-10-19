@@ -8,7 +8,7 @@
 //! volume option menu state
 class OptionsVolumeState : public MenuParentState {
 public:
-	// constructor that takes ptr to GameEngine
+	//! Constructor that takes ptr to GameEngine
 	OptionsVolumeState( Engine & engine );
 	~OptionsVolumeState( void );
 

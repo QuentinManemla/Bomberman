@@ -8,7 +8,7 @@
 //! Main menue state
 class MenuState : public MenuParentState {
 public:
-	// constructor that takes ptr to GameEngine
+	//! Constructor that takes ptr to GameEngine
 	MenuState( Engine & engine );
 	~MenuState( void );
 

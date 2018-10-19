@@ -5,7 +5,7 @@
 # include <vector>
 # include "MenuParentState.hpp"
 
-//!Quit menu state
+//! Quit menu state
 class QuitState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
