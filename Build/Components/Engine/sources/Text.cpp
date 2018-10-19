@@ -77,9 +77,13 @@ Text::Text( const char *FontPath, int FontSize ) {
 	glBindVertexArray(0);
 }
 
-Text::Text(Text const & src) {}
+Text::Text(Text const & src) {
+	this->_face = src._face
+}
 
-Text	&Text::operator=(Text const &rhs) {}
+Text	&Text::operator=(Text const &rhs) {
+	return (new Text(rhs));
+}
 
 void		Text::init( const char *FontPath, int FontSize, int Width, int Height ) {
 	// All functions return a value different than 0 whenever an error occurred

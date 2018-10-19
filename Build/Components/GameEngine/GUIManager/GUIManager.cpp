@@ -6,9 +6,13 @@ GUIManager::GUIManager( Engine & engine ) {
 
 GUIManager::GUIManager( void ) { return ; }
 
-GUIManager::GUIManager(GUIManager const & src) {}
+GUIManager::GUIManager(GUIManager const & src) {
+	this->engine = src.engine;
+}
 
-GUIManager	&GUIManager::operator=(GUIManager const &rhs) {}
+GUIManager	&GUIManager::operator=(GUIManager const &rhs) {
+	return (new GUIManager(rhs));
+}
 
 GUIManager::~GUIManager( void ) { return ; }
 

@@ -6,9 +6,13 @@ Model::Model( std::string const &path ) : gammaCorrection(false) {
 	this->loadModel(path);
 }
 
-Model::Model(Model const & src) {}
+Model::Model(Model const & src) {
+	this->gammaCorrection = src.gammaCorrection;
+}
 
-Model	&Model::operator=(Model const &rhs) {}
+Model	&Model::operator=(Model const &rhs) {
+	return (new Model(rhs));
+}
 
 Model::~Model() {}
 

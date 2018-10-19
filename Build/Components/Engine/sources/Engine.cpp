@@ -73,9 +73,13 @@ Engine::Engine(): _deltaTime(0.0f), _WindowHeight(600), _WindowWidth(800), bombA
 	return ;
 }
 
-Engine::Engine(Engine const & src) {}
+Engine::Engine(Engine const & src) {
+	this->_Monitor = glfwGetPrimaryMonitor();
+}
 
-Engine	&Engine::operator=(Engine const &rhs) {}
+Engine	&Engine::operator=(Engine const &rhs) {
+	return (new Engine(rhs));
+}
 
 Engine::~Engine() {
 	std::cout << "Engine destructed" << std::endl;

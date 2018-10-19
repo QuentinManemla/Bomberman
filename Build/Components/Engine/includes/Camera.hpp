@@ -59,9 +59,13 @@ class Camera {
 			updateCameraVectors();
 		}
 
-		Camera(Camera const & src) {}
+		Camera(Camera const & src) {
+			this->position = src.position;
+		}
 		
-		Camera	&operator=(Camera const &rhs) {}
+		Camera	&operator=(Camera const &rhs) {
+			return (new Camera(rhs));
+		}
 
 		~Camera() {}
 

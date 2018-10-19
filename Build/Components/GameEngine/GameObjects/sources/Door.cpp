@@ -7,9 +7,13 @@ Door::Door( eGameObjectType type, Vector3d *position ){
 	this->mortal = 0;
 }
 
-Door::Door(Door const & src) {}
+Door::Door(Door const & src) {
+	this->position = src.position;
+}
 
-Door &Door::operator=(Door const &rhs) {}
+Door &Door::operator=(Door const &rhs) {
+	return (new Door(rhs));
+}
 
 Door::~Door( void ){
 

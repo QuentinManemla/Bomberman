@@ -9,8 +9,12 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
 	setupMesh();
 }
 
-Mesh::Mesh(Mesh const & src) {}
-Mesh	&Mesh::operator=(Mesh const &rhs) {}
+Mesh::Mesh(Mesh const & src) {
+	this->vertices = src.vertices;
+}
+Mesh	&Mesh::operator=(Mesh const &rhs) {
+	return (new Mesh(rhs));
+}
 Mesh::~Mesh() {}
 
 void Mesh::Draw(Shader shader) {
