@@ -11,6 +11,7 @@
 #include <sstream>
 #include <iostream>
 
+//! a class that draws the models
 class Shader
 {
 public:

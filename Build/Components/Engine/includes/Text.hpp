@@ -38,6 +38,7 @@ struct Character {
 	GLuint Advance;    //!< Horizontal offset to advance to next glyph
 };
 
+//! a class that allows text to be rendered to the screen
 class Text {
 	public:
 		Text( void );

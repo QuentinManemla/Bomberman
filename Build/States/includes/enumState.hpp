@@ -1,6 +1,7 @@
 #ifndef ENUMSTATE_HPP
 # define ENUMSTATE_HPP
 
+//! all available types of game states
 enum eState {
 	IDLE,
 	INTRO,

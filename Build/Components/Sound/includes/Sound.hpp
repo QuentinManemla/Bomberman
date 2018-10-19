@@ -8,14 +8,16 @@
 # include <chrono>
 # include <pthread.h>
 
-
+//! class that handels the loading and playing of sounds
 class Sound {
 	public:
 		Sound( void );
 		~Sound( void );
-
+		//! initiate the paths for each of the sounds/music used in different occasions
 		void		init( void );
+		//! takes in a string indicating the sound/music needed, and a boolean on whether to loop the sound/music or not
 		void		play2DSound( std::string soundPath, bool loop );
+		//! takes in a ISoundSource file indicating the sound/music needed, and a boolean on whether to loop the sound/music or not
 		void		playSoundSource(	irrklang::ISoundSource* sound, bool loop );
 		void		stopSound( void );
 

@@ -5,6 +5,7 @@
 # include <vector>
 # include "MenuParentState.hpp"
 
+//! full screen option state
 class OptionsFullScreenState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine

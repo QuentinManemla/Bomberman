@@ -5,6 +5,7 @@
 # include <vector>
 # include "MenuParentState.hpp"
 
+//! shows all the options for if you died in game
 class FailState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine

@@ -6,6 +6,7 @@
 # include "MenuParentState.hpp"
 # include <dirent.h>
 
+//! Save and quit menu state
 class SaveQuitState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine

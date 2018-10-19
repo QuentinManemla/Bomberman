@@ -5,6 +5,7 @@
 # include <vector>
 # include "MenuParentState.hpp"
 
+//! level transition state
 class LevelTransitionState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine

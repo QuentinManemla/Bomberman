@@ -16,6 +16,7 @@
 # include <assimp/postprocess.h>
 # include <stb_image.h>
 
+//! main model class for all 3D objects
 class Model {
 public:	
 	Model( void );

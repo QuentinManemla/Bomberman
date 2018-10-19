@@ -3,6 +3,7 @@
 
 # include "../../Components/Engine/includes/Engine.hpp"
 
+//! interface of all state classes
 class IState {
 public:
 	virtual void update( eControls key ) = 0;

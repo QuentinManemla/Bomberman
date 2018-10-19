@@ -5,6 +5,7 @@
 # include <vector>
 # include "MenuParentState.hpp"
 
+//! options menu state
 class OptionsState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine

@@ -58,19 +58,40 @@ public:
 	//! randomly choose a free direction to move in
 	void		getRandomOpenDirection( GameObject *actor );
 
+	//! place a bomb in at the destination of the player
 	void		placeBomb( void );
+	//! check for anything breakable within its radius and kill all that can be destroyed render the explosion animation
 	void		explode( void );
 	void		checkEnemyCollision( void );
+	//! set player as dead when player dies
 	void		playerDied( void );
+	//! check if the 2 vectors are the same
 	int			isDestVectorEqual(Vector3d *first, Vector3d *second);
+	//! Reset the player position when player dies
 	void		playerReset( int penalize );
+	//! make player immortal the first few seconds when respawned
 	void		ImmortalTick( void );
 	//void		processRemaingingTime( int remainingTime );
+	/*!
+	 * takes in the time remaining on the timer
+	 * check if all enemy is dead
+	 * check if the position of the player is equal to the position of the door
+	 * if enemies are all dead, and the player is at the position of the door, proceed to the next level
+	 */
 	void		levelProcess( int remainingTime );
+	//!  takes in an int representing the amount of points earned and add the amount onto the player score
 	void		updatePlayerScore( int amount );
+	//! check if all enemies are dead
 	int			allEnemiesDead( void );
+	/*!
+	 * takes in an int value for which level you are at, 
+	 * and a boolean value for whether or not you’ve succeeded in finishing up the stage
+	 * determine if the stage has been completed successfully, or failed, set the state of the game accordingly
+	 */
 	void		initLevel( int level, bool success );
+	//! places the powerups into the x and y position given
 	void		placePowerup( float x, float y);
+	//! check if the player position is at the same position as the powerup if it is, then the bomb radius increase by 1
 	void		powerupCollision( void );
 
 
@@ -79,8 +100,8 @@ public:
 	Engine						*engine;
 	LevelManager				*LM;
 	std::vector<GameObject *>	map; // pointer or reference
-	std::vector<GameObject *>	enemies;
-	std::vector<GameObject *>	powerups; // new
+	std::vector<GameObject *>	enemies; //!< list of all enemies
+	std::vector<GameObject *>	powerups;//!< list of all powerups // new 
 	GameObject					*player;
 	Bomb						*bomb;
 	const float					fuseTime;

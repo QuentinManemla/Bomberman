@@ -10,6 +10,7 @@
 # include "../../Components/GameEngine/ObjectManager/ObjectManager.hpp"
 # include "../../Components/GameEngine/GUIManager/GUIManager.hpp"
 
+//! play state
 class PlayState : public IState {
 public:
 	// constructor that takes ptr to GameEngine
@@ -20,10 +21,11 @@ public:
 	~PlayState( void );
 
 	std::string		getType( void ); // debug
-
+	//! update state using a key that was pressed
 	void			update( eControls key );
+	//! render objects to the screen
 	void			render( void );
-
+	//! draws the map
 	void			drawMap( void );
 
 protected:

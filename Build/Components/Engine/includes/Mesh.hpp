@@ -13,6 +13,7 @@
 # include <vector>
 # include "Shader.hpp"
 
+//! positions in 3d space
 struct Vertex {
 	// position
 	glm::vec3 Position;
@@ -26,6 +27,7 @@ struct Vertex {
 	glm::vec3 Bitangent;
 };
 
+//! the path and ID of a texture
 struct Texture {
 	unsigned int id;
 	std::string type;
