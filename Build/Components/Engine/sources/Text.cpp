@@ -78,11 +78,11 @@ Text::Text( const char *FontPath, int FontSize ) {
 }
 
 Text::Text(Text const & src) {
-	this->_face = src._face
+	this->_face = src._face;
 }
 
 Text	&Text::operator=(Text const &rhs) {
-	return (new Text(rhs));
+	return *(new Text(rhs));
 }
 
 void		Text::init( const char *FontPath, int FontSize, int Width, int Height ) {

@@ -15,7 +15,7 @@ Player::Player(Player const & src) {
 }
 
 Player	&Player::operator=(Player const &rhs) {
-	return (new Player(rhs));
+	return *(new Player(rhs));
 }
 
 Player::~Player( void ){

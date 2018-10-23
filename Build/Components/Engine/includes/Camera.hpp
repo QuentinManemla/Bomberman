@@ -60,11 +60,11 @@ class Camera {
 		}
 
 		Camera(Camera const & src) {
-			this->position = src.position;
+			this->Position = src.Position;
 		}
 		
-		Camera	&operator=(Camera const &rhs) {
-			return (new Camera(rhs));
+		Camera	&operator=(Camera const & rhs) {
+			return *(new Camera(rhs));
 		}
 
 		~Camera() {}

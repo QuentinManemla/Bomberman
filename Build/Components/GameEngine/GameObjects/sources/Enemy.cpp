@@ -16,7 +16,7 @@ Enemy::Enemy(Enemy const & src) {
 }
 
 Enemy	&Enemy::operator=(Enemy const &rhs) {
-	return (new Enemy(rhs));
+	return *(new Enemy(rhs));
 }
 
 Enemy::~Enemy( void ){

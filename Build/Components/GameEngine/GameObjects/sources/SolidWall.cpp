@@ -13,7 +13,7 @@ SolidWall::SolidWall(SolidWall const & src) {
 }
 
 SolidWall	&SolidWall::operator=(SolidWall const &rhs) {
-	return (new SolidWall(rhs));
+	return *(new SolidWall(rhs));
 }
 
 SolidWall::~SolidWall( void ){

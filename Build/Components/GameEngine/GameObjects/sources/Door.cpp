@@ -12,7 +12,7 @@ Door::Door(Door const & src) {
 }
 
 Door &Door::operator=(Door const &rhs) {
-	return (new Door(rhs));
+	return *(new Door(rhs));
 }
 
 Door::~Door( void ){

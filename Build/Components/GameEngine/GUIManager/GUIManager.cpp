@@ -11,7 +11,7 @@ GUIManager::GUIManager(GUIManager const & src) {
 }
 
 GUIManager	&GUIManager::operator=(GUIManager const &rhs) {
-	return (new GUIManager(rhs));
+	return *(new GUIManager(rhs));
 }
 
 GUIManager::~GUIManager( void ) { return ; }

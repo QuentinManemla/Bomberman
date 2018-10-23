@@ -16,7 +16,7 @@ GameObject::GameObject(GameObject const & src) {
 }
 
 GameObject	&GameObject::operator=(const GameObject &rhs) {
-	return (new GameObject(rhs));
+	return *(new GameObject(rhs));
 }
 
 GameObject::~GameObject( void ){

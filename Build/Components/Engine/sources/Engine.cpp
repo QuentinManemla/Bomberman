@@ -74,11 +74,11 @@ Engine::Engine(): _deltaTime(0.0f), _WindowHeight(600), _WindowWidth(800), bombA
 }
 
 Engine::Engine(Engine const & src) {
-	this->_Monitor = glfwGetPrimaryMonitor();
+	this->_Monitor = src._Monitor;
 }
 
 Engine	&Engine::operator=(Engine const &rhs) {
-	return (new Engine(rhs));
+	return *(new Engine(rhs));
 }
 
 Engine::~Engine() {
@@ -500,11 +500,15 @@ void		Engine::print2DText(std::string text, float pos_x, float pos_y, float red,
 }
 
 void		Engine::printMenu(std::vector<std::string> menuItems, float pos_x, float pos_y, int menuIndex, std::string backgroundPath) {
-	pos_x = 0;
-	pos_y = 0;
-	menuIndex = 0;
-	backgroundPath = " ";
-
+	// pos_x = 0;
+	// pos_y = 0;
+	// menuIndex = 0;
+	// backgroundPath = " ";
+	static_cast<void>(pos_x);
+	static_cast<void>(pos_y);
+	static_cast<void>(menuIndex);
+	static_cast<void>(pos_x);
+	static_cast<void>(backgroundPath);
 	float	x = 20;
 	float 	y = 20;
 	for (int i = menuItems.size() - 1;i >= 0; i--) {

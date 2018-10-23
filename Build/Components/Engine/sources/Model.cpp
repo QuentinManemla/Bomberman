@@ -11,7 +11,7 @@ Model::Model(Model const & src) {
 }
 
 Model	&Model::operator=(Model const &rhs) {
-	return (new Model(rhs));
+	return *(new Model(rhs));
 }
 
 Model::~Model() {}

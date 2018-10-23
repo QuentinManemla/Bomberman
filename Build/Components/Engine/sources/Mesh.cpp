@@ -13,7 +13,7 @@ Mesh::Mesh(Mesh const & src) {
 	this->vertices = src.vertices;
 }
 Mesh	&Mesh::operator=(Mesh const &rhs) {
-	return (new Mesh(rhs));
+	return *(new Mesh(rhs));
 }
 Mesh::~Mesh() {}
 

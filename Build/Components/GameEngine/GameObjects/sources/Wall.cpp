@@ -13,7 +13,7 @@ Wall::Wall(Wall const & src) {
 }
 
 Wall	&Wall::operator=(Wall const &rhs) {
-	return (new Wall(rhs));
+	return *(new Wall(rhs));
 }
 
 Wall::~Wall( void ){

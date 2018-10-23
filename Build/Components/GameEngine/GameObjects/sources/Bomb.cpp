@@ -12,7 +12,7 @@ Bomb::Bomb(Bomb const & src) {
 	this->position = src.position;
 }
 Bomb	&Bomb::operator=(Bomb const &rhs) {
-	return (new Bomb(rhs));
+	return *(new Bomb(rhs));
 }
 Bomb::~Bomb( void ){
 }

@@ -17,7 +17,7 @@ Game::Game(Game const & src) {
 }
 
 Game	&Game::operator=(Game const &rhs) {
-	return (new Game(rhs));
+	return *(new Game(rhs));
 }
 
 Game::~Game( void ){
