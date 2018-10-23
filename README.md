@@ -1,7 +1,9 @@
 # Bomberman
-Everybody loves playing Bomberman. Good news. The goal of this project is to create a full implementation of a 3D Bomberman video game.
 
-**Objectives**
+Everybody loves playing Bomberman. Good news. The goal of this project is to create
+a full implementation of a 3D Bomberman video game.
+
+## Objectives
 
 There are several distinct objectives in this project.
 
@@ -34,8 +36,8 @@ like Ogre for instance.
 
 • You must provide a Makefile with the usual rules.
 
-• Any class that declares at least one attribute must be written in canonical form. Inheriting
-from a class that declares attributes does not count as declaring attributes.
+• Any class that declares at least one attribute must be written in canonical form.
+Inheriting from a class that declares attributes does not count as declaring attributes.
 Exceptions don’t have to be canonical.
 
 • It’s forbidden to implement any function in a header file, except for templates and
@@ -45,6 +47,7 @@ the virtual destructor of a base class.
 
 
 ## Generalities
+
 So, here we are. You must code a 3D version of Bomberman, functional, and complete
 with graphics, animations and levels. Your version being a solo game, we expect at least:
 
@@ -97,19 +100,28 @@ It could be a regular save system or a campain mecanic. As long as the feature
 is present, it’s up to you to integrate it in your game. Anyway, This persitance
 MUST remain even if the game is exited completly and executed again.
 
-## To run and install on WeThinkCode_ Mac OS.
+## To set up on WeThinkCode_ Mac OS
+
 • Have Xquartz installed through Managment Software Center
 
 • Have brew installed ( sh -c "$(curl -fsSL https://raw.githubusercontent.com/Tolsadus/42homebrewfix/master/install.sh)" )
 
 • Have cmake installed ( brew install cmake )
 
+## To set up on Linux OS
+
+• Make sure cmake v3.11 or higher is installed (https://cmake.org/install/)
+
+• Make sure boost is installed (https://www.boost.org/users/download/)
+    • make sure it is added to your path
+
+## To compile and run
+
 • generate the Makefile with "cmake -B./tmp -H."
 
 • compile with "make -C tmp"
 
-• run witn "./BomberMan"
-
+• run with "./BomberMan"
 
 ![alt text](https://raw.githubusercontent.com/QuentinLucyyd/Bomberman/master/1.png)
 ![alt text](https://raw.githubusercontent.com/QuentinLucyyd/Bomberman/master/2.png)
