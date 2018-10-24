@@ -65,9 +65,13 @@ LevelManager::LevelManager( void ){
 
 }
 
-LevelManager::LevelManager(LevelManager const & src) {}
+LevelManager::LevelManager(LevelManager const & src) {
+	this->level = src.level;
+}
 
-LevelManager	&LevelManager::operator=(LevelManager const &rhs) {}
+LevelManager	&LevelManager::operator=(LevelManager const &rhs) {
+	return *(new LevelManager(rhs));
+}
 
 LevelManager::~LevelManager( void ){
 	std::cout << "LevelManager destructed" << std::endl; // debug
@@ -90,7 +94,7 @@ std::vector<GameObject *>	LevelManager::generateMap( void ){
 	int	solidCountDebug = 0;
 	int	breakableCountDebug = 0;
 	int	openCountDebug = 0;
-	int	doorFlag = 0;
+	// int	doorFlag = 0;
 
 	for (int i = 0; i < (h * w); i++){ // i will increment from 0 to (TOTAL_BLOCKS - 1)
 		type = 0;
@@ -170,7 +174,7 @@ void	LevelManager::encloseSafeZone( void ){
 	int midBarrier = 0;
 	int bottomBarrier = 0;
 
-	for (int i = 0; i < this->map.size(); i++){
+	for (unsigned long i = 0; i < this->map.size(); i++){
 		if (this->map[i]->position->vX == 5 && this->map[i]->position->vY == 2){
 			topBarrier = 1;
 		}
@@ -194,7 +198,7 @@ void	LevelManager::setDoor( void ){
 	GameObject *door;
 
 	while (doorFlag == 0)
-		for (int i = 0; i < this->map.size(); i++){
+		for (unsigned long i = 0; i < this->map.size(); i++){
 			if (doorFlag == 0){
 				if (this->map[i]->eType == WALL){
 					if (rand() % 50 == 0){
@@ -210,7 +214,7 @@ void	LevelManager::setDoor( void ){
 
 void	LevelManager::setEnemies( void ){	
 	while (this->numEnemies > 0){
-		for (int i = 0; i < this->openBlock.size(); i++){
+		for (unsigned long i = 0; i < this->openBlock.size(); i++){
 			if (rand() % 50 == 0 && this->openBlock[i].first > 5 && this->openBlock[i].second > 5){
 				this->enemies.push_back(std::pair<int, int>(this->openBlock[i].first, this->openBlock[i].second));
 				//std::cout << "openBlock popped at " << this->openBlock[i].first << ";" << this->openBlock[i].second << " : "<< i << std::endl; // debug
@@ -233,7 +237,7 @@ bool	LevelManager::isSafeZone(int x, int y){
 
 void	LevelManager::debugPrintMap( void ){ // debug // test
 	std::cout << "total = " <<map.size() << std::endl;
-	for (int i = 0; i < map.size(); i++){
+	for (unsigned long i = 0; i < map.size(); i++){
 		//std::cout << map[i]->strType << " = " << map[i]->position->vX << ";" << map[i]->position->vY << std::endl;
 		std::cout << map[i]->eType;
 		if (i % this->mapWidth == 0)
@@ -243,7 +247,7 @@ void	LevelManager::debugPrintMap( void ){ // debug // test
 
 void	LevelManager::debugPrintEnemies( void ){ // debug // test
 	std::cout << "total = " << enemies.size() << std::endl;
-	for (int i = 0; i < enemies.size(); i++){
+	for (unsigned long i = 0; i < enemies.size(); i++){
 		std::cout << this->enemies[i].first << ";" << this->enemies[i].second << std::endl;
 	}
 }
