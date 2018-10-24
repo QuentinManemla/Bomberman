@@ -27,7 +27,7 @@ PlayState::PlayState( Engine & engine ) { // first init?
 PlayState::PlayState( Engine & engine, std::string savePath, bool restart ) {
 	this->_engine = &engine;
 	this->_type = "Play";
-	std::cout << "Play constructed WITH RESTART" << std::endl;
+	std::cout << "Play constructed WITH LOAD" << std::endl;
 
 	_positionTime = 0.0f;
 	_positionPitch = 0.0f;
@@ -37,10 +37,10 @@ PlayState::PlayState( Engine & engine, std::string savePath, bool restart ) {
 	if (restart) {
 		this->_OM = new ObjectManager( engine, this->_engine->_Save.level,0, 0 );
 	} else {
-		std::ifstream saveFile (savePath);
+		std::ifstream saveFile(savePath.c_str());
 		std::string line;
 		if (saveFile.is_open()) {
-			getline (saveFile,line);
+			getline(saveFile,line);
 		}
 		saveFile.close();
 

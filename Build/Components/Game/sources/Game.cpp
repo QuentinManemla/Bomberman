@@ -46,12 +46,12 @@ void Game::_switchState( void ){
 				this->_stateStack.push(new PlayState(this->_engine));
 				break;
 			case PLAYLOADGAME:
-				this->_stateStack.push(new PlayState(this->_engine, "./save/save.save", false));
+				this->_stateStack.push(new PlayState(this->_engine, "./.save/save.save", false));
 				break;
 			case RESTARTLEVEL:
 				delete this->_stateStack.top();
 				this->_stateStack.pop();
-				this->_stateStack.push(new PlayState(this->_engine, "./save/save.save", true));
+				this->_stateStack.push(new PlayState(this->_engine, "./.save/save.save", true));
 				break;
 			case FAIL:
 				this->_stateStack.push(new FailState(this->_engine));
