@@ -43,9 +43,9 @@ public:
 	/*  Functions  */
 	// constructor
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
-	// Mesh(Mesh const & src);
-	// Mesh	&operator=(Mesh const &rhs);
-	// ~Mesh();
+	Mesh(Mesh const & src);
+	Mesh	&operator=(Mesh const &rhs);
+	~Mesh();
 
 	// render the mesh
 	void Draw(Shader shader);
