@@ -86,14 +86,6 @@ Engine::~Engine() {
 	glfwTerminate();
 }
 
-Engine::Engine(const Engine &_src) {
-	return ;
-}
-
-const Engine& Engine::operator=(const Engine &_rhs) {
-	return (_rhs);
-}
-
 void	Engine::BigTexture( std::string path ) {
 	float vertices[] = {
 		// positions          // texture coords

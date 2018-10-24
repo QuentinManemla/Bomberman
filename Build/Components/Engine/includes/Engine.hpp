@@ -54,9 +54,6 @@ class	Engine {
 		Engine			&operator=(Engine const &rhs);
 		~Engine();
 
-		Engine(const Engine &_src);
-		const Engine& operator=(const Engine &_rhs);
-
 		void			engineInit( void );
 		void			render( void );
 		void			clear( void );
