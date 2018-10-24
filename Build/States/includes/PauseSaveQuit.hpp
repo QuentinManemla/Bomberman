@@ -10,8 +10,6 @@ class SaveQuitState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
 	SaveQuitState( Engine & engine );
-	SaveQuitState(SaveQuitState const & src);
-	SaveQuitState	&operator=(SaveQuitState const &rhs);
 	~SaveQuitState( void );
 
 private:

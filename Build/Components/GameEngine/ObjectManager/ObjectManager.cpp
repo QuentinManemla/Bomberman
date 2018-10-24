@@ -110,7 +110,7 @@ void	ObjectManager::update( eControls key/*, int remainingTime*/){
 		this->playerDied();
 
 	// ENEMY - PLAYER COLLISION DETECTION
-	for (int i = 0; i < this->enemies.size(); i++){
+	for (unsigned long i = 0; i < this->enemies.size(); i++){
 		if (isDestVectorEqual(this->player->destination, this->enemies[i]->destination) && this->enemies[i]->state == ALIVE && this->player->state == ALIVE){
 			this->player->hitPoints -= 1; // move to 2;2 and become INVINCIBLE FOR A BIT 
 			this->playerReset(1);
@@ -126,7 +126,7 @@ void	ObjectManager::update( eControls key/*, int remainingTime*/){
 	}
 
 	// ENEMY MOVE
-	for (int i = 0; i < this->enemies.size(); i++){
+	for (unsigned long i = 0; i < this->enemies.size(); i++){
 		if (this->enemies[i]->state == ALIVE)
 			requestEnemyMove(this->enemies[i]);
 	}
@@ -550,7 +550,7 @@ void	ObjectManager::explode( void ){
 	}
 
 	// debug print bomb blast
-	for (int i = 0; i < this->bomb->blast.size(); i++){
+	for (unsigned long i = 0; i < this->bomb->blast.size(); i++){
 		std::cout << "blast coord: " << this->bomb->blast[i].first << ";" << this->bomb->blast[i].second << std::endl;
 	}
 
@@ -655,7 +655,7 @@ void	ObjectManager::initLevel( int level, bool success ){
 	}
 
 	if (level > 4)
-		std::cout << "Huston we have a problem" //I don't even know
+		std::cout << "Huston we have a problem"; //I don't even know
 
 	std::cout << "pre success" << std::endl;
 	if (success){

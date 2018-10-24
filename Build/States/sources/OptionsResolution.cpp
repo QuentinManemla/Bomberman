@@ -10,10 +10,6 @@ OptionsResolutionState::OptionsResolutionState( Engine & engine ) {
 	this->_menu.insert(this->_menu.end(), std::begin(arrMainMenu), std::end(arrMainMenu));
 }
 
-OptionsResolutionState::OptionsResolutionState(OptionsResolutionState const & src) {}
-
-OptionsResolutionState	&OptionsResolutionState::operator=(OptionsResolutionState const &rhs) {}
-
 OptionsResolutionState::~OptionsResolutionState( void ){
 	std::cout << this->getType() << " destructed" << std::endl; // debug
 }

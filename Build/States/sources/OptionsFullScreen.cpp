@@ -10,10 +10,6 @@ OptionsFullScreenState::OptionsFullScreenState( Engine & engine ) {
 	this->_menu.insert(this->_menu.end(), std::begin(arrMainMenu), std::end(arrMainMenu));
 }
 
-OptionsFullScreenState::OptionsFullScreenState(OptionsFullScreenState const & src) {}
-
-OptionsFullScreenState	&OptionsFullScreenState::operator=(OptionsFullScreenState const &rhs) {}
-
 OptionsFullScreenState::~OptionsFullScreenState( void ){
 	std::cout << this->getType() << " destructed" << std::endl; // debug
 }

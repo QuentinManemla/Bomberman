@@ -13,7 +13,7 @@ Mesh::Mesh(Mesh const & src) {//this function breaks things??? WHY???
 	this->vertices = src.vertices;
 	this->indices = src.indices; 
 	this->textures = src.textures;
-	// this->VAO = src.VAO;
+	this->VAO = src.VAO;
 	this->VBO = src.VBO;
 	this->EBO = src.EBO;
 }

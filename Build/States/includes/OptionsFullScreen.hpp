@@ -9,8 +9,6 @@ class OptionsFullScreenState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
 	OptionsFullScreenState( Engine & engine );
-	OptionsFullScreenState(OptionsFullScreenState const & src);
-	OptionsFullScreenState	&operator=(OptionsFullScreenState const &rhs);
 	~OptionsFullScreenState( void );
 
 private:

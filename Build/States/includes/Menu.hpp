@@ -9,8 +9,6 @@ class MenuState : public MenuParentState {
 public:
 	// constructor that takes ptr to GameEngine
 	MenuState( Engine & engine );
-	MenuState(MenuState const & src);
-	MenuState	&operator=(MenuState const &rhs);
 	~MenuState( void );
 
 private:

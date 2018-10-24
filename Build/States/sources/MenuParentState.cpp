@@ -11,10 +11,6 @@ MenuParentState::MenuParentState( void ){
 	std::cout << this->getType() << " constructed" << std::endl; // debug
 }
 
-MenuParentState::MenuParentState(MenuParentState const & src) {}
-
-MenuParentState	&MenuParentState::operator=(MenuParentState const &rhs) {}
-
 MenuParentState::~MenuParentState( void ){
 	std::cout << this->getType() << " destructed" << std::endl; // debug
 }

@@ -10,10 +10,6 @@ OptionsControlsState::OptionsControlsState( Engine & engine ) {
 	this->_menu.insert(this->_menu.end(), std::begin(arrMainMenu), std::end(arrMainMenu));
 }
 
-OptionsControlsState::OptionsControlsState(OptionsControlsState const & src) {}
-
-OptionsControlsState	&OptionsControlsState::operator=(OptionsControlsState const &rhs) {}
-
 OptionsControlsState::~OptionsControlsState( void ){
 	std::cout << this->getType() << " destructed" << std::endl; // debug
 }

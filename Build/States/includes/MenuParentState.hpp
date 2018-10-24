@@ -9,8 +9,6 @@ class MenuParentState : public IState {
 public:
 	MenuParentState( Engine & engine );
 	MenuParentState( void );
-	MenuParentState(MenuParentState const & src);
-	MenuParentState	&operator=(MenuParentState const &rhs);
 	~MenuParentState( void );
 
 	std::string					getType( void );

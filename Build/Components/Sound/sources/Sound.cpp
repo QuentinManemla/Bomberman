@@ -2,9 +2,13 @@
 
 Sound::Sound( void ): _volume(1.0f) {}
 
-Sound::Sound(Sound const & src) {}
+Sound::Sound(Sound const & src) {
+	this->_Intro = src._Intro;
+}
 
-Sound	&Sound::operator=(Sound const &rhs) {}
+Sound	&Sound::operator=(Sound const &rhs) {
+	return *(new Sound(rhs));
+}
 
 Sound::~Sound( void ) {
 	this->_soundEngine->drop();

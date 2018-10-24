@@ -74,9 +74,13 @@ PlayState::PlayState( void ){
 	std::cout << "Play constructed" << std::endl;
 }
 
-PlayState::PlayState(PlayState const & src) {}
+PlayState::PlayState(PlayState const & src) {
+	this->_engine = src._engine;
+}
 
-PlayState	&PlayState::operator=(PlayState const &rhs) {}
+PlayState	&PlayState::operator=(PlayState const &rhs) {
+	return *(new PlayState(rhs));
+}
 
 PlayState::~PlayState( void ){
 	this->_engine->_Camera.init(glm::vec3(0.48f, -1.1f, 2.7f));
