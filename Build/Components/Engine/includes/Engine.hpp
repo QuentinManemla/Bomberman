@@ -168,7 +168,7 @@ class	Engine {
 		class EngineErr : public std::exception {
 		public:
 			EngineErr( std::string line );
-			~EngineErr() _NOEXCEPT;
+			~EngineErr() noexcept;
 		private:
 			virtual const char *what() const throw();
 			std::string _errMsg;
