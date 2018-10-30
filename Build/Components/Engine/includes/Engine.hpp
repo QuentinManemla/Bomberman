@@ -161,9 +161,6 @@ class	Engine {
 		Model					_Explosion;
 		Model					_PowerUp;
 
-
-
-
 		/** Exception **/
 		class EngineErr : public std::exception {
 		public:
