@@ -18,10 +18,10 @@ Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float u
 }
 
 Camera::Camera(const Camera &_src) {
-	return ;
+	this->Position = _src.Position;
 }
 const Camera& Camera::operator=(const Camera &_rhs) {
-	return (_rhs);
+	return *(new Camera(_rhs));
 }
 
 Camera::~Camera( void ) { 

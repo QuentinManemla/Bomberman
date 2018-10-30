@@ -12,6 +12,14 @@ Game::Game( void ){
 	_switchState();
 }
 
+Game::Game(Game const & src) {
+	this->_engine = src._engine;
+}
+
+Game	&Game::operator=(Game const &rhs) {
+	return *(new Game(rhs));
+}
+
 Game::~Game( void ){
 	std::cout << "Game destructed" << std::endl; // debug
 }

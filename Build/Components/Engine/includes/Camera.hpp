@@ -45,7 +45,6 @@ class Camera {
 		
 		Camera(const Camera &_src);
 		const Camera& operator=(const Camera &_rhs);
-
 		~Camera();
 
 		void init(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH);

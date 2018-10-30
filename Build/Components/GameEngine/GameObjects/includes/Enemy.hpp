@@ -7,6 +7,8 @@
 class Enemy : public GameObject{
 public:
 	Enemy( eGameObjectType type, Vector3d *position );
+	Enemy(Enemy const & src);
+	Enemy	&operator=(Enemy const &rhs);
 	~Enemy( void );
 
 protected:

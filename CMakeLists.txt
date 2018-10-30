@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.11)
 
 project (BomberMan)
 
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+
 if(NOT WIN32)
   string(ASCII 27 Esc)
   set(ColourReset "${Esc}[m")
@@ -42,14 +46,33 @@ list(REMOVE_DUPLICATES BomberMan_INCLUDE_DIRS)
 #installing what is nessesry
 message(STATUS "${Yellow} Installing Libraries ${ColourReset}")
 
+include("FetchContent")
+
 #needs xquartz from the softwear managment center on mac
-execute_process(COMMAND brew install assimp)
+if(APPLE)
+	execute_process(COMMAND brew install assimp)
+endif()
+if(LINUX)
+  find_package(Boost REQUIRED)
+	FetchContent_Declare(
+		assimp
+		GIT_REPOSITORY https://github.com/assimp/assimp.git
+	)
+
+	FetchContent_GetProperties(assimp)
+	if(NOT assimp_POPULATED)
+		FetchContent_Populate(assimp)
+		add_subdirectory(${assimp_SOURCE_DIR} ${assimp_BINARY_DIR})
+	endif()
+endif()
 message(STATUS "${Green} Assimp Should Be Downloaded ${ColourReset}")
 
-execute_process(COMMAND brew install freeglut)
+if (APPLE)
+	execute_process(COMMAND brew install freeglut)
+elseif(LINUX)
+	execute_process(COMMAND sudo apt-get install freeglut3-dev)
+endif()
 message(STATUS "${Green} FreeGlut Should Be Downloaded ${ColourReset}")
-
-include("FetchContent")
 
 FetchContent_Declare(
 	glad
@@ -147,37 +170,47 @@ target_include_directories(BomberMan PRIVATE ${glfw_SOURCE_DIR}/include)
 target_include_directories(BomberMan PRIVATE ${irrklang_SOURCE_DIR}/include)
 target_include_directories(BomberMan PRIVATE ${stb_SOURCE_DIR})
 target_include_directories(BomberMan PRIVATE ${glm_SOURCE_DIR})
-target_include_directories(BomberMan PRIVATE $ENV{HOME}/.brew/Cellar/assimp/4.1.0/include/)
-target_include_directories(BomberMan PRIVATE $ENV{HOME}/.brew/Cellar/freeglut/3.0.0/include)
+if (APPLE)
+	target_include_directories(BomberMan PRIVATE $ENV{HOME}/.brew/Cellar/assimp/4.1.0/include/)
+	target_include_directories(BomberMan PRIVATE $ENV{HOME}/.brew/Cellar/freeglut/3.0.0/include)
+	find_library(ASSIMP_LIB assimp HINTS $ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/ ${ASSIMP_LIB})
+	#link_directories($ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/ )
+	find_library(GLUT_LIB glut HINTS $ENV{HOME}/.brew/Cellar/freeglut/3.0.0/lib/)
+	find_library(OPENGL GL HINTS /System/Library/Frameworks/OpenGL.framework/Libraries)
+	target_link_libraries(BomberMan ${ASSIMP_LIB} ${GLUT_LIB} ${OPENGL})
+elseif(LINUX)
+	target_include_directories(BomberMan PRIVATE ${assimp_SOURCE_DIR})
+	target_link_libraries(BomberMan assimp)
+endif()
 
-find_library(ASSIMP_LIB assimp HINTS $ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/)
-#link_directories($ENV{HOME}/.brew/Cellar/assimp/4.1.0/lib/ )
-find_library(GLUT_LIB glut HINTS $ENV{HOME}/.brew/Cellar/freeglut/3.0.0/lib/)
-find_library(OPENGL GL HINTS /System/Library/Frameworks/OpenGL.framework/Libraries)
 
-execute_process(COMMAND install_name_tool -id "${irrklang_SOURCE_DIR}/bin/macosx-gcc/libirrklang.dylib" ${irrklang_SOURCE_DIR}/bin/macosx-gcc/libirrklang.dylib)
 
-target_link_libraries(BomberMan glfw freetype irrklang glad ${ASSIMP_LIB} ${GLUT_LIB} ${OPENGL})
+
+if (APPLE)
+	execute_process(COMMAND install_name_tool -id "${irrklang_SOURCE_DIR}/bin/macosx-gcc/libirrklang.dylib" ${irrklang_SOURCE_DIR}/bin/macosx-gcc/libirrklang.dylib)
+	target_link_libraries(BomberMan irrklang)
+elseif(LINUX)
+	find_library(IRRKLANGLIB IrrKlang HINTS ${irrklang_SOURCE_DIR}/bin/linux-gcc-64)
+	target_link_libraries(BomberMan ${IRRKLANGLIB})
+endif()
+target_link_libraries(BomberMan glfw freetype glad )
 
 set_target_properties( BomberMan PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR} )
 
 #add compiling flags
-target_compile_options(BomberMan PRIVATE "-Wall" "-Wextra" "-Wpedantic" "-std=c++11")
+target_compile_options(BomberMan PRIVATE "-Wall" "-Wextra" "-std=c++11") #"-Wpedantic"
 
 #message(STATUS "Your operating system is ${CMAKE_SYSTEM_NAME}")
-if(UNIX AND NOT APPLE)
-    set(LINUX TRUE)
-endif()
 
 if (APPLE)
 	message(STATUS "${Green} # - This Is an Apple Machine - # ${ColourReset}")
 endif()
 if (LINUX)
 	message(STATUS "${Green} # - This Is a Linux Machine - # ${ColourReset}")
-	find_package(glfw REQUIRED)
-	if(glfw_FOUND)
-		message(STATUS "${Green} # - GLFW is Installed - # ${ColourReset}")
-	endif()
+#	find_package(glfw REQUIRED)
+#	if(glfw_FOUND)
+#		message(STATUS "${Green} # - GLFW is Installed - # ${ColourReset}")
+#	endif()
 endif()
 if (WIN32)
 	message(STATUS "${Green} # - This Is a Windows Machine - # ${ColourReset}")

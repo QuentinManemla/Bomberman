@@ -6,6 +6,14 @@ GUIManager::GUIManager( Engine & engine ) {
 
 GUIManager::GUIManager( void ) { return ; }
 
+GUIManager::GUIManager(GUIManager const & src) {
+	this->engine = src.engine;
+}
+
+GUIManager	&GUIManager::operator=(GUIManager const &rhs) {
+	return *(new GUIManager(rhs));
+}
+
 GUIManager::~GUIManager( void ) { return ; }
 
 void		GUIManager::update( GameObject *player, int	elapsedSec, int playerScore, int level) {

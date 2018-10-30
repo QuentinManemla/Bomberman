@@ -18,6 +18,7 @@
 # include <sstream>
 # include <iostream>
 # include <numeric>
+# include <iterator>
 # include <chrono>
 # include <assimp/Importer.hpp>
 # include <assimp/scene.h>
@@ -49,10 +50,9 @@
 class	Engine {
 	public:
 		Engine();
+		Engine(Engine const & src);
+		Engine			&operator=(Engine const &rhs);
 		~Engine();
-
-		Engine(const Engine &_src);
-		const Engine& operator=(const Engine &_rhs);
 
 		void			engineInit( void );
 		void			render( void );
@@ -168,7 +168,7 @@ class	Engine {
 		class EngineErr : public std::exception {
 		public:
 			EngineErr( std::string line );
-			~EngineErr() _NOEXCEPT;
+			~EngineErr() noexcept;
 		private:
 			virtual const char *what() const throw();
 			std::string _errMsg;

@@ -17,6 +17,8 @@ public:
 	PlayState( Engine & engine );
 	PlayState( Engine & engine, std::string savePath, bool restart );
 	PlayState( Engine & engine, bool cont );
+	PlayState(PlayState const & src);
+	PlayState	&operator=(PlayState const &rhs);
 	~PlayState( void );
 
 	std::string		getType( void ); // debug

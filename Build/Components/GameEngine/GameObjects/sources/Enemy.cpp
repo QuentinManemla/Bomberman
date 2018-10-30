@@ -10,6 +10,15 @@ Enemy::Enemy( eGameObjectType type, Vector3d *position ){
 	this->velocity = 2.0;
 }
 
+Enemy::Enemy(Enemy const & src) {
+	this->position = src.position;
+
+}
+
+Enemy	&Enemy::operator=(Enemy const &rhs) {
+	return *(new Enemy(rhs));
+}
+
 Enemy::~Enemy( void ){
 
 }

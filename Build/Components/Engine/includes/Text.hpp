@@ -42,6 +42,8 @@ class Text {
 	public:
 		Text( void );
 		Text( const char *FontPath, int FontSize );
+		Text(Text const & src);
+		Text	&operator=(Text const &rhs);
 		~Text( void );
 
 		void	init( const char *FontPath, int FontSize, int Width, int Height );

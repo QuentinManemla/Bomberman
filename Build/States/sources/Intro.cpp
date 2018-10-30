@@ -11,6 +11,14 @@ IntroState::IntroState( void ){
 	std::cout << "Intro constructed" << std::endl;
 }
 
+IntroState::IntroState(IntroState const & src) {
+	this->_type = src._type;
+}
+
+IntroState	&IntroState::operator=(IntroState const &rhs) {
+	return *(new IntroState(rhs));
+}
+
 IntroState::~IntroState( void ){
 	std::cout << "Intro destructed" << std::endl;
 }

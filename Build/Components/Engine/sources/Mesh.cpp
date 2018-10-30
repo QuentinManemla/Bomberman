@@ -9,6 +9,19 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
 	setupMesh();
 }
 
+Mesh::Mesh(Mesh const & src) {//this function breaks things??? WHY???
+	this->vertices = src.vertices;
+	this->indices = src.indices; 
+	this->textures = src.textures;
+	this->VAO = src.VAO;
+	this->VBO = src.VBO;
+	this->EBO = src.EBO;
+}
+Mesh	&Mesh::operator=(Mesh const &rhs) {
+	return *(new Mesh(rhs));
+}
+Mesh::~Mesh() {}
+
 void Mesh::Draw(Shader shader) {
 	// bind appropriate textures
 	unsigned int diffuseNr  = 1;

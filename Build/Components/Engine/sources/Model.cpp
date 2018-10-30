@@ -6,6 +6,16 @@ Model::Model( std::string const &path ) : gammaCorrection(false) {
 	this->loadModel(path);
 }
 
+Model::Model(Model const & src) {
+	this->gammaCorrection = src.gammaCorrection;
+}
+
+Model	&Model::operator=(Model const &rhs) {
+	return *(new Model(rhs));
+}
+
+Model::~Model() {}
+
 void	Model::init( std::string const &path) { 
 	this->gammaCorrection = false;
 	this->loadModel(path); 
@@ -119,7 +129,7 @@ Mesh	Model::processMesh(aiMesh *mesh, const aiScene *scene) {
 	textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 	
 	// return a mesh object created from the extracted mesh data
-	return Mesh(vertices, indices, textures);
+	return *(new Mesh(vertices, indices, textures));
 }
 
 std::vector<Texture> Model::loadMaterialTextures( aiMaterial *mat, aiTextureType type, std::string typeName ) {

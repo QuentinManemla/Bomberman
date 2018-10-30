@@ -10,6 +10,14 @@ Player::Player( eGameObjectType type, Vector3d *position ) {
 	this->velocity = 5.0;
 }
 
+Player::Player(Player const & src) {
+	this->position = src.position;
+}
+
+Player	&Player::operator=(Player const &rhs) {
+	return *(new Player(rhs));
+}
+
 Player::~Player( void ){
 
 }

@@ -6,6 +6,16 @@ Vector3d::Vector3d( float vX, float vY, float vZ): vX(vX), vY(vY), vZ(vZ){
 Vector3d::Vector3d( void ){
 }
 
+Vector3d::Vector3d(Vector3d const & src){
+	this->vX = src.vX;
+	this->vY = src.vY;
+	this->vZ = src.vZ;
+}
+
+Vector3d	&Vector3d::operator=(Vector3d const &rhs) {
+	return *(new Vector3d(rhs));
+}
+
 Vector3d::~Vector3d( void ){
 }
 
