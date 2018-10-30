@@ -6,7 +6,7 @@ OptionsFullScreenState::OptionsFullScreenState( Engine & engine ) {
 	this->_engine = &engine;
 	this->_menuIndex = 0;
 
-	std::string arrMainMenu[3] = {"On", "Off"};
+	std::string arrMainMenu[2] = {"On", "Off"};
 	this->_menu.insert(this->_menu.end(), std::begin(arrMainMenu), std::end(arrMainMenu));
 }
 
