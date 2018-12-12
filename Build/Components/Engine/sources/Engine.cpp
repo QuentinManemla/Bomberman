@@ -351,7 +351,7 @@ void	Engine::drawModel( eGameObjectType type, float transX, float transY, float 
 		model = glm::translate(model, glm::vec3(transX, transY + 0.009f, transZ));
 		if (this->bombAnim++ < 5) {
 			model = glm::scale(model, glm::vec3(this->bombMove, this->bombMove, this->bombMove));
-			this->bombMove += 0.00008f;
+			this->bombMove += 0.00002f;
 		} else
 			model = glm::scale(model, glm::vec3(this->bombMove, this->bombMove, this->bombMove));
 		model = glm::rotate(model, 2.0f, glm::vec3(1.5f, 0.0f, 0.0f));
